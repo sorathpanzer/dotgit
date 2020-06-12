@@ -21,7 +21,6 @@ TRAPALRM() {
 alias vfm="$HOME/.config/vifm/scripts/vifmrun"
 alias vim='nvim'
 alias ls='ls --color --group-directories-first'
-#alias gt='/usr/bin/git --git-dir=$HOME/.config/dotfiles/ --work-tree=$HOME'
 alias gu='echo "Commit Message:"; read MESSAGE; gt add -u; gt commit -m "$MESSAGE"; gt push -u origin master'
 alias nv=' nvim $(find -L ! -path "./.local/*" ! -path "./.cache/*" ! -path "./.*Brave*" \
 ! -path "./.*/R/*" ! -path "./.*dotfiles/*" ! -path "./Projectos/r-backtester/.Rproj.user/*" \
