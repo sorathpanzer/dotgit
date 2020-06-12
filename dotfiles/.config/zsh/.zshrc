@@ -55,13 +55,15 @@ ext () {
 
 
 gitup() {
-	STATUS=$(gt status | grep :)
-	gt status
+	cd $HOME/.config/dotgit
+	STATUS=$(git status | grep :)
+	git status
 	echo "Commit Message:"
 	read MESSAGE
-	gt add -u
-	gt commit -m "$MESSAGE"
-	gt push -u origin master
+	git add -u
+	git commit -m "$MESSAGE"
+	git push -u origin master
+	cd -
 }
 
 dwmcmp() {
@@ -100,7 +102,7 @@ bindkey "^e" end-of-line
 bindkey '^H' backward-kill-word
 bindkey "\e[3~" delete-char
 
-#bindkey -s '^g' 'gitup\n'
+bindkey -s '^g' 'gitup\n'
 bindkey '^v' edit-command-line
 bindkey -s '^f' 'nv\n'
 bindkey -s '^d' 'cd $(sl); ls -l\n'
