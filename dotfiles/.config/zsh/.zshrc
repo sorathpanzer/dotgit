@@ -52,11 +52,9 @@ ext () {
 	fi
 }
 
-
 gitup() {
 	cd $HOME/.config/dotgit
-	STATUS=$(git status | grep :)
-	git status
+	git status -s
 	echo "Commit Message:"
 	read MESSAGE
 	git add -u
