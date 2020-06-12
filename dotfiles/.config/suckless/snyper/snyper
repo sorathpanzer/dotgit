@@ -1,0 +1,134 @@
+#!/bin/bash
+
+DAYS_OF_DELAY="7"
+UPDATE_DEPENDENCIES="FALSE" # I think setting to TRUE might not be a good idea, but i will not clean the code... just yet!
+
+RED='\e[1m\x1b[38;5;96m'
+GREEN='\e[1m\x1b[38;5;244m'
+BLUE='\e[1m\x1b[38;5;8m'
+NC='\e[m'
+
+
+sudo pacman -Sy
+CURRENT_UPDATES=$(sudo -S pacman -Qu)
+CUTOFF=$(date -d "now - $DAYS_OF_DELAY days" "+%Y-%m-%d")
+
+snyper_table()
+{
+while IFS= read -r line; do
+	echo -n "$(date -d"$(LC_ALL=en_US sudo pacman -Si $(echo "$line" | awk '{print $1}') | grep Build | cut -c 19-42)" +%Y-%m-%d)"; echo " $line"
+done < <(echo "$CURRENT_UPDATES")
+}
+
+echo "$(snyper_table)" > /tmp/snyper.pkgs
+
+snyper_cold_updates()
+{
+cat /tmp/snyper.pkgs | awk -v cutoff="$CUTOFF" '$1 > cutoff {print $2; }'
+}
+
+snyper_hot_updates()
+{
+cat /tmp/snyper.pkgs | awk -v cutoff="$CUTOFF" '$1 <= cutoff {print $2; }'
+}
+
+snyper_dependencies()
+{
+while IFS= read -r line; do
+	pactree -lu $line | sort -u
+done < <(echo "$(snyper_hot_updates)")
+}
+
+snyper_rev_dependencies()
+{
+while IFS= read -r line; do
+	pactree -lur $line | sort -u
+done < <(echo "$(snyper_hot_updates)")
+}
+
+snyper_update_dependencies()
+{
+while IFS= read -r line; do
+	UPDATE_DEP=$(comm -12 <(echo "$(snyper_cold_updates)" | sort -u) <(echo "$(snyper_dependencies)" | sort -u))
+	UPDATE_REV=$(comm -12 <(echo "$(snyper_cold_updates)" | sort -u) <(echo "$(snyper_rev_dependencies)" | sort -u))
+	paste <(echo "$UPDATE_DEP") <(echo "$UPDATE_REV")
+done < <(echo "$(snyper_hot_updates)")
+}
+
+snyper_info()
+{
+for line in $(snyper_cold_updates); do
+	echo -n "$(date -d"$(LC_ALL=en_US sudo pacman -Si $(echo "$line" | awk '{print $1}') | grep Build | cut -c 19-42)+$DAYS_OF_DELAY days" +%Y-%m-%d)"; echo -n -e "${BLUE} $line${NC}"; echo -n -e "${RED} $(sudo pacman -Q $(echo "$line" | cut -d ' ' -f 2) | cut -d ' ' -f 2)${NC}"; echo "${GREEN} $(sudo pacman -Qu $(echo "$line" | cut -d ' ' -f 4) | cut -d ' ' -f 4)${NC}"
+done < <(echo "$(snyper_cold_updates)") | sort --field-separator=" "
+}
+
+snyper_feed()
+{
+	python << END
+import argparse
+import datetime
+import feedparser
+import time
+
+FEED_URL = 'https://www.archlinux.org/feeds/news/'
+
+def ts_to_dt(ts):
+  return datetime.datetime.fromtimestamp(time.mktime(ts))
+
+def main(args=None):
+
+  feed = feedparser.parse(FEED_URL)
+  now = datetime.datetime.now()
+  cutoff = datetime.timedelta(days=7)
+
+  for entry in feed.entries:
+    ts = entry.published_parsed
+    dt = ts_to_dt(ts)
+    if (now - dt) <= cutoff:
+      print(entry.title)
+
+main()
+END
+}
+
+if [ -z "$1" ]; then
+	echo "$(snyper_update_dependencies)" > /tmp/snyper.deps
+	DEPENDENCIES=$(cat /tmp/snyper.deps | wc -w)
+	if [ -z "$(snyper_hot_updates)" ]; then
+		echo " "
+		echo -e "$(snyper_info)" | column -t
+		echo " "
+	else
+		echo -e "$RED $(snyper_feed) $NC"
+		sudo pacman -S $(snyper_hot_updates)
+		if [ $DEPENDENCIES -gt 0 ] && [ "$UPDATE_DEPENDENCIES" == "TRUE" ]; then
+			echo "Install updatable dependencies..."
+			sudo pacman -S $(cat /tmp/snyper.deps)
+		fi
+		echo " "
+		echo -e "$(snyper_info)" | column -t
+		echo " "
+	fi
+	rm /tmp/snyper.deps
+else
+sudo pacman -S $@
+PACKAGES=$(printf '%s\n' "$@")
+
+DEPENDENCY=$(while IFS= read -r line; do
+	pactree -lu $line | sort -u
+done < <(echo "$PACKAGES"))
+
+REV_DEPENDENCY=$(while IFS= read -r line; do
+	pactree -lur $line | sort -u
+done < <(echo "$PACKAGES"))
+
+UPDATE_DEP=$(comm -12 <(echo "$(snyper_cold_updates)" | sort -u) <(echo "$DEPENDENCY" | sort -u))
+UPDATE_REV=$(comm -12 <(echo "$(snyper_cold_updates)" | sort -u) <(echo "$REV_DEPENDENCY" | sort -u))
+INSTALL=$(paste <(echo "$UPDATE_DEP") <(echo "$UPDATE_REV"))
+
+	if [ -n "$INSTALL" ]; then
+		sudo pacman -S $INSTALL
+	fi
+fi
+
+rm /tmp/snyper.pkgs

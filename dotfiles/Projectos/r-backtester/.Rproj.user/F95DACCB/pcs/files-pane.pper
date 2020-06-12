@@ -1,0 +1,9 @@
+{
+    "path" : "~/r-backtester",
+    "sortOrder" : [
+        {
+            "ascending" : true,
+            "columnIndex" : 2
+        }
+    ]
+}

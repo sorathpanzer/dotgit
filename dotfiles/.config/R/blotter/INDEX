@@ -1,0 +1,95 @@
+.calcPosAvgCost         Calculates the average cost of a resulting
+                        position from a transaction
+.calcTxnAvgCost         Calculates a per share or per contract cost of
+                        the transaction to match the units the price is
+                        quoted in
+.calcTxnValue           Calculates the total value of a transaction or
+                        trade
+.getByPortf             get attributes from each portfolio in an
+                        account
+.getBySymbol            Retrieves calculated attributes for each
+                        position in the portfolio
+.getPortfAcct           get a protfolio in an account
+.getPosAvgCost          Retrieves the most recent average cost of the
+                        position
+.initPosPL              initializes position P&L for a portfolio
+                        instrument
+.initSummary            initialize the summary table used in portfolio
+                        and account lists
+.initTxn                Constructs the data container used to store
+                        transactions and resulting positions.
+.updatePosPL            Calculates position PL from the position data
+                        and corresponding close price data.
+AcctReturns             Calculate account returns
+IBM                     IBM stock price data for one month
+PortfReturns            Calculate portfolio instrument returns
+addAcctTxn              Add capital account transactions, such as
+                        capital additions and withdrawals or interest
+                        income (expense)
+addDiv                  Add cash dividend transactions to a portfolio.
+addPortfInstr           add an instrument to a portfolio
+addTxn                  Add transactions to a portfolio.
+amzn                    Hypothetical Intra-Day AMZN Trades
+blotter                 Tools for Transaction-Oriented Trading Systems
+                        Development
+calcPortfWgt            Calculates the portfolio weights for positions
+                        within a given portfolio.
+chart.ME                Chart Maximum Adverse/Favorable Excursion
+chart.Posn              Chart trades against market data, position
+                        through time, and cumulative P&L
+chart.Reconcile         Chart trades against market data, position
+                        through time, and cumulative P&L
+chart.Spread            Charts the transaction series, positions, and
+                        P&L of a spread against prices
+dailyTxnPL              generate daily Transaction Realized or Equity
+                        Curve P&L by instrument
+extractTxns             Extract transactions from a portfolio
+getAccount              Get an account object from the .blotter
+                        environment
+getEndEq                Retrieves the most recent value of the capital
+                        account
+getPortfolio            get a portfolio object
+getPos                  Retrieves all information about the position as
+                        of a date
+getPosQty               gets position at Date
+getTxns                 Retrieve transactions and their attributes.
+hist.mcsim              hist method for objects of type 'mcsim'
+hist.txnsim             hist method for objects of type 'txnsim'
+initAcct                Constructs the data container used to store
+                        calculated account values such as aggregated
+                        P&L, equity, etc.
+initPortf               Initializes a portfolio object.
+is.account              generic is.function for account, will take
+                        either a string or an object
+is.portfolio            generic is.function for portfolio, will take
+                        either a string or an object
+mcsim                   Monte Carlo simulate strategy results
+pennyPerShare           Example TxnFee cost function
+perTradeStats           calculate trade statistics for round turn
+                        trades.
+plot.mcsim              plot method for objects of type 'mcsim'
+plot.txnsim             plot method for objects of type 'txnsim'
+put.account             put a account object in .blotter env
+put.portfolio           put a portfolio object in .blotter env
+quantile.mcsim          quantile method for objects of type 'mcsim'
+quantile.txnsim         quantile method for objects of type 'txnsim'
+summary.mcsim           summary and print methods for objects of type
+                        'mcsim'
+summary.txnsim          summary and print methods for objects of type
+                        txnsim
+tradeQuantiles          quantiles of per-trade stats
+tradeStats              calculate statistics on transactions and P&L
+                        for a symbol or symbols in a portfolio or
+                        portfolios
+txnsim                  Monte Carlo analysis of round turn trades
+txnsim.portfs           convenience function to generate portfolios for
+                        txnsim replicates
+txnsim.portnames        helper function for generating txnsim portfolio
+                        names
+txnsim.txns             convenience function to create transactions
+                        from txnsim replicates
+updateAcct              Constructs the equity account calculations from
+                        the portfolio data and corresponding close
+                        prices.
+updateEndEq             update ending equity for an account
+updatePortf             update Portfilio P&L over a Dates range

@@ -1,0 +1,37 @@
+Package: quantstrat
+Type: Package
+Title: Quantitative Strategy Model Framework
+Version: 0.16.6
+Date: 2019-09-14 $Date$
+Author: Peter Carl, Brian G. Peterson, Joshua Ulrich, Jasen Mackie, Jan Humme
+Depends: R (>= 3.5.0), quantmod, xts (>= 0.10), blotter (>= 0.14.0),
+        FinancialInstrument (>= 0.12.5), foreach (>= 1.4.0)
+Imports: methods, iterators, zoo, TTR, MASS
+Suggests: PerformanceAnalytics, PortfolioAnalytics, rgl, testthat,
+        rCharts, gamlss, gamlss.util, reshape2, beanplot, knitr,
+        rmarkdown, pander, xtable, covr, usethis
+Maintainer: Brian G. Peterson <brian@braverock.com>
+Description: Specify, build, and back-test quantitative
+    financial trading and portfolio strategies.
+Contributors: Yu Chen, Joe Dunn, Dirk Eddelbuettel, Michael Guan,
+        Jeffrey A. Ryan, Garrett See
+LazyLoad: yes
+License: GPL-3
+Copyright: (c) 2009-2019
+ByteCompile: TRUE
+Encoding: UTF-8
+RoxygenNote: 6.1.1.9000
+VignetteBuilder: knitr
+RemoteType: github
+RemoteHost: api.github.com
+RemoteRepo: quantstrat
+RemoteUsername: braverock
+RemoteRef: master
+RemoteSha: 9960e3e2c3c4d54fd8113b7a635b291131c9e637
+GithubRepo: quantstrat
+GithubUsername: braverock
+GithubRef: master
+GithubSHA1: 9960e3e2c3c4d54fd8113b7a635b291131c9e637
+NeedsCompilation: yes
+Packaged: 2019-12-09 04:24:26 UTC; sorath
+Built: R 3.6.1; x86_64-pc-linux-gnu; 2019-12-09 04:24:27 UTC; unix

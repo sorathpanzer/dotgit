@@ -1,0 +1,2 @@
+"0","hchart(equity, color = ""black"", name = ""PL"") %>%"
+"0","  hc_title(text = ""Equity"")"

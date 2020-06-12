@@ -1,0 +1,2 @@
+"0","durStats <- durationStatistics(portfolio.st, Symbols = sort(symbols), aggregate = FALSE)"
+"0","kable(t(durStats))"

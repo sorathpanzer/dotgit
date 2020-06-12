@@ -1,0 +1,62 @@
+t1 <- Sys.time()
+
+add.distribution(strategy.st,
+                 paramset.label = "EMA",
+                 component.type = "indicator",
+                 component.label = "nFast",
+                 variable = list(n = 3),
+                 label = "nFAST")
+
+add.distribution(strategy.st, paramset.label = "EMA",
+                 component.type = "indicator", component.label = "nMed",
+                 variable = list(n = 40:50), label = "nMED")
+
+add.distribution.constraint(strategy.st,
+                            paramset.label = "EMA",
+                            distribution.label.1 = "nFAST",
+                            distribution.label.2 = "nMED",
+                            operator = "<",
+                            label = "EMA.Constraint")
+
+results <- apply.paramset(strategy.st,
+                          paramset.label = "EMA",
+                          portfolio.st = portfolio.st,
+                          account.st = account.st)
+
+(profit_dat <- results$tradeStats %>%
+    select(nFAST, nMED, Portfolio, End.Equity) %>%
+    group_by(Portfolio) %>%
+    summarize(Fast = mean(nFAST),
+              Med = mean(nMED),
+              Profit = sum(End.Equity)) %>%
+    select(Fast, Med, Profit) %>%
+    arrange(desc(Profit)))
+
+
+
+
+#############################################################
+# .upper = c(1:7)
+# add.distribution(strategy.st,
+#                  paramset.label = "wday2",
+#                  component.type = "indicator",
+#                  component.label = "wdaysell",
+#                  variable = list(EURUSD$weekday == .upper),
+#                  label = "WEEK")
+# 
+# results <- apply.paramset(strategy.st,
+#                           paramset.label = "wday2",
+#                           portfolio.st = portfolio.st,
+#                           account.st = account.st,
+#                           nsamples = 40)
+# 
+# (profit_dat <- results$tradeStats %>%
+#         select(WEEK, Portfolio, End.Equity) %>%
+#         group_by(Portfolio) %>%
+#         summarize(Week = mean(WEEK),
+#                   Profit = sum(End.Equity)) %>%
+#         select(Week, Profit) %>%
+#         arrange(desc(Profit)))
+
+t2 <- Sys.time()
+print(t2-t1)

@@ -1,0 +1,21 @@
+# Maintainer: Sorath Panzer
+pkgname=syncpac
+pkgver=0.9
+pkgrel=2
+pkgdesc="Cache sync for offline Arch Installer"
+arch=('x86_64' 'aarch64' 'armv7h')
+license=('GPL')
+depends=(
+  'rsync'
+  'pacman-contrib'
+)
+provides=('syncpac')
+conflicts=('syncpac')
+
+source=("syncpac")
+sha256sums=('SKIP')
+
+package() {
+  _output="${srcdir}/${pkgname/-bin/}_${pkgver}_${CARCH}"
+  install -Dm755 "syncpac" "${pkgdir}/usr/bin/syncpac"
+}

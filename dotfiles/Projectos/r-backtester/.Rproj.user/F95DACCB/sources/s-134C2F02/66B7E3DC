@@ -1,0 +1,24 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1573267520806.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "1788954419",
+    "id" : "66B7E3DC",
+    "lastKnownWriteTime" : 1572803341,
+    "last_content_update" : 1572803341,
+    "path" : "~/r-backtester/myblotter.R",
+    "project_path" : "myblotter.R",
+    "properties" : {
+        "source_window_id" : "wql1jr5m0ks4p"
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 3,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

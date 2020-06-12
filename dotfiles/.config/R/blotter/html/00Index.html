@@ -1,0 +1,159 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head><title>R: Tools for Transaction-Oriented Trading Systems P&amp;L</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+<h1> Tools for Transaction-Oriented Trading Systems P&amp;L
+<img class="toplogo" src="../../../doc/html/Rlogo.svg" alt="[R logo]" />
+</h1>
+<hr/>
+<div style="text-align: center;">
+<a href="../../../doc/html/packages.html"><img class="arrow" src="../../../doc/html/left.jpg" alt="[Up]" /></a>
+<a href="../../../doc/html/index.html"><img class="arrow" src="../../../doc/html/up.jpg" alt="[Top]" /></a>
+</div><h2>Documentation for package &lsquo;blotter&rsquo; version 0.14.7</h2>
+
+<ul><li><a href="../DESCRIPTION">DESCRIPTION file</a>.</li>
+<li><a href="../demo">Code demos</a>.  Use <a href="../../utils/help/demo">demo()</a> to run them.</li>
+</ul>
+
+<h2>Help Pages</h2>
+
+
+<table width="100%">
+<tr><td style="width: 25%;"><a href="blotter-package.html">blotter-package</a></td>
+<td>Tools for Transaction-Oriented Trading Systems Development</td></tr>
+<tr><td style="width: 25%;"><a href="calcPosAvgCost.html">.calcPosAvgCost</a></td>
+<td>Calculates the average cost of a resulting position from a transaction</td></tr>
+<tr><td style="width: 25%;"><a href="calcTxnAvgCost.html">.calcTxnAvgCost</a></td>
+<td>Calculates a per share or per contract cost of the transaction to match the units the price is quoted in</td></tr>
+<tr><td style="width: 25%;"><a href="calcTxnValue.html">.calcTxnValue</a></td>
+<td>Calculates the total value of a transaction or trade</td></tr>
+<tr><td style="width: 25%;"><a href="getByPortf.html">.getByPortf</a></td>
+<td>get attributes from each portfolio in an account</td></tr>
+<tr><td style="width: 25%;"><a href="getBySymbol.html">.getBySymbol</a></td>
+<td>Retrieves calculated attributes for each position in the portfolio</td></tr>
+<tr><td style="width: 25%;"><a href="getPortfAcct.html">.getPortfAcct</a></td>
+<td>get a protfolio in an account</td></tr>
+<tr><td style="width: 25%;"><a href="getPortfolio.html">.getPortfolio</a></td>
+<td>get a portfolio object</td></tr>
+<tr><td style="width: 25%;"><a href="getPosAvgCost.html">.getPosAvgCost</a></td>
+<td>Retrieves the most recent average cost of the position</td></tr>
+<tr><td style="width: 25%;"><a href="initPosPL.html">.initPosPL</a></td>
+<td>initializes position P&amp;L for a portfolio instrument</td></tr>
+<tr><td style="width: 25%;"><a href="initSummary.html">.initSummary</a></td>
+<td>initialize the summary table used in portfolio and account lists</td></tr>
+<tr><td style="width: 25%;"><a href="initTxn.html">.initTxn</a></td>
+<td>Constructs the data container used to store transactions and resulting positions.</td></tr>
+<tr><td style="width: 25%;"><a href="updatePosPL.html">.updatePosPL</a></td>
+<td>Calculates position PL from the position data and corresponding close price data.</td></tr>
+<tr><td style="width: 25%;"><a href="AcctReturns.html">AcctReturns</a></td>
+<td>Calculate account returns</td></tr>
+<tr><td style="width: 25%;"><a href="addAcctTxn.html">addAcctTxn</a></td>
+<td>Add capital account transactions, such as capital additions and withdrawals or interest income (expense)</td></tr>
+<tr><td style="width: 25%;"><a href="addDiv.html">addDiv</a></td>
+<td>Add cash dividend transactions to a portfolio.</td></tr>
+<tr><td style="width: 25%;"><a href="addPortfInstr.html">addPortfInstr</a></td>
+<td>add an instrument to a portfolio</td></tr>
+<tr><td style="width: 25%;"><a href="addTxn.html">addTxn</a></td>
+<td>Add transactions to a portfolio.</td></tr>
+<tr><td style="width: 25%;"><a href="addTxn.html">addTxns</a></td>
+<td>Add transactions to a portfolio.</td></tr>
+<tr><td style="width: 25%;"><a href="amzn.html">amzn</a></td>
+<td>Hypothetical Intra-Day AMZN Trades</td></tr>
+<tr><td style="width: 25%;"><a href="amzn.html">amzn.trades</a></td>
+<td>Hypothetical Intra-Day AMZN Trades</td></tr>
+<tr><td style="width: 25%;"><a href="blotter-package.html">blotter</a></td>
+<td>Tools for Transaction-Oriented Trading Systems Development</td></tr>
+<tr><td style="width: 25%;"><a href="calcPortfWgt.html">calcPortfWgt</a></td>
+<td>Calculates the portfolio weights for positions within a given portfolio.</td></tr>
+<tr><td style="width: 25%;"><a href="chart.ME.html">chart.ME</a></td>
+<td>Chart Maximum Adverse/Favorable Excursion</td></tr>
+<tr><td style="width: 25%;"><a href="chart.Posn.html">chart.Posn</a></td>
+<td>Chart trades against market data, position through time, and cumulative P&amp;L</td></tr>
+<tr><td style="width: 25%;"><a href="chart.Reconcile.html">chart.Reconcile</a></td>
+<td>Chart trades against market data, position through time, and cumulative P&amp;L</td></tr>
+<tr><td style="width: 25%;"><a href="chart.Spread.html">chart.Spread</a></td>
+<td>Charts the transaction series, positions, and P&amp;L of a spread against prices</td></tr>
+<tr><td style="width: 25%;"><a href="dailyTxnPL.html">dailyEqPL</a></td>
+<td>generate daily Transaction Realized or Equity Curve P&amp;L by instrument</td></tr>
+<tr><td style="width: 25%;"><a href="tradeStats.html">dailyStats</a></td>
+<td>calculate statistics on transactions and P&amp;L for a symbol or symbols in a portfolio or portfolios</td></tr>
+<tr><td style="width: 25%;"><a href="dailyTxnPL.html">dailyTxnPL</a></td>
+<td>generate daily Transaction Realized or Equity Curve P&amp;L by instrument</td></tr>
+<tr><td style="width: 25%;"><a href="extractTxns.html">extractTxns</a></td>
+<td>Extract transactions from a portfolio</td></tr>
+<tr><td style="width: 25%;"><a href="getAccount.html">getAccount</a></td>
+<td>Get an account object from the .blotter environment</td></tr>
+<tr><td style="width: 25%;"><a href="getEndEq.html">getEndEq</a></td>
+<td>Retrieves the most recent value of the capital account</td></tr>
+<tr><td style="width: 25%;"><a href="getPortfolio.html">getPortfolio</a></td>
+<td>get a portfolio object</td></tr>
+<tr><td style="width: 25%;"><a href="getPos.html">getPos</a></td>
+<td>Retrieves all information about the position as of a date</td></tr>
+<tr><td style="width: 25%;"><a href="getPosQty.html">getPosQty</a></td>
+<td>gets position at Date</td></tr>
+<tr><td style="width: 25%;"><a href="getTxns.html">getTxns</a></td>
+<td>Retrieve transactions and their attributes.</td></tr>
+<tr><td style="width: 25%;"><a href="hist.mcsim.html">hist.mcsim</a></td>
+<td>hist method for objects of type 'mcsim'</td></tr>
+<tr><td style="width: 25%;"><a href="hist.txnsim.html">hist.txnsim</a></td>
+<td>hist method for objects of type 'txnsim'</td></tr>
+<tr><td style="width: 25%;"><a href="IBM.html">IBM</a></td>
+<td>IBM stock price data for one month</td></tr>
+<tr><td style="width: 25%;"><a href="initAcct.html">initAcct</a></td>
+<td>Constructs the data container used to store calculated account values such as aggregated P&amp;L, equity, etc.</td></tr>
+<tr><td style="width: 25%;"><a href="initPortf.html">initPortf</a></td>
+<td>Initializes a portfolio object.</td></tr>
+<tr><td style="width: 25%;"><a href="is.account.html">is.account</a></td>
+<td>generic is.function for account, will take either a string or an object</td></tr>
+<tr><td style="width: 25%;"><a href="is.portfolio.html">is.portfolio</a></td>
+<td>generic is.function for portfolio, will take either a string or an object</td></tr>
+<tr><td style="width: 25%;"><a href="mcsim.html">mcsim</a></td>
+<td>Monte Carlo simulate strategy results</td></tr>
+<tr><td style="width: 25%;"><a href="pennyPerShare.html">pennyPerShare</a></td>
+<td>Example TxnFee cost function</td></tr>
+<tr><td style="width: 25%;"><a href="perTradeStats.html">perTradeStats</a></td>
+<td>calculate trade statistics for round turn trades.</td></tr>
+<tr><td style="width: 25%;"><a href="plot.mcsim.html">plot.mcsim</a></td>
+<td>plot method for objects of type 'mcsim'</td></tr>
+<tr><td style="width: 25%;"><a href="plot.txnsim.html">plot.txnsim</a></td>
+<td>plot method for objects of type 'txnsim'</td></tr>
+<tr><td style="width: 25%;"><a href="PortfReturns.html">PortfReturns</a></td>
+<td>Calculate portfolio instrument returns</td></tr>
+<tr><td style="width: 25%;"><a href="summary.mcsim.html">print.mcsim</a></td>
+<td>summary and print methods for objects of type 'mcsim'</td></tr>
+<tr><td style="width: 25%;"><a href="summary.txnsim.html">print.txnsim</a></td>
+<td>summary and print methods for objects of type txnsim</td></tr>
+<tr><td style="width: 25%;"><a href="put.account.html">put.account</a></td>
+<td>put a account object in .blotter env</td></tr>
+<tr><td style="width: 25%;"><a href="put.portfolio.html">put.portfolio</a></td>
+<td>put a portfolio object in .blotter env</td></tr>
+<tr><td style="width: 25%;"><a href="quantile.mcsim.html">quantile.mcsim</a></td>
+<td>quantile method for objects of type 'mcsim'</td></tr>
+<tr><td style="width: 25%;"><a href="quantile.txnsim.html">quantile.txnsim</a></td>
+<td>quantile method for objects of type 'txnsim'</td></tr>
+<tr><td style="width: 25%;"><a href="summary.mcsim.html">summary.mcsim</a></td>
+<td>summary and print methods for objects of type 'mcsim'</td></tr>
+<tr><td style="width: 25%;"><a href="summary.txnsim.html">summary.txnsim</a></td>
+<td>summary and print methods for objects of type txnsim</td></tr>
+<tr><td style="width: 25%;"><a href="tradeQuantiles.html">tradeQuantiles</a></td>
+<td>quantiles of per-trade stats</td></tr>
+<tr><td style="width: 25%;"><a href="tradeStats.html">tradeStats</a></td>
+<td>calculate statistics on transactions and P&amp;L for a symbol or symbols in a portfolio or portfolios</td></tr>
+<tr><td style="width: 25%;"><a href="txnsim.html">txnsim</a></td>
+<td>Monte Carlo analysis of round turn trades</td></tr>
+<tr><td style="width: 25%;"><a href="txnsim.portfs.html">txnsim.portfs</a></td>
+<td>convenience function to generate portfolios for txnsim replicates</td></tr>
+<tr><td style="width: 25%;"><a href="txnsim.portnames.html">txnsim.portnames</a></td>
+<td>helper function for generating txnsim portfolio names</td></tr>
+<tr><td style="width: 25%;"><a href="txnsim.txns.html">txnsim.txns</a></td>
+<td>convenience function to create transactions from txnsim replicates</td></tr>
+<tr><td style="width: 25%;"><a href="updateAcct.html">updateAcct</a></td>
+<td>Constructs the equity account calculations from the portfolio data and corresponding close prices.</td></tr>
+<tr><td style="width: 25%;"><a href="updateEndEq.html">updateEndEq</a></td>
+<td>update ending equity for an account</td></tr>
+<tr><td style="width: 25%;"><a href="updatePortf.html">updatePortf</a></td>
+<td>update Portfilio P&amp;L over a Dates range</td></tr>
+</table>
+</body></html>

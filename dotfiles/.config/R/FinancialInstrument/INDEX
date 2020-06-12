@@ -1,0 +1,98 @@
+.get_rate               get an exchange rate series
+.to_daily               Extract a single row from each day in an xts
+                        object
+C2M                     Month-to-Code and Code-to-Month
+CompareInstrumentFiles
+                        Compare Instrument Files
+FinancialInstrument-package
+                        Construct, manage and store contract
+                        specifications for trading
+FindCommonInstrumentAttributes
+                        Find attributes that more than one instrument
+                        have in common
+Notionalize             Convert price series to/from notional value
+add.defined.by          Add a source to the defined.by field of an
+                        'instrument'
+add.identifier          Add an identifier to an 'instrument'
+buildHierarchy          Construct a hierarchy of instruments useful for
+                        aggregation
+buildRatio              construct price ratios of 2 instruments
+buildSpread             Construct a price/level series for pre-defined
+                        multi-leg spread instrument
+build_series_symbols    construct a series of symbols based on root
+                        symbol and suffix letters
+build_spread_symbols    build symbols for exchange guaranteed
+                        (calendar) spreads
+currencies              currency metadata to be used by
+                        'load.instruments'
+exchange_rate           constructor for spot exchange rate instruments
+expires                 extract the correct expires value from an
+                        'instrument'
+find.instrument         Find the primary_ids of instruments that
+                        contain certain strings
+fn_SpreadBuilder        Calculate prices of a spread from 2
+                        instruments.
+formatSpreadPrice       format the price of a synthetic instrument
+format_id               format an id
+future_series           Constructors for series contracts
+getInstrument           Primary accessor function for getting objects
+                        of class 'instrument'
+getSymbols.FI           getSymbols method for loading data from split
+                        files
+instrument              instrument class constructors
+instrument.auto         Create an instrument based on name alone
+instrument.table        Create data.frame with attributes of all
+                        instruments
+instrument_attr         Add or change an attribute of an instrument
+is.currency             class test for object supposedly of type
+                        'currency'
+is.currency.name        check each element of a character vector to see
+                        if it is either the primary_id or an identifier
+                        of a 'currency'
+is.instrument           class test for object supposedly of type
+                        'instrument'
+is.instrument.name      check each element of a character vector to see
+                        if it is either the primary_id or an identifier
+                        of an 'instrument'
+load.instruments        load instrument metadata into the .instrument
+                        environment
+ls_by_currency          shows or removes instruments of given currency
+                        denomination(s)
+ls_by_expiry            list or remove instruments by expiration date
+ls_expiries             show unique expiration dates of instruments
+ls_instruments          List or Remove instrument objects
+ls_instruments_by       Subset names of instruments
+ls_strikes              show strike prices of defined options
+ls_underlyings          show names of underlyings
+make_spread_id          Construct a primary_id for a 'spread'
+                        'instrument' from the primary_ids of its
+                        members
+month_cycle2numeric     coerce month_cycle to a numeric vector
+next.future_id          Get the primary_id of the next-to-expire
+                        (previously expiring) future_series instrument
+option_series.yahoo     constructor for series of options using yahoo
+                        data
+parse_id                Parse a primary_id
+parse_suffix            parse a suffix_id
+redenominate            Redenominate (change the base of) an instrument
+root_contracts          future metadata to be used by
+                        'load.instruments'
+saveInstruments         Save and Load all instrument definitions
+saveSymbols.days        Save data to disk
+setSymbolLookup.FI      set quantmod-style SymbolLookup for instruments
+sort_ids                sort primary_ids of instruments
+synthetic               synthetic instrument constructors
+to_secBATV              Convert tick data to one-second data
+update_instruments.iShares
+                        update iShares and SPDR ETF metadata
+update_instruments.instrument
+                        Update instruments with metadata from another
+                        instrument.
+update_instruments.masterDATA
+                        Update instrument metadata for ETFs
+update_instruments.morningstar
+                        Update instrument metadata for ETFs
+update_instruments.yahoo
+                        updates instrument metadata with data from
+                        yahoo
+volep                   generate endpoints for volume bars

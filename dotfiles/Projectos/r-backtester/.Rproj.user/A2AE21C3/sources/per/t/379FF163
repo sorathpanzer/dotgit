@@ -1,0 +1,25 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1575677118751.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2961131266",
+    "id" : "379FF163",
+    "lastKnownWriteTime" : 1574170218,
+    "last_content_update" : 1574170218,
+    "path" : "~/Projectos/r-backtester/main.R",
+    "project_path" : "main.R",
+    "properties" : {
+        "cursorPosition" : "145,26",
+        "scrollLine" : "0"
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

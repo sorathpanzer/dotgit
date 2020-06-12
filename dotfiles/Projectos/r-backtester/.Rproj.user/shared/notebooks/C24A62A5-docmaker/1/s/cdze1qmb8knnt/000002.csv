@@ -1,0 +1,2 @@
+"0","tradeStatsOrder[, ""PL""] <-round(tradeStatsOrder[, ""PL""],1)"
+"0","kable(tradeStatsOrder[,c(""Start"", ""End"", ""Position"", ""Entry.Rule"", ""PL"", ""Close Rule"")])"

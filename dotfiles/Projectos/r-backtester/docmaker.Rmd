@@ -1,0 +1,158 @@
+---
+title: "  Backtesting Results  "
+output:
+  pdf_document: default
+  header-includes: \usepackage{booktabs}
+  html_document:
+  df_print: paged
+  html_notebook: default
+  word_document: default
+knit: (
+  function(inputFile, encoding) { 
+    pSubTitle <- paste("Report-", Sys.time(), ".pdf", sep="")
+
+    rmarkdown::render( 
+      input       = inputFile, 
+      encoding    = encoding, 
+      params      = list(sub_title = pSubTitle), 
+      output_dir  = "./Reports",     
+      output_file = pSubTitle) })
+---
+
+```{r Strategy Data}
+source("main.R")
+rbind(emaF,emaM, emaS)
+cbind(wdayBuy)
+cbind(wdaySell)
+```
+
+### Obs:
+
+\newpage
+
+```{r Trade Stats #1, echo=FALSE, results='asis'}
+
+library(knitr)
+library(xtable)
+K1 <- kable(t(tradeStats(portfolio.st)), format = "latex", booktabs = TRUE)
+K2 <- kable(t(dailyStats(portfolio.st)), format = "latex", booktabs = TRUE)
+
+cat(c("\\begin{table}[!htb]
+    \\begin{minipage}{.5\\linewidth}
+      \\caption{}
+      \\centering",
+        K1,
+    "\\end{minipage}%
+    \\begin{minipage}{.5\\linewidth}
+      \\centering
+        \\caption{}",
+        K2,
+    "\\end{minipage} 
+\\end{table}"
+)) 
+```
+
+```{r Trade Stats #2, echo=FALSE, results='asis'}
+Kb1 <- kable(LS_Stats("long"), format = "latex", booktabs = TRUE)
+Kb2 <- kable(LS_Stats("short"), format = "latex", booktabs = TRUE)
+
+cat(c("\\begin{table}[!htb]
+    \\begin{minipage}{.5\\linewidth}
+      \\caption{}
+      \\centering",
+        Kb1,
+    "\\end{minipage}%
+    \\begin{minipage}{.5\\linewidth}
+      \\centering
+        \\caption{}",
+        Kb2,
+    "\\end{minipage} 
+\\end{table}"
+)) 
+```
+
+```{r Graphs-1, echo=FALSE}
+chart.Posn(portfolio.st, Symbol = symbols)
+plot(equity, colorset = bluefocus)
+```
+
+\newpage
+
+```{r Graphs-2, echo=FALSE}
+chart.ME(Portfolio=portfolio.st, Symbol=symbols, type='MAE', scale='cash')
+chart.ME(Portfolio=portfolio.st, Symbol=symbols, type='MFE', scale='cash')
+chart.Boxplot(rets, main = "EURUSD Returns", colorset= rich10equal)
+```
+
+```{r Graphs-3, echo=FALSE, out.width='.49\\linewidth', fig.width=3, fig.height=3,fig.show='hold',fig.align='center'}
+chart.RiskReturnScatter(rets, main = "EURUSD Performance", colorset = rich10equal,
+                        xlim = c(0, max.risk * 1.1), ylim = c(0, max.return))
+chart.RiskReturnScatter(rets, Rf = 0, add.sharpe = c(1, 2),
+                        main = "Return vs. Risk", colorset = c("red", "blue"))
+```
+
+\newpage
+## Trade Journal
+```{r Data, echo=FALSE, results='asis'}
+tradeStatsOrder[, "PL"] <-round(tradeStatsOrder[, "PL"],1)
+kable(tradeStatsOrder[,c("Start", "End", "Position", "Entry.Rule", "PL", "Close Rule")])
+
+durStats <- durationStatistics(portfolio.st, Symbols = sort(symbols), aggregate = FALSE)
+Kc1 <- kable(t(durStats), format = "latex", booktabs = TRUE)
+
+yReturn <- yearlyReturn(equity) * 200
+yearDates <- substr(index(yReturn), 1, 20)
+yearReturns <- as.character(round(yReturn, 2))
+bindReturns <- cbind(yearDates, yearReturns)
+Kc2 <- kable(bindReturns, format = "latex", booktabs = TRUE)
+
+cat(c("\\begin{table}[!htb]
+    \\begin{minipage}{.5\\linewidth}
+      \\caption{}
+      \\centering",
+        Kc1,
+    "\\end{minipage}%
+    \\begin{minipage}{.5\\linewidth}
+      \\centering
+        \\caption{}",
+        Kc2,
+    "\\end{minipage} 
+\\end{table}"
+)) 
+```
+
+```{r Returns, echo=FALSE}
+charts.PerformanceSummary(apply.monthly(rets, Return.cumulative),
+                                        colorset = bluefocus, main = "Strategy Performance")
+```
+
+\newpage
+## Session Info
+```{r Session, echo=FALSE}
+info <- sessionInfo()
+print(info, locale = FALSE)
+strat <- paste(readLines("strat.R"), collapse="\n")
+rules <- paste(readLines("rules.R"), collapse="\n")
+```
+
+\newpage
+## Strategy Input
+```{r eval=FALSE, code=strat}
+```
+
+\newpage
+## Rules Input
+```{r eval=FALSE, code=rules}
+```
+
+```{r Final, echo=FALSE}
+t2 <- Sys.time()
+print(t2-t1)
+Sys.time()
+```
+
+```{r Highcharter, echo=FALSE}
+#source("highchart.R")
+#chartplot
+```
+

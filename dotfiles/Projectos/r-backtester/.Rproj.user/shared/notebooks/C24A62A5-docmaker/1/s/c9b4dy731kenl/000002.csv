@@ -1,0 +1,122 @@
+"0",""
+"0","library(knitr)"
+"0","library(xtable)"
+"0","K1 <- kable(t(tradeStats(portfolio.st)), format = ""latex"", booktabs = TRUE)"
+"0","K2 <- kable(t(dailyStats(portfolio.st)), format = ""latex"", booktabs = TRUE)"
+"0",""
+"0","cat(c(""\\begin{table}[!htb]"
+"0","    \\begin{minipage}{.5\\linewidth}"
+"0","      \\caption{}"
+"0","      \\centering"","
+"0","        K1,"
+"0","    ""\\end{minipage}%"
+"0","    \\begin{minipage}{.5\\linewidth}"
+"0","      \\centering"
+"0","        \\caption{}"","
+"0","        K2,"
+"0","    ""\\end{minipage} "
+"0","\\end{table}"""
+"0",")) "
+"1","\begin{table}[!htb]
+    \begin{minipage}{.5\linewidth}
+      \caption{}
+      \centering"
+"1"," "
+"1","
+\begin{tabular}{ll}
+\toprule
+  & EURUSD\\
+\midrule
+Portfolio & Port.Luxor\\
+Symbol & EURUSD\\
+Num.Txns & 41\\
+Num.Trades & 20\\
+Net.Trading.PL & 66.53333\\
+\addlinespace
+Avg.Trade.PL & 3.272167\\
+Med.Trade.PL & -1\\
+Largest.Winner & 24\\
+Largest.Loser & -1\\
+Gross.Profits & 77.44333\\
+\addlinespace
+Gross.Losses & -12\\
+Std.Dev.Trade.PL & 7.766945\\
+Std.Err.Trade.PL & 1.736742\\
+Percent.Positive & 40\\
+Percent.Negative & 60\\
+\addlinespace
+Profit.Factor & 6.453611\\
+Avg.Win.Trade & 9.680417\\
+Med.Win.Trade & 6.821667\\
+Avg.Losing.Trade & -1\\
+Med.Losing.Trade & -1\\
+\addlinespace
+Avg.Daily.PL & 3.272167\\
+Med.Daily.PL & -1\\
+Std.Dev.Daily.PL & 7.766945\\
+Std.Err.Daily.PL & 1.736742\\
+Ann.Sharpe & 6.687833\\
+\addlinespace
+Max.Drawdown & -11.64333\\
+Profit.To.Max.Draw & 5.714286\\
+Avg.WinLoss.Ratio & 9.680417\\
+Med.WinLoss.Ratio & 6.821667\\
+Max.Equity & 68.82\\
+\addlinespace
+Min.Equity & -0.4866667\\
+End.Equity & 66.53333\\
+\bottomrule
+\end{tabular}"
+"1"," "
+"1","\end{minipage}%
+    \begin{minipage}{.5\linewidth}
+      \centering
+        \caption{}"
+"1"," "
+"1","
+\begin{tabular}{lr}
+\toprule
+  & EURUSD.DailyEqPL\\
+\midrule
+Total.Net.Profit & 66.53\\
+Total.Days & 216.00\\
+Winning.Days & 118.00\\
+Losing.Days & 98.00\\
+Avg.Day.PL & 0.31\\
+\addlinespace
+Med.Day.PL & 0.08\\
+Largest.Winner & 9.39\\
+Largest.Loser & -2.57\\
+Gross.Profits & 138.63\\
+Gross.Losses & -72.10\\
+\addlinespace
+Std.Dev.Daily.PL & 1.39\\
+Percent.Positive & 54.63\\
+Percent.Negative & 45.37\\
+Profit.Factor & 1.92\\
+Avg.Win.Day & 1.17\\
+\addlinespace
+Med.Win.Day & 0.87\\
+Avg.Losing.Day & -0.74\\
+Med.Losing.Day & -0.53\\
+Avg.Daily.PL & 0.31\\
+Med.Daily.PL & 0.08\\
+\addlinespace
+Std.Dev.Daily.PL.1 & 1.39\\
+Skewness & 3.02\\
+Kurtosis & 24.87\\
+Ann.Sharpe & 3.52\\
+Max.Drawdown & -11.58\\
+\addlinespace
+Profit.To.Max.Draw & 5.75\\
+Avg.WinLoss.Ratio & 1.60\\
+Med.WinLoss.Ratio & 1.64\\
+Max.Equity & 67.94\\
+Min.Equity & 0.00\\
+\addlinespace
+End.Equity & 66.53\\
+\bottomrule
+\end{tabular}"
+"1"," "
+"1","\end{minipage} 
+\end{table}"

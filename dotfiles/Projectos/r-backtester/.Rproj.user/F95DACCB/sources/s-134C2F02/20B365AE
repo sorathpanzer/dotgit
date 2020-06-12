@@ -1,0 +1,26 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1573267471572.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "20B365AE",
+    "lastKnownWriteTime" : 1573761149,
+    "last_content_update" : 1573761149977,
+    "path" : "~/r-backtester/rules.R",
+    "project_path" : "rules.R",
+    "properties" : {
+        "cursorPosition" : "126,0",
+        "scrollLine" : "0",
+        "source_window_id" : "wql1jr5m0ks4p"
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 7,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}
