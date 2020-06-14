@@ -18,10 +18,11 @@ TRAPALRM() {
 }
 
 #alias sudo="doas"
+alias lgit="cd $HOME/.config/dotgit; lazygit; cd -"
 alias vfm="$HOME/.config/vifm/scripts/vifmrun"
 alias vim='nvim'
 alias ls='ls --color --group-directories-first'
-alias gu='echo "Commit Message:"; read MESSAGE; gt add -u; gt commit -m "$MESSAGE"; gt push -u origin master'
+#alias gu='echo "Commit Message:"; read MESSAGE; gt add -u; gt commit -m "$MESSAGE"; gt push -u origin master'
 alias nv=' nvim $(find -L ! -path "./.local/*" ! -path "./.cache/*" ! -path "./.*Brave*" \
 ! -path "./.*/R/*" ! -path "./.*dotfiles/*" ! -path "./Projectos/r-backtester/.Rproj.user/*" \
 ! -path "./.config/coc/*" ! -path "./.*/nvim/autoload/*" ! -path "$HOME/.npm/*" | fzf)'
@@ -99,7 +100,7 @@ bindkey "^e" end-of-line
 bindkey '^H' backward-kill-word
 bindkey "\e[3~" delete-char
 
-bindkey -s '^g' 'gitup\n'
+bindkey -s '^g' 'lgit\n'
 bindkey '^v' edit-command-line
 bindkey -s '^f' 'nv\n'
 bindkey -s '^d' 'cd $(sl); ls -l\n'
