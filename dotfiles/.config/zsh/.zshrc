@@ -1,6 +1,6 @@
 #!/usr/bin/zsh
 export EDITOR="nvim"
-export TERMINAL="termite"
+export TERMINAL="alacritty"
 export VISUAL="nvim"
 
 setopt hist_ignore_dups
