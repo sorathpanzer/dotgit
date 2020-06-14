@@ -42,8 +42,9 @@ static const Rule rules[] = {
 	{ "Telegram",    	NULL,       NULL,       1 << 5,       9,             0,           -1 },
 	{ "RStudio",     	NULL,       NULL,       1 << 2,       8,             0,           -1 },
 	{ "VirtualBox Manager", NULL,       NULL,       1 << 2,       8,             0,           -1 },
-	{ "Pcmanfm",     	NULL,       NULL,       1 << 3,       8,             0,           -1 },
-	{ "code",     	 	NULL,       NULL,       1 << 3,       8,             0,           -1 },
+	{ "Nautilus",     	NULL,       NULL,       1 << 3,       8,             0,           -1 },
+	{ "Steam",     	 	NULL,       NULL,       1 << 4,       8,             0,           -1 },
+	{ "sxiv",     	 	NULL,       NULL,       1 << 4,       8,             0,           -1 },
 };
 
 /* layout(s) */
@@ -112,8 +113,8 @@ static Key keys[] = {
 
     /* Apps Launched with SUPER + ALT + KEY  */
 	{ MODKEY,        	  XK_w,      	   spawn,          CMD("brave") },
-	{ MODKEY,        	  XK_p,      	   spawn,          CMD("pcmanfm") },
-	{ MODKEY,        	  XK_e,      	   spawn,          CMD("io.elementary.code") },
+	{ MODKEY,        	  XK_n,      	   spawn,          CMD("nautilus") },
+	{ MODKEY,        	  XK_s,      	   spawn,          CMD("steam") },
 	{ MODKEY|ShiftMask,       XK_Return,       spawn,          CMD("rstudio-bin") },
 	{ MODKEY|ShiftMask,       XK_Delete, 	   spawn,          {.v = shutcmd } },
 	{ MODKEY|ShiftMask,       XK_BackSpace,    spawn,          {.v = rebcmd } },
