@@ -35,7 +35,7 @@ static const Rule rules[] = {
 	 *	WM_NAME(STRING) = title
 	 */
 	/* class      instance    title       tags mask     switchtotag    isfloating   monitor */
-	{ "Termite",     	NULL,       NULL,       2,            2,             0,           -1 },
+	{ "Alacritty",     	NULL,       NULL,       2,            2,             0,           -1 },
 	{ "Brave-browser",    	NULL,       NULL,       1,            1,             0,           -1 },
 	{ "firefox",     	NULL,       NULL,       1,            1,             0,           -1 },
 	{ "imv",         	NULL,       NULL,       1 << 4,       5,             0,           -1 },
@@ -55,7 +55,6 @@ static const Layout layouts[] = {
 	/* symbol     arrange function */
 	{ "[]=",      tile },    /* first entry is default */
 	{ "|M|",      monocle },
-	{ "><>",      NULL },    /* no layout function means floating behavior */
 	{ NULL,       NULL },
 };
 
@@ -74,7 +73,7 @@ static const Layout layouts[] = {
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
-static const char *termcmd[]  = { "termite", NULL };
+static const char *termcmd[]  = { "alacritty", NULL };
 static const char *shutcmd[]  = { "systemctl", "poweroff", NULL };
 static const char *rebcmd[]  = { "systemctl", "reboot", NULL };
 static const char *lckcmd[]  = { "slock", NULL };
@@ -93,9 +92,9 @@ static Key keys[] = {
 	{ MODKEY,       	  XK_Tab,          focusstack,     {.i = +1 } },
 	{ MODKEY,                 XK_backslash,    view,           {0} },
 	{ MODKEY,	          XK_q,            killclient,     {0} },
+	{ MODKEY,	  	  XK_Escape,  	   cyclelayout,    {.i = -1 } },
 	{ MODKEY,                 XK_t,            setlayout,      {.v = &layouts[0]} },
 	{ MODKEY,                 XK_m,            setlayout,      {.v = &layouts[1]} },
-	{ MODKEY,                 XK_o,            setlayout,      {.v = &layouts[2]} },
 	{ MODKEY,                 XK_space,        setlayout,      {0} },
 	{ MODKEY|ShiftMask,       XK_space,        togglefloating, {0} },
 	{ MODKEY,                 XK_0,            view,           {.ui = ~0 } },
@@ -120,8 +119,8 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,       XK_BackSpace,    spawn,          {.v = rebcmd } },
 	{ MODKEY,       	  XK_BackSpace,    spawn,          {.v = lckcmd } },
 	{ 0,                      XK_Print,  	   spawn,          SHCMD("scrot ~/Imagens/Screenshots/$(date '+%Y%m%d').png") },
-	{ MODKEY|ShiftMask,       XK_plus,   	   spawn,          SHCMD ("~/.suckless/brightness.sh Up") },
-  	{ MODKEY|ShiftMask,       XK_minus,  	   spawn,          SHCMD ("~/.suckless/brightness.sh Down") },
+	{ MODKEY|ShiftMask,       XK_plus,   	   spawn,          SHCMD ("~/.config/suckless/brightness.sh Up") },
+  	{ MODKEY|ShiftMask,       XK_minus,  	   spawn,          SHCMD ("~/.config/suckless/brightness.sh Down") },
   	{ MODKEY,                 XK_plus,   	   spawn,          SHCMD ("pactl set-sink-volume alsa_output.pci-0000_00_1f.3.analog-stereo +10%") },
   	{ MODKEY,                 XK_minus,  	   spawn,          SHCMD ("pactl set-sink-volume alsa_output.pci-0000_00_1f.3.analog-stereo -10%") },
   	{ MODKEY,                 XK_z, 	   spawn,          SHCMD ("pamixer -t ") },
