@@ -1,7 +1,5 @@
 /* See LICENSE file for copyright and license details. */
 
-#include "fibonacci.c"
-
 static const unsigned int borderpx  = 1;        /* border pixel of windows */
 static const unsigned int snap      = 32;       /* snap pixel */
 static const unsigned int gappih    = 8;       /* horiz inner gap between windows */
@@ -14,7 +12,6 @@ static const int topbar             = 1;        /* 0 means bottom bar */
 static const Bool viewontag         = True;     /* Switch view on tag switch */
 static const int horizpadbar        = 6;        /* horizontal padding for statusbar */
 static const int vertpadbar         = 7;        /* vertical padding for statusbar */
-static const int attachbelow = 1;    /* 1 means attach at the end */
 static const char *fonts[]          = { "UbuntuMono Nerd Font:size=10" };
 static const char dmenufont[]       = "UbuntuMono Nerd Font:size=10";
 static const char col_gray1[]       = "#292d3e";
@@ -22,17 +19,10 @@ static const char col_gray2[]       = "#000000"; /* border color unfocused windo
 static const char col_gray3[]       = "#96b5b4";
 static const char col_gray4[]       = "#c0c5ce";
 static const char col_cyan[]        = "#645377"; /* border color focused windows and tags DT= #84598D */
-static const unsigned int baralpha = 0xee;
-static const unsigned int borderalpha = OPAQUE;
 static const char *colors[][3]      = {
 	/*               fg         bg         border   */
 	[SchemeNorm] = { col_gray4, col_gray1, col_gray2 },
 	[SchemeSel]  = { col_gray4, col_cyan,  col_cyan  },
-};
-static const unsigned int alphas[][3]      = {
-	/*               fg      bg        border     */
-	[SchemeNorm] = { OPAQUE, baralpha, borderalpha },
-	[SchemeSel]  = { OPAQUE, baralpha, borderalpha },
 };
 
 /* tagging */
@@ -65,7 +55,6 @@ static const Layout layouts[] = {
 	/* symbol     arrange function */
 	{ "[]=",      tile },    /* first entry is default */
 	{ "|M|",      monocle },
-	{ "[F]",      dwindle },
 	{ "><>",      NULL },    /* no layout function means floating behavior */
 	{ NULL,       NULL },
 };
@@ -104,12 +93,9 @@ static Key keys[] = {
 	{ MODKEY,       	  XK_Tab,          focusstack,     {.i = +1 } },
 	{ MODKEY,                 XK_backslash,    view,           {0} },
 	{ MODKEY,	          XK_q,            killclient,     {0} },
-	{ MODKEY|ShiftMask,       XK_q,     	   killunsel,      {0} },
 	{ MODKEY,                 XK_t,            setlayout,      {.v = &layouts[0]} },
 	{ MODKEY,                 XK_m,            setlayout,      {.v = &layouts[1]} },
-	{ MODKEY,                 XK_f,            setlayout,      {.v = &layouts[2]} },
-	{ MODKEY,                 XK_o,            setlayout,      {.v = &layouts[3]} },
-	{ MODKEY,     		  XK_Escape,       cyclelayout,    {.i = +1 } },
+	{ MODKEY,                 XK_o,            setlayout,      {.v = &layouts[2]} },
 	{ MODKEY,                 XK_space,        setlayout,      {0} },
 	{ MODKEY|ShiftMask,       XK_space,        togglefloating, {0} },
 	{ MODKEY,                 XK_0,            view,           {.ui = ~0 } },

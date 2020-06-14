@@ -30,10 +30,10 @@ function! StartifyEntryFormat()
     endfunction
 
 let g:startify_bookmarks = [
-            \ { 'z': '~/.config/zsh/zshrc' },
+            \ { 'z': '~/.config/zsh/.zshrc' },
             \ { 'n': '~/.config/nvim/init.vim' },
             \ { 'l': '~/.config/lf/lfrc' },
-            \ { 'd': '~/.config/suckless/dwm/src/config.h' },
+            \ { 'd': '~/.config/suckless/dwm/dwm/config.h' },
             \ { 't': '~/.config/termite/config' },
             \ { 'u': '~/.config/user-dirs.dirs' },
             \ ]
