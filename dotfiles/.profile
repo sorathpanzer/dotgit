@@ -1,6 +1,6 @@
 # Default programs:
 #export EDITOR="/usr/bin/nvim"
-#export TERMINAL="termite"
+#export TERMINAL="alacritty"
 #export BROWSER="brave"
 #export READER="zathura"
 #export FILE="pcmanfm"
