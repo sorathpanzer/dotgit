@@ -25,10 +25,14 @@ alias ls='ls --color --group-directories-first'
 #alias gu='echo "Commit Message:"; read MESSAGE; gt add -u; gt commit -m "$MESSAGE"; gt push -u origin master'
 alias nv=' nvim $(find -L ! -path "./.local/*" ! -path "./.cache/*" ! -path "./.*Brave*" \
 ! -path "./.*/R/*" ! -path "./.*dotfiles/*" ! -path "./Projectos/r-backtester/.Rproj.user/*" \
-! -path "./.config/coc/*" ! -path "./.*/nvim/autoload/*" ! -path "$HOME/.npm/*" | fzf)'
-alias sl='find $(pwd) -type d ! -path "$HOME*/.local/*" ! -path "$HOME*/.cache/*" ! -path "$HOME*/Brave*" \
+! -path "./.config/coc/*" ! -path "./.*/nvim/autoload/*" ! -path "$HOME/.npm/*" | fzf --reverse --header='Jump to location')'
+alias dlist='find -L $HOME -maxdepth 4 -type d ! -path "$HOME*/.local/*" ! -path "$HOME*/.cache/*" ! -path "$HOME*/Brave*" \
 ! -path "$HOME*/.config/R/*" ! -path "$HOME*/.*dotfiles/*" ! -path "$HOME*/Projectos/r-backtester/.Rproj.user/*" \
-! -path "$HOME*/.config/coc/*" ! -path "$HOME*/.*/nvim/autoload/*" ! -path "$HOME/.npm/*" | fzf'
+! -path "$HOME*/.config/coc/*" ! -path "$HOME*/.*/nvim/autoload/*" ! -path "$HOME/.npm/*" | fzf --reverse --header='Jump to location''
+
+ sl() {
+    cd $(dlist); ls -l | cut -d ">" -f 1 | sed 's/-$//'
+}
 
 
 ext () {
@@ -103,7 +107,9 @@ bindkey "\e[3~" delete-char
 bindkey -s '^g' 'lgit\n'
 bindkey '^v' edit-command-line
 bindkey -s '^f' 'nv\n'
-bindkey -s '^d' 'cd $(sl); ls -l\n'
+bindkey -s '^d' 'sl\n'
+
+#bindkey -s '^d' 'cd $(sl); ls -l | cut -d ">" -f 1 | sed 's/-$//'\n'
 
 # Load zsh-syntax-highlighting; should be last.
 source ~/.config/zsh/unicode.zsh
