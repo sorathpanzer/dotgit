@@ -1,6 +1,7 @@
 #!/bin/bash
 export EDITOR="nvim"
 picom &
+#diskie &
 numlockx &
 exec /usr/lib/kdeconnectd &
 xinput set-prop 12 "271" 1 &
