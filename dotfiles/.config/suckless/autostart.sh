@@ -1,17 +1,16 @@
 #!/bin/bash
 export EDITOR="nvim"
 picom &
-#hsetroot -solid black &
 hsetroot -full $HOME/Imagens/Wallpapers/vader.png
 xinput set-prop 12 "271" 1 &
 exec /usr/lib/kdeconnectd &
-#exec redshift &
 numlockx &
 xinput --set-prop "SYNA2B46:00 06CB:CD5F Touchpad" "libinput Natural Scrolling Enabled" 1 &
 pactl set-sink-volume alsa_output.pci-0000_00_1f.3.analog-stereo 150% &
-#lxpolkit
 /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
-#brave | xdotool key Super+b &
+#lxpolkit &
+#exec redshift &
+#hsetroot -solid black &
 
 dte(){
   dte="$(date +"%A, %B %d | 🕒 %H:%M%p")"
