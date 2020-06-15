@@ -18,17 +18,18 @@ TRAPALRM() {
 }
 
 #alias sudo="doas"
-alias lgit="cd $HOME/.config/dotgit; lazygit; cd -"
+alias cl="clear"
+alias lg="cd $HOME/.config/dotgit; lazygit; cd -"
 alias vfm="$HOME/.config/vifm/scripts/vifmrun"
 alias vim='nvim'
 alias ls='ls --color --group-directories-first'
 #alias gu='echo "Commit Message:"; read MESSAGE; gt add -u; gt commit -m "$MESSAGE"; gt push -u origin master'
-alias nv=' nvim $(find -L ! -path "./.local/*" ! -path "./.cache/*" ! -path "./.*Brave*" \
-! -path "./.*/R/*" ! -path "./.*dotfiles/*" ! -path "./Projectos/r-backtester/.Rproj.user/*" \
-! -path "./.config/coc/*" ! -path "./.*/nvim/autoload/*" ! -path "$HOME/.npm/*" | fzf --reverse --header='Jump to location')'
+alias nv='nvim $(find -L $HOME -maxdepth 4 -type f ! -path "$HOME/.local/*" ! -path "$HOME/.cache/*" ! -path "$HOME/.*Brave*" \
+! -path "$HOME/.*/R/*" ! -path "$HOME/.*dotfiles/*" ! -path "$HOME/Projectos/r-backtester/.Rproj.user/*" \
+! -path "$HOME/.steam*" ! -path "$HOME/.cargo*" ! -path "$HOME/.config/coc/*" ! -path "$HOME/.*/nvim/autoload/*" ! -path "$HOME/.npm/*" | fzf --reverse)'
 alias dlist='find -L $HOME -maxdepth 4 -type d ! -path "$HOME*/.local/*" ! -path "$HOME*/.cache/*" ! -path "$HOME*/Brave*" \
 ! -path "$HOME*/.config/R/*" ! -path "$HOME*/.*dotfiles/*" ! -path "$HOME*/Projectos/r-backtester/.Rproj.user/*" \
-! -path "$HOME*/.config/coc/*" ! -path "$HOME*/.*/nvim/autoload/*" ! -path "$HOME/.npm/*" | fzf --reverse --header='Jump to location''
+! -path "$HOME/.steam*" ! -path "$HOME/.cargo/*" ! -path "$HOME*/.config/coc/*" ! -path "$HOME*/.*/nvim/autoload/*" ! -path "$HOME/.npm/*" | fzf --reverse --header='Jump to location''
 
  sl() {
     cd $(dlist); ls -l | cut -d ">" -f 1 | sed 's/-$//'
