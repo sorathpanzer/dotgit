@@ -54,19 +54,10 @@ cmd sudomkfile ${{
 cmd setwallpaper %cp "$f" ~/.config/wall.png && nitrogen --set-scaled "$f"
 
 cmd fzf_jump ${{
-  res="$(find . -maxdepth 3 | fzf --reverse --header='Jump to location')"
-  if [ -f "$res" ]; then
-    cmd="select"
-  elif [ -d "$res" ]; then
-    cmd="cd"
-  fi
-  lf -remote "send $id $cmd \"$res\""
-}}
-
-cmd broot_jump ${{
-  f=$(mktemp)
-  res="$(broot  --outcmd $f && cat $f | sed 's/cd //')"
-  rm -f "$f"
+  res="$(find -L $HOME -maxdepth 4 -type d ! -path "$HOME*/.local/*" ! -path "$HOME*/.cache/*" ! -path "$HOME*/Brave*" \
+! -path "$HOME*/.config/R/*" ! -path "$HOME*/.*dotfiles/*" ! -path "$HOME*/Projectos/r-backtester/.Rproj.user/*" \
+! -path "$HOME*/.config/coc/*" ! -path "$HOME*/.*/nvim/autoload/*" ! -path "$HOME/.npm/*" | fzf --reverse --header='Jump to location')"
+#  res="$(find . -maxdepth 3 | fzf --reverse --header='Jump to location')"
   if [ -f "$res" ]; then
     cmd="select"
   elif [ -d "$res" ]; then
@@ -159,8 +150,7 @@ map dd trash
 map tc clear_trash
 map tr restore_trash
 
-# Broot Mapping
-map f broot_jump
+# Awesome Search
 map s fzf_jump
 
 # Dragon Mapping
