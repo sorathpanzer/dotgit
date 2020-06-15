@@ -27,7 +27,8 @@ static const char *colors[][3]      = {
 
 /* tagging */
 /* static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" }; */
-static const char *tags[] = { "", "", "", "", "", "" };
+/*static const char *tags[] = { "", "", "", "", "" };*/
+static const char *tags[] = { "", "", "", "", "" };
 
 static const Rule rules[] = {
 	/* xprop(1):
@@ -35,16 +36,16 @@ static const Rule rules[] = {
 	 *	WM_NAME(STRING) = title
 	 */
 	/* class      instance    title       tags mask     switchtotag    isfloating   monitor */
-	{ "Alacritty",     	NULL,       NULL,       2,            2,             0,           -1 },
 	{ "Brave-browser",    	NULL,       NULL,       1,            1,             0,           -1 },
 	{ "firefox",     	NULL,       NULL,       1,            1,             0,           -1 },
-	{ "imv",         	NULL,       NULL,       1 << 4,       5,             0,           -1 },
-	{ "Telegram",    	NULL,       NULL,       1 << 5,       9,             0,           -1 },
-	{ "RStudio",     	NULL,       NULL,       1 << 2,       8,             0,           -1 },
-	{ "VirtualBox Manager", NULL,       NULL,       1 << 2,       8,             0,           -1 },
-	{ "Nautilus",     	NULL,       NULL,       1 << 3,       8,             0,           -1 },
-	{ "Steam",     	 	NULL,       NULL,       1 << 4,       8,             0,           -1 },
-	{ "sxiv",     	 	NULL,       NULL,       1 << 4,       8,             0,           -1 },
+	{ "Alacritty",     	NULL,       NULL,       2,            2,             0,           -1 },
+	{ "Nautilus",     	NULL,       NULL,       1 << 2,       3,             0,           -1 },
+	{ "Telegram",    	NULL,       NULL,       1 << 2,       3,             0,           -1 },
+	{ "sxiv",     	 	NULL,       NULL,       1 << 3,       4,             0,           -1 },
+	{ "imv",         	NULL,       NULL,       1 << 3,       4,             0,           -1 },
+	{ "Steam",     	 	NULL,       NULL,       1 << 4,       5,             0,           -1 },
+	{ "RStudio",     	NULL,       NULL,       1 << 4,       5,             0,           -1 },
+	{ "VirtualBox Manager", NULL,       NULL,       1 << 4,       5,             0,           -1 },
 };
 
 /* layout(s) */
@@ -113,6 +114,7 @@ static Key keys[] = {
 
     /* Apps Launched with SUPER + ALT + KEY  */
 	{ MODKEY,        	  XK_w,      	   spawn,          CMD("brave") },
+	{ MODKEY,        	  XK_t,      	   spawn,          CMD("telegram-desktop") },
 	{ MODKEY,        	  XK_n,      	   spawn,          CMD("nautilus") },
 	{ MODKEY,        	  XK_s,      	   spawn,          CMD("steam") },
 	{ MODKEY|ShiftMask,       XK_Return,       spawn,          CMD("rstudio-bin") },
@@ -130,10 +132,6 @@ static Key keys[] = {
 	TAGKEYS(                  XK_3,            2)
 	TAGKEYS(                  XK_4,            3)
 	TAGKEYS(                  XK_5,            4)
-	TAGKEYS(                  XK_6,            5)
-	TAGKEYS(                  XK_7,            6)
-	TAGKEYS(                  XK_8,            7)
-	TAGKEYS(                  XK_9,            8)
 };
 
 /* button definitions */
