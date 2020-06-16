@@ -30,7 +30,6 @@ alias lg="cd $HOME/.config/dotgit; lazygit; cd -"
 alias vfm="$HOME/.config/vifm/scripts/vifmrun"
 alias vim='nvim'
 alias ls='ls --color --group-directories-first'
-#alias gu='echo "Commit Message:"; read MESSAGE; gt add -u; gt commit -m "$MESSAGE"; gt push -u origin master'
 alias nvlist='find -L $HOME -maxdepth 4 -type f ! -path "$HOME/.local/*" ! -path "$HOME/.cache/*" ! -path "$HOME/.*Brave*" \
 ! -path "$HOME/.*/R/*" ! -path "$HOME/.*dotfiles/*" ! -path "$HOME/Projectos/r-backtester/.Rproj.user/*" \
 ! -path "$HOME/.steam*" ! -path "$HOME/.cargo*" ! -path "$HOME/.config/coc/*" ! -path "$HOME/.*/nvim/autoload/*" ! -path "$HOME/.npm/*" | fzf --reverse'
@@ -89,7 +88,7 @@ dcop() {
 	cd ~/.config/suckless
 	rm dwm-backup.tar.gz
 	tar -czvf ./dwm-backup.tar.gz ./dwm/
-	cd ~/.config/suckless/dwm/dwm
+	cd ~/.config/suckless/dwm
 	vim config.h
 	sudo make install clean
 	cd -
