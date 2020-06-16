@@ -3,7 +3,6 @@
 export EDITOR="nvim"
 export TERMINAL="st"
 export VISUAL="nvim"
-ZSH_COMPDUMP="~/.cache/zsh/zcompdump"
 
 setopt hist_ignore_dups
 setopt hist_ignore_space
@@ -102,7 +101,7 @@ setopt menucomplete
 autoload -U compinit
 zstyle ':completion:*' menu select
 zmodload zsh/complist
-compinit
+compinit -d ~/.cache/zsh/zcompdump
 _comp_options+=(globdots)		# Include hidden files.
 
 # Edit line in vim with ctrl-e:
