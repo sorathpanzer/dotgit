@@ -85,13 +85,14 @@ gitup() {
 	cd -
 }
 
-dwmcmp() {
+dcop() {
 	cd ~/.config/suckless
+	rm dwm-backup.tar.gz
 	tar -czvf ./dwm-backup.tar.gz ./dwm/
-	cd ~/.config/suckless/dwm/src
+	cd ~/.config/suckless/dwm/dwm
 	vim config.h
 	sudo make install clean
-	cd
+	cd -
 }
 
 setopt auto_cd
@@ -111,8 +112,6 @@ bindkey "^[[1;5D" backward-word
 bindkey "^[[1;5C" forward-word
 bindkey "^a" beginning-of-line
 bindkey "^e" end-of-line
-#bindkey "^[[1;3D" backward-word
-#bindkey "^[[1;3C" forward-word
 bindkey '^H' backward-kill-word
 bindkey "\e[3~" delete-char
 
@@ -120,8 +119,6 @@ bindkey -s '^g' 'lgit\n'
 bindkey '^v' edit-command-line
 bindkey -s '^f' 'nv\n \n'
 bindkey -s '^d' 'sl\n \n'
-
-#bindkey -s '^d' 'cd $(sl); ls -l | cut -d ">" -f 1 | sed 's/-$//'\n'
 
 # Load zsh-syntax-highlighting; should be last.
 source ~/.config/zsh/unicode.zsh
