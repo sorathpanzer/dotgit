@@ -36,7 +36,7 @@ static const Rule rules[] = {
 	 *	WM_NAME(STRING) = title
 	 */
 	/* class      instance    title       tags mask     switchtotag    isfloating   monitor */
-	{ "Brave-browser",    	NULL,       NULL,       1,            1,             0,           -1 },
+	{ "Chromium",    	NULL,       NULL,       1,            1,             0,           -1 },
 	{ "firefox",     	NULL,       NULL,       1,            1,             0,           -1 },
 	{ "st-256color",     	NULL,       NULL,       2,            2,             0,           -1 },
 	{ "Alacritty",     	NULL,       NULL,       2,            2,             0,           -1 },
@@ -114,7 +114,7 @@ static Key keys[] = {
 	{ MODKEY, 		  XK_a,      	   defaultgaps,    {0} },
 
     /* Apps Launched with SUPER + ALT + KEY  */
-	{ MODKEY,        	  XK_w,      	   spawn,          CMD("brave") },
+	{ MODKEY,        	  XK_w,      	   spawn,          CMD("chromium") },
 	{ MODKEY,        	  XK_t,      	   spawn,          CMD("telegram-desktop") },
 	{ MODKEY,        	  XK_n,      	   spawn,          CMD("nautilus") },
 	{ MODKEY,        	  XK_s,      	   spawn,          CMD("steam") },
