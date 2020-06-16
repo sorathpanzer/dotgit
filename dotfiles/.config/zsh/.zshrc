@@ -29,27 +29,18 @@ alias lg="cd $HOME/.config/dotgit; lazygit; cd -"
 alias vfm="$HOME/.config/vifm/scripts/vifmrun"
 alias vim='nvim'
 alias ls='ls --color --group-directories-first'
-#alias gu='echo "Commit Message:"; read MESSAGE; gt add -u; gt commit -m "$MESSAGE"; gt push -u origin master'
-alias nvlist='find -L $HOME -maxdepth 4 -type f ! -path "$HOME/.local/*" ! -path "$HOME/.cache/*" ! -path "$HOME/.*Brave*" \
-! -path "$HOME/.*/R/*" ! -path "$HOME/.*dotfiles/*" ! -path "$HOME/Projectos/r-backtester/.Rproj.user/*" \
-! -path "$HOME/.steam*" ! -path "$HOME/.cargo*" ! -path "$HOME/.config/coc/*" ! -path "$HOME/.*/nvim/autoload/*" ! -path "$HOME/.npm/*" | fzf --reverse'
+alias nv='~/.config/scripts/nvlist'
+#alias sl='~/.config/scripts/drlist'
+
 alias dlist='find -L $HOME -maxdepth 4 -type d ! -path "$HOME*/.local/*" ! -path "$HOME*/.cache/*" ! -path "$HOME*/Brave*" \
 ! -path "$HOME*/.config/R/*" ! -path "$HOME*/.*dotfiles/*" ! -path "$HOME*/Projectos/r-backtester/.Rproj.user/*" \
 ! -path "$HOME/.steam*" ! -path "$HOME/.cargo/*" ! -path "$HOME*/.config/coc/*" ! -path "$HOME*/.*/nvim/autoload/*" ! -path "$HOME/.npm/*" | fzf --reverse --header='Jump to location''
 
-nv() {
-    res_nvlist=$(nvlist)
-    nvim $res_nvlist
-    echo "nvim $res_nvlist" >> $HISTFILE
-}
-
-
- sl() {
+sl() {
     res_dlist=$(dlist)
     cd $res_dlist; ls -l | cut -d ">" -f 1 | sed 's/-$//'
     echo "cd $res_dlist" >> $HISTFILE
 }
-
 
 ext () {
 	if [ -f $1 ] ; then
@@ -117,8 +108,8 @@ bindkey "\e[3~" delete-char
 
 bindkey -s '^g' 'lgit\n'
 bindkey '^v' edit-command-line
-bindkey -s '^f' 'nv\n \n'
-bindkey -s '^d' 'sl\n \n'
+bindkey -s '^f' 'nv\n'
+bindkey -s '^d' 'sl\n'
 
 #bindkey -s '^d' 'cd $(sl); ls -l | cut -d ">" -f 1 | sed 's/-$//'\n'
 
