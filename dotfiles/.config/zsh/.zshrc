@@ -1,7 +1,7 @@
 #!/usr/bin/zsh
 
 export EDITOR="nvim"
-export TERMINAL="alacritty"
+export TERMINAL="st"
 export VISUAL="nvim"
 ZSH_COMPDUMP="~/.cache/zsh/zcompdump"
 
