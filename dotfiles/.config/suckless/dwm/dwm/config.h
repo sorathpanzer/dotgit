@@ -38,6 +38,7 @@ static const Rule rules[] = {
 	/* class      instance    title       tags mask     switchtotag    isfloating   monitor */
 	{ "Brave-browser",    	NULL,       NULL,       1,            1,             0,           -1 },
 	{ "firefox",     	NULL,       NULL,       1,            1,             0,           -1 },
+	{ "st-256color",     	NULL,       NULL,       2,            2,             0,           -1 },
 	{ "Alacritty",     	NULL,       NULL,       2,            2,             0,           -1 },
 	{ "Nautilus",     	NULL,       NULL,       1 << 2,       3,             0,           -1 },
 	{ "Telegram",    	NULL,       NULL,       1 << 2,       3,             0,           -1 },
@@ -75,7 +76,7 @@ static const Layout layouts[] = {
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
-static const char *termcmd[]  = { "alacritty", NULL };
+static const char *termcmd[]  = { "st", NULL };
 static const char *shutcmd[]  = { "systemctl", "poweroff", NULL };
 static const char *rebcmd[]  = { "systemctl", "reboot", NULL };
 static const char *lckcmd[]  = { "slock", NULL };

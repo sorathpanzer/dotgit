@@ -2,7 +2,7 @@
 /* |  _ \_   _|  Derek Taylor (DistroTube) */
 /* | | | || |  	 http://www.youtube.com/c/DistroTube */
 /* | |_| || |  	 http://www.gitlab.com/dwt1/ */
-/* |____/ |_|  	 */ 
+/* |____/ |_|  	 */
 
 /* See LICENSE file for copyright and license details. */
 /* appearance */
@@ -12,12 +12,12 @@
  * Arch repos and is listed as a dependency for this build. JoyPixels is also
  * a hard dependency and makes colored fonts and emojis possible.
  */
-static char *font = "Mononoki Nerd Font:pixelsize=15:antialias=true:autohint=true";
+static char *font = "Mononoki Nerd Font:pixelsize=16";
 static char *font2[] = {
 	"Hack:pixelsize=15:antialias=true:autohint=true",
 	"JoyPixels:pixelsize=15:antialias=true:autohint=true",
 };
-static int borderpx = 2;
+static int borderpx = 8;
 
 /*
  * What program is execed by st depends of these precedence rules:
@@ -35,8 +35,8 @@ char *stty_args = "stty raw pass8 nl -echo -iexten -cstopb 38400";
 char *vtiden = "\033[?6c";
 
 /* Kerning / character bounding-box multipliers */
-static float cwscale = 1.0;
-static float chscale = 1.0;
+static float cwscale = 0.95;
+static float chscale = 0.95;
 
 /*
  * word delimiter string
@@ -93,23 +93,23 @@ char *termname = "st-256color";
  */
 unsigned int tabspaces = 8;
 
-/* bg opacity 
+/* bg opacity
  * 0xff is no transparency.
  * 0xee adds wee bit of transparency.
  * Play with the value to get desired transparency.
  */
-unsigned int alpha = 0xee; 
+unsigned int alpha = 0xef;
 
 /* Terminal colors (16 first used in escape sequence) */
 static const char *colorname[] = {
 	/* 8 normal colors */
-    "#282a36",
+    "#292d3e",
 	"#f07178",
 	"#c3e88d",
 	"#ffcb6b",
 	"#82aaff",
 	"#c792ea",
-	"#89ddff",
+	"#73FBF1",
 	"#d0d0d0",
 
 	/* 8 bright colors */
@@ -117,7 +117,7 @@ static const char *colorname[] = {
 	"#ff8b92",
 	"#ddffa7",
 	"#ffe585",
-	"#9cc4ff",
+	"#82aaff",
 	"#e1acff",
 	"#a3f7ff",
 	"#ffffff",
@@ -125,7 +125,7 @@ static const char *colorname[] = {
 	[255] = 0,
 
 	/* more colors can be added after 255 to use with DefaultXX */
-	"#282a36",
+	"#292d3e",
 	"#bbc5ff",
 	"#d7d7d7",
 };
