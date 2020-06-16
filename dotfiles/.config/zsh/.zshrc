@@ -3,6 +3,7 @@
 export EDITOR="nvim"
 export TERMINAL="alacritty"
 export VISUAL="nvim"
+export ZSH_COMPDUMP="~/.cache/zsh/zcompdump"
 
 setopt hist_ignore_dups
 setopt hist_ignore_space
