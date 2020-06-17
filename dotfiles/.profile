@@ -1,9 +1,9 @@
 # Default programs:
-#export EDITOR="/usr/bin/nvim"
-#export TERMINAL="alacritty"
-#export BROWSER="brave"
-#export READER="zathura"
-#export FILE="pcmanfm"
+export EDITOR="/usr/bin/nvim"
+export TERMINAL="st"
+export BROWSER="chromium"
+export READER="zathura"
+export FILE="pcmanfm"
 
 # ~/ Clean-up:
 export XDG_CONFIG_HOME="$HOME/.config"
