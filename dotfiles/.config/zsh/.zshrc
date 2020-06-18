@@ -1,8 +1,9 @@
 #!/usr/bin/zsh
 
 export EDITOR="nvim"
-export TERMINAL="st"
-export VISUAL="nvim"
+export TERMINAL="st-256color"
+export VISUAL="sxiv"
+export PATH="${PATH}:${HOME}/.local/bin/"
 
 setopt hist_ignore_dups
 setopt hist_ignore_space
@@ -24,7 +25,7 @@ TRAPALRM() {
     zle reset-prompt
 }
 
-#alias sudo="doas"
+#alias doas="doas --"
 alias cl="clear"
 alias lg="cd $HOME/.config/dotgit; lazygit; cd -"
 alias vfm="$HOME/.config/vifm/scripts/vifmrun"

@@ -184,7 +184,7 @@ map U unselect
 
 # Movement
 map gtr cd ~/.local/share/Trash/files
-map gms cd /run/media/sorath
+map gm cd /run/media/sorath
 
 map gv. cd ~/Videos
 map gi. cd ~/Imagens

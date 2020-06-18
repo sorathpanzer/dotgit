@@ -1,6 +1,6 @@
 # Default programs:
-export EDITOR="/usr/bin/nvim"
-export TERMINAL="st"
+export EDITOR="nvim"
+export TERMINAL="st-256color"
 export BROWSER="chromium"
 export READER="zathura"
 export FILE="thunar"
