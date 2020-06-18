@@ -3,7 +3,7 @@
 export EDITOR="nvim"
 export TERMINAL="st-256color"
 export VISUAL="sxiv"
-export PATH="${PATH}:${HOME}/.local/bin/"
+#export PATH="${PATH}:${HOME}/.local/bin"
 
 setopt hist_ignore_dups
 setopt hist_ignore_space

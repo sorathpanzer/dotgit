@@ -193,7 +193,7 @@ map gd cd ~/Documentos
 map gt cd ~/Transferências
 
 map gc cd ~/.config
-map gs. cd ~/.config/scripts
+map gs. cd ~/.config/suckless
 map ge cd /etc
 map gu. cd /usr
 map gus cd /usr/share

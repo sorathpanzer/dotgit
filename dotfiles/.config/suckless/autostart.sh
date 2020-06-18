@@ -1,11 +1,12 @@
 #!/bin/bash
 export EDITOR="nvim"
+
 picom &
 udiskie &
 numlockx &
 exec /usr/lib/kdeconnectd &
 hsetroot -full $HOME/Imagens/Wallpapers/vader.png &
-xrandr --output "eDP-1" --brightness 0.75
+xrandr --output "eDP-1" --brightness 0.75 &
 xinput --set-prop "SYNA2B46:00 06CB:CD5F Touchpad" "libinput Natural Scrolling Enabled" 1 &
 pactl set-sink-volume alsa_output.pci-0000_00_1f.3.analog-stereo 150% &
 #lxpolkit &
@@ -14,9 +15,9 @@ pactl set-sink-volume alsa_output.pci-0000_00_1f.3.analog-stereo 150% &
 #xinput set-prop 12 "271" 1 &
 #/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
 
-dte(){
-  dte="$(date +"%A, %B %d | 🕒 %H:%M%p")"
-  echo -e "$dte"
+clock(){
+  clock="$(date +"%a, %B %d %l:%M%p"| sed 's/  / /g')"
+  echo -e "🕒 $clock"
 }
 
 mem(){
@@ -37,12 +38,12 @@ cpu(){
 
 battery(){
   ENERGY=$(cat /sys/class/power_supply/BAT?/capacity)
-  echo -e "🔋$ENERGY%"
+  echo -e "⚡ $ENERGY%"
 }
 
 updates(){
   PMUPDATES=$(checkupdates | wc -l)
-  echo -e "ᗧ $PMUPDATES"
+  echo -e "📦 $PMUPDATES"
 }
 
 temp(){
@@ -55,8 +56,13 @@ news(){
   echo -e "📰 $NEWS"
 }
 
+disk(){
+ DISK=$(df -h / | awk ' /[0-9]/ {print $3 "/" $2}')
+ echo -e "💾 $DISK"
+}
+
 while true; do
-  xsetroot -name "$(news) | $(updates) | $(cpu) | $(mem) | $(temp) | $(battery) | $(dte)"
+  xsetroot -name "$(news) | $(updates) | $(cpu) | $(mem) | $(temp) | $(disk) | $(battery) | $(clock)"
      sleep 60s    # Update time every ten seconds
 done &
 
@@ -67,7 +73,7 @@ tf="${HOME}/.wm-unmapped-${wm_name}"
         xdotool search $wm_name windowunmap
         touch $tf
         exit 0
-}
+ }
 
 xdotool search $wm_name windowmap
 xdotool search $wm_name windowraise
