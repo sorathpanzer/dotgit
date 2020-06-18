@@ -50,8 +50,13 @@ temp(){
  echo -e "🔥$TEMPERATURE"
 }
 
+news(){
+  NEWS=$(newsboat -x print-unread | awk '{ print $1}')
+  echo -e "📰 $NEWS"
+}
+
 while true; do
-     xsetroot -name "$(updates) | $(cpu) | $(mem) | $(temp) | $(battery) | $(dte)"
+  xsetroot -name "$(news) | $(updates) | $(cpu) | $(mem) | $(temp) | $(battery) | $(dte)"
      sleep 60s    # Update time every ten seconds
 done &
 

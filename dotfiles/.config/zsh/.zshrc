@@ -26,6 +26,7 @@ TRAPALRM() {
 }
 
 #alias doas="doas --"
+alias nb="newsboat"
 alias cl="clear"
 alias lg="cd $HOME/.config/dotgit; lazygit; cd -"
 alias vfm="$HOME/.config/vifm/scripts/vifmrun"
