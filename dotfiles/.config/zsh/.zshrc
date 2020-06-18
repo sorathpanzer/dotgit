@@ -2,8 +2,7 @@
 
 export EDITOR="nvim"
 export TERMINAL="st-256color"
-export VISUAL="sxiv"
-#export PATH="${PATH}:${HOME}/.local/bin"
+export VISUAL="nvim"
 
 setopt hist_ignore_dups
 setopt hist_ignore_space
@@ -30,6 +29,7 @@ alias nb="newsboat"
 alias cl="clear"
 alias lg="cd $HOME/.config/dotgit; lazygit; cd -"
 alias vfm="$HOME/.config/vifm/scripts/vifmrun"
+alias vm='nvim'
 alias vim='nvim'
 alias ls='ls --color --group-directories-first'
 alias nvlist='find -L $HOME -maxdepth 4 -type f ! -path "$HOME/.local/*" ! -path "$HOME/.cache/*" ! -path "$HOME/.*Brave*" \
@@ -39,21 +39,21 @@ alias dlist='find -L $HOME -maxdepth 4 -type d ! -path "$HOME*/.local/*" ! -path
 ! -path "$HOME*/.config/R/*" ! -path "$HOME*/.*dotfiles/*" ! -path "$HOME*/Projectos/r-backtester/.Rproj.user/*" \
 ! -path "$HOME/.steam*" ! -path "$HOME/.cargo/*" ! -path "$HOME*/.config/coc/*" ! -path "$HOME*/.*/nvim/autoload/*" ! -path "$HOME/.npm/*" | fzf --reverse --header='Jump to location''
 
-nv() {
+fl() {
     res_nvlist=$(nvlist)
     nvim $res_nvlist
     echo "nvim $res_nvlist" >> $HISTFILE
 }
 
 
- sl() {
+dr() {
     res_dlist=$(dlist)
     cd $res_dlist; ls -l | cut -d ">" -f 1 | sed 's/-$//'
     echo "cd $res_dlist" >> $HISTFILE
 }
 
 
-ext () {
+xt () {
 	if [ -f $1 ] ; then
 		case $1 in
 			*.tar.xz)    tar xvf $1     ;;
@@ -73,6 +73,10 @@ ext () {
 	else
 		echo "'$1' is not a valid file!"
 	fi
+}
+
+cx () {
+    tar cfJv "$1.tar.xz" "$1"
 }
 
 gitup() {
@@ -118,8 +122,8 @@ bindkey "\e[3~" delete-char
 
 bindkey -s '^g' 'lgit\n'
 bindkey '^v' edit-command-line
-bindkey -s '^f' 'nv\n \n'
-bindkey -s '^d' 'sl\n \n'
+bindkey -s '^f' 'fl\n \n'
+bindkey -s '^d' 'dr\n \n'
 
 # Load zsh-syntax-highlighting; should be last.
 source ~/.config/zsh/unicode.zsh
