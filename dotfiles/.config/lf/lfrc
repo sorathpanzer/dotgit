@@ -70,6 +70,12 @@ cmd open_config  ${{
   $EDITOR $(bookmenu -b ~/.config/bookmenu/configs -f fzf -o)
 }}
 
+cmd mtsda ${{
+  clear
+  sudo udisksctl unlock -b /dev/sda1
+  sudo udisksctl mount -b /dev/dm-0
+}}
+
 cmd dragon %dragon-drag-and-drop -a -x $fx
 cmd cpdragon %cpdragon
 cmd mvdragon %mvdragon
@@ -91,6 +97,7 @@ cmd zip %zip -r "$f" "$f"
 cmd tar %tar cvf "$f.tar" "$f"
 cmd targz %tar cvzf "$f.tar.gz" "$f"
 cmd tarbz2 %tar cjvf "$f.tar.bz2" "$f"
+cmd tarxz %tar cfjv "$f.tar.xz" "$f"
 
 # Trash cli bindings
 cmd trash ${{
@@ -137,13 +144,14 @@ map f
 
 # File Openers
 map ee $$EDITOR "$f"
-map u $view "$f"
+#map u $view "$f"
 
 # Archive Mappings
 map az zip
 map at tar
 map ag targz
 map ab tarbz2
+map ax tarxz
 map au unarchive
 
 # Trash Mappings
@@ -184,16 +192,17 @@ map U unselect
 
 # Movement
 map gtr cd ~/.local/share/Trash/files
-map gm cd /run/media/sorath
+map gm cd /media
+map mt mtsda
 
-map gv. cd ~/Videos
-map gi. cd ~/Imagens
-map gw. cd ~/Imagens/Wallpapers
+map gv cd ~/Videos
+map gi cd ~/Imagens
+map gw cd ~/Imagens/Wallpapers
 map gd cd ~/Documentos
 map gt cd ~/Transferências
 
 map gc cd ~/.config
 map gs cd ~/.config/suckless
 map ge cd /etc
-map gu. cd /usr
+map gu cd /usr
 map gus cd /usr/share
