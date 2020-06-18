@@ -66,16 +66,3 @@ while true; do
      sleep 60s    # Update time every ten seconds
 done &
 
-wm_name="$1"
-tf="${HOME}/.wm-unmapped-${wm_name}"
-
-[[ ! -e $tf ]] && {
-        xdotool search $wm_name windowunmap
-        touch $tf
-        exit 0
- }
-
-xdotool search $wm_name windowmap
-xdotool search $wm_name windowraise
-xdotool search $wm_name windowsize 100% 100%  windowmove 0 0
-rm $tf
