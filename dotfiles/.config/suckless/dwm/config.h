@@ -40,9 +40,9 @@ static const Rule rules[] = {
 	{ "firefox",     	NULL,       NULL,       1,            1,             0,           -1 },
 	{ "st-256color",     	NULL,       NULL,       2,            2,             0,           -1 },
 	{ "Alacritty",     	NULL,       NULL,       2,            2,             0,           -1 },
-	{ "Nautilus",     	NULL,       NULL,       1 << 2,       3,             0,           -1 },
+	{ "Nemo",     		NULL,       NULL,       1 << 2,       3,             0,           -1 },
 	{ "Telegram",    	NULL,       NULL,       1 << 2,       3,             0,           -1 },
-	{ "sxiv",     	 	NULL,       NULL,       1 << 3,       4,             0,           -1 },
+	{ "Sxiv",     	 	NULL,       NULL,       1 << 3,       4,             0,           -1 },
 	{ "imv",         	NULL,       NULL,       1 << 3,       4,             0,           -1 },
 	{ "Steam",     	 	NULL,       NULL,       1 << 4,       5,             0,           -1 },
 	{ "RStudio",     	NULL,       NULL,       1 << 4,       5,             0,           -1 },
@@ -79,7 +79,6 @@ static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont,
 static const char *termcmd[]  = { "st", NULL };
 static const char *shutcmd[]  = { "systemctl", "poweroff", NULL };
 static const char *rebcmd[]  = { "systemctl", "reboot", NULL };
-static const char *lckcmd[]  = { "slock", NULL };
 
 static Key keys[] = {
 	/* modifier               key              function        argument */
@@ -107,7 +106,7 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,       XK_comma,        tagmon,         {.i = -1 } },
 	{ MODKEY|ShiftMask,       XK_period,       tagmon,         {.i = +1 } },
 	{ MODKEY,       	  XK_Delete,	   quit,	   {0} },
-	{ MODKEY, 	  	  XK_r,      	   quit,           {1} },
+	{ MODKEY|ShiftMask, 	  XK_r,      	   quit,           {1} },
 
     /* Gaps keybinds control */
 	{ MODKEY|ControlMask,     XK_g,      	   togglegaps,     {0} },
@@ -116,12 +115,14 @@ static Key keys[] = {
     /* Apps Launched with SUPER + ALT + KEY  */
 	{ MODKEY,        	  XK_w,      	   spawn,          CMD("chromium") },
 	{ MODKEY,        	  XK_t,      	   spawn,          CMD("telegram-desktop") },
-	{ MODKEY,        	  XK_n,      	   spawn,          CMD("nautilus") },
+	{ MODKEY,        	  XK_n,      	   spawn,          CMD("nemo") },
 	{ MODKEY,        	  XK_s,      	   spawn,          CMD("steam") },
+	{ MODKEY,        	  XK_r,      	   spawn,          CMD("rstudio-bin") },
+	{ MODKEY,        	  XK_v,      	   spawn,          CMD("virtualbox") },
 	{ MODKEY|ShiftMask,       XK_Return,       spawn,          CMD("rstudio-bin") },
+	{ MODKEY,       	XK_BackSpace,      spawn,          CMD("i3lock -c 000000") },
 	{ MODKEY|ShiftMask,       XK_Delete, 	   spawn,          {.v = shutcmd } },
 	{ MODKEY|ShiftMask,       XK_BackSpace,    spawn,          {.v = rebcmd } },
-	{ MODKEY,       	  XK_BackSpace,    spawn,          {.v = lckcmd } },
 	{ 0,                      XK_Print,  	   spawn,          SHCMD("scrot ~/Imagens/Screenshots/$(date '+%Y%m%d').png") },
 	{ MODKEY|ShiftMask,       XK_plus,   	   spawn,          SHCMD ("~/.config/suckless/brightness.sh Up") },
   	{ MODKEY|ShiftMask,       XK_minus,  	   spawn,          SHCMD ("~/.config/suckless/brightness.sh Down") },
