@@ -113,14 +113,14 @@ static Key keys[] = {
 	{ MODKEY, 		  XK_a,      	   defaultgaps,    {0} },
 
     /* Apps Launched with SUPER + ALT + KEY  */
-	{ MODKEY,        	  XK_w,      	   spawn,          CMD("chromium") },
+	{ MODKEY,        	  XK_w,      	   spawn,          CMD("xdo activate -N Chromium || chromium") },
 	{ MODKEY,        	  XK_t,      	   spawn,          CMD("telegram-desktop") },
 	{ MODKEY,        	  XK_n,      	   spawn,          CMD("nemo") },
 	{ MODKEY,        	  XK_s,      	   spawn,          CMD("steam") },
 	{ MODKEY,        	  XK_r,      	   spawn,          CMD("rstudio-bin") },
 	{ MODKEY,        	  XK_v,      	   spawn,          CMD("virtualbox") },
 	{ MODKEY|ShiftMask,       XK_Return,       spawn,          CMD("rstudio-bin") },
-	{ MODKEY,       	XK_BackSpace,      spawn,          CMD("i3lock -c 000000") },
+	{ MODKEY,       	  XK_BackSpace,    spawn,          CMD("i3lock -c 000000") },
 	{ MODKEY|ShiftMask,       XK_Delete, 	   spawn,          {.v = shutcmd } },
 	{ MODKEY|ShiftMask,       XK_BackSpace,    spawn,          {.v = rebcmd } },
 	{ 0,                      XK_Print,  	   spawn,          SHCMD("scrot ~/Imagens/Screenshots/$(date '+%Y%m%d').png") },
