@@ -76,11 +76,6 @@ cmd mtsda ${{
   sudo udisksctl mount -b /dev/dm-0
 }}
 
-cmd dragon %dragon-drag-and-drop -a -x $fx
-cmd cpdragon %cpdragon
-cmd mvdragon %mvdragon
-cmd dlfile %dlfile
-
 # Archive bindings
 cmd unarchive ${{
   case "$f" in
@@ -91,6 +86,10 @@ cmd unarchive ${{
       *.tar.xz) tar -xvf "$f" ;;
       *) echo "Unsupported format" ;;
   esac
+}}
+
+cmd burniso ${{
+  sudo dd if="$f" of=/dev/sdb
 }}
 
 cmd zip %zip -r "$f" "$f"
@@ -124,8 +123,6 @@ cmd clear_trash %trash-empty
 cmd restore_trash ${{
   trash-restore
 }}
-
-cmd stripspace %stripspace "$f"
 
 cmd q quit
 map <esc> quit
@@ -162,12 +159,6 @@ map tr restore_trash
 # Awesome Search
 map s fzf_jump
 
-# Dragon Mapping
-map dr dragon
-map dm mvdragon
-map dc cpdragon
-map dl dlfile
-
 # Basic Functions
 map . set hidden!
 map DD delete
@@ -189,6 +180,7 @@ map L bottom
 map R reload
 map C clear
 map U unselect
+map bi burniso
 
 # Movement
 map gtr cd ~/.local/share/Trash/files

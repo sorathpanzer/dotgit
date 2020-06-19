@@ -18,11 +18,11 @@ autoload -U colors && colors
 setopt PROMPT_SUBST
 PS1="%B%{$fg[red]%}[%{$fg[white]%}%n%{$fg[white]%}@%{$fg[white]%}%M %{$fg[blue]%}%~%{$fg[red]%}]%{$reset_color%} λ%b "
 
-RPROMPT='[%D{%a %d %b %Y %H:%M}]'
-TMOUT=1
-TRAPALRM() {
-    zle reset-prompt
-}
+#RPROMPT='[%D{%a %d %b %Y %H:%M}]'
+#TMOUT=1
+#TRAPALRM() {
+#    zle reset-prompt
+#}
 
 #alias doas="doas --"
 alias nb="newsboat"
@@ -123,8 +123,8 @@ bindkey "\e[3~" delete-char
 
 bindkey -s '^g' 'lgit\n'
 bindkey '^v' edit-command-line
-bindkey -s '^[e' 'fl\n \n'
-bindkey -s '^[d' 'dr\n \n'
+bindkey -s '^[e' 'fl\n'
+bindkey -s '^[d' 'dr\n'
 
 # Load zsh-syntax-highlighting; should be last.
 source ~/.config/zsh/unicode.zsh
