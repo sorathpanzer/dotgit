@@ -82,7 +82,7 @@ static const char *rebcmd[]  = { "systemctl", "reboot", NULL };
 
 static Key keys[] = {
 	/* modifier               key              function        argument */
-	{ MODKEY,   		  XK_d,       	   spawn,          {.v = dmenucmd } },
+	{ MODKEY|ShiftMask,   	  XK_Return,       spawn,          {.v = dmenucmd } },
 	{ MODKEY,                 XK_Return,       spawn,          {.v = termcmd } },
 	{ MODKEY,                 XK_b,            togglebar,      {0} },
 	{ MODKEY|ShiftMask,       XK_Right,        rotatestack,    {.i = +1 } },
@@ -116,6 +116,7 @@ static Key keys[] = {
 	{ MODKEY,        	  XK_w,      	   spawn,          CMD("xdo activate -N Chromium || chromium") },
 	{ MODKEY,        	  XK_t,      	   spawn,          CMD("telegram-desktop") },
 	{ MODKEY,        	  XK_n,      	   spawn,          CMD("nemo") },
+	{ MODKEY,        	  XK_j,      	   spawn,          CMD("st -e journalctl --follow") },
 	{ MODKEY,        	  XK_s,      	   spawn,          CMD("steam") },
 	{ MODKEY,        	  XK_r,      	   spawn,          CMD("rstudio-bin") },
 	{ MODKEY,        	  XK_v,      	   spawn,          CMD("virtualbox") },

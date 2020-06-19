@@ -77,6 +77,7 @@ xt () {
 
 cx () {
     tar cfJv "$1.tar.xz" "$1"
+    ls -la
 }
 
 gitup() {
@@ -117,13 +118,13 @@ bindkey "^[[1;5D" backward-word
 bindkey "^[[1;5C" forward-word
 bindkey "^a" beginning-of-line
 bindkey "^e" end-of-line
-bindkey '^H' backward-kill-word
+bindkey '^d' backward-kill-word
 bindkey "\e[3~" delete-char
 
 bindkey -s '^g' 'lgit\n'
 bindkey '^v' edit-command-line
-bindkey -s '^f' 'fl\n \n'
-bindkey -s '^d' 'dr\n \n'
+bindkey -s '^[e' 'fl\n \n'
+bindkey -s '^[d' 'dr\n \n'
 
 # Load zsh-syntax-highlighting; should be last.
 source ~/.config/zsh/unicode.zsh
