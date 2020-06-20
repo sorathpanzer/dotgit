@@ -12,5 +12,5 @@ export XDG_CACHE_HOME="$HOME/.cache"
 export ZDOTDIR="${XDG_CONFIG_HOME:-$HOME/.config}/zsh"
 export CARGO_HOME="$XDG_DATA_HOME"/cargo
 
-PATH="$PATH:/$HOME/.local/bin"
+#PATH="$PATH:$HOME/.local/bin"
 [[ -z $DISPLAY && $XDG_VTNR -eq 1 ]] && startx

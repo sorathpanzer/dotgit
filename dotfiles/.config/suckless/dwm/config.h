@@ -120,7 +120,6 @@ static Key keys[] = {
 	{ MODKEY,        	  XK_s,      	   spawn,          CMD("steam") },
 	{ MODKEY,        	  XK_r,      	   spawn,          CMD("rstudio-bin") },
 	{ MODKEY,        	  XK_v,      	   spawn,          CMD("virtualbox") },
-	{ MODKEY|ShiftMask,       XK_Return,       spawn,          CMD("rstudio-bin") },
 	{ MODKEY,       	  XK_BackSpace,    spawn,          CMD("i3lock -c 000000") },
 	{ MODKEY|ShiftMask,       XK_Delete, 	   spawn,          {.v = shutcmd } },
 	{ MODKEY|ShiftMask,       XK_BackSpace,    spawn,          {.v = rebcmd } },

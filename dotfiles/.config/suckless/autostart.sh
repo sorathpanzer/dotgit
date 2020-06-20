@@ -4,14 +4,14 @@ picom &
 udiskie &
 numlockx &
 exec /usr/lib/kdeconnectd &
-hsetroot -full $HOME/Imagens/Wallpapers/vader.png &
+hsetroot -full $HOME/Imagens/Wallpapers/literature-black.png &
 xrandr --output "eDP-1" --brightness 0.70 &
 xinput --set-prop "SYNA2B46:00 06CB:CD5F Touchpad" "libinput Natural Scrolling Enabled" 1 &
 pactl set-sink-volume alsa_output.pci-0000_00_1f.3.analog-stereo 150% &
 #lxpolkit &
 #exec redshift &
 #hsetroot -solid black &
-#/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
+/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
 
 clock(){
   clock="$(date +"%a, %B %d %l:%M%p"| sed 's/  / /g')"
