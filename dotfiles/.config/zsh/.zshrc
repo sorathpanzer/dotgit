@@ -129,7 +129,6 @@ bindkey -s '^[e' 'fl\n'
 bindkey -s '^[d' 'dr\n'
 
 # Load zsh-syntax-highlighting; should be last.
-source ~/.config/lf/lfcd.sh
 source ~/.config/zsh/unicode.zsh
 source ~/.config/zsh/goto.sh
 source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh 2>/dev/null
