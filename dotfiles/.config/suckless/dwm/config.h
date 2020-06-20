@@ -29,6 +29,7 @@ static const char *colors[][3]      = {
 /* static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" }; */
 /*static const char *tags[] = { "", "", "", "", "" };*/
 static const char *tags[] = { "", "", "", "", "" };
+static const char *alttags[] = { "|}|", "| |", "| |", "| |", "| |" };
 
 static const Rule rules[] = {
 	/* xprop(1):
@@ -38,15 +39,15 @@ static const Rule rules[] = {
 	/* class      instance    title       tags mask     switchtotag    isfloating   monitor */
 	{ "Chromium",    	NULL,       NULL,       1,            1,             0,           -1 },
 	{ "firefox",     	NULL,       NULL,       1,            1,             0,           -1 },
-	{ "st-256color",     	NULL,       NULL,       2,            2,             0,           -1 },
-	{ "Alacritty",     	NULL,       NULL,       2,            2,             0,           -1 },
-	{ "Nemo",     		NULL,       NULL,       1 << 2,       3,             0,           -1 },
-	{ "Telegram",    	NULL,       NULL,       1 << 2,       3,             0,           -1 },
-	{ "Sxiv",     	 	NULL,       NULL,       1 << 3,       4,             0,           -1 },
-	{ "imv",         	NULL,       NULL,       1 << 3,       4,             0,           -1 },
-	{ "Steam",     	 	NULL,       NULL,       1 << 4,       5,             0,           -1 },
-	{ "RStudio",     	NULL,       NULL,       1 << 4,       5,             0,           -1 },
-	{ "VirtualBox Manager", NULL,       NULL,       1 << 4,       5,             0,           -1 },
+	{ "st-256color",     	NULL,       NULL,       2,            1,             0,           -1 },
+	{ "Alacritty",     	NULL,       NULL,       2,            1,             0,           -1 },
+	{ "Nemo",     		NULL,       NULL,       1 << 2,       1,             0,           -1 },
+	{ "Telegram",    	NULL,       NULL,       1 << 2,       1,             0,           -1 },
+	{ "Sxiv",     	 	NULL,       NULL,       1 << 3,       1,             0,           -1 },
+	{ "imv",         	NULL,       NULL,       1 << 3,       1,             0,           -1 },
+	{ "Steam",     	 	NULL,       NULL,       1 << 4,       1,             0,           -1 },
+	{ "RStudio",     	NULL,       NULL,       1 << 4,       1,             0,           -1 },
+	{ "VirtualBox Manager", NULL,       NULL,       1 << 4,       1,             0,           -1 },
 };
 
 /* layout(s) */
