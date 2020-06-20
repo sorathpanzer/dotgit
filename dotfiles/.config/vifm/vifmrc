@@ -12,7 +12,7 @@
 set vicmd=nvim
 set syscalls
 set trash
-set history=100
+" set history=100
 set nofollowlinks
 set sortnumbers
 set undolevels=100
