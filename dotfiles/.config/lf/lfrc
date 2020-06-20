@@ -150,6 +150,19 @@ cmd yank-basename ${{
     fi | xclip -i -selection clipboard
 }}
 
+cmd stow ${{
+    clear
+    stow -nvt ~ dotfiles
+    printf "Link all files to the Stow [y/n]: "
+    read ans
+    if [[ $ans == "y" ]]; then
+      stow -vt ~ dotfiles
+      echo "OK!"
+      read exit
+    else
+      echo " "
+     fi
+}}
 
 cmd q quit
 
@@ -165,14 +178,18 @@ map c
 map e
 map f
 
+cmd drawimg ${{
+  ~/.config/lf/draw_img.sh "$f"
+}}
+
 cmd video_preview ${{
     CACHE=$(mktemp /tmp/thumb_cache.XXXXX)
     ffmpegthumbnailer -i "$f" -o $CACHE -s 0
     ~/.config/lf/draw_img.sh $CACHE && rm $CACHE
 }}
 
-map + :video_preview
-map - ~/.config/lf/draw_img.sh "$f"
+map * :video_preview
+map + :drawimg
 
 # File Openers
 map ee $$EDITOR "$f"
@@ -194,6 +211,7 @@ map tr restore_trash
 # Awesome Search
 map s fzf_jump
 map f fzf_jump
+map S stow
 
 # Basic Functions
 map . set hidden!
@@ -208,7 +226,7 @@ map mf mkfile
 map mr sudomkfile
 map md mkdir
 map ms $mkscript
-map ch chmod
+map X chmod
 map bg setwallpaper
 map o open_config
 map br bulkrename
@@ -226,13 +244,14 @@ map sd mvtofold
 map gtr cd ~/.local/share/Trash/files
 map gm cd /media
 map mt mtsda
-
+map gh cd ~/
 map gv cd ~/Videos
 map gi cd ~/Imagens
 map gw cd ~/Imagens/Wallpapers
 map gd cd ~/Documentos
 map gt cd ~/Transferências
-
+map gb cd ~/.local/bin
+map gg cd ~/.config/dotgit
 map gc cd ~/.config
 map gs cd ~/.config/suckless
 map ge cd /etc
