@@ -36,12 +36,9 @@ cmd mkfile ${{
 }}
 
 cmd chmod ${{
-  printf "Mode Bits: "
-  read ans
-
   for file in "$fx"
   do
-    chmod $ans $file
+    chmod +x $file
   done
 }}
 
@@ -124,8 +121,37 @@ cmd restore_trash ${{
   trash-restore
 }}
 
+cmd cptofold ${{
+    set -f
+    printf "Directory Name: "
+    read newd
+    mkdir $newd
+    cp $fx $newd
+}}
+
+cmd mvtofold ${{
+    set -f
+    printf "Directory Name: "
+    read newd
+    mkdir $newd
+    mv $fx $newd
+}}
+
+cmd yank-path ${{
+    if [ -n "$fs" ]; then echo "$fs"; else echo "$f" | tr -d '\n'; fi |
+      xclip -i -selection clipboard
+}}
+
+cmd yank-basename ${{
+    if [ -n "$fs" ]; then
+      echo "$fs" | xargs -r -d '\n' basename -a --
+    else
+      basename -- "$f" | tr -d '\n'
+    fi | xclip -i -selection clipboard
+}}
+
+
 cmd q quit
-map <esc> quit
 
 # Bindings
 # Remove some defaults
@@ -138,6 +164,15 @@ map d
 map c
 map e
 map f
+
+cmd video_preview ${{
+    CACHE=$(mktemp /tmp/thumb_cache.XXXXX)
+    ffmpegthumbnailer -i "$f" -o $CACHE -s 0
+    ~/.config/lf/draw_img.sh $CACHE && rm $CACHE
+}}
+
+map + :video_preview
+map - ~/.config/lf/draw_img.sh "$f"
 
 # File Openers
 map ee $$EDITOR "$f"
@@ -158,6 +193,7 @@ map tr restore_trash
 
 # Awesome Search
 map s fzf_jump
+map f fzf_jump
 
 # Basic Functions
 map . set hidden!
@@ -165,6 +201,8 @@ map DD delete
 map p paste
 map x cut
 map y copy
+map Yf yank-basename
+map Yp yank-path
 map <enter> open
 map mf mkfile
 map mr sudomkfile
@@ -179,8 +217,10 @@ map H top
 map L bottom
 map R reload
 map C clear
-map U unselect
+map <esc> unselect
 map bi burniso
+map cd cptofold
+map sd mvtofold
 
 # Movement
 map gtr cd ~/.local/share/Trash/files
