@@ -3,6 +3,7 @@
 export EDITOR="nvim"
 export TERMINAL="st-256color"
 export VISUAL="nvim"
+#PATH="$PATH:$HOME/.local/bin"
 
 setopt hist_ignore_dups
 setopt hist_ignore_space
@@ -25,6 +26,7 @@ PS1="%B%{$fg[red]%}[%{$fg[white]%}%n%{$fg[white]%}@%{$fg[white]%}%M %{$fg[blue]%
 #}
 
 #alias doas="doas --"
+convert="convert -quality 100"
 alias nb="newsboat"
 alias cl="clear"
 alias lg="cd $HOME/.config/dotgit; lazygit; cd -"
@@ -127,6 +129,7 @@ bindkey -s '^[e' 'fl\n'
 bindkey -s '^[d' 'dr\n'
 
 # Load zsh-syntax-highlighting; should be last.
+source ~/.config/lf/lfcd.sh
 source ~/.config/zsh/unicode.zsh
 source ~/.config/zsh/goto.sh
 source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh 2>/dev/null
