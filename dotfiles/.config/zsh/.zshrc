@@ -1,7 +1,7 @@
 #!/usr/bin/zsh
 
 export EDITOR="nvim"
-export TERMINAL="st-256color"
+export TERMINAL="st"
 export VISUAL="nvim"
 #PATH="$PATH:$HOME/.local/bin"
 
@@ -26,6 +26,21 @@ PS1="%B%{$fg[red]%}[%{$fg[white]%}%n%{$fg[white]%}@%{$fg[white]%}%M %{$fg[blue]%
 #}
 
 #alias doas="doas --"
+alias gtr="cd ~/.local/share/Trash/files; ls -la"
+alias gm="cd /media; ls -la"
+alias gv="cd ~/Videos; ls -la"
+alias gi="cd ~/Imagens; ls -la"
+alias gw="cd ~/Imagens/Wallpapers; ls -la"
+alias gd="cd ~/Documentos; ls -la"
+alias gt="cd ~/Transferências; ls -la"
+alias gb="cd ~/.local/bin; ls -la"
+alias gg="cd ~/.config/dotgit; ls -la"
+alias gc="cd ~/.config; ls -la"
+alias gs="cd ~/.config/suckless; ls -la"
+alias ge="cd /etc; ls"
+alias gu="cd /usr; ls"
+alias gus="cd /usr/share; ls"
+
 convert="convert -quality 100"
 alias nb="newsboat"
 alias cl="clear"
@@ -125,8 +140,8 @@ bindkey "\e[3~" delete-char
 
 bindkey -s '^g' 'lgit\n'
 bindkey '^v' edit-command-line
-bindkey -s '^[e' 'fl\n'
-bindkey -s '^[d' 'dr\n'
+bindkey -s '^f' 'fl\n'
+bindkey -s '^d' 'dr\n'
 
 # Load zsh-syntax-highlighting; should be last.
 source ~/.config/zsh/unicode.zsh
