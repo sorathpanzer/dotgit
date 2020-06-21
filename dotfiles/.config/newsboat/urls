@@ -3,4 +3,4 @@
 ------------------------
 https://www.archlinux.org/feeds/news/ "~ARCH: News"
 https://distrowatch.com/news/dw.xml "~NEWSFEED: DistroWatch"
-https://rss.app/feeds/gwivB4j0mDWU70DO.xml "~DWM: Gitsource"
+https://git.suckless.org/dwm/atom.xml "~DWM: Gitsource"
