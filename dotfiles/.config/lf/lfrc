@@ -70,7 +70,7 @@ cmd open_config  ${{
 cmd mtsda ${{
   clear
   sudo udisksctl unlock -b /dev/sda1
-  sudo udisksctl mount -b /dev/dm-0
+  sudo udisksctl mount -b /dev/dm-1
 }}
 
 # Archive bindings
