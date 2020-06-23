@@ -19,7 +19,7 @@ cmd open ${{
     case $(file --mime-type "$f" -bL) in
         text/*|application/json) $EDITOR "$f";;
         video/*|image/*/application/pdf) xdg-open "$f" & disown;;
-        *) xdg-open "$f" ;;
+        *) xdg-open "$f" & disown;;
     esac
 }}
 
@@ -152,6 +152,7 @@ cmd yank-basename ${{
 
 cmd stow ${{
     clear
+    cd ~/.config/dotgit
     stow -nvt ~ dotfiles
     printf "Link all files to the Stow [y/n]: "
     read ans
@@ -161,6 +162,7 @@ cmd stow ${{
       read exit
     else
       echo " "
+      cd -
      fi
 }}
 
@@ -179,7 +181,7 @@ map e
 map f
 
 cmd drawimg ${{
-  ~/.config/lf/draw_img.sh "$f"
+  drawimg $f
 }}
 
 cmd video_preview ${{
