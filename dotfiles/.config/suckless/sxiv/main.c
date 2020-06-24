@@ -21,13 +21,13 @@
 #include "config.h"
 
 #include <stdlib.h>
-#include <libgen.h>
 #include <string.h>
 #include <fcntl.h>
 #include <unistd.h>
 #include <errno.h>
 #include <locale.h>
 #include <signal.h>
+#include <libgen.h> // dirname, basename
 #include <sys/select.h>
 #include <sys/stat.h>
 #include <sys/wait.h>
@@ -125,6 +125,13 @@ void check_add_file(char *filename, bool given)
 
 	files[fileidx].name = estrdup(filename);
 	files[fileidx].path = path;
+
+    if (is_video(path)) {
+      files[fileidx].video_thumb = get_video_thumb(path);
+    } else {
+      files[fileidx].video_thumb = NULL;
+    }
+
 	if (given)
 		files[fileidx].flags |= FF_WARN;
 	fileidx++;
@@ -241,7 +248,12 @@ void open_info(void)
 		dup2(pfd[1], 1);
 		snprintf(w, sizeof(w), "%d", img.w);
 		snprintf(h, sizeof(h), "%d", img.h);
-		execl(info.f.cmd, info.f.cmd, files[fileidx].name, w, h, NULL);
+		execl(info.f.cmd,
+              info.f.cmd,
+              files[fileidx].name,
+              w, h,
+              files[fileidx].video_thumb == NULL ? "image" : "video",
+              NULL);
 		error(EXIT_FAILURE, errno, "exec: %s", info.f.cmd);
 	}
 	close(pfd[1]);
@@ -818,36 +830,15 @@ void setup_signal(int sig, void (*handler)(int sig))
 		error(EXIT_FAILURE, errno, "signal %d", sig);
 }
 
-int add_files_from_dir(char *directory, char *exclude_filename, bool recursive)
-{
-	r_dir_t dir;
-	if (r_opendir(&dir, directory, recursive) < 0) {
-		error(0, errno, "%s", directory);
-		return 1;
-	}
-	int start = fileidx;
-	char *filename;
-	while ((filename = r_readdir(&dir, true)) != NULL) {
-
-		if (strcmp(filename, exclude_filename) != 0) {
-			check_add_file(filename, false);
-		}
-		free((void*) filename);
-	}
-	r_closedir(&dir);
-	if (fileidx - start > 1)
-		qsort(files + start, fileidx - start, sizeof(fileinfo_t), fncmp);
-	return 0;
-}
-
 int main(int argc, char **argv)
 {
-	int i;
+	int i, start;
 	size_t n;
 	ssize_t len;
 	char *filename;
 	const char *homedir, *dsuffix = "";
 	struct stat fstats;
+	r_dir_t dir;
 
 	setup_signal(SIGCHLD, sigchld);
 	setup_signal(SIGPIPE, SIG_IGN);
@@ -887,6 +878,27 @@ int main(int argc, char **argv)
 		free(filename);
 	}
 
+    if (!options->old && options->filecnt == 1) {
+      filename = options->filenames[0];
+
+      if (stat(filename, &fstats) < 0) {
+        error(0, errno, "%s", filename);
+      }
+
+      if (S_ISDIR(fstats.st_mode)) {
+        // start in thumbs mode if only one dir provided
+        options->thumb_mode = true;
+
+      } else if (options->startfile == NULL) {
+        // one file provided => open all in the dir
+        char *name = basename(filename);
+        filename = realpath(dirname(options->filenames[0]), NULL);
+        options->startfile = (char *) malloc(strlen(name) + strlen(filename) + 2);
+        sprintf(options->startfile, "%s/%s", filename, name);
+        options->filenames[0] = filename;
+      }
+    }
+
 	for (i = 0; i < options->filecnt; i++) {
 		filename = options->filenames[i];
 
@@ -896,14 +908,19 @@ int main(int argc, char **argv)
 		}
 		if (!S_ISDIR(fstats.st_mode)) {
 			check_add_file(filename, true);
-			char *_filename = strdup(filename);
-			char *filedir = strdup(filename);
-			filedir = dirname(filename);
-			if (!add_files_from_dir(filedir, _filename, options->recursive))
-				continue;
 		} else {
-			if (!add_files_from_dir(filename, "", options->recursive))
+			if (r_opendir(&dir, filename, options->recursive) < 0) {
+				error(0, errno, "%s", filename);
 				continue;
+			}
+			start = fileidx;
+			while ((filename = r_readdir(&dir, true)) != NULL) {
+				check_add_file(filename, false);
+				free((void*) filename);
+			}
+			r_closedir(&dir);
+			if (fileidx - start > 1)
+				qsort(files + start, fileidx - start, sizeof(fileinfo_t), fncmp);
 		}
 	}
 
@@ -912,6 +929,14 @@ int main(int argc, char **argv)
 
 	filecnt = fileidx;
 	fileidx = options->startnum < filecnt ? options->startnum : 0;
+
+  if (options->startfile != NULL) {
+    for (int i = 0; i < filecnt; ++i) {
+      if (strcmp(options->startfile, files[i].path) == 0) {
+        fileidx = i;
+      }
+    }
+  }
 
 	for (i = 0; i < ARRLEN(buttons); i++) {
 		if (buttons[i].cmd == i_cursor_navigate) {

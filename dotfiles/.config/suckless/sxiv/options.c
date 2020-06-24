@@ -26,13 +26,13 @@
 #include <unistd.h>
 
 opt_t _options;
-const opt_t *options = (const opt_t*) &_options;
+opt_t *options = (opt_t*) &_options;
 
 void print_usage(void)
 {
-	printf("usage: sxiv [-abcfhiopqrtvZ] [-A FRAMERATE] [-e WID] [-G GAMMA] "
+	printf("usage: sxiv [-abcfhiopqrtvZO] [-A FRAMERATE] [-e WID] [-G GAMMA] "
 	       "[-g GEOMETRY] [-N NAME] [-n NUM] [-S DELAY] [-s MODE] [-z ZOOM] "
-	       "FILES...\n");
+	       "[-F FILE] FILES...\n");
 }
 
 void print_version(void)
@@ -53,6 +53,7 @@ void parse_options(int argc, char **argv)
 	_options.to_stdout = false;
 	_options.recursive = false;
 	_options.startnum = 0;
+  _options.startfile = NULL;
 
 	_options.scalemode = SCALE_DOWN;
 	_options.zoom = 1.0;
@@ -71,8 +72,9 @@ void parse_options(int argc, char **argv)
 	_options.thumb_mode = false;
 	_options.clean_cache = false;
 	_options.private_mode = false;
+    _options.old = false;
 
-	while ((opt = getopt(argc, argv, "A:abce:fG:g:hin:N:opqrS:s:tvZz:")) != -1) {
+	while ((opt = getopt(argc, argv, "A:abce:fG:g:hin:F:N:opqrS:s:tvZz:O")) != -1) {
 		switch (opt) {
 			case '?':
 				print_usage();
@@ -122,6 +124,9 @@ void parse_options(int argc, char **argv)
 					error(EXIT_FAILURE, 0, "Invalid argument for option -n: %s", optarg);
 				_options.startnum = n - 1;
 				break;
+      case 'F':
+        _options.startfile = optarg;
+        break;
 			case 'N':
 				_options.res_name = optarg;
 				break;
@@ -166,6 +171,9 @@ void parse_options(int argc, char **argv)
 				_options.scalemode = SCALE_ZOOM;
 				_options.zoom = (float) n / 100.0;
 				break;
+        case 'O':
+          _options.old = true;
+          break;
 		}
 	}
 

@@ -298,10 +298,17 @@ Imlib_Image img_open(const fileinfo_t *file)
 	struct stat st;
 	Imlib_Image im = NULL;
 
-	if (access(file->path, R_OK) == 0 &&
-	    stat(file->path, &st) == 0 && S_ISREG(st.st_mode))
+    const char *file_path;
+    if (file->video_thumb == NULL) {
+      file_path = file->path;
+    } else {
+      file_path = file->video_thumb;
+    }
+
+	if (access(file_path, R_OK) == 0 &&
+	    stat(file_path, &st) == 0 && S_ISREG(st.st_mode))
 	{
-		im = imlib_load_image(file->path);
+		im = imlib_load_image(file_path);
 		if (im != NULL) {
 			imlib_context_set_image(im);
 			if (imlib_image_get_data_for_reading_only() == NULL) {
@@ -391,12 +398,9 @@ void img_check_pan(img_t *img, bool moved)
 		img->dirty = true;
 }
 
-bool img_fit(img_t *img)
+int img_zoom_diff(img_t *img, float *zptr)
 {
 	float z, zw, zh;
-
-	if (img->scalemode == SCALE_ZOOM)
-		return false;
 
 	zw = (float) img->win->w / (float) img->w;
 	zh = (float) img->win->h / (float) img->h;
@@ -412,9 +416,21 @@ bool img_fit(img_t *img)
 			z = MIN(zw, zh);
 			break;
 	}
-	z = MIN(z, img->scalemode == SCALE_DOWN ? 1.0 : zoom_max);
+	//z = MIN(z, img->scalemode == SCALE_DOWN ? 1.0 : zoom_max);
+  if (zptr != NULL)
+    *zptr = z;
 
-	if (zoomdiff(img, z) != 0) {
+  return zoomdiff(img, z);
+}
+
+bool img_fit(img_t *img)
+{
+  float z;
+
+	if (img->scalemode == SCALE_ZOOM)
+		return false;
+
+	if (img_zoom_diff(img, &z) != 0) {
 		img->zoom = z;
 		img->dirty = true;
 		return true;

@@ -1,0 +1,663 @@
+diff --color -ru sxiv/commands.c sxiv2/commands.c
+--- sxiv/commands.c	2020-06-24 15:18:11.999957450 +0000
++++ sxiv2/commands.c	2020-06-24 15:15:35.366631090 +0000
+@@ -18,6 +18,7 @@
+
+ #include "sxiv.h"
+ #define _IMAGE_CONFIG
++#define _VIDEO_CONFIG
+ #include "config.h"
+
+ #include <stdlib.h>
+@@ -308,6 +309,14 @@
+
+ bool ci_toggle_animation(arg_t _)
+ {
++  if (files[fileidx].video_thumb != NULL) {
++    char *cmd = (char *) malloc(strlen(files[fileidx].path)
++                                + strlen(VIDEO_CMD) + 1);
++    sprintf(cmd, VIDEO_CMD, files[fileidx].path);
++    system(cmd);
++    return false;
++  }
++
+ 	bool dirty = false;
+
+ 	if (img.multi.cnt > 0) {
+@@ -332,6 +341,21 @@
+ 	return img_pan_edge(&img, dir);
+ }
+
++bool ci_scroll_or_navigate(arg_t dir)
++{
++  if (img_zoom_diff(&img, NULL) >= 0) {
++    arg_t n;
++    switch (dir) {
++		case DIR_LEFT:  n = -1; break;
++		case DIR_RIGHT: n =  1; break;
++    default:        n =  0; break;
++    }
++    return ci_navigate(n);
++  } else {
++    return ci_scroll(dir);
++  }
++}
++
+ bool ci_drag(arg_t mode)
+ {
+ 	int x, y, ox, oy;
+diff --color -ru sxiv/commands.lst sxiv2/commands.lst
+--- sxiv/commands.lst	2020-06-24 15:18:11.999957450 +0000
++++ sxiv2/commands.lst	2020-06-24 15:15:35.366631090 +0000
+@@ -23,6 +23,7 @@
+ I_CMD(toggle_animation)
+ I_CMD(scroll)
+ I_CMD(scroll_to_edge)
++I_CMD(scroll_or_navigate)
+ I_CMD(drag)
+ I_CMD(set_zoom)
+ I_CMD(fit_to_win)
+diff --color -ru sxiv/config.def.h sxiv2/config.def.h
+--- sxiv/config.def.h	2020-06-24 15:18:11.999957450 +0000
++++ sxiv2/config.def.h	2020-06-24 15:15:35.366631090 +0000
+@@ -17,10 +17,19 @@
+ /* levels (in percent) to use when zooming via '-' and '+':
+  * (first/last value is used as min/max zoom level)
+  */
+-static const float zoom_levels[] = {
+-	 12.5,  25.0,  50.0,  75.0,
+-	100.0, 150.0, 200.0, 400.0, 800.0
+-};
++/* exponentials from 1 to 1500, calculated with octave:
++ * MAX_ZOOM = 1500;
++ * x = linspace(0, log(MAX_ZOOM), 300);
++ * y = exp(x);
++ * for z = y
++ * printf("%f, ", z);
++ * end
++ * printf("\n");
++ */
++static const float zoom_levels[] =
++  {
++   1.000000, 1.024761, 1.050134, 1.076136, 1.102782, 1.130087, 1.158069, 1.186743, 1.216127, 1.246239, 1.277097, 1.308718, 1.341123, 1.374330, 1.408359, 1.443230, 1.478966, 1.515585, 1.553112, 1.591568, 1.630976, 1.671360, 1.712744, 1.755152, 1.798610, 1.843145, 1.888782, 1.935549, 1.983474, 2.032586, 2.082914, 2.134488, 2.187339, 2.241499, 2.296999, 2.353874, 2.412157, 2.471884, 2.533089, 2.595809, 2.660083, 2.725948, 2.793444, 2.862611, 2.933490, 3.006125, 3.080558, 3.156834, 3.234999, 3.315099, 3.397183, 3.481299, 3.567498, 3.655831, 3.746351, 3.839112, 3.934171, 4.031583, 4.131407, 4.233703, 4.338531, 4.445955, 4.556040, 4.668849, 4.784452, 4.902918, 5.024317, 5.148721, 5.276206, 5.406848, 5.540724, 5.677915, 5.818503, 5.962572, 6.110209, 6.261500, 6.416538, 6.575415, 6.738226, 6.905067, 7.076040, 7.251247, 7.430791, 7.614781, 7.803327, 7.996542, 8.194540, 8.397441, 8.605366, 8.818439, 9.036788, 9.260543, 9.489839, 9.724812, 9.965604, 10.212357, 10.465220, 10.724344, 10.989884, 11.261999, 11.540852, 11.826610, 12.119442, 12.419526, 12.727040, 13.042167, 13.365098, 13.696025, 14.035145, 14.382662, 14.738784, 15.103724, 15.477700, 15.860936, 16.253660, 16.656109, 17.068523, 17.491148, 17.924238, 18.368051, 18.822853, 19.288917, 19.766520, 20.255949, 20.757496, 21.271462, 21.798155, 22.337888, 22.890985, 23.457778, 24.038604, 24.633812, 25.243758, 25.868806, 26.509330, 27.165715, 27.838352, 28.527643, 29.234002, 29.957851, 30.699622, 31.459760, 32.238720, 33.036967, 33.854979, 34.693245, 35.552267, 36.432559, 37.334648, 38.259073, 39.206387, 40.177157, 41.171963, 42.191402, 43.236082, 44.306629, 45.403684, 46.527902, 47.679956, 48.860536, 50.070348, 51.310115, 52.580579, 53.882501, 55.216659, 56.583851, 57.984896, 59.420631, 60.891916, 62.399630, 63.944677, 65.527979, 67.150485, 68.813165, 70.517013, 72.263050, 74.052320, 75.885893, 77.764865, 79.690363, 81.663536, 83.685567, 85.757664, 87.881067, 90.057046, 92.286904, 94.571974, 96.913624, 99.313254, 101.772301, 104.292234, 106.874562, 109.520830, 112.232621, 115.011558, 117.859302, 120.777558, 123.768071, 126.832631, 129.973071, 133.191270, 136.489153, 139.868693, 143.331912, 146.880883, 150.517727, 154.244622, 158.063797, 161.977536, 165.988182, 170.098133, 174.309848, 178.625848, 183.048714, 187.581093, 192.225695, 196.985300, 201.862756, 206.860980, 211.982962, 217.231767, 222.610535, 228.122484, 233.770912, 239.559198, 245.490804, 251.569280, 257.798262, 264.181478, 270.722744, 277.425976, 284.295183, 291.334475, 298.548064, 305.940264, 313.515500, 321.278301, 329.233314, 337.385297, 345.739127, 354.299803, 363.072444, 372.062301, 381.274751, 390.715307, 400.389615, 410.303464, 420.462784, 430.873655, 441.542304, 452.475114, 463.678626, 475.159543, 486.924733, 498.981235, 511.336262, 523.997206, 536.971641, 550.267329, 563.892226, 577.854482, 592.162450, 606.824691, 621.849977, 637.247296, 653.025860, 669.195110, 685.764719, 702.744599, 720.144910, 737.976061, 756.248720, 774.973820, 794.162563, 813.826429, 833.977181, 854.626877, 875.787870, 897.472819, 919.694699, 942.466803, 965.802757, 989.716520, 1014.222401, 1039.335059, 1065.069519, 1091.441178, 1118.465812, 1146.159589, 1174.539079, 1203.621259, 1233.423529, 1263.963717, 1295.260097, 1327.331390, 1360.196785, 1393.875943, 1428.389015, 1463.756647, 1500.000000
++  };
+
+ /* default slideshow delay (in sec, overwritten via -S option): */
+ enum { SLIDESHOW_DELAY = 5 };
+@@ -32,7 +41,7 @@
+ static const int    GAMMA_RANGE = 32;
+
+ /* command i_scroll pans image 1/PAN_FRACTION of screen width/height */
+-static const int PAN_FRACTION = 5;
++static const int PAN_FRACTION = 70;
+
+ /* if false, pixelate images at zoom level != 100%,
+  * toggled with 'a' key binding
+@@ -54,6 +63,13 @@
+ static const int THUMB_SIZE = 3;
+
+ #endif
++#ifdef _VIDEO_CONFIG
++/*
++ * command used to play videos
++ */
++static const char *VIDEO_CMD = "xdg-open '%s'";
++
++#endif
+ #ifdef _MAPPINGS_CONFIG
+
+ /* keyboard mappings for image and thumbnail mode: */
+@@ -112,14 +128,14 @@
+ 	{ ControlMask,  XK_n,             i_navigate_frame,     +1 },
+ 	{ ControlMask,  XK_p,             i_navigate_frame,     -1 },
+ 	{ ControlMask,  XK_space,         i_toggle_animation,   None },
+-	{ 0,            XK_h,             i_scroll,             DIR_LEFT },
+-	{ 0,            XK_Left,          i_scroll,             DIR_LEFT },
+-	{ 0,            XK_j,             i_scroll,             DIR_DOWN },
+-	{ 0,            XK_Down,          i_scroll,             DIR_DOWN },
+-	{ 0,            XK_k,             i_scroll,             DIR_UP },
+-	{ 0,            XK_Up,            i_scroll,             DIR_UP },
+-	{ 0,            XK_l,             i_scroll,             DIR_RIGHT },
+-	{ 0,            XK_Right,         i_scroll,             DIR_RIGHT },
++	{ 0,            XK_h,             i_scroll_or_navigate, DIR_LEFT },
++	{ 0,            XK_Left,          i_scroll_or_navigate, DIR_LEFT },
++	{ 0,            XK_j,             i_scroll_or_navigate, DIR_DOWN },
++	{ 0,            XK_Down,          i_scroll_or_navigate, DIR_DOWN },
++	{ 0,            XK_k,             i_scroll_or_navigate, DIR_UP },
++	{ 0,            XK_Up,            i_scroll_or_navigate, DIR_UP },
++	{ 0,            XK_l,             i_scroll_or_navigate, DIR_RIGHT },
++	{ 0,            XK_Right,         i_scroll_or_navigate, DIR_RIGHT },
+ 	{ 0,            XK_H,             i_scroll_to_edge,     DIR_LEFT },
+ 	{ 0,            XK_J,             i_scroll_to_edge,     DIR_DOWN },
+ 	{ 0,            XK_K,             i_scroll_to_edge,     DIR_UP },
+Só em sxiv2: config.h
+diff --color -ru sxiv/exec/image-info sxiv2/exec/image-info
+--- sxiv/exec/image-info	2020-06-24 15:18:11.999957450 +0000
++++ sxiv2/exec/image-info	2020-06-24 15:15:35.366631090 +0000
+@@ -7,14 +7,34 @@
+ #   $1: path to image file
+ #   $2: image width
+ #   $3: image height
++#   $4: image/video
+
+ s="  " # field separator
+
+ exec 2>/dev/null
+
+-filename=$(basename -- "$1")
+-filesize=$(du -Hh -- "$1" | cut -f 1)
++video_duration() {
++    f="$1"
++    duration=$(ffprobe -v quiet -of default=noprint_wrappers=1:nokey=1 -show_entries format=duration "$f")
++    h=$(echo "$duration/3600" | bc)
++    m=$(echo "$duration%3600/60" | bc)
++    s=$(echo "$duration%60/1" | bc)
++    if [ "$h" = 0 ]; then
++        printf '%02d:%02d\n' "$m" "$s"
++    else
++        printf '%02d:%02d:%02d\n' "$h" "$m" "$s"
++    fi
++}
++
++path="$1"
++filename=$(basename -- "$path")
++filesize=$(du -Hh -- "$path" | cut -f 1)
+ geometry="${2}x${3}"
++type=
++[ "$4" = video ] && {
++    dur=$(video_duration "$path")
++    type="${s}⯈ $dur${s}(play with ctrl-space)"
++}
+
+-echo "${filesize}${s}${geometry}${s}${filename}"
++echo "${filesize}${s}${geometry}${type}${s}${filename}"
+
+diff --color -ru sxiv/image.c sxiv2/image.c
+--- sxiv/image.c	2020-06-24 15:18:12.003290782 +0000
++++ sxiv2/image.c	2020-06-24 15:15:35.366631090 +0000
+@@ -298,10 +298,17 @@
+ 	struct stat st;
+ 	Imlib_Image im = NULL;
+
+-	if (access(file->path, R_OK) == 0 &&
+-	    stat(file->path, &st) == 0 && S_ISREG(st.st_mode))
++    const char *file_path;
++    if (file->video_thumb == NULL) {
++      file_path = file->path;
++    } else {
++      file_path = file->video_thumb;
++    }
++
++	if (access(file_path, R_OK) == 0 &&
++	    stat(file_path, &st) == 0 && S_ISREG(st.st_mode))
+ 	{
+-		im = imlib_load_image(file->path);
++		im = imlib_load_image(file_path);
+ 		if (im != NULL) {
+ 			imlib_context_set_image(im);
+ 			if (imlib_image_get_data_for_reading_only() == NULL) {
+@@ -391,13 +398,10 @@
+ 		img->dirty = true;
+ }
+
+-bool img_fit(img_t *img)
++int img_zoom_diff(img_t *img, float *zptr)
+ {
+ 	float z, zw, zh;
+
+-	if (img->scalemode == SCALE_ZOOM)
+-		return false;
+-
+ 	zw = (float) img->win->w / (float) img->w;
+ 	zh = (float) img->win->h / (float) img->h;
+
+@@ -412,9 +416,21 @@
+ 			z = MIN(zw, zh);
+ 			break;
+ 	}
+-	z = MIN(z, img->scalemode == SCALE_DOWN ? 1.0 : zoom_max);
++	//z = MIN(z, img->scalemode == SCALE_DOWN ? 1.0 : zoom_max);
++  if (zptr != NULL)
++    *zptr = z;
++
++  return zoomdiff(img, z);
++}
++
++bool img_fit(img_t *img)
++{
++  float z;
++
++	if (img->scalemode == SCALE_ZOOM)
++		return false;
+
+-	if (zoomdiff(img, z) != 0) {
++	if (img_zoom_diff(img, &z) != 0) {
+ 		img->zoom = z;
+ 		img->dirty = true;
+ 		return true;
+diff --color -ru sxiv/main.c sxiv2/main.c
+--- sxiv/main.c	2020-06-24 15:18:12.003290782 +0000
++++ sxiv2/main.c	2020-06-24 15:15:35.366631090 +0000
+@@ -27,6 +27,7 @@
+ #include <errno.h>
+ #include <locale.h>
+ #include <signal.h>
++#include <libgen.h> // dirname, basename
+ #include <sys/select.h>
+ #include <sys/stat.h>
+ #include <sys/wait.h>
+@@ -124,6 +125,13 @@
+
+ 	files[fileidx].name = estrdup(filename);
+ 	files[fileidx].path = path;
++
++    if (is_video(path)) {
++      files[fileidx].video_thumb = get_video_thumb(path);
++    } else {
++      files[fileidx].video_thumb = NULL;
++    }
++
+ 	if (given)
+ 		files[fileidx].flags |= FF_WARN;
+ 	fileidx++;
+@@ -240,7 +248,12 @@
+ 		dup2(pfd[1], 1);
+ 		snprintf(w, sizeof(w), "%d", img.w);
+ 		snprintf(h, sizeof(h), "%d", img.h);
+-		execl(info.f.cmd, info.f.cmd, files[fileidx].name, w, h, NULL);
++		execl(info.f.cmd,
++              info.f.cmd,
++              files[fileidx].name,
++              w, h,
++              files[fileidx].video_thumb == NULL ? "image" : "video",
++              NULL);
+ 		error(EXIT_FAILURE, errno, "exec: %s", info.f.cmd);
+ 	}
+ 	close(pfd[1]);
+@@ -865,6 +878,27 @@
+ 		free(filename);
+ 	}
+
++    if (!options->old && options->filecnt == 1) {
++      filename = options->filenames[0];
++
++      if (stat(filename, &fstats) < 0) {
++        error(0, errno, "%s", filename);
++      }
++
++      if (S_ISDIR(fstats.st_mode)) {
++        // start in thumbs mode if only one dir provided
++        options->thumb_mode = true;
++
++      } else if (options->startfile == NULL) {
++        // one file provided => open all in the dir
++        char *name = basename(filename);
++        filename = realpath(dirname(options->filenames[0]), NULL);
++        options->startfile = (char *) malloc(strlen(name) + strlen(filename) + 2);
++        sprintf(options->startfile, "%s/%s", filename, name);
++        options->filenames[0] = filename;
++      }
++    }
++
+ 	for (i = 0; i < options->filecnt; i++) {
+ 		filename = options->filenames[i];
+
+@@ -896,6 +930,14 @@
+ 	filecnt = fileidx;
+ 	fileidx = options->startnum < filecnt ? options->startnum : 0;
+
++  if (options->startfile != NULL) {
++    for (int i = 0; i < filecnt; ++i) {
++      if (strcmp(options->startfile, files[i].path) == 0) {
++        fileidx = i;
++      }
++    }
++  }
++
+ 	for (i = 0; i < ARRLEN(buttons); i++) {
+ 		if (buttons[i].cmd == i_cursor_navigate) {
+ 			imgcursor[0] = CURSOR_LEFT;
+diff --color -ru sxiv/Makefile sxiv2/Makefile
+--- sxiv/Makefile	2020-06-24 15:18:11.999957450 +0000
++++ sxiv2/Makefile	2020-06-24 15:15:35.366631090 +0000
+@@ -28,7 +28,7 @@
+   $(lib_exif_$(HAVE_LIBEXIF)) $(lib_gif_$(HAVE_GIFLIB))
+
+ objs = autoreload_$(AUTORELOAD).o commands.o image.o main.o options.o \
+-  thumbs.o util.o window.o
++  thumbs.o util.o window.o video.o
+
+ all: sxiv
+
+diff --color -ru sxiv/options.c sxiv2/options.c
+--- sxiv/options.c	2020-06-24 15:18:12.003290782 +0000
++++ sxiv2/options.c	2020-06-24 15:15:35.366631090 +0000
+@@ -26,13 +26,13 @@
+ #include <unistd.h>
+
+ opt_t _options;
+-const opt_t *options = (const opt_t*) &_options;
++opt_t *options = (opt_t*) &_options;
+
+ void print_usage(void)
+ {
+-	printf("usage: sxiv [-abcfhiopqrtvZ] [-A FRAMERATE] [-e WID] [-G GAMMA] "
++	printf("usage: sxiv [-abcfhiopqrtvZO] [-A FRAMERATE] [-e WID] [-G GAMMA] "
+ 	       "[-g GEOMETRY] [-N NAME] [-n NUM] [-S DELAY] [-s MODE] [-z ZOOM] "
+-	       "FILES...\n");
++	       "[-F FILE] FILES...\n");
+ }
+
+ void print_version(void)
+@@ -53,6 +53,7 @@
+ 	_options.to_stdout = false;
+ 	_options.recursive = false;
+ 	_options.startnum = 0;
++  _options.startfile = NULL;
+
+ 	_options.scalemode = SCALE_DOWN;
+ 	_options.zoom = 1.0;
+@@ -71,8 +72,9 @@
+ 	_options.thumb_mode = false;
+ 	_options.clean_cache = false;
+ 	_options.private_mode = false;
++    _options.old = false;
+
+-	while ((opt = getopt(argc, argv, "A:abce:fG:g:hin:N:opqrS:s:tvZz:")) != -1) {
++	while ((opt = getopt(argc, argv, "A:abce:fG:g:hin:F:N:opqrS:s:tvZz:O")) != -1) {
+ 		switch (opt) {
+ 			case '?':
+ 				print_usage();
+@@ -122,6 +124,9 @@
+ 					error(EXIT_FAILURE, 0, "Invalid argument for option -n: %s", optarg);
+ 				_options.startnum = n - 1;
+ 				break;
++      case 'F':
++        _options.startfile = optarg;
++        break;
+ 			case 'N':
+ 				_options.res_name = optarg;
+ 				break;
+@@ -166,6 +171,9 @@
+ 				_options.scalemode = SCALE_ZOOM;
+ 				_options.zoom = (float) n / 100.0;
+ 				break;
++        case 'O':
++          _options.old = true;
++          break;
+ 		}
+ 	}
+
+diff --color -ru sxiv/README.md sxiv2/README.md
+--- sxiv/README.md	2020-06-24 15:18:11.999957450 +0000
++++ sxiv2/README.md	2020-06-24 15:15:35.366631090 +0000
+@@ -7,8 +7,11 @@
+ report if something does not work as documented or expected. Contributions are
+ welcome but there is no guarantee that they will be incorporated.
+
++**IMPORTANT**
+
+-Features
++This repo is a fork of the [main sxiv repo](https://github.com/muennich/sxiv). Below are the reasons this fork exist.
++
++SXIV Main Features
+ --------
+
+ * Basic image operations, e.g. zooming, panning, rotating
+@@ -19,17 +22,34 @@
+ * Load all frames from GIF files and play GIF animations
+ * Display image information in status bar
+
++Fork Features
++-------------
++
++Here are the key points that diverge from the main repo
++
++* Video support
++* Navigate with arrows when not zoomed
++* Logarithmic zoom steps
++* Fit image zoom by default
++* Start with a file name (`-F` option)
++* Match bar colors
++* Square thumbnails [patch](https://github.com/i-tsvetkov/sxiv-patches/blob/master/sxiv-square-thumbnails.patch)
++
+
+ Screenshots
+ -----------
+
+ **Image mode:**
+
+-![Image](http://muennich.github.com/sxiv/img/image.png "Image mode")
++![Image](screenshots/image.png "Image mode")
++
++**Video mode:**
++
++![Image](screenshots/video.png "Video mode")
+
+ **Thumbnail mode:**
+
+-![Thumb](http://muennich.github.com/sxiv/img/thumb.png "Thumb mode")
++![Thumb](screenshots/thumb.png "Thumb mode")
+
+
+ Dependencies
+Só em sxiv2: screenshots
+diff --color -ru sxiv/sxiv.1 sxiv2/sxiv.1
+--- sxiv/sxiv.1	2020-06-24 15:18:12.003290782 +0000
++++ sxiv2/sxiv.1	2020-06-24 15:15:35.369964423 +0000
+@@ -1,9 +1,9 @@
+ .TH SXIV 1 sxiv\-VERSION
+ .SH NAME
+-sxiv \- Simple X Image Viewer
++sxiv \- Simple X Image Viewer (Naheel's fork)
+ .SH SYNOPSIS
+ .B sxiv
+-.RB [ \-abcfhiopqrtvZ ]
++.RB [ \-abcfhiopqrtvZO ]
+ .RB [ \-A
+ .IR FRAMERATE ]
+ .RB [ \-e
+@@ -16,6 +16,8 @@
+ .IR NAME ]
+ .RB [ \-n
+ .IR NUM ]
++.RB [ \-F
++.IR FILE ]
+ .RB [ \-S
+ .IR DELAY ]
+ .RB [ \-s
+@@ -67,6 +69,9 @@
+ .BI "\-n " NUM
+ Start at picture number NUM.
+ .TP
++.BI "\-F " FILE
++Start at picture file FILE.
++.TP
+ .B \-h
+ Print brief usage information to standard output and exit.
+ .TP
+@@ -108,6 +113,9 @@
+ .B \-Z
+ The same as `\-z 100'.
+ .TP
++.B \-O
++Run in the old mode. That is, the original sxiv.
++.TP
+ .BI "\-z " ZOOM
+ Set zoom level to ZOOM percent.
+ .SH KEYBOARD COMMANDS
+diff --color -ru sxiv/sxiv.h sxiv2/sxiv.h
+--- sxiv/sxiv.h	2020-06-24 15:18:12.003290782 +0000
++++ sxiv2/sxiv.h	2020-06-24 15:15:35.369964423 +0000
+@@ -118,6 +118,7 @@
+ typedef struct {
+ 	const char *name; /* as given by user */
+ 	const char *path; /* always absolute */
++  const char* video_thumb;
+ 	fileflags_t flags;
+ } fileinfo_t;
+
+@@ -252,6 +253,7 @@
+ bool img_change_gamma(img_t*, int);
+ bool img_frame_navigate(img_t*, int);
+ bool img_frame_animate(img_t*);
++int  img_zoom_diff(img_t*, float*);
+
+
+ /* options.c */
+@@ -264,6 +266,8 @@
+ 	bool recursive;
+ 	int filecnt;
+ 	int startnum;
++  char *startfile;
++  bool old;
+
+ 	/* image: */
+ 	scalemode_t scalemode;
+@@ -287,7 +291,7 @@
+ 	bool private_mode;
+ };
+
+-extern const opt_t *options;
++extern opt_t *options;
+
+ void print_usage(void);
+ void print_version(void);
+@@ -444,5 +448,10 @@
+ void win_set_cursor(win_t*, cursor_t);
+ void win_cursor_pos(win_t*, int*, int*);
+
++/* video.c */
++
++bool is_video(const char *file);
++char *get_video_thumb(char *file);
++
+ #endif /* SXIV_H */
+
+diff --color -ru sxiv/thumbs.c sxiv2/thumbs.c
+--- sxiv/thumbs.c	2020-06-24 15:18:12.003290782 +0000
++++ sxiv2/thumbs.c	2020-06-24 15:15:35.369964423 +0000
+@@ -202,20 +202,19 @@
+ Imlib_Image tns_scale_down(Imlib_Image im, int dim)
+ {
+ 	int w, h;
+-	float z, zw, zh;
+
+ 	imlib_context_set_image(im);
+ 	w = imlib_image_get_width();
+ 	h = imlib_image_get_height();
+-	zw = (float) dim / (float) w;
+-	zh = (float) dim / (float) h;
+-	z = MIN(zw, zh);
+-	z = MIN(z, 1.0);
+
+-	if (z < 1.0) {
++	int x = (w < h) ? 0 : (w - h) / 2;
++	int y = (w > h) ? 0 : (h - w) / 2;
++
++	int s = (w < h) ? w : h;
++
++	if (dim < w || dim < h) {
+ 		imlib_context_set_anti_alias(1);
+-		im = imlib_create_cropped_scaled_image(0, 0, w, h,
+-		                                       MAX(z * w, 1), MAX(z * h, 1));
++		im = imlib_create_cropped_scaled_image(x, y, s, s, dim, dim);
+ 		if (im == NULL)
+ 			error(EXIT_FAILURE, ENOMEM, NULL);
+ 		imlib_free_image_and_decache();
+@@ -230,6 +229,7 @@
+ 	char *cfile;
+ 	thumb_t *t;
+ 	fileinfo_t *file;
++    const char *file_path;
+ 	Imlib_Image im = NULL;
+
+ 	if (n < 0 || n >= *tns->cnt)
+@@ -238,6 +238,12 @@
+ 	if (file->name == NULL || file->path == NULL)
+ 		return false;
+
++    if (file->video_thumb == NULL) {
++      file_path = file->path;
++    } else {
++      file_path = file->video_thumb;
++    }
++
+ 	t = &tns->thumbs[n];
+
+ 	if (t->im != NULL) {
+@@ -247,12 +253,12 @@
+ 	}
+
+ 	if (!force) {
+-		if ((im = tns_cache_load(file->path, &force)) != NULL) {
++		if ((im = tns_cache_load(file_path, &force)) != NULL) {
+ 			imlib_context_set_image(im);
+ 			if (imlib_image_get_width() < maxwh &&
+ 			    imlib_image_get_height() < maxwh)
+ 			{
+-				if ((cfile = tns_cache_filepath(file->path)) != NULL) {
++				if ((cfile = tns_cache_filepath(file_path)) != NULL) {
+ 					unlink(cfile);
+ 					free(cfile);
+ 				}
+@@ -274,7 +280,7 @@
+ 			char tmppath[] = "/tmp/sxiv-XXXXXX";
+ 			Imlib_Image tmpim;
+
+-			if ((ed = exif_data_new_from_file(file->path)) != NULL) {
++			if ((ed = exif_data_new_from_file(file_path)) != NULL) {
+ 				if (ed->data != NULL && ed->size > 0 &&
+ 				    (tmpfd = mkstemp(tmppath)) >= 0)
+ 				{
+@@ -323,8 +329,10 @@
+ 	}
+
+ 	if (im == NULL) {
+-		if ((im = img_open(file)) == NULL)
+-			return false;
++      if ((im = img_open(file)) == NULL) {
++        error(0, 0, "failed opening thumb for '%s'", file_path);
++        return false;
++      }
+ 	}
+ 	imlib_context_set_image(im);
+
+@@ -568,7 +576,7 @@
+
+ 	tns->bw = ((thumb_sizes[tns->zl] - 1) >> 5) + 1;
+ 	tns->bw = MIN(tns->bw, 4);
+-	tns->dim = thumb_sizes[tns->zl] + 2 * tns->bw + 6;
++	tns->dim = thumb_sizes[tns->zl] + 2 * tns->bw;
+
+ 	if (tns->zl != oldzl) {
+ 		for (i = 0; i < *tns->cnt; i++)
+Só em sxiv2: version.h
+Só em sxiv2: video.c
+diff --color -ru sxiv/window.c sxiv2/window.c
+--- sxiv/window.c	2020-06-24 15:18:12.003290782 +0000
++++ sxiv2/window.c	2020-06-24 15:15:35.369964423 +0000
+@@ -397,7 +397,7 @@
+ 	d = XftDrawCreate(e->dpy, win->buf.pm, DefaultVisual(e->dpy, e->scr),
+ 	                  DefaultColormap(e->dpy, e->scr));
+
+-	XSetForeground(e->dpy, gc, win->fg.pixel);
++	XSetForeground(e->dpy, gc, win->bg.pixel);
+ 	XFillRectangle(e->dpy, win->buf.pm, gc, 0, win->h, win->w, win->bar.h);
+
+ 	XSetForeground(e->dpy, gc, win->bg.pixel);
+@@ -408,12 +408,12 @@
+ 			return;
+ 		x = win->w - tw - H_TEXT_PAD;
+ 		w -= tw;
+-		win_draw_text(win, d, &win->bg, x, y, r->buf, len, tw);
++		win_draw_text(win, d, &win->fg, x, y, r->buf, len, tw);
+ 	}
+ 	if ((len = strlen(l->buf)) > 0) {
+ 		x = H_TEXT_PAD;
+ 		w -= 2 * H_TEXT_PAD; /* gap between left and right parts */
+-		win_draw_text(win, d, &win->bg, x, y, l->buf, len, w);
++		win_draw_text(win, d, &win->fg, x, y, l->buf, len, w);
+ 	}
+ 	XftDrawDestroy(d);
+ }

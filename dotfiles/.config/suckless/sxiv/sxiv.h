@@ -118,6 +118,7 @@ typedef enum {
 typedef struct {
 	const char *name; /* as given by user */
 	const char *path; /* always absolute */
+  const char* video_thumb;
 	fileflags_t flags;
 } fileinfo_t;
 
@@ -252,6 +253,7 @@ void img_toggle_antialias(img_t*);
 bool img_change_gamma(img_t*, int);
 bool img_frame_navigate(img_t*, int);
 bool img_frame_animate(img_t*);
+int  img_zoom_diff(img_t*, float*);
 
 
 /* options.c */
@@ -264,6 +266,8 @@ struct opt {
 	bool recursive;
 	int filecnt;
 	int startnum;
+  char *startfile;
+  bool old;
 
 	/* image: */
 	scalemode_t scalemode;
@@ -287,7 +291,7 @@ struct opt {
 	bool private_mode;
 };
 
-extern const opt_t *options;
+extern opt_t *options;
 
 void print_usage(void);
 void print_version(void);
@@ -443,6 +447,11 @@ void win_draw_rect(win_t*, int, int, int, int, bool, int, unsigned long);
 void win_set_title(win_t*, const char*);
 void win_set_cursor(win_t*, cursor_t);
 void win_cursor_pos(win_t*, int*, int*);
+
+/* video.c */
+
+bool is_video(const char *file);
+char *get_video_thumb(char *file);
 
 #endif /* SXIV_H */
 
