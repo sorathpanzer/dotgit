@@ -8,6 +8,7 @@ set color256 true
 set drawbox true
 set icons true
 set ignorecase true
+set shellopts '-eu'
 
 # Custom Functions
 
@@ -66,38 +67,49 @@ cmd fzf_jump ${{
   lf -remote "send $id $cmd \"$res\""
 }}
 
-cmd open_config  ${{
-  $EDITOR $(bookmenu -b ~/.config/bookmenu/configs -f fzf -o)
-}}
-
 cmd mtsda ${{
   clear
   sudo udisksctl unlock -b /dev/sda1
   sudo udisksctl mount -b /dev/dm-1
 }}
 
+# dynamically set number of columns
+cmd autoratios &{{
+                    w=$(tput cols)
+                    if [ $w -le 60 ]; then
+                        lf -remote "send $id set nopreview"
+                        lf -remote "send $id set ratios 1"
+                    elif [ $w -le 130 ]; then
+                        lf -remote "send $id set ratios 1:2"
+                        lf -remote "send $id set preview"
+                    else
+                        lf -remote "send $id set ratios 1:5:6"
+                        lf -remote "send $id set preview"
+                    fi
+                }}
+autoratios # auto-run at start
+
 # Archive bindings
-cmd unarchive ${{
+cmd extract ${{
   case "$f" in
       *.zip) unzip "$f" ;;
-      *.tar.gz) tar -xzvf "$f" ;;
-      *.tar.bz2) tar -xjvf "$f" ;;
+      *.tar.bz|*.tar.bz2|*.tbz|*.tbz2) $s tar xjvf "$f";;
+      *.tar.zst) tar -I zstd -xvf "$f" ;;
+      *.tar.gz|*.tgz) tar -xzvf "$f" ;;
       *.tar) tar -xvf "$f" ;;
-      *.tar.xz) tar -xvf "$f" ;;
+      *.tar.xz|*.txz) tar -xvf "$f" ;;
+      *.rar) unrar x $f ;;
+      *.7z) 7z x $f ;;
       *) echo "Unsupported format" ;;
   esac
 }}
+
+cmd compress %tar -I zstd -cvf "$f.tar.zst" "$f"
 
 cmd burniso ${{
   sudo dd if="$f" of=/dev/sdb
   notify-send "Burn the iso has finished!"
 }}
-
-cmd zip %zip -r "$f" "$f"
-cmd tar %tar cvf "$f.tar" "$f"
-cmd targz %tar cvzf "$f.tar.gz" "$f"
-cmd tarbz2 %tar cjvf "$f.tar.bz2" "$f"
-cmd tarxz %tar cfjv "$f.tar.xz" "$f"
 
 # Trash cli bindings
 cmd trash ${{
@@ -123,6 +135,13 @@ cmd clear_trash %trash-empty
 
 cmd restore_trash ${{
   trash-restore
+}}
+
+cmd viewtrash ${{
+  clear
+  du -sh ~/.local/share/Trash/files; echo "$(ls ~/.local/share/Trash/files | wc -l)       files"
+  printf "\n          Hit enter to exit!"
+  read exit
 }}
 
 cmd cptofold ${{
@@ -184,35 +203,19 @@ map c
 map e
 map f
 
-cmd drawimg ${{
-  drawimg $f
-}}
-
-cmd video_preview ${{
-    CACHE=$(mktemp /tmp/thumb_cache.XXXXX)
-    ffmpegthumbnailer -i "$f" -o $CACHE -s 0
-    ~/.config/lf/draw_img.sh $CACHE && rm $CACHE
-}}
-
-map * :video_preview
-map + :drawimg
-
 # File Openers
 map ee $$EDITOR "$f"
 #map u $view "$f"
 
 # Archive Mappings
-map az zip
-map at tar
-map ag targz
-map ab tarbz2
-map ax tarxz
-map au unarchive
+map ax extract
+map ac compress
 
 # Trash Mappings
 map dd trash
-map tc clear_trash
-map tr restore_trash
+map dc clear_trash
+map dr restore_trash
+map dv viewtrash
 
 # Awesome Search
 map s fzf_jump
@@ -221,7 +224,6 @@ map S stow
 
 # Basic Functions
 map . set hidden!
-map DD delete
 map p paste
 map x cut
 map y copy
@@ -231,10 +233,8 @@ map <enter> open
 map mf mkfile
 map mr sudomkfile
 map md mkdir
-map ms $mkscript
 map X chmod
 map bg setwallpaper
-map o open_config
 map br bulkrename
 map r rename
 map H top
