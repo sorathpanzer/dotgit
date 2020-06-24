@@ -47,6 +47,8 @@ alias lg="cd $HOME/.config/dotgit; lazygit; cd -"
 alias vfm="$HOME/.config/vifm/scripts/vifmrun"
 alias vm='nvim'
 alias vim='nvim'
+alias diff="diff --color"
+alias compl="sudo make install clean; sudo make clean"
 alias ls='ls --color --group-directories-first'
 alias nvlist='find -L $HOME -maxdepth 4 -type f ! -path "$HOME/.local/*" ! -path "$HOME/.cache/*" ! -path "$HOME/.*Brave*" \
 ! -path "$HOME/.*/R/*" ! -path "$HOME/.*dotfiles/*" ! -path "$HOME/Projectos/r-backtester/.Rproj.user/*" \
