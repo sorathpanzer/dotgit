@@ -30,5 +30,10 @@ do
 	"d")
 		[ "$(printf "No\\nYes" | dmenu -i -p "Really delete $file?")" = "Yes" ] && rm "$file" && notify-send "$file deleted." ;;
 	"g")	ifinstalled gimp && gimp "$file" & ;;
+
+	"s")
+		fname="$(echo "$file" | rev | cut -d "/" -f 1 | rev)"
+		cp "$file" "/home/$USER/Imagens"  && notify-send -i "$(readlink -f "$file")" "$fname moved to Image folder!" &
+                ;;
         esac
 done
