@@ -1,6 +1,12 @@
 #!/usr/bin/env sh
-while read file
-do
+#while read file
+#do
+# put files in an array
+files=()
+while IFS= read -r file; do
+    file=$(realpath "$file")
+    files+=("$file")
+
         case "$1" in
         "w") setbg "$file" & ;;
         "c")
@@ -27,13 +33,24 @@ do
 	"Y")
 		readlink -f "$file" | xclip -selection clipboard &&
 			notify-send "$(readlink -f "$file") copied to clipboard" & ;;
-	"d")
-		[ "$(printf "No\\nYes" | dmenu -i -p "Really delete $file?")" = "Yes" ] && rm "$file" && notify-send "$file deleted." ;;
 	"g")	ifinstalled gimp && gimp "$file" & ;;
 
 	"s")
 		fname="$(echo "$file" | rev | cut -d "/" -f 1 | rev)"
 		cp "$file" "/home/$USER/Imagens"  && notify-send -i "$(readlink -f "$file")" "$fname moved to Image folder!" &
                 ;;
+    "Delete" | "d")
+        if [ "${#files[@]}" = 1 ]; then
+            P=$(basename "$f")
+        else
+            P="${#files[@]} files"
+        fi
+        R=$(printf "Trash\nDelete permanently\nCancel" |
+                dmenu -p "Delete $P?" -i -sb red -nf red)
+        case "$R" in
+            Trash)   for f in "${files[@]}"; do trash-put "$f"; done;;
+        esac;;
+    "Play video" | "p")
+        open "${files[@]}";;
         esac
 done
