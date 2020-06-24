@@ -24,12 +24,14 @@ cmd open ${{
 }}
 
 cmd mkdir ${{
+  clear
   printf "Directory Name: "
   read ans
   mkdir $ans
 }}
 
 cmd mkfile ${{
+  clear
   printf "File Name: "
   read ans
   $EDITOR $ans
@@ -43,6 +45,7 @@ cmd chmod ${{
 }}
 
 cmd sudomkfile ${{
+  clear
   printf "File Name: "
   read ans
   sudo $EDITOR $ans
@@ -87,6 +90,7 @@ cmd unarchive ${{
 
 cmd burniso ${{
   sudo dd if="$f" of=/dev/sdb
+  notify-send "Burn the iso has finished!"
 }}
 
 cmd zip %zip -r "$f" "$f"
@@ -247,7 +251,7 @@ map gtr cd ~/.local/share/Trash/files
 map gm cd /media
 map mt mtsda
 map gh cd ~/
-map gv cd ~/Videos
+map gv cd ~/Vídeos
 map gi cd ~/Imagens
 map gw cd ~/Imagens/Wallpapers
 map gd cd ~/Documentos

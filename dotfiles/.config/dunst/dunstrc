@@ -5,13 +5,13 @@
 [urgency_low]
     background = "#000000"
     foreground = "#ffffff"
-    timeout = 10
+    timeout = 5
     icon = /home/sorath/.config/dunst/normal.png
 
 [urgency_normal]
     background = "#212121"
     foreground = "#ffffff"
-    timeout = 10
+    timeout = 5
     icon = /home/sorath/.config/dunst/normal.png
 
 [urgency_critical]
