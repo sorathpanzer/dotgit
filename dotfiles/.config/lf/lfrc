@@ -108,7 +108,6 @@ cmd compress %tar -I zstd -cvf "$f.tar.zst" "$f"
 
 cmd burniso ${{
   sudo dd if="$f" of=/dev/sdb
-  notify-send "Burn the iso has finished!"
 }}
 
 # Trash cli bindings

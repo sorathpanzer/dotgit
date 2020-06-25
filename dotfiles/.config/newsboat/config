@@ -1,3 +1,6 @@
+auto-reload yes
+reload-time 30
+
 unbind-key j
 unbind-key k
 unbind-key H
