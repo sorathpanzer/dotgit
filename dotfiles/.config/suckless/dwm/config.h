@@ -108,6 +108,9 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,       XK_period,       tagmon,         {.i = +1 } },
 	{ MODKEY,       	  XK_Delete,	   quit,	   {0} },
 	{ MODKEY|ShiftMask, 	  XK_r,      	   quit,           {1} },
+	{ MODKEY,                 XK_i,      	   incnmaster,     {.i = +1 } },
+      	{ MODKEY,                 XK_d,      	   incnmaster,     {.i = -1 } },
+	{ MODKEY,                 XK_z, 	   zoom,           {0} },
 
     /* Gaps keybinds control */
 	{ MODKEY|ControlMask,     XK_g,      	   togglegaps,     {0} },

@@ -175,6 +175,7 @@ static void enqueuestack(Client *c);
 static void enternotify(XEvent *e);
 static void expose(XEvent *e);
 static void focus(Client *c);
+static void incnmaster(const Arg *arg);
 static void focusin(XEvent *e);
 static void focusmon(const Arg *arg);
 static void focusstack(const Arg *arg);
@@ -1027,6 +1028,13 @@ grabkeys(void)
 					XGrabKey(dpy, code, keys[i].mod | modifiers[j], root,
 						True, GrabModeAsync, GrabModeAsync);
 	}
+}
+
+void
+     incnmaster(const Arg *arg)
+     {
+     	selmon->nmaster = MAX(selmon->nmaster + arg->i, 0);
+     	arrange(selmon);
 }
 
 #ifdef XINERAMA
