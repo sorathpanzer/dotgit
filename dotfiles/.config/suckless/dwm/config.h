@@ -38,10 +38,10 @@ static const Rule rules[] = {
 	 */
 	/* class      instance    title       tags mask     switchtotag    isfloating   monitor */
 	{ "Chromium",    	NULL,       NULL,       1,            1,             0,           -1 },
-	{ "firefox",     	NULL,       NULL,       1,            1,             0,           -1 },
+	{ "mpv",     		NULL,       NULL,       1 << 3,       1,             0,           -1 },
 	{ "st-256color",     	NULL,       NULL,       2,            1,             0,           -1 },
 	{ "Lxappearance",     	NULL,       NULL,       0,            0,             1,           -1 },
-	{ "Nautilus",     		NULL,       NULL,       1 << 2,       1,             0,           -1 },
+	{ "Nautilus",     	NULL,       NULL,       1 << 2,       1,             0,           -1 },
 	{ "Telegram",    	NULL,       NULL,       1 << 2,       1,             0,           -1 },
 	{ "Sxiv",     	 	NULL,       NULL,       1 << 3,       1,             0,           -1 },
 	{ "imv",         	NULL,       NULL,       1 << 3,       1,             0,           -1 },
