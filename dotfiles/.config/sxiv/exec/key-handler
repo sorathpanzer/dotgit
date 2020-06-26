@@ -39,6 +39,9 @@ while IFS= read -r file; do
 		fname="$(echo "$file" | rev | cut -d "/" -f 1 | rev)"
 		cp "$file" "/home/$USER/Imagens"  && notify-send -i "$(readlink -f "$file")" "$fname moved to Image folder!" &
                 ;;
+	"x")
+			lf -remote "send select '$file'"
+			lf -remote "send toggle" ;;
     "Delete" | "d")
         if [ "${#files[@]}" = 1 ]; then
             P=$(basename "$f")

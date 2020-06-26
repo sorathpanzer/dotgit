@@ -131,8 +131,9 @@ cmd trash ${{
 }}
 
 cmd clear_trash %trash-empty
-cmd sxthumb %sxiv -t "$fi"
-
+cmd sxthumb ${{
+    xdg-open "$f" & disown; sleep 0.15; /usr/bin/xdotool key --window "$(/usr/bin/xdotool search --name sxiv)" Return
+}}
 
 cmd restore_trash ${{
   trash-restore
@@ -246,7 +247,7 @@ map <esc> unselect
 map bi burniso
 map cd cptofold
 map sd mvtofold
-map oo sxthumb
+map o sxthumb
 
 # Movement
 map gtr cd ~/.local/share/Trash/files
