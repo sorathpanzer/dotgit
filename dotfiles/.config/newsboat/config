@@ -1,6 +1,8 @@
-auto-reload no
+# Feed settings
+refresh-on-startup no
 show-read-feeds  no
 show-read-articles no
+prepopulate-query-feeds yes
 #mark-as-read-on-hover yes
 #confirm-exit yes
 
@@ -12,11 +14,6 @@ unbind-key c
 unbind-key ,
 unbind-key SPACE
 browser "chromium %u"
-
-# Feed settings
-prepopulate-query-feeds yes
-refresh-on-startup yes
-
 
 # bind keys
 bind-key , macro-prefix
@@ -32,7 +29,7 @@ color listfocus_unread black cyan
 color info default black
 color article default default
 
-feedlist-format "%?T?║%n %11u (%T) %t &╠%u══Unread Articles?"
+feedlist-format "%?T?║%n %11u %t &╠%u══Unread Articles? [%T]"
 
 highlight article "(^Feed:.*|^Title:.*|^Author:.*)" cyan default bold
 highlight article "(^Link:.*|^Date:.*)" default default
