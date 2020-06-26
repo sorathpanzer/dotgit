@@ -132,7 +132,7 @@ static Key keys[] = {
   	{ MODKEY|ShiftMask,       XK_minus,  	   spawn,          SHCMD ("~/.config/suckless/brightness.sh Down") },
   	{ MODKEY,                 XK_plus,   	   spawn,          SHCMD ("pactl set-sink-volume alsa_output.pci-0000_00_1f.3.analog-stereo +10%") },
   	{ MODKEY,                 XK_minus,  	   spawn,          SHCMD ("pactl set-sink-volume alsa_output.pci-0000_00_1f.3.analog-stereo -10%") },
-  	{ MODKEY,                 XK_z, 	   spawn,          SHCMD ("pamixer -t ") },
+  	{ MODKEY,                 XK_m, 	   spawn,          SHCMD ("pamixer -t ") },
 	{ MODKEY,        	  XK_1,      	   spawn,          CMD("xdo activate -N Chromium || chromium") },
 	{ MODKEY,        	  XK_2,      	   spawn,          CMD("xdo activate -N st-256color || st") },
 	TAGKEYS(                  XK_1,            0)

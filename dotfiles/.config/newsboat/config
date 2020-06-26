@@ -19,7 +19,7 @@ refresh-on-startup yes
 
 
 # bind keys
-bind-key C-a macro-prefix
+bind-key , macro-prefix
 bind-key LEFT quit
 bind-key RIGHT open
 bind-key SPACE toggle-article-read
