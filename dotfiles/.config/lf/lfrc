@@ -148,6 +148,7 @@ cmd viewtrash ${{
 }}
 
 cmd cptofold ${{
+    clear
     set -f
     printf "Directory Name: "
     read newd
@@ -156,6 +157,7 @@ cmd cptofold ${{
 }}
 
 cmd mvtofold ${{
+    clear
     set -f
     printf "Directory Name: "
     read newd
@@ -246,14 +248,14 @@ map R reload
 map C clear
 map <esc> unselect
 map bi burniso
-map cd cptofold
-map sd mvtofold
+map ctf cptofold
+map mtf mvtofold
 map o sxthumb
+map msd mtsda
 
 # Movement
 map gtr cd ~/.local/share/Trash/files
 map gm cd /media
-map mt mtsda
 map gh cd ~/
 map gv cd ~/Vídeos
 map gi cd ~/Imagens
