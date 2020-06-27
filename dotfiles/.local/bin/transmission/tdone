@@ -1,0 +1,4 @@
+#!/bin/sh
+
+rm ~/Transferências/*.added
+notify-send "🚀 transmission-daemon" "$TR_TORRENT_NAME as completely downloaded!"

@@ -121,6 +121,7 @@ static Key keys[] = {
     /* Apps Launched with SUPER + ALT + KEY  */
 	{ MODKEY,        	  XK_w,      	   spawn,          CMD("xdo activate -N Chromium || chromium") },
 	{ MODKEY,        	  XK_t,      	   spawn,          CMD("telegram-desktop") },
+	{ MODKEY|ShiftMask,       XK_t,      	   spawn,          CMD("tnoty") },
 	{ MODKEY,        	  XK_n,      	   spawn,          CMD("nautilus") },
 	{ MODKEY,        	  XK_j,      	   spawn,          CMD("st -e journalctl --follow") },
 	{ MODKEY,        	  XK_s,      	   spawn,          CMD("steam") },

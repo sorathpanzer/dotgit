@@ -1,2 +1,6 @@
 dotfiles/.config/vifm/vifminfo
 dotfiles/.config/vifm/vifm-help.txt
+dotfiles/.config/blocklists
+dotfiles/.config/resume
+dotfiles/.config/torrents
+dotfiles/.config/stats.json

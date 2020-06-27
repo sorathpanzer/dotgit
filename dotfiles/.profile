@@ -13,3 +13,4 @@ export CARGO_HOME="${XDG_DATA_HOME:-$HOME/.local/share}/cargo"
 export GOPATH="${XDG_DATA_HOME:-$HOME/.local/share}/go"
 
 PATH="$PATH:$HOME/.local/bin"
+PATH="$PATH:$HOME/.local/bin/transmission"
