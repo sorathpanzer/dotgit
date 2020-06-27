@@ -71,6 +71,7 @@ cmd mtsda ${{
   clear
   sudo udisksctl unlock -b /dev/sda1
   sudo udisksctl mount -b /dev/dm-1
+  cd /media
 }}
 
 # dynamically set number of columns
@@ -107,6 +108,7 @@ cmd extract ${{
 cmd compress %tar -I zstd -cvf "$f.tar.zst" "$f"
 
 cmd burniso ${{
+  clear
   sudo dd if="$f" of=/dev/sdb
 }}
 
