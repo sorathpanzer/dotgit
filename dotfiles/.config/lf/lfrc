@@ -142,6 +142,7 @@ cmd restore_trash ${{
 cmd viewtrash ${{
   clear
   du -sh ~/.local/share/Trash/files; echo "$(ls ~/.local/share/Trash/files | wc -l)       files"
+  ls -Slh ~/.local/share/Trash/files
   printf "\n          Hit enter to exit!"
   read exit
 }}
