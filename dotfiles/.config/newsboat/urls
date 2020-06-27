@@ -1,17 +1,11 @@
 "query:Unread Articles:unread = \"yes\""
 
-                            -----------------------------------------------
-                           |------------------- Linux --------------------|
-                            -----------------------------------------------
-
+Linux
 https://www.archlinux.org/feeds/news/ "Linux" "~ARCH: News"
 https://distrowatch.com/news/dw.xml "Linux" "~DistroWatch"
 https://git.suckless.org/dwm/atom.xml "Linux" "~DWM: Gitsource"
 
-                            -----------------------------------------------
-                           |------------------- Reddit --------------------|
-                            -----------------------------------------------
-
+Reddit
 https://www.reddit.com/r/archlinux/top.rss "Reddit" "~r/Archlinux"
 https://www.reddit.com/r/bspwm/top.rss "Reddit" "~r/Bspwm"
 https://www.reddit.com/r/commandline/top.rss "Reddit" "~r/Commandline"
@@ -31,10 +25,7 @@ https://www.reddit.com/r/vimporn/top.rss "Reddit" "~r/Vimporn"
 https://www.reddit.com/r/voidlinux/top.rss "Reddit" "~r/Voidlinux"
 https://www.reddit.com/r/xmonad/top.rss "Reddit" "~r/Xmonad"
 
-                            -----------------------------------------------
-                           |------------------- Youtube ------------------|
-                            -----------------------------------------------
-
+Youtube
 https://www.youtube.com/feeds/videos.xml?channel_id=UC-yewGHQbNFpDrGM0diZOLA "Youtube" "~Sargon of Akkad"
 https://www.youtube.com/feeds/videos.xml?channel_id=UC1jtAq_bP3reGKykkbW26ww "Youtube" "~templesounds"
 https://www.youtube.com/feeds/videos.xml?channel_id=UC2eYFnH61tmytImy1mTYvhA "Youtube" "~Luke Smith"
