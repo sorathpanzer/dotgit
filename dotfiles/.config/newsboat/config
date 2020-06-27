@@ -1,7 +1,7 @@
 # Feed settings
 refresh-on-startup no
 show-read-feeds  no
-show-read-articles no
+#show-read-articles no
 prepopulate-query-feeds yes
 #mark-as-read-on-hover yes
 #confirm-exit yes
@@ -22,9 +22,9 @@ bind-key RIGHT open
 bind-key SPACE toggle-article-read
 
 color background default default
-color listnormal red default
+color listnormal color146 default
 color listnormal_unread cyan default
-color listfocus color9 cyan
+color listfocus red cyan
 color listfocus_unread black cyan
 color info default black
 color article default default
@@ -42,8 +42,10 @@ highlight article "\\[embedded flash: [0-9][0-9]*\\]" green default bold
 highlight article ":.*\\(link\\)$" cyan default
 highlight article ":.*\\(image\\)$" blue default
 highlight article ":.*\\(embedded flash\\)$" magenta default
+highlight feedlist "\\(Youtube\\) .*" red
+highlight feedlist "\\(Reddit\\) .*" red
 
 browser linkhandler
-macro b open-in-browser-and-mark-read
-macro v set browser "setsid -f mpv" ; open-in-browser ; set browser linkhandler
-macro w set browser "w3m" ; open-in-browser ; set browser linkhandler
+macro c set browser "chromium" ; open-in-browser-and-mark-read
+macro v set browser "setsid -f mpv" ; open-in-browser-and-mark-read
+macro w set browser "w3m" ; open-in-browser-and-mark-read
