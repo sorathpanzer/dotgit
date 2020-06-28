@@ -26,10 +26,8 @@ static const char *colors[][3]      = {
 };
 
 /* tagging */
-/* static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" }; */
-/*static const char *tags[] = { "", "", "", "", "" };*/
-static const char *tags[] = { "", "", "", "", "" };
-static const char *alttags[] = { "|}|", "| |", "| |", "| |", "| |" };
+static const char *tags[] = { "", "", "", "" };
+static const char *alttags[] = { "|}|", "| |", "| |", "| |" };
 
 static const Rule rules[] = {
 	/* xprop(1):
@@ -38,16 +36,16 @@ static const Rule rules[] = {
 	 */
 	/* class      instance    title       tags mask     switchtotag    isfloating   monitor */
 	{ "Chromium",    	NULL,       NULL,       1,            1,             0,           -1 },
-	{ "mpv",     		NULL,       NULL,       1 << 3,       1,             0,           -1 },
 	{ "st-256color",     	NULL,       NULL,       2,            1,             0,           -1 },
-	{ "Lxappearance",     	NULL,       NULL,       0,            0,             1,           -1 },
+	{ "mpv",     		NULL,       NULL,       1 << 2,       1,             0,           -1 },
+	{ "Lxappearance",     	NULL,       NULL,       1 << 2,       0,             1,           -1 },
 	{ "Nautilus",     	NULL,       NULL,       1 << 2,       1,             0,           -1 },
 	{ "Telegram",    	NULL,       NULL,       1 << 2,       1,             0,           -1 },
-	{ "Sxiv",     	 	NULL,       NULL,       1 << 3,       1,             0,           -1 },
-	{ "imv",         	NULL,       NULL,       1 << 3,       1,             0,           -1 },
-	{ "Steam",     	 	NULL,       NULL,       1 << 4,       1,             0,           -1 },
-	{ "RStudio",     	NULL,       NULL,       1 << 4,       1,             0,           -1 },
-	{ "VirtualBox Manager", NULL,       NULL,       1 << 4,       1,             0,           -1 },
+	{ "Sxiv",     	 	NULL,       NULL,       1 << 2,       1,             0,           -1 },
+	{ "imv",         	NULL,       NULL,       1 << 2,       1,             0,           -1 },
+	{ "Steam",     	 	NULL,       NULL,       1 << 3,       1,             0,           -1 },
+	{ "RStudio",     	NULL,       NULL,       1 << 3,       1,             0,           -1 },
+	{ "VirtualBox Manager", NULL,       NULL,       1 << 3,       1,             0,           -1 },
 };
 
 /* layout(s) */
@@ -142,7 +140,6 @@ static Key keys[] = {
 	TAGKEYS(                  XK_2,            1)
 	TAGKEYS(                  XK_3,            2)
 	TAGKEYS(                  XK_4,            3)
-	TAGKEYS(                  XK_5,            4)
 };
 
 /* button definitions */
