@@ -71,7 +71,6 @@ cmd mtsda ${{
   clear
   sudo udisksctl unlock -b /dev/sda1
   sudo udisksctl mount -b /dev/dm-1
-  cd /media
 }}
 
 # dynamically set number of columns
