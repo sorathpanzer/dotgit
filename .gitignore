@@ -1,6 +1,7 @@
 dotfiles/.config/vifm/vifminfo
 dotfiles/.config/vifm/vifm-help.txt
-dotfiles/.config/blocklists
-dotfiles/.config/resume
-dotfiles/.config/torrents
-dotfiles/.config/stats.json
+dotfiles/.config/transmission-daemon/blocklists
+dotfiles/.config/transmission-daemon/resume
+dotfiles/.config/transmission-daemon/torrents
+dotfiles/.config/transmission-daemon/stats.json
+dotfiles/.config/transmission-daemon/dht.dat
