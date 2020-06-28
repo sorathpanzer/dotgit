@@ -59,6 +59,12 @@ alias dlist='find -L $HOME -maxdepth 4 -type d ! -path "$HOME*/.local/*" ! -path
 alias paclog='pacman -Qiie | grep -iE "nome[ ]+:|Data da Instalação" | sed "s/.*: //" | tac | paste -d " " - - | sort -n --k 2'
 alias trc="transmission-remote"
 
+calc()
+{
+   echo $* | bc
+}
+alias calc='noglob calc'
+
 fl() {
     res_nvlist=$(nvlist)
     nvim $res_nvlist
