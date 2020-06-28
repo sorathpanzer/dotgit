@@ -98,6 +98,6 @@ torrent(){
 }
 
 while true; do
-  xsetroot -name "$(torrent) | $(news) | $(updates) | $(mem) | $(temp) | $(disk) | $(battery) | $(clock)"
+  xsetroot -name "$(torrent) < $(news) | $(updates) | $(mem) | $(temp) | $(disk) | $(battery) | $(clock)"
      sleep 60s    # Update time every ten seconds
 done &
