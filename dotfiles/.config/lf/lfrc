@@ -231,7 +231,6 @@ map S stow
 
 # Basic Functions
 map . set hidden!
-map p paste
 map x cut
 map y copy
 map Yf yank-basename
