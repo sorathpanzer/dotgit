@@ -1,0 +1,16 @@
+#!/bin/bash
+
+rsync -a /var/cache/pacman/pkg/ /media/Vault/Archlinux/Pacman
+paccache -c /media/Vault/Archlinux/Pacman -rk1
+#paccache -c /media/Vault/Archlinux/Pacman -ruk0
+
+cd /media/Vault/Archlinux/Pacman/
+rm kore.db
+rm kore.db.tar.gz
+rm kore.db.tar.gz.old
+rm kore.files
+rm kore.files.tar.gz
+rm kore.files.tar.gz.old
+
+repo-add kore.db.tar.gz ./*.xz
+repo-add kore.db.tar.gz ./*.zst
