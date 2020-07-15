@@ -58,6 +58,10 @@ alias dlist='find -L $HOME -maxdepth 4 -type d ! -path "$HOME*/.local/*" ! -path
 ! -path "$HOME/.steam*" ! -path "$HOME/.cargo/*" ! -path "$HOME*/.config/coc/*" ! -path "$HOME*/.*/nvim/autoload/*" ! -path "$HOME/.npm/*" | fzf --reverse --header='Jump to location''
 alias paclog='pacman -Qiie | grep -iE "nome[ ]+:|Data da Instalação" | sed "s/.*: //" | tac | paste -d " " - - | sort -n --k 2'
 alias trc="transmission-remote"
+alias dck="docker inspect -f \
+'{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' \
+$1"
+
 
 calc()
 {
