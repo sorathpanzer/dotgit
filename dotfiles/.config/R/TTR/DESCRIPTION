@@ -16,4 +16,4 @@ NeedsCompilation: yes
 Packaged: 2019-12-15 11:49:36 UTC; josh
 Repository: CRAN
 Date/Publication: 2019-12-15 17:00:02 UTC
-Built: R 3.6.3; x86_64-pc-linux-gnu; 2020-04-16 16:38:28 UTC; unix
+Built: R 4.0.2; x86_64-pc-linux-gnu; 2020-07-17 03:32:40 UTC; unix

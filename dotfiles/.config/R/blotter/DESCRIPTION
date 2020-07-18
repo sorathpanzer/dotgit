@@ -1,8 +1,8 @@
 Package: blotter
 Type: Package
 Title: Tools for Transaction-Oriented Trading Systems P&L
-Version: 0.14.7
-Date: 2019-08-24 $Date$
+Version: 0.15.0
+Date: 2019-07-01 $Date$
 Author: Peter Carl [aut],
     Brian G. Peterson [aut, cre],
     Joshua Ulrich [ctb],
@@ -23,24 +23,26 @@ Description: Transaction infrastructure for defining
     portfolios.  Actively maintained and developed.
 License: GPL-3
 LazyLoad: yes
+LazyData: TRUE
 Depends: R (>= 3.0.0), xts (>= 0.10-0), FinancialInstrument(>= 0.6.3),
         PerformanceAnalytics, quantmod
 Imports: zoo, TTR, graphics, methods, stats, utils, boot, foreach
-Suggests: Hmisc, RUnit,
+Suggests: Hmisc, RUnit, knitr, rmarkdown
 URL: https://github.com/braverock/blotter
 Copyright: (c) 2008-2019
 ByteCompile: TRUE
-RoxygenNote: 6.1.1.9000
+RoxygenNote: 7.0.2
+VignetteBuilder: knitr
 RemoteType: github
 RemoteHost: api.github.com
 RemoteRepo: blotter
 RemoteUsername: braverock
 RemoteRef: master
-RemoteSha: 16349ee9b9ab7ad7df0dc5d06361932b12a0b910
+RemoteSha: 239361655af2aa1e1ab1966e0da3e304a067abc0
 GithubRepo: blotter
 GithubUsername: braverock
 GithubRef: master
-GithubSHA1: 16349ee9b9ab7ad7df0dc5d06361932b12a0b910
+GithubSHA1: 239361655af2aa1e1ab1966e0da3e304a067abc0
 NeedsCompilation: yes
-Packaged: 2019-12-09 04:19:11 UTC; sorath
-Built: R 3.6.1; x86_64-pc-linux-gnu; 2019-12-09 04:19:12 UTC; unix
+Packaged: 2020-07-17 04:09:37 UTC; sorath
+Built: R 4.0.2; x86_64-pc-linux-gnu; 2020-07-17 04:09:37 UTC; unix

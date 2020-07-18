@@ -14,13 +14,13 @@ add.indicator(strategy.st, name = "EMA",
               label = "nSlow")
 
 buysig <- function(data) {
-  sig <- data[, "EMA.nSlow"] > market(ha_EURUSD$Close, 1) & EURUSD$weekday == wdayBuy
+  sig <- data[, "EMA.nSlow"] > market(ha_EURUSD$ha.Close, 1) & EURUSD$weekday == wdayBuy
   colnames(sig) <- "upSig"
   sig
 }
 
 sellsig <- function(data) {
-  sig <- data[, "EMA.nSlow"] < market(ha_EURUSD$Close, 1) & EURUSD$weekday == wdaySell
+  sig <- data[, "EMA.nSlow"] < market(ha_EURUSD$ha.Close, 1) & EURUSD$weekday == wdaySell
   colnames(sig) <- "downSig"
   sig
 }

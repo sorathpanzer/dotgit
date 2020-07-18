@@ -2,6 +2,7 @@ quantstrat-package	quantstrat-package
 .deflatedSharpe	SharpeRatio.deflated
 .haircutSR	SharpeRatio.haircut
 .profitHurdle	dotprofitHurdle
+AAPL	AAPL
 add.distribution	add.distribution
 add.distribution.constraint	add.distribution.constraint
 add.indicator	add.indicator

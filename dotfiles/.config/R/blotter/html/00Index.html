@@ -11,7 +11,7 @@
 <div style="text-align: center;">
 <a href="../../../doc/html/packages.html"><img class="arrow" src="../../../doc/html/left.jpg" alt="[Up]" /></a>
 <a href="../../../doc/html/index.html"><img class="arrow" src="../../../doc/html/up.jpg" alt="[Top]" /></a>
-</div><h2>Documentation for package &lsquo;blotter&rsquo; version 0.14.7</h2>
+</div><h2>Documentation for package &lsquo;blotter&rsquo; version 0.15.0</h2>
 
 <ul><li><a href="../DESCRIPTION">DESCRIPTION file</a>.</li>
 <li><a href="../demo">Code demos</a>.  Use <a href="../../utils/help/demo">demo()</a> to run them.</li>
@@ -47,8 +47,12 @@
 <td>Constructs the data container used to store transactions and resulting positions.</td></tr>
 <tr><td style="width: 25%;"><a href="updatePosPL.html">.updatePosPL</a></td>
 <td>Calculates position PL from the position data and corresponding close price data.</td></tr>
+<tr><td style="width: 25%;"><a href="ABC.html">ABC</a></td>
+<td>Prices of random security ABC for a full trading day.</td></tr>
 <tr><td style="width: 25%;"><a href="AcctReturns.html">AcctReturns</a></td>
 <td>Calculate account returns</td></tr>
+<tr><td style="width: 25%;"><a href="acOptTxns.html">acOptTxns</a></td>
+<td>The Almgren-Chriss Market Impact Model</td></tr>
 <tr><td style="width: 25%;"><a href="addAcctTxn.html">addAcctTxn</a></td>
 <td>Add capital account transactions, such as capital additions and withdrawals or interest income (expense)</td></tr>
 <tr><td style="width: 25%;"><a href="addDiv.html">addDiv</a></td>
@@ -63,6 +67,12 @@
 <td>Hypothetical Intra-Day AMZN Trades</td></tr>
 <tr><td style="width: 25%;"><a href="amzn.html">amzn.trades</a></td>
 <td>Hypothetical Intra-Day AMZN Trades</td></tr>
+<tr><td style="width: 25%;"><a href="ArrivalCost.html">ArrivalCost</a></td>
+<td>Arrival Cost</td></tr>
+<tr><td style="width: 25%;"><a href="benchTradePerf.html">benchTradePerf</a></td>
+<td>Trade Execution Performance Benchmarks</td></tr>
+<tr><td style="width: 25%;"><a href="benchTradeStats.html">benchTradeStats</a></td>
+<td>Trade Execution Performance Benchmarks Statistical Testing</td></tr>
 <tr><td style="width: 25%;"><a href="blotter-package.html">blotter</a></td>
 <td>Tools for Transaction-Oriented Trading Systems Development</td></tr>
 <tr><td style="width: 25%;"><a href="calcPortfWgt.html">calcPortfWgt</a></td>
@@ -101,6 +111,12 @@
 <td>hist method for objects of type 'txnsim'</td></tr>
 <tr><td style="width: 25%;"><a href="IBM.html">IBM</a></td>
 <td>IBM stock price data for one month</td></tr>
+<tr><td style="width: 25%;"><a href="impShortfall.html">impShortfall</a></td>
+<td>Implementation Shortfall (IS)</td></tr>
+<tr><td style="width: 25%;"><a href="IndexAdjustedCost.html">IndexAdjustedCost</a></td>
+<td>Index Adjusted Cost</td></tr>
+<tr><td style="width: 25%;"><a href="IndexCost.html">IndexCost</a></td>
+<td>Index Cost</td></tr>
 <tr><td style="width: 25%;"><a href="initAcct.html">initAcct</a></td>
 <td>Constructs the data container used to store calculated account values such as aggregated P&amp;L, equity, etc.</td></tr>
 <tr><td style="width: 25%;"><a href="initPortf.html">initPortf</a></td>
@@ -109,22 +125,34 @@
 <td>generic is.function for account, will take either a string or an object</td></tr>
 <tr><td style="width: 25%;"><a href="is.portfolio.html">is.portfolio</a></td>
 <td>generic is.function for portfolio, will take either a string or an object</td></tr>
+<tr><td style="width: 25%;"><a href="iStarPostTrade.html">iStarPostTrade</a></td>
+<td>The Kissell-Malamut _I-Star_ Market Impact model</td></tr>
+<tr><td style="width: 25%;"><a href="iStarSensitivity.html">iStarSensitivity</a></td>
+<td>I-Star model sensitivity analysis</td></tr>
 <tr><td style="width: 25%;"><a href="mcsim.html">mcsim</a></td>
 <td>Monte Carlo simulate strategy results</td></tr>
 <tr><td style="width: 25%;"><a href="pennyPerShare.html">pennyPerShare</a></td>
 <td>Example TxnFee cost function</td></tr>
 <tr><td style="width: 25%;"><a href="perTradeStats.html">perTradeStats</a></td>
 <td>calculate trade statistics for round turn trades.</td></tr>
+<tr><td style="width: 25%;"><a href="plot.iStarEst.html">plot.iStarEst</a></td>
+<td>Plot method for object of type 'iStarEst'</td></tr>
+<tr><td style="width: 25%;"><a href="plot.iStarSens.html">plot.iStarSens</a></td>
+<td>Plot method for object of type 'iStarSens'</td></tr>
 <tr><td style="width: 25%;"><a href="plot.mcsim.html">plot.mcsim</a></td>
 <td>plot method for objects of type 'mcsim'</td></tr>
 <tr><td style="width: 25%;"><a href="plot.txnsim.html">plot.txnsim</a></td>
 <td>plot method for objects of type 'txnsim'</td></tr>
+<tr><td style="width: 25%;"><a href="plot.txnsPerf.html">plot.txnsPerf</a></td>
+<td>Plot method for object of type 'txnsPerf'</td></tr>
 <tr><td style="width: 25%;"><a href="PortfReturns.html">PortfReturns</a></td>
 <td>Calculate portfolio instrument returns</td></tr>
 <tr><td style="width: 25%;"><a href="summary.mcsim.html">print.mcsim</a></td>
 <td>summary and print methods for objects of type 'mcsim'</td></tr>
 <tr><td style="width: 25%;"><a href="summary.txnsim.html">print.txnsim</a></td>
 <td>summary and print methods for objects of type txnsim</td></tr>
+<tr><td style="width: 25%;"><a href="print.txnsStats.html">print.txnsStats</a></td>
+<td>Print method for object of class 'txnsStats'</td></tr>
 <tr><td style="width: 25%;"><a href="put.account.html">put.account</a></td>
 <td>put a account object in .blotter env</td></tr>
 <tr><td style="width: 25%;"><a href="put.portfolio.html">put.portfolio</a></td>
@@ -137,10 +165,14 @@
 <td>summary and print methods for objects of type 'mcsim'</td></tr>
 <tr><td style="width: 25%;"><a href="summary.txnsim.html">summary.txnsim</a></td>
 <td>summary and print methods for objects of type txnsim</td></tr>
+<tr><td style="width: 25%;"><a href="summary.txnsPerf.html">summary.txnsPerf</a></td>
+<td>Summary method for object of type 'txnsPerf'</td></tr>
 <tr><td style="width: 25%;"><a href="tradeQuantiles.html">tradeQuantiles</a></td>
 <td>quantiles of per-trade stats</td></tr>
 <tr><td style="width: 25%;"><a href="tradeStats.html">tradeStats</a></td>
 <td>calculate statistics on transactions and P&amp;L for a symbol or symbols in a portfolio or portfolios</td></tr>
+<tr><td style="width: 25%;"><a href="trdPrcPerf.html">trdPrcPerf</a></td>
+<td>Trading Price Performance</td></tr>
 <tr><td style="width: 25%;"><a href="txnsim.html">txnsim</a></td>
 <td>Monte Carlo analysis of round turn trades</td></tr>
 <tr><td style="width: 25%;"><a href="txnsim.portfs.html">txnsim.portfs</a></td>

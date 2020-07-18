@@ -23,15 +23,15 @@ colnames(ha) = n;
 return ha;
 }')
 
-# HAOHLC <- function(x) {
-#     x <- OHLC(try.xts(x))
-#     r <- RawHeikinAshi(x, paste0("ha.", colnames(x)))
-#     return(reclass(r, x))
-# }
-# 
-# ha_EURUSD <- as.xts(HAOHLC(EURUSD))
+ HAOHLC <- function(x) {
+     x <- OHLC(try.xts(x))
+     r <- RawHeikinAshi(x, paste0("ha.", colnames(x)))
+     return(reclass(r, x))
+ }
+ 
+ ha_EURUSD <- as.xts(HAOHLC(EURUSD))
 
-ha_EURUSD <- EURUSD
+#ha_EURUSD <- EURUSD
 
 market <- function(z,y) {
   rollapplyr(z[start_date], y, function(x) x[1])

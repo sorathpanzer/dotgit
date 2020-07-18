@@ -1,5 +1,6 @@
 .profitHurdle           internal implementation of profit hurdle code,
                         see 'profit.hurdle'
+AAPL                    AAPL time series of daily OHLCVA bars
 add.distribution        Adds a distribution to a paramset in a strategy
 add.distribution.constraint
                         Adds a constraint on 2 distributions within a

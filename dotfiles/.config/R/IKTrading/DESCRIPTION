@@ -28,5 +28,5 @@ GithubUsername: IlyaKipnis
 GithubRef: master
 GithubSHA1: 0b4e0e5b21b0b3818e1b7bfcc46a82ed5c6f7ead
 NeedsCompilation: yes
-Packaged: 2019-12-09 04:25:46 UTC; sorath
-Built: R 3.6.1; x86_64-pc-linux-gnu; 2019-12-09 04:25:47 UTC; unix
+Packaged: 2020-07-17 04:13:21 UTC; sorath
+Built: R 4.0.2; x86_64-pc-linux-gnu; 2020-07-17 04:13:21 UTC; unix

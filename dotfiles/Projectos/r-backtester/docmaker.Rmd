@@ -30,7 +30,7 @@ cbind(wdaySell)
 
 \newpage
 
-```{r Trade Stats #1, echo=FALSE, results='asis'}
+# ```{r Trade Stats #1, echo=FALSE, results='asis'}
 
 library(knitr)
 library(xtable)
