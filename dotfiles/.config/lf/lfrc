@@ -195,6 +195,10 @@ cmd stow ${{
      fi
 }}
 
+cmd vview ${{
+  mpv *
+}}
+
 cmd q quit
 
 # Bindings
@@ -252,6 +256,7 @@ map ctf cptofold
 map mtf mvtofold
 map o sxthumb
 map msd mtsda
+map V vview
 
 # Movement
 map gtr cd ~/.local/share/Trash/files
