@@ -1,7 +1,7 @@
 #!/bin/bash
 
 DAYS_OF_DELAY="7"
-UPDATE_DEPENDENCIES="FALSE" # I think setting to TRUE might not be a good idea, but i will not clean the code... just yet!
+UPDATE_DEPENDENCIES="TRUE"
 
 RED='\e[1m\x1b[38;5;96m'
 GREEN='\e[1m\x1b[38;5;244m'
