@@ -1,6 +1,6 @@
             t1 <- Sys.time()
             suppressPackageStartupMessages(library(doParallel))
-            registerDoParallel(cores=detectCores())
+            registerDoParallel(detectCores())
             
             add.distribution(strategy.st,
                              paramset.label = "EMA",

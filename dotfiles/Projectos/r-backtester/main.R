@@ -7,14 +7,14 @@
           suppressPackageStartupMessages(library(doParallel))
           suppressPackageStartupMessages(library(dplyr))
           t1 <- Sys.time()
-          registerDoParallel(cores=detectCores())
+          registerDoParallel(detectCores())
 
           # ---------------------------------------------------- #
           t1 <- Sys.time()
           init_date <- "2004-10-25 01:00:00"
           init_equity <- 200
 
-          start_date <- "2018::"
+          start_date <- "2005-11::"
 
           stoploss <- 0.24
           profitLong <- 1.8
