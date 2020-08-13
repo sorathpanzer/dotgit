@@ -1,5 +1,5 @@
 # Feed settings
-refresh-on-startup no
+refresh-on-startup yes
 show-read-feeds  no
 #show-read-articles no
 prepopulate-query-feeds yes
