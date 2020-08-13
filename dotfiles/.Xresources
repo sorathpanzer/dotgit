@@ -4,7 +4,7 @@
 !! Set a default font and font size as below:
 *.font: monospace:size=10
 
-! Dracula Xresources palette
+!! Dracula Xresources palette
 *.foreground: #F8F8F2
 *.background: #000000
 *.color0:     #000000
