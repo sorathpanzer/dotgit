@@ -5,9 +5,18 @@ https://www.archlinux.org/feeds/news/ "Linux" "~ARCH: News"
 https://distrowatch.com/news/dw.xml "Linux" "~DistroWatch"
 https://git.suckless.org/dwm/atom.xml "Linux" "~DWM: Gitsource"
 
+Bitchute
+https://www.bitchute.com/feeds/rss/channel/LukeSmith "Bitchute" "~Luke Smith"
+https://www.bitchute.com/feeds/rss/channel/brodierobertson "Bitchute" "~Brodie Robertson"
+https://www.bitchute.com/feeds/rss/channel/ComputingForever "Bitchute" "~Computing Forever"
+https://www.bitchute.com/feeds/rss/channel/freedomainradio "Bitchute" "~Stefan Molyneux"
+https://www.bitchute.com/feeds/rss/channel/switchedtolinux "Bitchute" "~Switched to Linux"
+https://www.bitchute.com/feeds/rss/channel/brittpettibone "Bitchute" "~Brittany Pettybone"
+https://www.bitchute.com/feeds/rss/channel/avoiceformen "Bitchute" "~A Voice for Men"
+https://www.bitchute.com/feeds/rss/channel/thuleanperspective "Bitchute" "~Thulean Perspective"
+
 Youtube
 https://www.youtube.com/feeds/videos.xml?channel_id=UC-yewGHQbNFpDrGM0diZOLA "Youtube" "~Sargon of Akkad"
-https://www.youtube.com/feeds/videos.xml?channel_id=UC2eYFnH61tmytImy1mTYvhA "Youtube" "~Luke Smith"
 https://www.youtube.com/feeds/videos.xml?channel_id=UC4XP1KD-sqGLmlE8g9QtyeQ "Youtube" "~Podcast Ubuntu Portugal"
 https://www.youtube.com/feeds/videos.xml?channel_id=UC4lp9Emg1ci8eo2eDkB-Tag "Youtube" "~Nature Relaxation Films"
 https://www.youtube.com/feeds/videos.xml?channel_id=UC5K-TQsItHnNLjqYf8A3CTw "Youtube" "~Xadrez Brasil"
@@ -22,7 +31,6 @@ https://www.youtube.com/feeds/videos.xml?channel_id=UCEZJ_6qgnT0gQ754yU5_1zw "Yo
 https://www.youtube.com/feeds/videos.xml?channel_id=UCEbYhDd6c6vngsF5PQpFVWg "Youtube" "~Tsoding"
 https://www.youtube.com/feeds/videos.xml?channel_id=UCEf5U1dB5a2e2S-XUlnhxSA "Youtube" "~Diolinux"
 https://www.youtube.com/feeds/videos.xml?channel_id=UCFHaYFxWu4zvM6-_O54A7cw "Youtube" "~Healing Vibrations"
-https://www.youtube.com/feeds/videos.xml?channel_id=UCFSn-h8wTnhpKJMteN76Abg "Youtube" "~Rayner Teo"
 https://www.youtube.com/feeds/videos.xml?channel_id=UCG-KntY7aVnIGXYEBQvmBAQ "Youtube" "~Thomas Frank"
 https://www.youtube.com/feeds/videos.xml?channel_id=UCGy6uV7yqGWDeUWTZzT3ZEg "Youtube" "~Rebel News"
 https://www.youtube.com/feeds/videos.xml?channel_id=UCHbq_l1qnuomfJCYQTsWf_Q "Youtube" "~Motivation Madness"
