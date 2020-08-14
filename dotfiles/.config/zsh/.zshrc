@@ -48,6 +48,7 @@ alias vfm="$HOME/.config/vifm/scripts/vifmrun"
 alias vm='nvim'
 alias vim='nvim'
 alias diff="diff --color"
+alias ap="absolutely-proprietary"
 alias compl="sudo make install clean; sudo make clean"
 alias ls='ls --color --group-directories-first'
 alias nvlist='find -L $HOME -maxdepth 4 -type f ! -path "$HOME/.local/*" ! -path "$HOME/.cache/*" ! -path "$HOME/.*Brave*" \
