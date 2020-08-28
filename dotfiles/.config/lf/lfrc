@@ -9,6 +9,7 @@ set drawbox true
 set icons true
 set ignorecase true
 set shellopts '-eu'
+set sortby ext
 
 # Custom Functions
 
@@ -195,6 +196,11 @@ cmd stow ${{
      fi
 }}
 
+cmd size ${{
+  du -h "$f"
+  read exit
+}}
+
 cmd vview ${{
   mpv *
 }}
@@ -226,6 +232,7 @@ map dd trash
 map dc clear_trash
 map dr restore_trash
 map dv viewtrash
+map ds size
 
 # Awesome Search
 map s fzf_jump
