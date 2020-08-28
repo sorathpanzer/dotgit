@@ -103,7 +103,7 @@ unsigned int alpha = 0xef;
 /* Terminal colors (16 first used in escape sequence) */
 static const char *colorname[] = {
 	/* 8 normal colors */
-    "#292d3e",
+	"#292d3e",
 	"#f07178",
 	"#c3e88d",
 	"#ffcb6b",
@@ -125,7 +125,7 @@ static const char *colorname[] = {
 	[255] = 0,
 
 	/* more colors can be added after 255 to use with DefaultXX */
-	"#292d3e",
+	"#000000", /*"#292d3e",*/
 	"#bbc5ff",
 	"#d7d7d7",
 };
