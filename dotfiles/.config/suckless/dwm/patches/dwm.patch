@@ -1,0 +1,770 @@
+diff --color -u dwm/config.def.h dwm2/config.def.h
+--- dwm/config.def.h	2019-02-02 12:55:28.000000000 +0000
++++ dwm2/config.def.h	2020-09-27 12:00:01.820853365 +0100
+@@ -1,55 +1,81 @@
+-/* See LICENSE file for copyright and license details. */
++/*  ____ _____  */
++/* |  _ \_   _|  Derek Taylor (DistroTube) */
++/* | | | || |  	http://www.youtube.com/c/DistroTube */
++/* | |_| || |  	http://www.gitlab.com/dwt1/ */
++/* |____/ |_|  	*/
+ 
++/* See LICENSE file for copyright and license details. */
+ /* appearance */
+-static const unsigned int borderpx  = 1;        /* border pixel of windows */
++static const unsigned int borderpx  = 2;        /* border pixel of windows */
+ static const unsigned int snap      = 32;       /* snap pixel */
++static const unsigned int gappx     = 5;        /* pixel gap between clients */
+ static const int showbar            = 1;        /* 0 means no bar */
+ static const int topbar             = 1;        /* 0 means bottom bar */
+-static const char *fonts[]          = { "monospace:size=10" };
+-static const char dmenufont[]       = "monospace:size=10";
+-static const char col_gray1[]       = "#222222";
+-static const char col_gray2[]       = "#444444";
+-static const char col_gray3[]       = "#bbbbbb";
+-static const char col_gray4[]       = "#eeeeee";
+-static const char col_cyan[]        = "#005577";
++static const Bool viewontag         = True;     /* Switch view on tag switch */
++static const int horizpadbar        = 6;        /* horizontal padding for statusbar */
++static const int vertpadbar         = 7;        /* vertical padding for statusbar */
++static const int attachbelow = 1;    /* 1 means attach at the end */
++static const char *fonts[]          = { "UbuntuMono Nerd Font:size=10" };
++static const char dmenufont[]       = "UbuntuMono Nerd Font:size=10";
++static const char col_gray1[]       = "#292d3e";
++static const char col_gray2[]       = "#000000"; /* border color unfocused windows */
++static const char col_gray3[]       = "#96b5b4";
++static const char col_gray4[]       = "#c0c5ce";
++static const char col_cyan[]        = "#AD69AF"; /* border color focused windows and tags DT= #AD69AF */
++static const unsigned int baralpha = 0xee;
++static const unsigned int borderalpha = OPAQUE;
+ static const char *colors[][3]      = {
+ 	/*               fg         bg         border   */
+-	[SchemeNorm] = { col_gray3, col_gray1, col_gray2 },
++	[SchemeNorm] = { col_gray4, col_gray1, col_gray2 },
+ 	[SchemeSel]  = { col_gray4, col_cyan,  col_cyan  },
+ };
++static const unsigned int alphas[][3]      = {
++	/*               fg      bg        border     */
++	[SchemeNorm] = { OPAQUE, baralpha, borderalpha },
++	[SchemeSel]  = { OPAQUE, baralpha, borderalpha },
++};
+ 
+ /* tagging */
+-static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
++/* static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" }; */
++static const char *tags[] = { "", "", "", "", "", "", "", "", "" };
++
+ 
+ static const Rule rules[] = {
+ 	/* xprop(1):
+ 	 *	WM_CLASS(STRING) = instance, class
+ 	 *	WM_NAME(STRING) = title
+ 	 */
+-	/* class      instance    title       tags mask     isfloating   monitor */
+-	{ "Gimp",     NULL,       NULL,       0,            1,           -1 },
+-	{ "Firefox",  NULL,       NULL,       1 << 8,       0,           -1 },
++	/* class      instance    title       tags mask     switchtotag    isfloating   monitor */
++	{ "Termite",     NULL,       NULL,       2,            2,             0,           -1 },
++	{ "Chromium",    NULL,       NULL,       1,            1,             0,           -1 },
++	{ "firefox",     NULL,       NULL,       1,            1,             0,           -1 },
++	{ "feh",         NULL,       NULL,       1 << 4,       1,             0,           -1 },
++	{ "Telegram",    NULL,       NULL,       1 << 8,       1,             0,           -1 },
++	{ "Nautilus",    NULL,       NULL,       1 << 7,       1,             0,           -1 },
+ };
+ 
+ /* layout(s) */
+-static const float mfact     = 0.55; /* factor of master area size [0.05..0.95] */
++static const float mfact     = 0.60; /* factor of master area size [0.05..0.95] */
+ static const int nmaster     = 1;    /* number of clients in master area */
+-static const int resizehints = 1;    /* 1 means respect size hints in tiled resizals */
++static const int resizehints = 0;    /* 1 means respect size hints in tiled resizals */
+ 
+ static const Layout layouts[] = {
+ 	/* symbol     arrange function */
+ 	{ "[]=",      tile },    /* first entry is default */
+-	{ "><>",      NULL },    /* no layout function means floating behavior */
+ 	{ "[M]",      monocle },
++	{ "[F]",      dwindle },
++	{ "><>",      NULL },    /* no layout function means floating behavior */
++	{ NULL,       NULL },
+ };
+ 
+ /* key definitions */
+-#define MODKEY Mod1Mask
++#define MODKEY Mod4Mask
+ #define TAGKEYS(KEY,TAG) \
+ 	{ MODKEY,                       KEY,      view,           {.ui = 1 << TAG} }, \
+ 	{ MODKEY|ControlMask,           KEY,      toggleview,     {.ui = 1 << TAG} }, \
+ 	{ MODKEY|ShiftMask,             KEY,      tag,            {.ui = 1 << TAG} }, \
+ 	{ MODKEY|ControlMask|ShiftMask, KEY,      toggletag,      {.ui = 1 << TAG} },
++#define CMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
+ 
+ /* helper for spawning shell commands in the pre dwm-5.0 fashion */
+ #define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
+@@ -57,33 +83,41 @@
+ /* commands */
+ static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
+ static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
+-static const char *termcmd[]  = { "st", NULL };
++static const char *termcmd[]  = { "termite", NULL };
+ 
+ static Key keys[] = {
+-	/* modifier                     key        function        argument */
+-	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
+-	{ MODKEY|ShiftMask,             XK_Return, spawn,          {.v = termcmd } },
+-	{ MODKEY,                       XK_b,      togglebar,      {0} },
+-	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
+-	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
+-	{ MODKEY,                       XK_i,      incnmaster,     {.i = +1 } },
+-	{ MODKEY,                       XK_d,      incnmaster,     {.i = -1 } },
+-	{ MODKEY,                       XK_h,      setmfact,       {.f = -0.05} },
+-	{ MODKEY,                       XK_l,      setmfact,       {.f = +0.05} },
+-	{ MODKEY,                       XK_Return, zoom,           {0} },
+-	{ MODKEY,                       XK_Tab,    view,           {0} },
+-	{ MODKEY|ShiftMask,             XK_c,      killclient,     {0} },
+-	{ MODKEY,                       XK_t,      setlayout,      {.v = &layouts[0]} },
+-	{ MODKEY,                       XK_f,      setlayout,      {.v = &layouts[1]} },
+-	{ MODKEY,                       XK_m,      setlayout,      {.v = &layouts[2]} },
+-	{ MODKEY,                       XK_space,  setlayout,      {0} },
+-	{ MODKEY|ShiftMask,             XK_space,  togglefloating, {0} },
+-	{ MODKEY,                       XK_0,      view,           {.ui = ~0 } },
+-	{ MODKEY|ShiftMask,             XK_0,      tag,            {.ui = ~0 } },
+-	{ MODKEY,                       XK_comma,  focusmon,       {.i = -1 } },
+-	{ MODKEY,                       XK_period, focusmon,       {.i = +1 } },
+-	{ MODKEY|ShiftMask,             XK_comma,  tagmon,         {.i = -1 } },
+-	{ MODKEY|ShiftMask,             XK_period, tagmon,         {.i = +1 } },
++	/* modifier               key              function        argument */
++	{ MODKEY,   		  XK_d,       	   spawn,          {.v = dmenucmd } },
++	{ MODKEY,                 XK_Return,       spawn,          {.v = termcmd } },
++	{ MODKEY,                 XK_b,            togglebar,      {0} },
++	{ MODKEY,       	  XK_Right,        rotatestack,    {.i = +1 } },
++	{ MODKEY,       	  XK_Left,         rotatestack,    {.i = -1 } },
++	{ MODKEY,                 XK_Down,         focusstack,     {.i = +1 } },
++	{ MODKEY,                 XK_Up,           focusstack,     {.i = -1 } },
++	{ MODKEY|ShiftMask,       XK_Left,         setmfact,       {.f = -0.05} },
++	{ MODKEY|ShiftMask,       XK_Right,        setmfact,       {.f = +0.05} },
++	{ MODKEY,       	  XK_Tab,          focusstack,     {.i = +1 } },
++	{ MODKEY,                 XK_backslash,    view,           {0} },
++	{ MODKEY,	          XK_q,            killclient,     {0} },
++	{ MODKEY,                 XK_t,            setlayout,      {.v = &layouts[0]} },
++	{ MODKEY,                 XK_m,            setlayout,      {.v = &layouts[1]} },
++	{ MODKEY,                 XK_f,            setlayout,      {.v = &layouts[2]} },
++	{ MODKEY,                 XK_o,            setlayout,      {.v = &layouts[3]} },
++	{ MODKEY,     		  XK_Escape,       cyclelayout,    {.i = +1 } },
++	{ MODKEY,                 XK_space,        setlayout,      {0} },
++	{ MODKEY|ShiftMask,       XK_space,        togglefloating, {0} },
++	{ MODKEY,                 XK_0,            view,           {.ui = ~0 } },
++	{ MODKEY|ShiftMask,       XK_0,            tag,            {.ui = ~0 } },
++	{ MODKEY,                 XK_comma,        focusmon,       {.i = -1 } },
++	{ MODKEY,                 XK_period,       focusmon,       {.i = +1 } },
++	{ MODKEY|ShiftMask,       XK_comma,        tagmon,         {.i = -1 } },
++	{ MODKEY|ShiftMask,       XK_period,       tagmon,         {.i = +1 } },
++	{ MODKEY,             	  XK_BackSpace,	   quit,	   {0} },
++	{ MODKEY, 	  	  XK_r,      	   quit,           {1} },
++
++    /* Apps Launched with SUPER + ALT + KEY  */
++	{ MODKEY,        	  	XK_w,      spawn,          CMD("chromium") },
++	{ MODKEY|ShiftMask,             XK_x,      killunsel,      {0} },
+ 	TAGKEYS(                        XK_1,                      0)
+ 	TAGKEYS(                        XK_2,                      1)
+ 	TAGKEYS(                        XK_3,                      2)
+@@ -93,7 +127,6 @@
+ 	TAGKEYS(                        XK_7,                      6)
+ 	TAGKEYS(                        XK_8,                      7)
+ 	TAGKEYS(                        XK_9,                      8)
+-	{ MODKEY|ShiftMask,             XK_q,      quit,           {0} },
+ };
+ 
+ /* button definitions */
+@@ -104,7 +137,7 @@
+ 	{ ClkLtSymbol,          0,              Button3,        setlayout,      {.v = &layouts[2]} },
+ 	{ ClkWinTitle,          0,              Button2,        zoom,           {0} },
+ 	{ ClkStatusText,        0,              Button2,        spawn,          {.v = termcmd } },
+-	{ ClkClientWin,         MODKEY,         Button1,        movemouse,      {0} },
++	{ ClkClientWin,         MODKEY,         Button1,        setlayout,       {0} },
+ 	{ ClkClientWin,         MODKEY,         Button2,        togglefloating, {0} },
+ 	{ ClkClientWin,         MODKEY,         Button3,        resizemouse,    {0} },
+ 	{ ClkTagBar,            0,              Button1,        view,           {0} },
+Só em dwm2: config.h
+diff --color -u dwm/dwm.1 dwm2/dwm.1
+--- dwm/dwm.1	2019-02-02 12:55:28.000000000 +0000
++++ dwm2/dwm.1	2020-09-27 12:00:01.824186698 +0100
+@@ -92,6 +92,12 @@
+ .B Mod1\-space
+ Toggles between current and previous layout.
+ .TP
++.B Mod1\-Control\-,
++Cycles backwards in layout list.
++.TP
++.B Mod1\-Control\-.
++Cycles forwards in layout list.
++.TP
+ .B Mod1\-j
+ Focus next window.
+ .TP
+@@ -142,6 +148,9 @@
+ .TP
+ .B Mod1\-Shift\-q
+ Quit dwm.
++.TP
++.B Mod1\-Control\-Shift\-q
++Restart dwm.
+ .SS Mouse commands
+ .TP
+ .B Mod1\-Button1
+@@ -155,6 +164,13 @@
+ .SH CUSTOMIZATION
+ dwm is customized by creating a custom config.h and (re)compiling the source
+ code. This keeps it fast, secure and simple.
++.SH SIGNALS
++.TP
++.B SIGHUP - 1
++Restart the dwm process.
++.TP
++.B SIGTERM - 15
++Cleanly terminate the dwm process.
+ .SH SEE ALSO
+ .BR dmenu (1),
+ .BR st (1)
+diff --color -u dwm/dwm.c dwm2/dwm.c
+--- dwm/dwm.c	2019-02-02 12:55:28.000000000 +0000
++++ dwm2/dwm.c	2020-09-27 12:00:01.824186698 +0100
+@@ -92,6 +92,7 @@
+ 	int basew, baseh, incw, inch, maxw, maxh, minw, minh;
+ 	int bw, oldbw;
+ 	unsigned int tags;
++	unsigned int switchtotag;
+ 	int isfixed, isfloating, isurgent, neverfocus, oldstate, isfullscreen;
+ 	Client *next;
+ 	Client *snext;
+@@ -119,6 +120,10 @@
+ 	int by;               /* bar geometry */
+ 	int mx, my, mw, mh;   /* screen size */
+ 	int wx, wy, ww, wh;   /* window area  */
++	int gappih;           /* horizontal gap between windows */
++	int gappiv;           /* vertical gap between windows */
++	int gappoh;           /* horizontal outer gaps */
++	int gappov;           /* vertical outer gaps */
+ 	unsigned int seltags;
+ 	unsigned int sellt;
+ 	unsigned int tagset[2];
+@@ -137,6 +142,7 @@
+ 	const char *instance;
+ 	const char *title;
+ 	unsigned int tags;
++	unsigned int switchtotag;
+ 	int isfloating;
+ 	int monitor;
+ } Rule;
+@@ -157,15 +163,19 @@
+ static void configurenotify(XEvent *e);
+ static void configurerequest(XEvent *e);
+ static Monitor *createmon(void);
++static void cyclelayout(const Arg *arg);
+ static void destroynotify(XEvent *e);
+ static void detach(Client *c);
+ static void detachstack(Client *c);
+ static Monitor *dirtomon(int dir);
+ static void drawbar(Monitor *m);
+ static void drawbars(void);
++static void enqueue(Client *c);
++static void enqueuestack(Client *c);
+ static void enternotify(XEvent *e);
+ static void expose(XEvent *e);
+ static void focus(Client *c);
++static void incnmaster(const Arg *arg);
+ static void focusin(XEvent *e);
+ static void focusmon(const Arg *arg);
+ static void focusstack(const Arg *arg);
+@@ -174,7 +184,6 @@
+ static int gettextprop(Window w, Atom atom, char *text, unsigned int size);
+ static void grabbuttons(Client *c, int focused);
+ static void grabkeys(void);
+-static void incnmaster(const Arg *arg);
+ static void keypress(XEvent *e);
+ static void killclient(const Arg *arg);
+ static void manage(Window w, XWindowAttributes *wa);
+@@ -182,7 +191,6 @@
+ static void maprequest(XEvent *e);
+ static void monocle(Monitor *m);
+ static void motionnotify(XEvent *e);
+-static void movemouse(const Arg *arg);
+ static Client *nexttiled(Client *c);
+ static void pop(Client *);
+ static void propertynotify(XEvent *e);
+@@ -192,19 +200,26 @@
+ static void resizeclient(Client *c, int x, int y, int w, int h);
+ static void resizemouse(const Arg *arg);
+ static void restack(Monitor *m);
++static void rotatestack(const Arg *arg);
+ static void run(void);
++static void runAutostart(void);
+ static void scan(void);
+ static int sendevent(Client *c, Atom proto);
+ static void sendmon(Client *c, Monitor *m);
+ static void setclientstate(Client *c, long state);
+ static void setfocus(Client *c);
+ static void setfullscreen(Client *c, int fullscreen);
++static void setgaps(int oh, int ov, int ih, int iv);
++static void togglegaps(const Arg *arg);
++static void defaultgaps(const Arg *arg);
+ static void setlayout(const Arg *arg);
+ static void setmfact(const Arg *arg);
+ static void setup(void);
+ static void seturgent(Client *c, int urg);
+ static void showhide(Client *c);
+ static void sigchld(int unused);
++static void sighup(int unused);
++static void sigterm(int unused);
+ static void spawn(const Arg *arg);
+ static void tag(const Arg *arg);
+ static void tagmon(const Arg *arg);
+@@ -240,6 +255,7 @@
+ static int screen;
+ static int sw, sh;           /* X display screen geometry width, height */
+ static int bh, blw = 0;      /* bar geometry */
++static int enablegaps = 1;   /* enables gaps, used by togglegaps */
+ static int lrpad;            /* sum of left and right padding for text */
+ static int (*xerrorxlib)(Display *, XErrorEvent *);
+ static unsigned int numlockmask = 0;
+@@ -260,6 +276,7 @@
+ 	[UnmapNotify] = unmapnotify
+ };
+ static Atom wmatom[WMLast], netatom[NetLast];
++static int restart = 0;
+ static int running = 1;
+ static Cur *cursor[CurLast];
+ static Clr **scheme;
+@@ -302,6 +319,11 @@
+ 			for (m = mons; m && m->num != r->monitor; m = m->next);
+ 			if (m)
+ 				c->mon = m;
++			if (r->switchtotag) {
++				Arg a = { .ui = r->tags };
++				c->switchtotag = selmon->tagset[selmon->seltags];
++				view(&a);
++			}
+ 		}
+ 	}
+ 	if (ch.res_class)
+@@ -416,7 +438,7 @@
+ void
+ buttonpress(XEvent *e)
+ {
+-	unsigned int i, x, click;
++	unsigned int i, x, click, occ;
+ 	Arg arg = {0};
+ 	Client *c;
+ 	Monitor *m;
+@@ -430,9 +452,13 @@
+ 		focus(NULL);
+ 	}
+ 	if (ev->window == selmon->barwin) {
+-		i = x = 0;
++		i = x = occ = 0;
++		/* Bitmask of occupied tags */
++		for (c = m->clients; c; c = c->next)
++			occ |= c->tags;
++
+ 		do
+-			x += TEXTW(tags[i]);
++			x += TEXTW(occ & 1 << i ? alttags[i] : tags[i]);
+ 		while (ev->x >= x && ++i < LENGTH(tags));
+ 		if (i < LENGTH(tags)) {
+ 			click = ClkTagBar;
+@@ -638,6 +664,10 @@
+ 	m->nmaster = nmaster;
+ 	m->showbar = showbar;
+ 	m->topbar = topbar;
++	m->gappih = gappih;
++	m->gappiv = gappiv;
++	m->gappoh = gappoh;
++	m->gappov = gappov;
+ 	m->lt[0] = &layouts[0];
+ 	m->lt[1] = &layouts[1 % LENGTH(layouts)];
+ 	strncpy(m->ltsymbol, layouts[0].symbol, sizeof m->ltsymbol);
+@@ -645,6 +675,23 @@
+ }
+ 
+ void
++cyclelayout(const Arg *arg) {
++	Layout *l;
++	for(l = (Layout *)layouts; l != selmon->lt[selmon->sellt]; l++);
++	if(arg->i > 0) {
++		if(l->symbol && (l + 1)->symbol)
++			setlayout(&((Arg) { .v = (l + 1) }));
++		else
++			setlayout(&((Arg) { .v = layouts }));
++	} else {
++		if(l != layouts && (l - 1)->symbol)
++			setlayout(&((Arg) { .v = (l - 1) }));
++		else
++			setlayout(&((Arg) { .v = &layouts[LENGTH(layouts) - 2] }));
++	}
++}
++
++void
+ destroynotify(XEvent *e)
+ {
+ 	Client *c;
+@@ -699,13 +746,14 @@
+ 	int boxs = drw->fonts->h / 9;
+ 	int boxw = drw->fonts->h / 6 + 2;
+ 	unsigned int i, occ = 0, urg = 0;
++	const char *tagtext;
+ 	Client *c;
+ 
+ 	/* draw status first so it can be overdrawn by tags later */
+ 	if (m == selmon) { /* status is only drawn on selected monitor */
+ 		drw_setscheme(drw, scheme[SchemeNorm]);
+-		sw = TEXTW(stext) - lrpad + 2; /* 2px right padding */
+-		drw_text(drw, m->ww - sw, 0, sw, bh, 0, stext, 0);
++		sw = TEXTW(stext);
++		drw_text(drw, m->ww - sw, 0, sw, bh, lrpad / 2, stext, 0);
+ 	}
+ 
+ 	for (c = m->clients; c; c = c->next) {
+@@ -715,13 +763,10 @@
+ 	}
+ 	x = 0;
+ 	for (i = 0; i < LENGTH(tags); i++) {
+-		w = TEXTW(tags[i]);
+-		drw_setscheme(drw, scheme[m->tagset[m->seltags] & 1 << i ? SchemeSel : SchemeNorm]);
+-		drw_text(drw, x, 0, w, bh, lrpad / 2, tags[i], urg & 1 << i);
+-		if (occ & 1 << i)
+-			drw_rect(drw, x + boxs, boxs, boxw, boxw,
+-				m == selmon && selmon->sel && selmon->sel->tags & 1 << i,
+-				urg & 1 << i);
++		tagtext = occ & 1 << i ? alttags[i] : tags[i];
++		w = TEXTW(tagtext);
++ 		drw_setscheme(drw, scheme[m->tagset[m->seltags] & 1 << i ? SchemeSel : SchemeNorm]);
++		drw_text(drw, x, 0, w, bh, lrpad / 2, tagtext, urg & 1 << i);
+ 		x += w;
+ 	}
+ 	w = blw = TEXTW(m->ltsymbol);
+@@ -752,6 +797,28 @@
+ }
+ 
+ void
++enqueue(Client *c)
++{
++	Client *l;
++	for (l = c->mon->clients; l && l->next; l = l->next);
++	if (l) {
++		l->next = c;
++		c->next = NULL;
++	}
++}
++
++void
++enqueuestack(Client *c)
++{
++	Client *l;
++	for (l = c->mon->stack; l && l->snext; l = l->snext);
++	if (l) {
++		l->snext = c;
++		c->snext = NULL;
++	}
++}
++
++void
+ enternotify(XEvent *e)
+ {
+ 	Client *c;
+@@ -964,10 +1031,10 @@
+ }
+ 
+ void
+-incnmaster(const Arg *arg)
+-{
+-	selmon->nmaster = MAX(selmon->nmaster + arg->i, 0);
+-	arrange(selmon);
++     incnmaster(const Arg *arg)
++     {
++     	selmon->nmaster = MAX(selmon->nmaster + arg->i, 0);
++     	arrange(selmon);
+ }
+ 
+ #ifdef XINERAMA
+@@ -1132,66 +1199,6 @@
+ 	mon = m;
+ }
+ 
+-void
+-movemouse(const Arg *arg)
+-{
+-	int x, y, ocx, ocy, nx, ny;
+-	Client *c;
+-	Monitor *m;
+-	XEvent ev;
+-	Time lasttime = 0;
+-
+-	if (!(c = selmon->sel))
+-		return;
+-	if (c->isfullscreen) /* no support moving fullscreen windows by mouse */
+-		return;
+-	restack(selmon);
+-	ocx = c->x;
+-	ocy = c->y;
+-	if (XGrabPointer(dpy, root, False, MOUSEMASK, GrabModeAsync, GrabModeAsync,
+-		None, cursor[CurMove]->cursor, CurrentTime) != GrabSuccess)
+-		return;
+-	if (!getrootptr(&x, &y))
+-		return;
+-	do {
+-		XMaskEvent(dpy, MOUSEMASK|ExposureMask|SubstructureRedirectMask, &ev);
+-		switch(ev.type) {
+-		case ConfigureRequest:
+-		case Expose:
+-		case MapRequest:
+-			handler[ev.type](&ev);
+-			break;
+-		case MotionNotify:
+-			if ((ev.xmotion.time - lasttime) <= (1000 / 60))
+-				continue;
+-			lasttime = ev.xmotion.time;
+-
+-			nx = ocx + (ev.xmotion.x - x);
+-			ny = ocy + (ev.xmotion.y - y);
+-			if (abs(selmon->wx - nx) < snap)
+-				nx = selmon->wx;
+-			else if (abs((selmon->wx + selmon->ww) - (nx + WIDTH(c))) < snap)
+-				nx = selmon->wx + selmon->ww - WIDTH(c);
+-			if (abs(selmon->wy - ny) < snap)
+-				ny = selmon->wy;
+-			else if (abs((selmon->wy + selmon->wh) - (ny + HEIGHT(c))) < snap)
+-				ny = selmon->wy + selmon->wh - HEIGHT(c);
+-			if (!c->isfloating && selmon->lt[selmon->sellt]->arrange
+-			&& (abs(nx - c->x) > snap || abs(ny - c->y) > snap))
+-				togglefloating(NULL);
+-			if (!selmon->lt[selmon->sellt]->arrange || c->isfloating)
+-				resize(c, nx, ny, c->w, c->h, 1);
+-			break;
+-		}
+-	} while (ev.type != ButtonRelease);
+-	XUngrabPointer(dpy, CurrentTime);
+-	if ((m = recttomon(c->x, c->y, c->w, c->h)) != selmon) {
+-		sendmon(c, m);
+-		selmon = m;
+-		focus(NULL);
+-	}
+-}
+-
+ Client *
+ nexttiled(Client *c)
+ {
+@@ -1248,6 +1255,7 @@
+ void
+ quit(const Arg *arg)
+ {
++	if(arg->i) restart = 1;
+ 	running = 0;
+ }
+ 
+@@ -1282,6 +1290,13 @@
+ 	c->oldw = c->w; c->w = wc.width = w;
+ 	c->oldh = c->h; c->h = wc.height = h;
+ 	wc.border_width = c->bw;
++	if (((nexttiled(c->mon->clients) == c && !nexttiled(c->next))
++	    || &monocle == c->mon->lt[c->mon->sellt]->arrange)
++	    && !c->isfullscreen && !c->isfloating) {
++		c->w = wc.width += c->bw * 2;
++		c->h = wc.height += c->bw * 2;
++		wc.border_width = 0;
++	}
+ 	XConfigureWindow(dpy, c->win, CWX|CWY|CWWidth|CWHeight|CWBorderWidth, &wc);
+ 	configure(c);
+ 	XSync(dpy, False);
+@@ -1370,6 +1385,38 @@
+ }
+ 
+ void
++rotatestack(const Arg *arg)
++{
++	Client *c = NULL, *f;
++
++	if (!selmon->sel)
++		return;
++	f = selmon->sel;
++	if (arg->i > 0) {
++		for (c = nexttiled(selmon->clients); c && nexttiled(c->next); c = nexttiled(c->next));
++		if (c){
++			detach(c);
++			attach(c);
++			detachstack(c);
++			attachstack(c);
++		}
++	} else {
++		if ((c = nexttiled(selmon->clients))){
++			detach(c);
++			enqueue(c);
++			detachstack(c);
++			enqueuestack(c);
++		}
++	}
++	if (c){
++		arrange(selmon);
++		//unfocus(f, 1);
++		focus(f);
++		restack(selmon);
++	}
++}
++
++void
+ run(void)
+ {
+ 	XEvent ev;
+@@ -1381,6 +1428,12 @@
+ }
+ 
+ void
++runAutostart(void) {
++	system("cd ~/.config/suckless; ./autostart_blocking.sh");
++	system("cd ~/.config/suckless; ./autostart.sh &");
++}
++
++void
+ scan(void)
+ {
+ 	unsigned int i, num;
+@@ -1498,6 +1551,34 @@
+ }
+ 
+ void
++setgaps(int oh, int ov, int ih, int iv)
++{
++	if (oh < 0) oh = 0;
++	if (ov < 0) ov = 0;
++	if (ih < 0) ih = 0;
++	if (iv < 0) iv = 0;
++
++	selmon->gappoh = oh;
++	selmon->gappov = ov;
++	selmon->gappih = ih;
++	selmon->gappiv = iv;
++	arrange(selmon);
++}
++
++void
++togglegaps(const Arg *arg)
++{
++	enablegaps = !enablegaps;
++	arrange(selmon);
++}
++
++void
++defaultgaps(const Arg *arg)
++{
++	setgaps(gappoh, gappov, gappih, gappiv);
++}
++
++void
+ setlayout(const Arg *arg)
+ {
+ 	if (!arg || !arg->v || arg->v != selmon->lt[selmon->sellt])
+@@ -1536,6 +1617,9 @@
+ 	/* clean up any zombies immediately */
+ 	sigchld(0);
+ 
++	signal(SIGHUP, sighup);
++	signal(SIGTERM, sigterm);
++
+ 	/* init screen */
+ 	screen = DefaultScreen(dpy);
+ 	sw = DisplayWidth(dpy, screen);
+@@ -1544,8 +1628,8 @@
+ 	drw = drw_create(dpy, screen, root, sw, sh);
+ 	if (!drw_fontset_create(drw, fonts, LENGTH(fonts)))
+ 		die("no fonts could be loaded.");
+-	lrpad = drw->fonts->h;
+-	bh = drw->fonts->h + 2;
++	lrpad = drw->fonts->h + horizpadbar;
++	bh = drw->fonts->h + vertpadbar;
+ 	updategeom();
+ 	/* init atoms */
+ 	utf8string = XInternAtom(dpy, "UTF8_STRING", False);
+@@ -1637,6 +1721,20 @@
+ }
+ 
+ void
++sighup(int unused)
++{
++	Arg a = {.i = 1};
++	quit(&a);
++}
++
++void
++sigterm(int unused)
++{
++	Arg a = {.i = 0};
++	quit(&a);
++}
++
++void
+ spawn(const Arg *arg)
+ {
+ 	if (arg->v == dmenucmd)
+@@ -1673,26 +1771,32 @@
+ void
+ tile(Monitor *m)
+ {
+-	unsigned int i, n, h, mw, my, ty;
++	unsigned int i, n, h, r, oe = enablegaps, ie = enablegaps, mw, my, ty;
+ 	Client *c;
+ 
+ 	for (n = 0, c = nexttiled(m->clients); c; c = nexttiled(c->next), n++);
+ 	if (n == 0)
+ 		return;
+ 
++	if (smartgaps == n) {
++		oe = 0; // outer gaps disabled
++	}
++
+ 	if (n > m->nmaster)
+-		mw = m->nmaster ? m->ww * m->mfact : 0;
++		mw = m->nmaster ? (m->ww + m->gappiv*ie) * m->mfact : 0;
+ 	else
+-		mw = m->ww;
+-	for (i = my = ty = 0, c = nexttiled(m->clients); c; c = nexttiled(c->next), i++)
++		mw = m->ww - 2*m->gappov*oe + m->gappiv*ie;
++	for (i = 0, my = ty = m->gappoh*oe, c = nexttiled(m->clients); c; c = nexttiled(c->next), i++)
+ 		if (i < m->nmaster) {
+-			h = (m->wh - my) / (MIN(n, m->nmaster) - i);
+-			resize(c, m->wx, m->wy + my, mw - (2*c->bw), h - (2*c->bw), 0);
+-			my += HEIGHT(c);
++			r = MIN(n, m->nmaster) - i;
++			h = (m->wh - my - m->gappoh*oe - m->gappih*ie * (r - 1)) / r;
++			resize(c, m->wx + m->gappov*oe, m->wy + my, mw - (2*c->bw) - m->gappiv*ie, h - (2*c->bw), 0);
++			my += HEIGHT(c) + m->gappih*ie;
+ 		} else {
+-			h = (m->wh - ty) / (n - i);
+-			resize(c, m->wx + mw, m->wy + ty, m->ww - mw - (2*c->bw), h - (2*c->bw), 0);
+-			ty += HEIGHT(c);
++			r = n - i;
++			h = (m->wh - ty - m->gappoh*oe - m->gappih*ie * (r - 1)) / r;
++			resize(c, m->wx + mw + m->gappov*oe, m->wy + ty, m->ww - mw - (2*c->bw) - 2*m->gappov*oe, h - (2*c->bw), 0);
++			ty += HEIGHT(c) + m->gappih*ie;
+ 		}
+ }
+ 
+@@ -1782,6 +1886,10 @@
+ 	focus(NULL);
+ 	updateclientlist();
+ 	arrange(m);
++	if (c->switchtotag) {
++		Arg a = { .ui = c->switchtotag };
++		view(&a);
++	}
+ }
+ 
+ void
+@@ -2142,7 +2250,9 @@
+ 		die("pledge");
+ #endif /* __OpenBSD__ */
+ 	scan();
++	runAutostart();
+ 	run();
++	if(restart) execvp(argv[0], argv);
+ 	cleanup();
+ 	XCloseDisplay(dpy);
+ 	return EXIT_SUCCESS;

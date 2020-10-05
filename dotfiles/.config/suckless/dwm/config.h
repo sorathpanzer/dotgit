@@ -37,6 +37,7 @@ static const Rule rules[] = {
 	/* class      instance    title       tags mask     switchtotag    isfloating   monitor */
 	{ "Chromium",    	NULL,       NULL,       1,            1,             0,           -1 },
 	{ "st-256color",     	NULL,       NULL,       2,            1,             0,           -1 },
+	{ "Alacritty",     	NULL,       NULL,       2,            1,             0,           -1 },
 	{ "mpv",     		NULL,       NULL,       1 << 2,       1,             0,           -1 },
 	{ "Lxappearance",     	NULL,       NULL,       1 << 2,       0,             1,           -1 },
 	{ "Thunar",     	NULL,       NULL,       1 << 2,       1,             0,           -1 },
@@ -75,7 +76,7 @@ static const Layout layouts[] = {
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
-static const char *termcmd[]  = { "st", NULL };
+static const char *termcmd[]  = { "alacritty", NULL };
 static const char *shutcmd[]  = { "systemctl", "poweroff", NULL };
 static const char *rebcmd[]  = { "systemctl", "reboot", NULL };
 
@@ -135,7 +136,7 @@ static Key keys[] = {
   	{ MODKEY,                 XK_minus,  	   spawn,          SHCMD ("pactl set-sink-volume alsa_output.pci-0000_00_1f.3.analog-stereo -10%") },
   	{ MODKEY,                 XK_m, 	   spawn,          SHCMD ("pamixer -t ") },
 	{ MODKEY,        	  XK_1,      	   spawn,          CMD("xdo activate -N Chromium || chromium") },
-	{ MODKEY,        	  XK_2,      	   spawn,          CMD("xdo activate -N st-256color || st") },
+	{ MODKEY,        	  XK_2,      	   spawn,          CMD("xdo activate -N Alacritty || alacritty") },
 	TAGKEYS(                  XK_1,            0)
 	TAGKEYS(                  XK_2,            1)
 	TAGKEYS(                  XK_3,            2)
