@@ -2,31 +2,31 @@
             suppressPackageStartupMessages(library(doParallel))
             registerDoParallel(detectCores())
             
-            add.distribution(strategy.st,
-                             paramset.label = "EMA",
-                             component.type = "indicator",
-                             component.label = "nFast",
-                             variable = list(n = 0:8),
-                             label = "nFAST")
+#            add.distribution(strategy.st,
+#                             paramset.label = "EMA",
+#                             component.type = "indicator",
+#                             component.label = "nFast",
+#                             variable = list(n = 0:8),
+#                             label = "nFAST")
             
             add.distribution(strategy.st, 
                              paramset.label = "EMA",
                              component.type = "indicator", 
                              component.label = "nMed",
-                             variable = list(n = 0:30), 
+                             variable = list(n = 50:60), 
                              label = "nMED")
             
             add.distribution(strategy.st, 
                              paramset.label = "EMA",
                              component.type = "indicator", 
                              component.label = "nSlow",
-                             variable = list(n = 100:195), 
+                             variable = list(n = 100:110), 
                              label = "nSLOW")
             
             add.distribution.constraint(strategy.st,
                                         paramset.label = "EMA",
-                                        distribution.label.1 = "nFAST",
-                                        distribution.label.2 = "nMED",
+                                        distribution.label.1 = "nMED",
+                                        distribution.label.2 = "nSLOW",
                                         operator = "<",
                                         label = "EMA.Constraint")
             
@@ -36,17 +36,20 @@
                                       account.st = account.st)
             
             out <- profit_dat <- results$tradeStats %>%
-                select(nFAST, nMED, nSLOW, Portfolio, End.Equity) %>%
+                select(nMED, nSLOW, Portfolio, End.Equity) %>%
                 group_by(Portfolio) %>%
-                summarize(Fast = mean(nFAST),
-                          Med = mean(nMED),
+                summarize(Med = mean(nMED),
                           Slow = mean(nSLOW),
                           Profit = sum(End.Equity)) %>%
-                select(Fast, Med, Slow, Profit) %>%
+                select(Med, Slow, Profit) %>%
                 arrange(desc(Profit))
             
-            results$tradeStats
+            stats <- results$tradeStats[,c("nMED","nSLOW","Percent.Positive","Profit.Factor","Ann.Sharpe","Max.Drawdown","Max.Equity","Min.Equity","End.Equity")]
+            head(stats[order(-stats$End.Equity),])
             out
+            
+            plot(Profit ~ Med, data = profit_dat, main = "Profit vs. Med MA Window")
+            plot(Profit ~ Slow, data = profit_dat, main = "Profit vs. Slow MA Window")
     
             t2 <- Sys.time()
             print(t2-t1)

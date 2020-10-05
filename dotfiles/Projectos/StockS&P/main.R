@@ -5,8 +5,8 @@ library(magrittr)
 start_date <- as.Date("2008-01-03")
 dataEnv<-new.env()
 
-STOCK <- `XRX`
-SYMBOL <- c("XRX")
+STOCK <- `CAJ`
+SYMBOL <- c("CAJ")
 length(SYMBOL)
 
 #getSymbols(SYMBOL, from = start_date)
