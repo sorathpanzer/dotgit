@@ -27,20 +27,6 @@ PS1="%B%{$fg[red]%}[%{$fg[white]%}%n%{$fg[white]%}@%{$fg[white]%}%M %{$fg[blue]%
 #}
 
 #alias doas="doas --"
-alias gtr="cd ~/.local/share/Trash/files; ls -alF"
-alias gm="cd /media; ls -alF"
-alias gv="cd ~/Vídeos; ls -alf"
-alias gi="cd ~/Imagens; ls -alF"
-alias gw="cd ~/Imagens/Wallpapers; ls -alF"
-alias gd="cd ~/Documentos; ls -alF"
-alias gt="cd ~/Transferências; ls -alF"
-alias gb="cd ~/.local/bin; ls -alF"
-alias gg="cd ~/.config/dotgit; ls -alF"
-alias gc="cd ~/.config; ls -alF"
-alias gs="cd ~/.config/suckless; ls -alF"
-alias ge="cd /etc; ls"
-alias gu="cd /usr; ls"
-alias gus="cd /usr/share; ls"
 convert="convert -quality 100"
 alias nb="newsboat"
 alias cl="clear"
@@ -50,14 +36,8 @@ alias vm='nvim'
 alias vim='nvim'
 alias diff="diff --color"
 alias ap="absolutely-proprietary"
-alias compl="sudo make install clean; sudo make clean"
+alias cpl="sudo make install clean; sudo make clean"
 alias ls='ls --color --group-directories-first'
-alias nvlist='find -L $HOME -maxdepth 4 -type f ! -path "$HOME/.local/*" ! -path "$HOME/.cache/*" ! -path "$HOME/.*Brave*" \
-! -path "$HOME/.*/R/*" ! -path "$HOME/.*dotfiles/*" ! -path "$HOME/Projectos/r-backtester/.Rproj.user/*" \
-! -path "$HOME/.steam*" ! -path "$HOME/.cargo*" ! -path "$HOME/.config/coc/*" ! -path "$HOME/.*/nvim/autoload/*" ! -path "$HOME/.npm/*" | fzf --reverse'
-alias dlist='find -L $HOME -maxdepth 4 -type d ! -path "$HOME*/.local/*" ! -path "$HOME*/.cache/*" ! -path "$HOME*/Brave*" \
-! -path "$HOME*/.config/R/*" ! -path "$HOME*/.*dotfiles/*" ! -path "$HOME*/Projectos/r-backtester/.Rproj.user/*" \
-! -path "$HOME/.steam*" ! -path "$HOME/.cargo/*" ! -path "$HOME*/.config/coc/*" ! -path "$HOME*/.*/nvim/autoload/*" ! -path "$HOME/.npm/*" | fzf --reverse --header='Jump to location''
 alias paclog='pacman -Qiie | grep -iE "nome[ ]+:|Data da Instalação" | sed "s/.*: //" | tac | paste -d " " - - | sort -n --k 2'
 alias tr="transmission-remote -l | sed '/Sum/d'"
 alias dck="docker inspect -f \
@@ -72,19 +52,12 @@ calc()
 }
 alias calc='noglob calc'
 
-fl() {
-    res_nvlist=$(nvlist)
-    nvim $res_nvlist
-    echo "nvim $res_nvlist" >> $HISTFILE
+msd() {
+   sudo udisksctl unlock -b /dev/sda1
+   sudo udisksctl mount -b /dev/dm-1
+   cd /media/Vault
+   ls -alF
 }
-
-
-dr() {
-    res_dlist=$(dlist)
-    cd $res_dlist; ls -l | cut -d ">" -f 1 | sed 's/-$//'
-    echo "cd $res_dlist" >> $HISTFILE
-}
-
 
 xt () {
 	if [ -f $1 ] ; then

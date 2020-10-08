@@ -55,19 +55,6 @@ cmd sudomkfile ${{
 
 cmd setwallpaper %cp "$f" ~/.config/wall.png && nitrogen --set-scaled "$f"
 
-cmd fzf_jump ${{
-  res="$(find -L $HOME -maxdepth 4 -type d ! -path "$HOME*/.local/*" ! -path "$HOME*/.cache/*" ! -path "$HOME*/Brave*" \
-! -path "$HOME*/.config/R/*" ! -path "$HOME*/.*dotfiles/*" ! -path "$HOME*/Projectos/r-backtester/.Rproj.user/*" \
-! -path "$HOME*/.config/coc/*" ! -path "$HOME*/.*/nvim/autoload/*" ! -path "$HOME/.npm/*" | fzf --reverse --header='Jump to location')"
-#  res="$(find . -maxdepth 3 | fzf --reverse --header='Jump to location')"
-  if [ -f "$res" ]; then
-    cmd="select"
-  elif [ -d "$res" ]; then
-    cmd="cd"
-  fi
-  lf -remote "send $id $cmd \"$res\""
-}}
-
 cmd mtsda ${{
   clear
   sudo udisksctl unlock -b /dev/sda1
@@ -235,8 +222,6 @@ map dv viewtrash
 map ds size
 
 # Awesome Search
-map s fzf_jump
-map f fzf_jump
 map S stow
 
 # Basic Functions
