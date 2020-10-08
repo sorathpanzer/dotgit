@@ -1,5 +1,6 @@
 #!/usr/bin/zsh
 
+eval "$(zoxide init zsh)"
 export EDITOR="nvim"
 export TERMINAL="st"
 export VISUAL="nvim"
@@ -62,7 +63,8 @@ alias tr="transmission-remote -l | sed '/Sum/d'"
 alias dck="docker inspect -f \
 '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' \
 $1"
-
+alias cat="bat"
+alias za="zoxide add $1; cd $1"
 
 calc()
 {
