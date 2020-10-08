@@ -1,6 +1,5 @@
 #!/bin/bash
 
-#picom &
 udiskie &
 numlockx &
 hsetroot -solid black
