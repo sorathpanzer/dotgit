@@ -2,7 +2,6 @@
 
 udiskie &
 numlockx &
-hsetroot -solid black
 xrdb -load $HOME/.Xresources &
 xrandr --output "eDP-1" --brightness 0.70 &
 xinput --set-prop "SYNA2B46:00 06CB:CD5F Touchpad" "libinput Natural Scrolling Enabled" 1 &
@@ -28,14 +27,12 @@ case "$clock" in
 	"12") icon="🕛" ;;
 esac
 
-#date "+%Y %b %d (%a) $icon%I:%M%p"
 date +"$icon %a, %B %d %l:%M%p"| sed 's/  / /g'
 }
 
 mem(){
   mem=`free | awk '/Mem/ {printf "%d MiB\n", $3 / 1024.0, $2 / 1024.0 }'`
   echo -e "💻 $mem"
-picom &
 }
 
 battery(){
@@ -52,7 +49,6 @@ do
 	printf "%s%s%s%% " "$status" "$warn" "$capacity"
 	unset warn
 done | sed 's/ *$//'
-
 }
 
 updates(){
@@ -94,6 +90,6 @@ torrent(){
 }
 
 while true; do
-  xsetroot -name "$(torrent) < $(news) | $(updates) | $(mem) | $(temp) | $(disk) | $(battery) | $(clock)"
+  xsetroot -name "$(torrent) $(news) | $(updates) | $(mem) | $(temp) | $(disk) | $(battery) | $(clock)"
      sleep 60s    # Update time every ten seconds
 done &
