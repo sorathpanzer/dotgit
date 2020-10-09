@@ -2,7 +2,6 @@
 
 set preview true
 set previewer ~/.config/lf/preview
-set previewer pistol
 set hidden true
 set color256 true
 set drawbox true
@@ -14,7 +13,22 @@ set sortby ext
 # Custom Functions
 
 cmd bulkrename ${{
-    vidir
+    old=$(mktemp)
+    new=$(mktemp)
+    [ -n $fs ] && fs=$(ls)
+    printf "$fs\n" > $old
+    printf "$fs\n" > $new
+    $EDITOR $new
+    [ $(cat $new | wc -l) -ne $(cat $old | wc -l) ] && exit
+    paste $old $new | while read names; do
+        src=$(printf $names | cut -f1)
+        dst=$(printf $names | cut -f2)
+        [ $src = $dst ] && continue
+        [ -e $dst ] && continue
+        mv $src $dst
+    done
+    rm $old $new
+    lf -remote "send $id unselect"
 }}
 
 cmd open ${{
@@ -192,7 +206,11 @@ cmd vview ${{
   mpv *
 }}
 
-cmd q quit
+cmd logout ${{
+  printf '%s\n' "$PWD" > "$HOME/.config/lf/lf.d"
+  pkill lf
+}}
+
 
 # Bindings
 # Remove some defaults
@@ -234,7 +252,7 @@ map <enter> open
 map mf mkfile
 map mr sudomkfile
 map md mkdir
-map X chmod
+#map X chmod
 map bg setwallpaper
 map br bulkrename
 map r rename
@@ -249,6 +267,8 @@ map mtf mvtofold
 map o sxthumb
 map msd mtsda
 map V vview
+map Q logout
+cmd q quit
 
 # Movement
 map gtr cd ~/.local/share/Trash/files

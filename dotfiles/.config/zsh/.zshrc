@@ -1,6 +1,6 @@
 #!/usr/bin/zsh
 
-eval "$(zoxide init zsh)"
+eval "$(fasd --init posix-alias zsh-hook)"
 export EDITOR="nvim"
 export TERMINAL="st"
 export VISUAL="nvim"
@@ -43,14 +43,20 @@ alias tr="transmission-remote -l | sed '/Sum/d'"
 alias dck="docker inspect -f \
 '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' \
 $1"
-alias cat="bat"
-alias za="zoxide add $1; cd $1"
+alias v="f -e nvim"
 
 calc()
 {
    echo $* | bc
 }
 alias calc='noglob calc'
+
+fl() {
+    lf "$@"
+    cd "$(cat "$HOME/.config/lf/lf.d")"
+    echo " " > ~/.config/lf/lf.d
+}
+alias lf="fl"
 
 msd() {
    sudo udisksctl unlock -b /dev/sda1
