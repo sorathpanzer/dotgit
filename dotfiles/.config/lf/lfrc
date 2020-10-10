@@ -134,9 +134,6 @@ cmd trash ${{
 }}
 
 cmd clear_trash %trash-empty
-cmd sxthumb ${{
-    xdg-open "$f" & disown; sleep 0.15; /usr/bin/xdotool key --window "$(/usr/bin/xdotool search --name sxiv)" Return
-}}
 
 cmd restore_trash ${{
   trash-restore
@@ -211,6 +208,9 @@ cmd logout ${{
   pkill lf
 }}
 
+cmd fadd ${{
+  fasd -A $f
+}}
 
 # Bindings
 # Remove some defaults
@@ -252,7 +252,7 @@ map <enter> open
 map mf mkfile
 map mr sudomkfile
 map md mkdir
-#map X chmod
+map X chmod
 map bg setwallpaper
 map br bulkrename
 map r rename
@@ -264,14 +264,13 @@ map <esc> unselect
 map bi burniso
 map ctf cptofold
 map mtf mvtofold
-map o sxthumb
 map msd mtsda
 map V vview
+map A fadd
 map Q logout
 cmd q quit
 
 # Movement
-map gtr cd ~/.local/share/Trash/files
 map gm cd /media
 map gh cd ~/
 map gv cd ~/Vídeos
@@ -280,7 +279,7 @@ map gw cd ~/Imagens/Wallpapers
 map gd cd ~/Documentos
 map gt cd ~/Transferências
 map gb cd ~/.local/bin
-map gg cd ~/.config/dotgit
+map sw cd ~/.config/dotgit
 map gc cd ~/.config
 map gs cd ~/.config/suckless
 map ge cd /etc

@@ -54,7 +54,7 @@ alias calc='noglob calc'
 fl() {
     lf "$@"
     cd "$(cat "$HOME/.config/lf/lf.d")"
-    echo " " > ~/.config/lf/lf.d
+    echo "./" > ~/.config/lf/lf.d
 }
 alias lf="fl"
 
