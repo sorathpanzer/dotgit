@@ -27,7 +27,8 @@ PS1="%B%{$fg[red]%}[%{$fg[white]%}%n%{$fg[white]%}@%{$fg[white]%}%M %{$fg[blue]%
 #}
 
 #alias doas="doas --"
-convert="convert -quality 100"
+alias sc="sc-im"
+alias convert="convert -quality 100"
 alias nb="newsboat"
 alias cl="clear"
 alias lg="cd $HOME/.config/dotgit; lazygit; cd -"

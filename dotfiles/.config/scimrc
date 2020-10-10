@@ -1,0 +1,3 @@
+color "type=NUMB bold=0 fg=GREEN bg=BLACK"
+color "type=CELL_NEGATIVE bold=0 fg=RED bg=BLACK"
+color "type=HEADINGS bold=0 fg=WHITE bg=BLACK"
