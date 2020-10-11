@@ -46,6 +46,10 @@ alias dck="docker inspect -f \
 $1"
 alias v="f -e nvim"
 
+g() {
+  z $1
+  ls
+}
 calc()
 {
    echo $* | bc

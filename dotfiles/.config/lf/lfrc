@@ -88,6 +88,7 @@ cmd autoratios &{{
                         lf -remote "send $id set ratios 1:5:6"
                         lf -remote "send $id set preview"
                     fi
+                    lf -remote "send reload"
                 }}
 autoratios # auto-run at start
 
@@ -212,6 +213,12 @@ cmd fadd ${{
   fasd -A $f
 }}
 
+cmd fasv ${{
+    xdg-open "$(fasd -fl $1)"
+}}
+
+cmd fasd %lf -remote "send $id cd '$(fasd -dl $1)'"
+
 # Bindings
 # Remove some defaults
 map m
@@ -224,13 +231,13 @@ map c
 map e
 map f
 
-# File Openers
-map ee $$EDITOR "$f"
-#map u $view "$f"
+map a fadd
+map t push :fasd<space>
+map e push :fasv<space>
 
 # Archive Mappings
-map ax extract
-map ac compress
+map - extract
+map + compress
 
 # Trash Mappings
 map dd trash
@@ -271,17 +278,12 @@ map Q logout
 cmd q quit
 
 # Movement
-map gm cd /media
+map gm cd /media/Vault
 map gh cd ~/
 map gv cd ~/Vídeos
 map gi cd ~/Imagens
 map gw cd ~/Imagens/Wallpapers
 map gd cd ~/Documentos
 map gt cd ~/Transferências
-map gb cd ~/.local/bin
-map sw cd ~/.config/dotgit
+map gs cd ~/.config/dotgit
 map gc cd ~/.config
-map gs cd ~/.config/suckless
-map ge cd /etc
-map gu cd /usr
-map gus cd /usr/share
