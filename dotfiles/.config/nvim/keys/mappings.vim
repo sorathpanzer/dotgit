@@ -42,8 +42,11 @@ else
   " SHIFT-TAB will go back
   nnoremap <silent> <S-TAB> :bprevious<CR>
 
+  " Find & Replace Globally
+  :nnoremap <C-s> :%s/\<<C-r><C-w>\>//g<Left><Left>
+
   " Alternate way to save
-  nnoremap <silent> <C-s> :w<CR>
+  " nnoremap <silent> <C-s> :w<CR>
   " Alternate way to quit
   nnoremap <silent> <C-Q> :wq!<CR>
   " Use control-c instead of escape

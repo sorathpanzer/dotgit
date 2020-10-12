@@ -233,7 +233,7 @@ map f
 
 map a fadd
 map t push :fasd<space>
-map e push :fasv<space>
+map o push :fasv<space>
 
 # Archive Mappings
 map - extract

@@ -42,6 +42,7 @@ let g:which_key_map['T'] = [ ':Rg'                        , 'search text' ]
 let g:which_key_map['v'] = [ '<C-W>v'                     , 'split right']
 let g:which_key_map['W'] = [ 'w'                          , 'write' ]
 let g:which_key_map['g'] = [ 'Goyo'                       , 'goyo' ]
+let g:which_key_map['c'] = [ ':Git commit'                , 'commit' ]
 
 " Group mappings
 
@@ -111,8 +112,8 @@ let g:which_key_map.g = {
       \ 'c' : [':Git commit'                       , 'commit'],
       \ 'd' : [':Git diff'                         , 'diff'],
       \ 'D' : [':Gdiffsplit'                       , 'diff split'],
-      \ 'g' : [':GGrep'                            , 'git grep'],
-      \ 'G' : [':Gstatus'                          , 'status'],
+      \ 'G' : [':GGrep'                            , 'git grep'],
+      \ 'g' : [':Gstatus'                          , 'status'],
       \ 'h' : [':GitGutterLineHighlightsToggle'    , 'highlight hunks'],
       \ 'H' : ['<Plug>(GitGutterPreviewHunk)'      , 'preview hunk'],
       \ 'j' : ['<Plug>(GitGutterNextHunk)'         , 'next hunk'],
