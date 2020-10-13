@@ -73,6 +73,12 @@ cmd mtsda ${{
   clear
   sudo udisksctl unlock -b /dev/sda1
   sudo udisksctl mount -b /dev/dm-1
+  lf -remote "send $id cd /media/Vault"
+}}
+
+cmd pac ${{
+    cd /var/cache/pacman/pkg
+    sudo pacman -U $(ls -p | grep -v / | fzf)
 }}
 
 # dynamically set number of columns
@@ -231,6 +237,7 @@ map c
 map e
 map f
 
+map i pac
 map a fadd
 map t push :fasd<space>
 map o push :fasv<space>
