@@ -36,5 +36,5 @@ map R rotate
 map K zoom in
 map J zoom out
 map i recolor
-set recolor                     true
+#set recolor                     true
 map p print

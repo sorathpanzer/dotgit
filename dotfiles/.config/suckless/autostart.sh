@@ -8,6 +8,14 @@ xinput --set-prop "SYNA2B46:00 06CB:CD5F Touchpad" "libinput Natural Scrolling E
 pactl set-sink-volume alsa_output.pci-0000_00_1f.3.analog-stereo 150% &
 /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
 
+#docker run -d \
+#        -v nextcloud:/var/www/html \
+#        -v apps:/var/www/html/custom_apps \
+#        -v config:/var/www/html/config \
+#        -v data:/var/www/html/data \
+#        -p 8080:80 \
+#nextcloud &
+
 clock() {
   clock=$(date '+%I')
 

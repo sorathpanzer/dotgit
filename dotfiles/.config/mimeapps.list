@@ -15,3 +15,5 @@ image/gif=sxiv.desktop
 application/x-shellscript=org.gnome.gedit.desktop
 x-scheme-handler/magnet=torrent.desktop;
 application/x-bittorrent=torrent.desktop;
+x-scheme-handler/geo=chromium.desktop
+application/pdf=org.pwmt.zathura-pdf-mupdf.desktop
