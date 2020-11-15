@@ -1,10 +1,8 @@
 #!/usr/bin/zsh
 
-eval "$(fasd --init posix-alias zsh-hook)"
 export EDITOR="nvim"
 export TERMINAL="st"
 export VISUAL="nvim"
-#PATH="$PATH:$HOME/.local/bin"
 
 setopt hist_ignore_dups
 setopt hist_ignore_space
@@ -20,36 +18,35 @@ autoload -U colors && colors
 setopt PROMPT_SUBST
 PS1="%B%{$fg[red]%}[%{$fg[white]%}%n%{$fg[white]%}@%{$fg[white]%}%M %{$fg[blue]%}%~%{$fg[red]%}]%{$reset_color%} λ%b "
 
-#RPROMPT='[%D{%a %d %b %Y %H:%M}]'
-#TMOUT=1
-#TRAPALRM() {
-#    zle reset-prompt
-#}
-
 #alias doas="doas --"
+alias ls="exa --icons -a --group-directories-first"
 alias sc="sc-im"
 alias convert="convert -quality 100"
 alias nb="newsboat"
 alias cl="clear"
 alias lg="cd $HOME/.config/dotgit; lazygit; cd -"
 alias vfm="$HOME/.config/vifm/scripts/vifmrun"
-alias vm='nvim'
 alias vim='nvim'
 alias diff="diff --color"
 alias ap="absolutely-proprietary"
-alias cpl="sudo make install clean; sudo make clean"
-alias ls='ls --color --group-directories-first'
+alias mk="sudo make install clean; sudo make clean"
+#alias ls='ls --color --group-directories-first'
 alias paclog='pacman -Qiie | grep -iE "nome[ ]+:|Data da Instalação" | sed "s/.*: //" | tac | paste -d " " - - | sort -n --k 2'
 alias tr="transmission-remote -l | sed '/Sum/d'"
 alias dck="docker inspect -f \
 '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' \
 $1"
-alias v="f -e nvim"
 
-g() {
-  z $1
-  ls
+o()
+{
+  nvim $(find -L $HOME -maxdepth 4 -type f | fzf)
 }
+
+g()
+{
+  cd $(find -L $HOME -maxdepth 4 -type d | fzf)
+}
+
 calc()
 {
    echo $* | bc
@@ -140,11 +137,13 @@ bindkey "\e[3~" delete-char
 
 bindkey -s '^g' 'lgit\n'
 bindkey '^v' edit-command-line
-bindkey -s '^f' 'fl\n'
-bindkey -s '^d' 'dr\n'
+bindkey -s '<<' 'g\n'
+bindkey -s '<z' 'o\n'
+bindkey -s '++' 'ls\n'
 
 # Load zsh-syntax-highlighting; should be last.
+export FZF_DEFAULT_OPTS='-e -i --height 40% --layout=reverse --border'
+source ~/.config/zsh/fzf.zsh
 source ~/.config/zsh/unicode.zsh
-source ~/.config/zsh/goto.sh
 source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh 2>/dev/null
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh 2>/dev/null
