@@ -4,8 +4,8 @@ application/x-bittorrent=torrent.desktop;
 x-scheme-handler/sms=org.gnome.Shell.Extensions.GSConnect.desktop;
 x-scheme-handler/tel=org.gnome.Shell.Extensions.GSConnect.desktop;
 image/jpeg=gimp.desktop;org.gnome.eog.desktop;
-application/x-shellscript=org.gnome.gedit.desktop;
-text/plain=org.gnome.gedit.desktop;
+application/x-shellscript=nvim.desktop;
+text/plain=nvim.desktop;
 
 [Default Applications]
 image/jpeg=sxiv.desktop
