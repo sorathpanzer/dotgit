@@ -8,7 +8,7 @@ endif
 
 call plug#begin('~/.config/nvim/autoload/plugged')
   " Intellisense
-  Plug 'neoclide/coc.nvim', {'branch': 'release'}
+  "Plug 'neoclide/coc.nvim', {'branch': 'release'}
   " Better escape
   Plug 'zhou13/vim-easyescape'
   "Change dates fast
