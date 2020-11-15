@@ -215,15 +215,13 @@ cmd logout ${{
   pkill lf
 }}
 
-cmd fadd ${{
-  fasd -A $f
+cmd gf ${{
+    nvim "$(find -L $HOME -maxdepth 4 -type f | fzf)"
 }}
 
-cmd fasv ${{
-    xdg-open "$(fasd -fl $1)"
+cmd gd ${{
+    lf -remote "send $id cd '$(find -L $HOME -maxdepth 4 -type d | fzf)'"
 }}
-
-cmd fasd %lf -remote "send $id cd '$(fasd -dl $1)'"
 
 # Bindings
 # Remove some defaults
@@ -238,9 +236,8 @@ map e
 map f
 
 map i pac
-map a fadd
-map t push :fasd<space>
-map o push :fasv<space>
+map t gd
+map o gf
 
 # Archive Mappings
 map - extract
@@ -280,7 +277,6 @@ map ctf cptofold
 map mtf mvtofold
 map msd mtsda
 map V vview
-map A fadd
 map Q logout
 cmd q quit
 
