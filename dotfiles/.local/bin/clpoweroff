@@ -1,0 +1,9 @@
+#!/bin/bash
+
+windows=$(wmctrl -lx | awk  '{ print $3 }' | cut -d'.' -f1)
+
+for i in $windows; do
+  xdotool search --class $i windowkill
+done
+
+systemctl poweroff

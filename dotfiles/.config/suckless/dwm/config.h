@@ -79,8 +79,8 @@ static const Layout layouts[] = {
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
 static const char *termcmd[]  = { "alacritty", NULL };
-static const char *shutcmd[]  = { "systemctl", "poweroff", NULL };
-static const char *rebcmd[]  = { "systemctl", "reboot", NULL };
+static const char *shutcmd[]  = { "clpoweroff", NULL };
+static const char *rebcmd[]  = { "clpoweroff", NULL };
 
 static Key keys[] = {
 	/* modifier               key              function        argument */
@@ -108,7 +108,7 @@ static Key keys[] = {
 	{ MODKEY,                 XK_period,      focusmon,       {.i = +1 } },
 	{ MODKEY|ShiftMask,       XK_comma,       tagmon,         {.i = -1 } },
 	{ MODKEY|ShiftMask,       XK_period,      tagmon,         {.i = +1 } },
-	{ MODKEY,       	  			XK_Delete,	   	quit,	   {0} },
+	{ MODKEY,       	  			XK_Delete,	   	quit,	   				{0} },
 	{ MODKEY|ShiftMask, 	  	XK_r,      	   	quit,           {1} },
 	{ MODKEY,                 XK_i,      	   	incnmaster,     {.i = +1 } },
   { MODKEY,           			XK_d,      	   	incnmaster,     {.i = -1 } },
@@ -138,8 +138,9 @@ static Key keys[] = {
   { MODKEY,           XK_plus,   	  spawn,          SHCMD ("pactl set-sink-volume alsa_output.pci-0000_00_1f.3.analog-stereo +10%") },
   { MODKEY,           XK_minus,  	  spawn,          SHCMD ("pactl set-sink-volume alsa_output.pci-0000_00_1f.3.analog-stereo -10%") },
   { MODKEY,           XK_m, 	   		spawn,          SHCMD ("pamixer -t ") },
-	{ MODKEY,        	 	XK_1,      	  spawn,          CMD("xdo activate -N Chromium || chromium") },
-	{ MODKEY,        	  XK_2,      	  spawn,          CMD("xdo activate -N Alacritty || alacritty") },
+  { MODKEY,           XK_c, 	   		spawn,          SHCMD ("xdotool search --class $(wmctrl -lx | awk  '{ print $3 }' | cut -d'.' -f1 | dmenu $@) windowkill") },
+	{ MODKEY,        	 	XK_1,      	  spawn,          CMD("xdotool search --class Chromium windowactivate || chromium") },
+	{ MODKEY,        	  XK_2,      	  spawn,          CMD("xdotool search --class Alacritty windowactivate || alacritty") },
 	TAGKEYS(            XK_1,            0)
 	TAGKEYS(            XK_2,            1)
 	TAGKEYS(            XK_3,            2)
