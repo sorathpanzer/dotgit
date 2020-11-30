@@ -21,6 +21,7 @@ PS1="%B%{$fg[red]%}[%{$fg[white]%}%n%{$fg[white]%}@%{$fg[white]%}%M %{$fg[blue]%
 #alias doas="doas --"
 alias ls="exa --icons -a --group-directories-first"
 alias fzf="fzf -m"
+alias mpv="mpv --loop"
 alias sc="sc-im"
 alias convert="convert -quality 100"
 alias nb="newsboat"
