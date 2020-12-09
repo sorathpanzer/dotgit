@@ -19,6 +19,7 @@ setopt PROMPT_SUBST
 PS1="%B%{$fg[red]%}[%{$fg[white]%}%n%{$fg[white]%}@%{$fg[white]%}%M %{$fg[blue]%}%~%{$fg[red]%}]%{$reset_color%} λ%b "
 
 #alias doas="doas --"
+alias visudo="sudo EDITOR=vim visudo"
 alias ls="exa --icons -a --group-directories-first"
 alias fzf="fzf -m"
 alias mpv="mpv --loop"
@@ -142,6 +143,7 @@ bindkey '^v' edit-command-line
 bindkey -s '<<' 'g\n'
 bindkey -s '<z' 'o\n'
 bindkey -s '++' 'ls\n'
+bindkey -s "^t" 'msd\n'
 
 # Load zsh-syntax-highlighting; should be last.
 export FZF_DEFAULT_OPTS='-e -i --height 40% --layout=reverse --border'
