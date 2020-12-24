@@ -39,6 +39,7 @@ alias tr="transmission-remote -l | sed '/Sum/d'"
 alias dck="docker inspect -f \
 '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' \
 $1"
+alias imgrm="sxiv -r -q -o * | xargs rm"
 
 o()
 {
