@@ -76,6 +76,12 @@ cmd mtsda ${{
   lf -remote "send $id cd /media/Vault"
 }}
 
+cmd usb ${{
+  clear
+  udisksctl mount -b /dev/sdb
+  lf -remote "send $id cd /media/sdb"
+}}
+
 cmd pac ${{
     cd /var/cache/pacman/pkg
     sudo pacman -U $(ls -p | grep -v / | fzf)
@@ -234,10 +240,12 @@ map d
 map c
 map e
 map f
+map u
 
 map i pac
 map t gd
 map o gf
+map usb usb
 
 # Archive Mappings
 map - extract
