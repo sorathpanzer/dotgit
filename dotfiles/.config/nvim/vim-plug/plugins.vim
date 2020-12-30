@@ -28,6 +28,8 @@ call plug#begin('~/.config/nvim/autoload/plugged')
   Plug 'airblade/vim-rooter'
   " auto set indent settings
   Plug 'tpope/vim-sleuth'
+  " Sudo in Neovim
+  Plug 'lambdalisue/suda.vim'
 
   if exists('g:vscode')
     " Easy motion for VSCode
