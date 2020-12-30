@@ -1,19 +1,15 @@
 #!/bin/sh
 
 cachedir=$HOME/.cache/redyt
-limit=250
+limit=100
 
-#curl -H "User-agent: 'your bot 0.1'" https://www.reddit.com/r/$subreddit/hot.json?limit=$limit > $cachedir/tmp.json &&
-
-curl -H "User-agent: 'your bot 0.1'" https://www.reddit.com/user/sorathpanzer/m/unixwms/new.json?limit=$limit > $cachedir/tmp.json &&
-imgs=$(cat $cachedir/tmp.json | jq '.' | grep url_overridden_by_dest | grep -Eo "https://.*(jpg|png)\b")
-curl -H "User-agent: 'your bot 0.1'" https://www.reddit.com/user/sorathpanzer/m/funny/new.json?limit=$limit > $cachedir/tmp2.json &&
-imgs2=$(cat $cachedir/tmp2.json | jq '.' | grep url_overridden_by_dest | grep -Eo "https://.*(jpg|png)\b")
+subreddit=$(cat ~/.config/redyt/subreddit.txt | fzf)
+curl -H "User-agent: 'your bot 0.1'" https://www.reddit.com/r/$subreddit/hot.json?limit=$limit > $cachedir/tmp.json &&
+imgs=$(cat $cachedir/tmp.json | jq '.' | grep url_overridden_by_dest | grep -Eo "https://.*(gif|jpg|png)\b")
 
 wget -P $cachedir $imgs
-wget -P $cachedir $imgs2
 
-sxiv -a $cachedir/*png $cachedir/*jpg
+sxiv -a $cachedir/*png $cachedir/*jpg $cachedir/*gif
 
 rm $cachedir/*jpg
 rm $cachedir/*png
