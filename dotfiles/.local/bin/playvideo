@@ -1,4 +1,4 @@
 #!/bin/bash
 
-xdotool search --name chromium windowactivate %1 && sleep 0.3s && xdotool key Tab F6 ctrl+c
+xdotool search --name chromium windowactivate %1 && sleep 0.4s && xdotool key Tab F6 ctrl+c
 mpv --loop "$(xclip -o)"
