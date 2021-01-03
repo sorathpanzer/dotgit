@@ -54,7 +54,7 @@ done | sed 's/ *$//'
 }
 
 updates(){
-  PMUPDATES=$(checkupdates | wc -l)
+  PMUPDATES=$(sudo pacman -Qu | wc -l)
   echo -e "📦 $PMUPDATES"
 }
 
