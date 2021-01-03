@@ -287,6 +287,9 @@ map msd mtsda
 map V vview
 map Q logout
 cmd q quit
+map <c-space> :glob-select *
+map <c-u> :glob-unselect *
+map <c-s> push :glob-select<space>*.
 
 # Movement
 map gm cd /media/Vault
@@ -297,4 +300,6 @@ map gw cd ~/Imagens/Wallpapers
 map gd cd ~/Documentos
 map gt cd ~/Transferências
 map gs cd ~/.config/dotgit
-map gc cd ~/.config
+map g.c cd ~/.config
+map g.l cd ~/.local
+
