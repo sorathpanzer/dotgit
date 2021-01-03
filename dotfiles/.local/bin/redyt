@@ -10,7 +10,7 @@ limit=100
 #wget -P $cachedir $imgs
 
 while IFS= read -r line; do
-  curl -H "User-agent: 'your bot 0.1'" https://www.reddit.com/r/$line/hot.json?limit=$limit > $cachedir/tmp.json &&
+  curl -H "User-agent: 'your bot 0.1'" https://www.reddit.com/r/$line/best.json?limit=$limit > $cachedir/tmp.json &&
   imgs=$(cat $cachedir/tmp.json | jq '.' | grep url_overridden_by_dest | grep -Eo "https://.*(gif|jpg|png)\b")
 
   wget -P $cachedir $imgs
@@ -23,3 +23,4 @@ rm $cachedir/*png
 rm $cachedir/*gif
 rm $cachedir/*json
 rm $cachedir/*.1
+trash-empty
