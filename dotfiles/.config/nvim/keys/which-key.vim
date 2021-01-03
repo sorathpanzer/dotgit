@@ -8,6 +8,8 @@ let g:which_key_map =  {}
 let g:which_key_sep = '→'
 " set timeoutlen=100
 
+"Vim-wiki
+let g:vimwiki_list = [{'auto_diary_index': 1}]
 
 " Not a fan of floating windows for this
 let g:which_key_use_floating_win = 0
@@ -147,11 +149,11 @@ let g:which_key_map.t = {
 " w is for wiki
 let g:which_key_map.w = {
       \ 'name' : '+wiki' ,
-      \ 'w' : ['<Plug>VimwikiIndex'                             , 'ncdu'],
-      \ 'n' : ['<plug>(wiki-open)'                              , 'ncdu'],
-      \ 'j' : ['<plug>(wiki-journal)'                           , 'ncdu'],
-      \ 'R' : ['<plug>(wiki-reload)'                            , 'ncdu'],
-      \ 'c' : ['<plug>(wiki-code-run)'                          , 'ncdu'],
+      \ 'w' : ['<Plug>VimwikiIndex'                             , 'Index'],
+      \ 'n' : ['<plug>(wiki-open)'                              , 'Open'],
+      \ 'j' : ['<plug>(wiki-journal)'                           , 'Journal'],
+      \ 'R' : ['<plug>(wiki-reload)'                            , 'Reload'],
+      \ 'c' : ['<plug>(wiki-code-run)'                          , 'Coderunner'],
       \ 'b' : ['<plug>(wiki-graph-find-backlinks)'              , 'ncdu'],
       \ 'g' : ['<plug>(wiki-graph-in)'                          , 'ncdu'],
       \ 'G' : ['<plug>(wiki-graph-out)'                         , 'ncdu'],

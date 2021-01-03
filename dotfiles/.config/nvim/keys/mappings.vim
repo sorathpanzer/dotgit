@@ -43,7 +43,11 @@ else
   nnoremap <silent> <S-TAB> :bprevious<CR>
 
   " Find & Replace Globally
-  :nnoremap <C-s> :%s/\<<C-r><C-w>\>//g<Left><Left>
+  :nnoremap <C-S-s> :%s/\<<C-r><C-w>\>//g<Left><Left>
+  :nnoremap <C-s> :VimwikiSearch<Space>
+  :nmap <C-n> :lnext<CR>
+  :nmap <C-p> :lprevious<CR>
+  :nmap <C-o> :lopen<CR>
 
   " Alternate way to save
   " nnoremap <silent> <C-s> :w<CR>
