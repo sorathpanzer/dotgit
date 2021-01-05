@@ -42,13 +42,6 @@ else
   " SHIFT-TAB will go back
   nnoremap <silent> <S-TAB> :bprevious<CR>
 
-  " Find & Replace Globally
-  :nnoremap <C-S-s> :%s/\<<C-r><C-w>\>//g<Left><Left>
-  :nnoremap <C-s> :VimwikiSearch<Space>
-  :nmap <C-n> :lnext<CR>
-  :nmap <C-p> :lprevious<CR>
-  :nmap <C-o> :lopen<CR>
-
   " Alternate way to save
   " nnoremap <silent> <C-s> :w<CR>
   " Alternate way to quit
@@ -89,3 +82,13 @@ else
   nnoremap <silent> <M-l>    :vertical resize +2<CR>
 endif
 
+iab <expr> dts strftime("%c")
+nnoremap <silent> <C-d> "=strftime("%c")<CR>P
+
+" Find & Replace Globally
+  :nnoremap <C-S-s> :%s/\<<C-r><C-w>\>//g<Left><Left>
+  :nnoremap <C-f> :VimwikiSearch<Space>
+  :nmap <C-n> :lnext<CR>
+  :nmap <C-p> :lprevious<CR>
+  :nmap <C-o> :lopen<CR>
+  :nmap <C-c> :lclose<CR>

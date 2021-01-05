@@ -40,6 +40,8 @@ alias dck="docker inspect -f \
 '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' \
 $1"
 alias imgrm="sxiv -r -q -o * | xargs rm"
+alias vwiki="nvim -c ':VimwikiIndex'"
+alias vnote="nvim -c ':VimwikiDiaryIndex'"
 
 o()
 {
