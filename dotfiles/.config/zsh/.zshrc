@@ -29,7 +29,7 @@ alias nb="newsboat"
 alias cl="clear"
 alias lg="cd $HOME/.config/dotgit; lazygit; cd -"
 alias vfm="$HOME/.config/vifm/scripts/vifmrun"
-alias vim='nvim'
+alias vim="nvim -c ':set showtabline=1'"
 alias diff="diff --color"
 alias ap="absolutely-proprietary"
 alias mk="sudo make install clean; sudo make clean"
@@ -40,8 +40,25 @@ alias dck="docker inspect -f \
 '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' \
 $1"
 alias imgrm="sxiv -r -q -o * | xargs rm"
-alias vwiki="nvim -c ':VimwikiIndex'"
+alias vwiki="cd $HOME/Documentos/wiki; nvim -c ':VimwikiIndex' -c ':set showtabline=1'; cd -"
 alias vnote="nvim -c ':VimwikiDiaryIndex'"
+alias readable="readable -l force -p text-content"
+
+#myip - finds your current IP if your connected to the internet
+myip() {
+	lynx -dump -hiddenlinks=ignore -nolist http://checkip.dyndns.org:8245/ | awk '{ print $4 }' | sed '/^$/d; s/^[ ]*//g; s/[ ]*$//g'
+}
+
+ft() { cd $HOME/Documentos/wiki; ${EDITOR:-vim} $(rg -i -n $1 | fzf --layout=reverse --height 50% --ansi | sed -E 's/(.*):([0-9]+):.*/\1 +\2/g'); }
+
+# Calculator
+calc() { echo "scale=5;$*" | bc -l; }
+
+# mkdir and cd in one command
+mcd() {
+	mkdir -p -- "$1" &&
+		cd -P -- "$1" || return
+	}
 
 o()
 {
@@ -52,12 +69,6 @@ g()
 {
   cd $(find -L $HOME -maxdepth 4 -type d | fzf)
 }
-
-calc()
-{
-   echo $* | bc
-}
-alias calc='noglob calc'
 
 fl() {
     lf "$@"
