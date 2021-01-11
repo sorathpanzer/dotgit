@@ -108,7 +108,7 @@ autoratios # auto-run at start
 cmd extract ${{
   case "$f" in
       *.zip) unzip "$f" ;;
-      *.tar.bz|*.tar.bz2|*.tbz|*.tbz2) $s tar xjvf "$f";;
+      *.tar.bz|*.tar.bz2|*.tbz|*.tbz2) tar xjvf "$f";;
       *.tar.zst) tar -I zstd -xvf "$f" ;;
       *.tar.gz|*.tgz) tar -xzvf "$f" ;;
       *.tar) tar -xvf "$f" ;;
