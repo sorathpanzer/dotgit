@@ -39,8 +39,40 @@ else
   luafile $HOME/.config/nvim/lua/plug-colorizer.lua
 endif
 
+"open auto VimwikiSearch
 augroup quickfix
     autocmd!
     autocmd QuickFixCmdPost [^l]* nested cwindow
     autocmd QuickFixCmdPost    l* nested lwindow
 augroup END
+
+"copy content of a url into vim
+function Webshare()
+  execute ':read !echo "Source: $(xclip -selection c -o)\n" & readable -l force -p text-content $(xclip -selection c -o)'
+  call feedkeys("ggdd2j2dd")
+endfunction
+
+"Hide tabline toggle
+let s:hidden_all = 0
+function! ToggleHiddenAll()
+    if s:hidden_all  == 0
+        let s:hidden_all = 1
+        set noshowmode
+        set noruler
+        set laststatus=0
+        set noshowcmd
+    else
+        let s:hidden_all = 0
+        set showmode
+        set ruler
+        set laststatus=2
+        set showcmd
+    endif
+endfunction
+
+nnoremap <silent> <S-h> :call ToggleHiddenAll()<CR>
+nnoremap <silent> <C-h> :set showtabline=2<CR>
+
+"Disable spell check in markdown
+autocmd BufRead,BufNewFile {*.markdown,*.mdown,*.mkdn,*.md,*.mkd,*.mdwn,*.mdtxt,*.mdtext,*.text} set filetype=markdown
+autocmd FileType markdown setlocal nospell

@@ -37,13 +37,15 @@ let g:which_key_map['d'] = [ ':bd'                        , 'delete buffer']
 let g:which_key_map['e'] = [ ':CocCommand explorer'       , 'explorer' ]
 let g:which_key_map['f'] = [ ':Files'                     , 'search files' ]
 let g:which_key_map['h'] = [ '<C-W>s'                     , 'split below']
-let g:which_key_map['q'] = [ 'q'                          , 'quit' ]
 let g:which_key_map['S'] = [ ':SSave'                     , 'save session' ]
-let g:which_key_map['T'] = [ ':Rg'                        , 'search text' ]
+let g:which_key_map['+'] = [ ':Rg!'                        , 'search text' ]
 let g:which_key_map['v'] = [ '<C-W>v'                     , 'split right']
 let g:which_key_map['W'] = [ 'w'                          , 'write' ]
 let g:which_key_map['r'] = [ 'Goyo'                       , 'goyo' ]
 let g:which_key_map['c'] = [ ':Git commit'                , 'commit' ]
+let g:which_key_map['n'] = [ ':bn'                        , 'next tab' ]
+let g:which_key_map['p'] = [ ':bp'                        , 'previous tab' ]
+let g:which_key_map['q'] = [ ':bd'                        , 'quit tab' ]
 
 " Group mappings
 

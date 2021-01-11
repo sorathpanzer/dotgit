@@ -14,7 +14,8 @@ if !exists('g:vscode')
   set splitbelow                          " Horizontal splits will automatically be below
   set splitright                          " Vertical splits will automatically be to the right
   set t_Co=256                            " Support 256 colors
-  set conceallevel=0                      " So that I can see `` in markdown files
+  set conceallevel=2                      " So that I can see `` in markdown files
+  set foldmethod=manual
   set tabstop=2                           " Insert 2 spaces for a tab
   set shiftwidth=2                        " Change the number of space characters inserted for indentation
   set smarttab                            " Makes tabbing smarter will realize you have 2 vs 4
@@ -25,7 +26,7 @@ if !exists('g:vscode')
   set number relativenumber                             " Line numbers
   set cursorline                          " Enable highlighting of the current line
   set background=dark                     " tell vim what the background color looks like
-  set showtabline=2                       " Always show tabs
+  set showtabline=1                       " Always show tabs
   set noshowmode                          " We don't need to see things like -- INSERT -- anymore
   set nobackup                            " This is recommended by coc
   set nowritebackup                       " This is recommended by coc

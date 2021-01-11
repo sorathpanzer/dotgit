@@ -1,7 +1,7 @@
-imap <C-h> <C-w>h
-imap <C-j> <C-w>j
-imap <C-k> <C-w>k
-imap <C-l> <C-w>l
+"imap <C-h> <C-w>h
+"imap <C-j> <C-w>j
+"imap <C-k> <C-w>k
+"imap <C-l> <C-w>l
 " g Leader key
 let mapleader=" "
 " let localleader=" "
@@ -26,13 +26,6 @@ xnoremap <leader>x :w !zsh<cr>
 vnoremap < <gv
 vnoremap > >gv
 
-if exists('g:vscode')
-
-" Simulate same TAB behavior in VSCode
-nmap <Tab> :Tabnext<CR>
-nmap <S-Tab> :Tabprev<CR>
-
-else
   " Better nav for omnicomplete
   inoremap <expr> <c-j> ("\<C-n>")
   inoremap <expr> <c-k> ("\<C-p>")
@@ -58,10 +51,10 @@ else
   nnoremap <C-S-Up> viwU<Esc><S-$>
 
   " Better window navigation
-  nnoremap <A-Left> <C-w>h
-  nnoremap <A-Down> <C-w>j
-  nnoremap <A-Up> <C-w>k
-  nnoremap <A-Right> <C-w>l
+nnoremap <A-Left> <C-w>h
+nnoremap <A-Down> <C-w>j
+nnoremap <A-Up> <C-w>k
+nnoremap <A-Right> <C-w>l
 
   " TerminalAwindow navigation
   tnoremap <A-Left> <C-\><C-N><C-w>h
@@ -80,15 +73,17 @@ else
   nnoremap <silent> <M-k>    :resize +2<CR>
   nnoremap <silent> <M-h>    :vertical resize -2<CR>
   nnoremap <silent> <M-l>    :vertical resize +2<CR>
-endif
 
 iab <expr> dts strftime("%c")
 nnoremap <silent> <C-d> "=strftime("%c")<CR>P
 
 " Find & Replace Globally
-  :nnoremap <C-S-s> :%s/\<<C-r><C-w>\>//g<Left><Left>
-  :nnoremap <C-f> :VimwikiSearch<Space>
-  :nmap <C-n> :lnext<CR>
-  :nmap <C-p> :lprevious<CR>
-  :nmap <C-o> :lopen<CR>
-  :nmap <C-c> :lclose<CR>
+ nnoremap <C-S-s> :%s/\<<C-r><C-w>\>//g<Left><Left>
+ nnoremap <C-f> :VimwikiSearch<Space>
+ nmap <C-n> :lnext<CR>
+ nmap <C-p> :lprevious<CR>
+ nmap <C-o> :lopen<CR>
+ nmap <C-c> :lclose<CR>
+
+nmap <C-l> :call Webshare()<CR>
+" nmap <C-l> :execute ':read !readable -l force -p text-content "'.input('Insert url: ').'"'<cr>
