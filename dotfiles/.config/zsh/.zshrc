@@ -16,7 +16,8 @@ setopt SHARE_HISTORY
 
 autoload -U colors && colors
 setopt PROMPT_SUBST
-PS1="%B%{$fg[red]%}[%{$fg[white]%}%n%{$fg[white]%}@%{$fg[white]%}%M %{$fg[blue]%}%~%{$fg[red]%}]%{$reset_color%} λ%b "
+#PS1="%B%{$fg[red]%}[%{$fg[white]%}%n%{$fg[white]%}@%{$fg[white]%}%M %{$fg[blue]%}%~%{$fg[red]%}]%{$reset_color%} λ%b "
+PS1="$fg[green]~$reset_color ⚡"
 
 #alias doas="doas --"
 alias visudo="sudo EDITOR=vim visudo"
