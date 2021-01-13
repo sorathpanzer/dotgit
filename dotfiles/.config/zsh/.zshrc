@@ -44,6 +44,7 @@ alias imgrm="sxiv -r -q -o * | xargs rm"
 alias vwiki="cd $HOME/Documentos/wiki; nvim -c ':VimwikiIndex' -c ':set showtabline=1'; cd -"
 alias vnote="nvim -c ':VimwikiDiaryIndex'"
 alias readable="readable -l force -p text-content"
+alias td="cat $HOME/Documentos/wiki/Personal/diary.md | rg TODO"
 
 #myip - finds your current IP if your connected to the internet
 myip() {

@@ -296,7 +296,7 @@ map gm cd /media/Vault
 map gh cd ~/
 map gv cd ~/Vídeos
 map gi cd ~/Imagens
-map gw cd ~/Imagens/Wallpapers
+map gw cd ~/Documentos/wiki
 map gd cd ~/Documentos
 map gt cd ~/Transferências
 map gs cd ~/.config/dotgit
