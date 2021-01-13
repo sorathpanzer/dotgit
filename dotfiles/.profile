@@ -14,3 +14,4 @@ export GOPATH="${XDG_DATA_HOME:-$HOME/.local/share}/go"
 
 PATH="$PATH:$HOME/.local/bin"
 PATH="$PATH:$HOME/.local/bin/transmission"
+PATH="$PATH:$HOME/.emacs.d/bin"
