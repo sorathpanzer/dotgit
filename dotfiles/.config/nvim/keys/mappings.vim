@@ -74,9 +74,6 @@ nnoremap <A-Right> <C-w>l
   nnoremap <silent> <M-h>    :vertical resize -2<CR>
   nnoremap <silent> <M-l>    :vertical resize +2<CR>
 
-iab <expr> dts strftime("%c")
-nnoremap <silent> <C-d> "=strftime("%c")<CR>P
-
 " Find & Replace Globally
  nnoremap <C-S-s> :%s/\<<C-r><C-w>\>//g<Left><Left>
  nnoremap <C-f> :VimwikiSearch<Space>
@@ -87,3 +84,9 @@ nnoremap <silent> <C-d> "=strftime("%c")<CR>P
 
 nmap <C-l> :call Webshare()<CR>
 " nmap <C-l> :execute ':read !readable -l force -p text-content "'.input('Insert url: ').'"'<cr>
+
+"Insert and modify date
+iab <expr> dts strftime("%c")
+nnoremap <silent> <C-d> "=strftime("%c")<CR>P
+nnoremap <silent> <F2>  0w<Left><c-a><S-$>
+nnoremap <silent> <F3>  0w<Left><c-x><S-$>
