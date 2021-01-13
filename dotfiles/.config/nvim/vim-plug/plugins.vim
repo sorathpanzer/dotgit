@@ -53,10 +53,9 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'alvan/vim-closetag'
     " Themes
     " Plug 'christianchiarulli/onedark.vim'
-    " Plug 'joshdick/onedark.vim'
-    " Plug 'kaicataldo/material.vim'
-    " Plug 'NLKNguyen/papercolor-theme'
-    " Plug 'tomasiser/vim-code-dark'
+    " Plug 'rakr/vim-one'
+    Plug 'arcticicestudio/nord-vim'
+    " Plug 'drewtempelmeyer/palenight.vim'
     " Status Line
     Plug 'vim-airline/vim-airline'
     " Plug 'vim-airline/vim-airline-themes'
