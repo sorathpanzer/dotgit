@@ -3,7 +3,7 @@
 set preview true
 set previewer ~/.config/lf/preview
 set hidden true
-set color256 true
+#set color256 true
 set drawbox true
 set icons true
 set ignorecase true
@@ -104,7 +104,18 @@ cmd autoratios &{{
                 }}
 autoratios # auto-run at start
 
-# Archive bindings
+# Better Archive
+cmd compress ${{
+    clear
+    set -f
+    printf "Archive Name: "
+    read name
+    mkdir $name
+    cp -r $fx $name
+    tar -I zstd -cvf "$name.tar.zst" $name
+    rm -r $name
+}}
+
 cmd extract ${{
   case "$f" in
       *.zip) unzip "$f" ;;
@@ -118,8 +129,6 @@ cmd extract ${{
       *) echo "Unsupported format" ;;
   esac
 }}
-
-cmd compress %tar -I zstd -cvf "$f.tar.zst" "$f"
 
 cmd burniso ${{
   clear
