@@ -9,6 +9,7 @@ pactl set-sink-volume alsa_output.pci-0000_00_1f.3.analog-stereo 150% &
 /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
 picom --config ~/.config/picom/picom.conf -b &
 hsetroot -solid "#000000" &
+emacs --daemon &
 
 clock() {
   clock=$(date '+%I')

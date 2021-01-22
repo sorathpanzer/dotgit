@@ -93,6 +93,7 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'ChristianChiarulli/codi.vim'
     " Vim Wiki
     Plug 'vimwiki/vimwiki'
+    Plug 'axvr/org.vim'
   endif
 
 

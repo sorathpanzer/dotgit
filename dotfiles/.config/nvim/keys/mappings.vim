@@ -90,3 +90,8 @@ iab <expr> dts strftime("%c")
 nnoremap <silent> <C-d> "=strftime("%c")<CR>P
 nnoremap <silent> <F2>  0w<Left><c-a><S-$>
 nnoremap <silent> <F3>  0w<Left><c-x><S-$>
+
+inoremap <F9> <C-O>za
+nnoremap <F9> za
+onoremap <F9> <C-C>za
+vnoremap <F9> zf
