@@ -48,6 +48,7 @@ static const Rule rules[] = {
 	{ "Steam",     	 	NULL,       NULL,       1 << 3,       1,             0,           -1 },
 	{ "RStudio",     	NULL,       NULL,       1 << 3,       1,             0,           -1 },
 	{ "libreoffice",  NULL,       NULL,       1 << 3,       1,             0,           -1 },
+	{ "libreoffice-calc",  NULL,       NULL,       1 << 3,       1,             0,           -1 },
 	{ "VirtualBox Manager", NULL,       NULL,       1 << 3,       1,             0,           -1 },
 };
 
