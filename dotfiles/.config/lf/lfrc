@@ -60,19 +60,19 @@ cmd chmod ${{
   done
 }}
 
-cmd sudomkfile ${{
+cmd doasmkfile ${{
   clear
   printf "File Name: "
   read ans
-  sudo $EDITOR $ans
+  doas $EDITOR $ans
 }}
 
 cmd setwallpaper %cp "$f" ~/.config/wall.png && nitrogen --set-scaled "$f"
 
 cmd mtsda ${{
   clear
-  sudo udisksctl unlock -b /dev/sda1
-  sudo udisksctl mount -b /dev/dm-1
+  doas udisksctl unlock -b /dev/sda1
+  doas udisksctl mount -b /dev/dm-1
   lf -remote "send $id cd /media/Vault"
 }}
 
@@ -84,7 +84,7 @@ cmd usb ${{
 
 cmd pac ${{
     cd /var/cache/pacman/pkg
-    sudo pacman -U $(ls -p | grep -v / | fzf)
+    doas pacman -U $(ls -p | grep -v / | fzf)
 }}
 
 # dynamically set number of columns
@@ -132,7 +132,7 @@ cmd extract ${{
 
 cmd burniso ${{
   clear
-  sudo dd if="$f" of=/dev/sdb
+  doas dd if="$f" of=/dev/sdb
 }}
 
 # Trash cli bindings
@@ -278,7 +278,7 @@ map Yf yank-basename
 map Yp yank-path
 map <enter> open
 map mf mkfile
-map mr sudomkfile
+map mr doasmkfile
 map md mkdir
 map X chmod
 map bg setwallpaper

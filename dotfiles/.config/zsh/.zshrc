@@ -20,6 +20,7 @@ setopt PROMPT_SUBST
 PS1="%{$fg[blue]%}%~$reset_color ⚡"
 
 #alias doas="doas --"
+#alias sudo="doas --"
 alias visudo="sudo EDITOR=vim visudo"
 alias ls="exa --icons -a --group-directories-first"
 alias fzf="fzf -m"
@@ -34,7 +35,6 @@ alias vim="nvim -c ':set showtabline=1'"
 alias diff="diff --color"
 alias ap="absolutely-proprietary"
 alias mk="sudo make install clean; sudo make clean"
-#alias ls='ls --color --group-directories-first'
 alias paclog='pacman -Qiie | grep -iE "nome[ ]+:|Data da Instalação" | sed "s/.*: //" | tac | paste -d " " - - | sort -n --k 2'
 alias tr="transmission-remote -l | sed '/Sum/d'"
 alias dck="docker inspect -f \
@@ -47,6 +47,7 @@ alias readable="readable -l force -p text-content"
 alias td="cat $HOME/Documentos/wiki/index.md | rg TODO"
 alias emacs="emacsclient -t"
 alias orgy="emacsclient -t $HOME/Documentos/orgwiki/index.org"
+alias pkg="paru"
 
 #myip - finds your current IP if your connected to the internet
 myip() {
