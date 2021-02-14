@@ -1,5 +1,5 @@
 #!/bin/bash
 
 PMUPDATES=$(pacman -Qu | wc -l)
-echo -e "📦$PMUPDATES"
+echo -e "📦 $PMUPDATES"
 

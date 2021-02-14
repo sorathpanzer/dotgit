@@ -48,6 +48,8 @@ alias td="cat $HOME/Documentos/wiki/index.md | rg TODO"
 alias emacs="emacsclient -t"
 alias orgy="emacsclient -t $HOME/Documentos/orgwiki/index.org"
 alias pkg="paru"
+alias off="xset -display :0.0 dpms force off"
+alias pacman="paru"
 
 #myip - finds your current IP if your connected to the internet
 myip() {
