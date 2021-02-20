@@ -71,8 +71,8 @@ cmd setwallpaper %cp "$f" ~/.config/wall.png && nitrogen --set-scaled "$f"
 
 cmd mtsda ${{
   clear
-  doas udisksctl unlock -b /dev/sda1
-  doas udisksctl mount -b /dev/dm-1
+  udisksctl unlock -b /dev/sda1
+  udisksctl mount -b /dev/dm-1
   lf -remote "send $id cd /media/Vault"
 }}
 

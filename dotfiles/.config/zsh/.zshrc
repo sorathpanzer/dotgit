@@ -21,7 +21,7 @@ PS1="%{$fg[blue]%}%~$reset_color ⚡"
 
 #alias doas="doas --"
 #alias sudo="doas --"
-alias visudo="sudo EDITOR=vim visudo"
+alias vim="nvim"
 alias ls="exa --icons -a --group-directories-first"
 alias fzf="fzf -m"
 alias mpv="mpv --loop"
@@ -50,6 +50,10 @@ alias orgy="emacsclient -t $HOME/Documentos/orgwiki/index.org"
 alias pkg="paru"
 alias off="xset -display :0.0 dpms force off"
 alias pacman="paru"
+alias rate='curl "eur.rate.sx/?n=25"'
+alias rateb='curl "btc.rate.sx/?n=25"'
+alias ratee='curl "eth.rate.sx/?n=25"'
+alias ratel='curl "ltc.rate.sx/?n=25"'
 
 #myip - finds your current IP if your connected to the internet
 myip() {
