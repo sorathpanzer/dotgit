@@ -124,6 +124,7 @@ cmd extract ${{
       *.tar.gz|*.tgz) tar -xzvf "$f" ;;
       *.tar) tar -xvf "$f" ;;
       *.tar.xz|*.txz) tar -xvf "$f" ;;
+      *.xz) xz --decompress "$f" ;;
       *.rar) unrar x $f ;;
       *.7z) 7z x $f ;;
       *) echo "Unsupported format" ;;
@@ -265,7 +266,7 @@ map dd trash
 map dc clear_trash
 map dr restore_trash
 map dv viewtrash
-map ds size
+map sv size
 
 # Awesome Search
 map S stow
