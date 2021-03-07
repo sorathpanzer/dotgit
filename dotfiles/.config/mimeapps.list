@@ -6,14 +6,17 @@ x-scheme-handler/tel=org.gnome.Shell.Extensions.GSConnect.desktop;
 image/jpeg=gimp.desktop;org.gnome.eog.desktop;
 application/x-shellscript=nvim.desktop;
 text/plain=nvim.desktop;
+x-scheme-handler/tg=userapp-Telegram Desktop-VO7GZ0.desktop;
 
 [Default Applications]
 image/jpeg=sxiv.desktop
 image/png=sxiv.desktop
 image/bmp=sxiv.desktop
 image/gif=sxiv.desktop
-application/x-shellscript=org.gnome.gedit.desktop
+application/x-shellscript=nvim.desktop
 x-scheme-handler/magnet=torrent.desktop;
 application/x-bittorrent=torrent.desktop;
 x-scheme-handler/geo=chromium.desktop
 application/pdf=org.pwmt.zathura-pdf-mupdf.desktop
+x-scheme-handler/tg=userapp-Telegram Desktop-VO7GZ0.desktop
+text/plain=nvim.desktop;
