@@ -49,11 +49,15 @@ alias emacs="emacsclient -t"
 alias orgy="emacsclient -t $HOME/Documentos/orgwiki/index.org"
 alias pkg="paru"
 alias off="xset -display :0.0 dpms force off"
-alias pacman="paru"
+alias pac="paru"
 alias rate='curl "eur.rate.sx/?n=25"'
 alias rateb='curl "btc.rate.sx/?n=25"'
 alias ratee='curl "eth.rate.sx/?n=25"'
 alias ratel='curl "ltc.rate.sx/?n=25"'
+alias yt="yt -t"
+alias getaudio="youtube-dl -x --audio-format mp3 "$1""
+
+export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 
 #myip - finds your current IP if your connected to the internet
 myip() {
@@ -73,7 +77,8 @@ mcd() {
 
 o()
 {
-  nvim $(find -L $HOME -maxdepth 4 -type f | fzf)
+#  xdg-open $(find -L ./ $HOME -maxdepth 4 -type f | fzf)
+  xdg-open $(find -L ./ $HOME -maxdepth 4 -type f | fzf --height 100% --preview 'pistol {}')
 }
 
 g()
