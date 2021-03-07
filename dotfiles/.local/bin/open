@@ -129,7 +129,6 @@ function print_on_winch {
             "${@}" &
 }
 
-
 if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
     trap finalise EXIT
     parse_options "${@}"
@@ -139,9 +138,10 @@ if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
     start_ueberzug
 
     export -f draw_preview calculate_position
-    xdg-open $(SHELL="${BASH_BINARY}" \
+    find -L ./ $HOME -maxdepth 4 -type f | xdg-open $(SHELL="${BASH_BINARY}" \
         fzf --height 100% --preview "draw_preview {}" \
             --preview-window "${DEFAULT_PREVIEW_POSITION}" \
             --bind "${REDRAW_KEY}:${REDRAW_COMMAND}" \
             "${@}")
 fi
+
