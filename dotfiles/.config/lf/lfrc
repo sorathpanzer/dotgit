@@ -217,6 +217,36 @@ cmd stow ${{
      fi
 }}
 
+cmd stowfile ${{
+    clear
+    if [[ ! -L "$f" ]]; then
+        link=$(dirname "$f" | sd "/home/sorath" "/home/sorath/.config/dotgit/dotfiles")
+        mv "$f" ~/.config/dotgit/dotfiles/.config
+        cd ~/.config/dotgit
+        stow -nvt ~ dotfiles
+        printf "Link all files to the Stow [y/n]: "
+        read ans
+            if [[ $ans == "y" ]]; then
+                stow -vt ~ dotfiles
+                echo "OK!"
+                read exit
+            else
+                echo " "
+                cd -
+            fi
+    else
+         echo "The file is a symlink... Press 'Enter' to exit!!"
+         read exit
+    fi
+}}
+
+cmd cutvideo ${{
+    read start
+    read end
+    read name
+    ffmpeg -i "$f" -ss $start -to $end -c copy $name.mp4
+}}
+
 cmd size ${{
   du -h "$f"
   read exit
@@ -232,7 +262,7 @@ cmd logout ${{
 }}
 
 cmd gf ${{
-    nvim "$(find -L $HOME -maxdepth 4 -type f | fzf)"
+    xdg-open "$(find -L $HOME -maxdepth 4 -type f | fzf --height 100% --preview 'pistol {}')"
 }}
 
 cmd gd ${{
@@ -263,14 +293,14 @@ map + compress
 
 # Trash Mappings
 map dd trash
-map dc clear_trash
+map dc Clear_trash
 map dr restore_trash
 map dv viewtrash
 map sv size
 
 # Awesome Search
 map S stow
-
+map X stowfile
 # Basic Functions
 map . set hidden!
 map x cut
@@ -281,7 +311,7 @@ map <enter> open
 map mf mkfile
 map mr doasmkfile
 map md mkdir
-map X chmod
+map * chmod
 map bg setwallpaper
 map br bulkrename
 map r rename
@@ -300,6 +330,7 @@ cmd q quit
 map <c-space> :glob-select *
 map <c-u> :glob-unselect *
 map <c-s> push :glob-select<space>*.
+map cv cutvideo
 
 # Movement
 map gm cd /media/Vault
