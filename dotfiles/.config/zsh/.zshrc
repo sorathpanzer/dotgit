@@ -86,12 +86,12 @@ g()
   cd $(find -L $HOME -maxdepth 4 -type d | fzf)
 }
 
-fl() {
-    lf "$@"
-    cd "$(cat "$HOME/.config/lf/lf.d")"
-    echo "./" > ~/.config/lf/lf.d
-}
-alias lf="fl"
+#fl() {
+#    lf "$@"
+#    cd "$(cat "$HOME/.config/lf/lf.d")"
+#    echo "./" > ~/.config/lf/lf.d
+#}
+alias lf="$HOME/.local/bin/lf"
 
 msd() {
    sudo udisksctl unlock -b /dev/sda1

@@ -9,6 +9,8 @@ set icons true
 set ignorecase true
 set shellopts '-eu'
 set sortby ext
+#set previewer pv
+set cleaner preview-image
 
 # Custom Functions
 
