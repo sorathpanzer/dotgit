@@ -1,7 +1,7 @@
 # Basic Settings
 
 set preview true
-set previewer ~/.config/lf/preview
+set previewer preview
 set hidden true
 #set color256 true
 set drawbox true
@@ -264,7 +264,7 @@ cmd logout ${{
 }}
 
 cmd gf ${{
-    xdg-open "$(find -L $HOME -maxdepth 4 -type f | fzf --height 100% --preview 'pistol {}')"
+    xdg-open "$(find -L $HOME -maxdepth 4 -type f | fzf --height 100% --preview 'preview {}')"
 }}
 
 cmd gd ${{

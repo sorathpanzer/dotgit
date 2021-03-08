@@ -1,0 +1,23 @@
+#!/bin/sh
+# Preview script built for use with lf and fzf
+LINES=30
+case "$1" in
+    #*.png|*.jpg|*.jpeg|*.mkv|*.mp4|*.gif|*.webm) mediainfo "$1";;
+    *.png|*.jpg|*.jpeg|*.mkv|*.mp4|*.gif|*.webm) preview-image draw "$1" "$2" "$3" "$4" "$5" && exit 1;;
+    *.pdf) pdftotext "$1" -;;
+    *.tgz|*.tar.gz) tar tzf "$1";;
+	  *.tar.bz2|*.tbz2) tar tjf "$1";;
+	  *.tar.txz|*.txz) xz --list "$1";;
+	  *.tar) tar tf "$1";;
+	  *.zip|*.jar|*.war|*.ear|*.oxt) unzip -l "$1";;
+	  *.rar) unrar l "$1";;
+	  *.7z) 7z l "$1";;
+    *.tar.zst) tar -I zstd -tvf "$1";;
+    *.html|*.xml) cat "$1";;
+    *.zsh*|*.bash*|*.git*) cat "$1";;
+	  *.[1-8]) man "$1" | col -b ;;
+	  *.o) nm "$1" | less ;;
+	  *.torrent) transmission-show "$1";;
+	  *.iso) iso-info --no-header -l "$1";;
+	  *) highlight --out-format ansi "$1" || cat "$1";;
+esac
