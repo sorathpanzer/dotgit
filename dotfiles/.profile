@@ -1,5 +1,5 @@
 export EDITOR="nvim"
-export TERMINAL="st"
+export TERMINAL="alacritty"
 export BROWSER="chromium"
 export READER="zathura"
 export FILE="nemo"
