@@ -3,13 +3,11 @@
 set preview true
 set previewer preview
 set hidden true
-#set color256 true
 set drawbox true
 set icons true
 set ignorecase true
 set shellopts '-eu'
 set sortby ext
-#set previewer pv
 set cleaner preview-image
 
 # Custom Functions
@@ -327,8 +325,8 @@ map ctf cptofold
 map mtf mvtofold
 map msd mtsda
 map V vview
-map Q logout
-cmd q quit
+map q logout
+#cmd q quit
 map <c-space> :glob-select *
 map <c-u> :glob-unselect *
 map <c-s> push :glob-select<space>*.

@@ -25,23 +25,25 @@ alias nb="newsboat"
 alias lg="cd $HOME/.config/dotgit; lazygit; cd -"
 alias vim="nvim -c ':set showtabline=0'"
 alias diff="diff --color"
-alias mkin="sudo make install clean; sudo make clean"
+alias micl="sudo make install clean; sudo make clean"
 alias paclog='pacman -Qiie | grep -iE "nome[ ]+:|Data da Instalação" | sed "s/.*: //" | tac | paste -d " " - - | sort -n --k 2'
 alias tr="transmission-remote -l | sed '/Sum/d'"
-alias dck="docker inspect -f \
-'{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' \
-$1"
-alias imgrm="sxiv -q -o ./ | xargs rm"
-alias readable="readable -l force -p text-content"
-alias td="cat $HOME/Documentos/wiki/index.md | rg TODO"
+alias sxrm="sxiv -q -o ./ | xargs rm"
 alias emacs="emacsclient -t"
 alias orgy="emacsclient -t $HOME/Documentos/orgwiki/index.org"
 alias off="xset -display :0.0 dpms force off"
-alias yt="yt -t"
-alias getaudio="youtube-dl -x --audio-format mp3 "$1""
-alias lf="$HOME/.local/bin/lf"
-
+alias ytplay="ytplay -t"
+alias ytmp3="youtube-dl -x --audio-format mp3 "$1""
+alias lf="$HOME/.local/bin/ff"
+alias dust="dust -rn $1"
+alias du="du -ahxD --apparent-size -d 1 "$@" 2>/dev/null | sort -h -r"
 export MANPAGER="sh -c 'col -bx | bat -l man -p'"
+
+repac() {
+  cd /var/cache/pacman/pkg
+  doas pacman -U $(exa | grep -v / | fzf)
+  cd -
+}
 
 #myip - finds your current IP if your connected to the internet
 myip() {
@@ -60,7 +62,7 @@ mcd() {
 o()
 {
 #  xdg-open $(find -L ./ $HOME -maxdepth 4 -type f | fzf)
-  xdg-open $(find -L ./ $HOME -maxdepth 4 -type f | fzf --height 100% --preview 'pistol {}')
+  xdg-open $(find -L ./ $HOME -maxdepth 4 -type f | fzf --height 100% --preview 'display {}')
 }
 
 g()
