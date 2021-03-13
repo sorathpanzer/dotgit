@@ -1,1 +1,1 @@
-/home/sorath/.config/dotgit/dotfiles/.config/lf
+/home/sorath/Transferências/Panzerfrost

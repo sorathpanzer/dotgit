@@ -258,7 +258,8 @@ cmd vview ${{
 
 cmd logout ${{
   printf '%s\n' "$PWD" > "$HOME/.config/lf/lf.d"
-  pkill lf
+  pkill ueberzug
+  lf -remote "send $id quit"
 }}
 
 cmd gf ${{
