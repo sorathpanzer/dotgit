@@ -39,7 +39,12 @@ alias dust="dust -rn $1"
 alias du="du -ahxD --apparent-size -d 1 "$@" 2>/dev/null | sort -h -r"
 export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 
-repac() {
+spac() {
+  pacmenu=$(paru -Ss $1 | awk "1" RS="\n[ \t]* " ORS=" >> " | fzf | awk '{print $1}')
+  paru -S $pacmenu
+}
+
+rpac() {
   cd /var/cache/pacman/pkg
   doas pacman -U $(exa | grep -v / | fzf)
   cd -

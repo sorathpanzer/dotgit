@@ -82,7 +82,7 @@ cmd usb ${{
   lf -remote "send $id cd /media/sdb"
 }}
 
-cmd pac ${{
+cmd rpac ${{
     cd /var/cache/pacman/pkg
     doas pacman -U $(ls -p | grep -v / | fzf)
 }}
@@ -283,7 +283,7 @@ map e
 map f
 map u
 
-map i pac
+map i rpac
 map t gd
 map o gf
 map usb usb
