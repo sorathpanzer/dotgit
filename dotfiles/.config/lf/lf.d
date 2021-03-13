@@ -1,1 +1,1 @@
-/home/sorath/Transferências/Panzerfrost
+/home/sorath/.config
