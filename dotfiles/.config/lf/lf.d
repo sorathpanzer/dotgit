@@ -1,1 +1,1 @@
-/home/sorath
+/home/sorath/.config/dotgit/dotfiles/.config/suckless/dwm

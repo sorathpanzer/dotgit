@@ -66,12 +66,12 @@ mcd() {
 
 o()
 {
-  xdg-open "$(find -L ./ $HOME -maxdepth 4 -type f | fzf --height 100% --preview 'preview {}')"
+  xdg-open "$(find -L $HOME /media/Vault -maxdepth 4 -type f | fzf --height 100% --preview 'preview {}')"
 }
 
-g()
+t()
 {
-  cd $(find -L $HOME -maxdepth 4 -type d | fzf)
+  cd $(find -L $HOME /media/Vault -maxdepth 4 -type d | fzf)
 }
 
 msd() {
@@ -129,7 +129,7 @@ bindkey '^H' backward-kill-word
 bindkey "\e[3~" delete-char
 
 bindkey '^v' edit-command-line
-bindkey -s '<<' 'g\n'
+bindkey -s '<<' 't\n'
 bindkey -s '<z' 'o\n'
 bindkey -s "^t" 'msd\n'
 

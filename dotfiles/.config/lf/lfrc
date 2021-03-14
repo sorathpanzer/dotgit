@@ -263,11 +263,11 @@ cmd logout ${{
 }}
 
 cmd gf ${{
-    xdg-open "$(find -L $HOME -maxdepth 4 -type f | fzf --height 100% --preview 'preview {}')"
+    xdg-open "$(find -L $HOME /media/Vault -maxdepth 4 -type f | fzf --height 100% --preview 'preview {}')"
 }}
 
 cmd gd ${{
-    lf -remote "send $id cd '$(find -L $HOME -maxdepth 4 -type d | fzf)'"
+    lf -remote "send $id cd '$(find -L $HOME /media/Vault -maxdepth 4 -type d | fzf)'"
 }}
 
 # Bindings
@@ -294,7 +294,7 @@ map + compress
 
 # Trash Mappings
 map dd trash
-map dc Clear_trash
+map dc clear_trash
 map dr restore_trash
 map dv viewtrash
 map sv size
