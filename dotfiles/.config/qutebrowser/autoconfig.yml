@@ -6,6 +6,10 @@
 
 config_version: 2
 settings:
+  content.javascript.enabled:
+    '*://*.www.etoro.com/*': true
+    '*://*.www.tradingview.com/*': true
+    global: true
   statusbar.show:
     global: never
   tabs.show:
