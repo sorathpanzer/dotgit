@@ -1,1 +1,1 @@
-/home/sorath/.config
+/home/sorath

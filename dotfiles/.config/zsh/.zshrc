@@ -25,7 +25,7 @@ alias nb="newsboat"
 alias lg="cd $HOME/.config/dotgit; lazygit; cd -"
 alias vim="nvim -c ':set showtabline=0'"
 alias diff="diff --color"
-alias micl="sudo make install clean; sudo make clean"
+alias micl="doas make install clean; doas make clean"
 alias paclog='pacman -Qiie | grep -iE "nome[ ]+:|Data da Instalação" | sed "s/.*: //" | tac | paste -d " " - - | sort -n --k 2'
 alias tr="transmission-remote -l | sed '/Sum/d'"
 alias sxrm="sxiv -q -o ./ | xargs rm"
@@ -66,8 +66,7 @@ mcd() {
 
 o()
 {
-#  xdg-open $(find -L ./ $HOME -maxdepth 4 -type f | fzf)
-  xdg-open $(find -L ./ $HOME -maxdepth 4 -type f | fzf --height 100% --preview 'display {}')
+  xdg-open "$(find -L ./ $HOME -maxdepth 4 -type f | fzf --height 100% --preview 'preview {}')"
 }
 
 g()
@@ -76,10 +75,10 @@ g()
 }
 
 msd() {
-   sudo udisksctl unlock -b /dev/sda1
-   sudo udisksctl mount -b /dev/dm-1
-   cd /media/Vault
-   ls -alF
+  doas udisksctl unlock -b /dev/sda1
+  doas udisksctl mount -b /dev/dm-1
+  cd /media/Vault
+  ls -alF
 }
 
 xt () {
@@ -132,7 +131,6 @@ bindkey "\e[3~" delete-char
 bindkey '^v' edit-command-line
 bindkey -s '<<' 'g\n'
 bindkey -s '<z' 'o\n'
-bindkey -s '++' 'ls\n'
 bindkey -s "^t" 'msd\n'
 
 # Load zsh-syntax-highlighting; should be last.
