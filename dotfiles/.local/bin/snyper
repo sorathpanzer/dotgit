@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 DAYS_OF_DELAY="7"
 UPDATE_DEPENDENCIES="TRUE"

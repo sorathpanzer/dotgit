@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 rsync -a /var/cache/pacman/pkg/ /media/Vault/Archlinux/Pacman
 paccache -c /media/Vault/Archlinux/Pacman -rk1

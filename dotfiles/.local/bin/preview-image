@@ -1,4 +1,4 @@
-#!/usr/bin/sh
+#!/bin/sh
 ID="lf-preview"
 [ -p "$FIFO_UEBERZUG" ] || exit 1
 

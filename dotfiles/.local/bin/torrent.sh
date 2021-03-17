@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 # A dwm_bar function to show the status of a torrent woth transmission-remote
 # Joe Standring <git@joestandring.com>
