@@ -221,7 +221,7 @@ cmd stowfile ${{
     clear
     if [[ ! -L "$f" ]]; then
         link=$(dirname "$f" | sd "/home/sorath" "/home/sorath/.config/dotgit/dotfiles")
-        mv "$f" ~/.config/dotgit/dotfiles/.config
+        mv "$f" ~/.config/dotgit/dotfiles/
         cd ~/.config/dotgit
         stow -nvt ~ dotfiles
         printf "Link all files to the Stow [y/n]: "
@@ -259,11 +259,11 @@ cmd vview ${{
 cmd logout ${{
   printf '%s\n' "$PWD" > "$HOME/.config/lf/lf.d"
   pkill ueberzug
-  lf -remote "send $id quit"
+  lf -remote "send quit"
 }}
 
 cmd gf ${{
-    xdg-open "$(find -L $HOME /media/Vault -maxdepth 4 -type f | fzf --height 100% --preview 'preview {}')"
+    xdg-open "$(find -L $HOME /media/Vault -maxdepth 4 -type f | fzf --height 100% --preview 'pv {}')"
 }}
 
 cmd gd ${{
