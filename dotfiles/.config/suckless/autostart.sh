@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 slstatus &
 udiskie &
@@ -10,6 +10,7 @@ pactl set-sink-volume alsa_output.pci-0000_00_1f.3.analog-stereo 100% &
 /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
 picom --config ~/.config/picom/picom.conf -b &
 hsetroot -solid "#000000" &
+#hsetroot -cover $HOME/Imagens/Waterfall.jpg &
 emacs --daemon &
 
 #clock() {
