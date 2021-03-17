@@ -1,4 +1,4 @@
-#!/usr/bin/sh
+#!/bin/sh
 start_ueberzug() {
     mkfifo "$FIFO_UEBERZUG" || exit 1
     ueberzug layer --parser json --silent < "$FIFO_UEBERZUG" &
@@ -15,4 +15,5 @@ if [ -n "$DISPLAY" ] && command -v ueberzug > /dev/null; then
     trap stop_ueberzug EXIT QUIT INT TERM
     start_ueberzug
 fi
-/usr/bin/lf "$@"
+
+lf "$@"

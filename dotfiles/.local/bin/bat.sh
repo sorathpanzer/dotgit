@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 # Loop through all attached batteries.
 for battery in /sys/class/power_supply/BAT?
