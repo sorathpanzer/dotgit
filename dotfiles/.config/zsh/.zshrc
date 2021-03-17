@@ -1,4 +1,4 @@
-#!/usr/bin/zsh
+#!zsh
 
 export EDITOR="nvim"
 export TERMINAL="st"
@@ -33,10 +33,11 @@ alias emacs="emacsclient -t"
 alias orgy="emacsclient -t $HOME/Documentos/orgwiki/index.org"
 alias off="xset -display :0.0 dpms force off"
 alias ytplay="ytplay -t"
-alias ytmp3="youtube-dl -x --audio-format mp3 "$1""
+alias y2mp3="youtube-dl -x --audio-format mp3 "$1""
 alias lf="$HOME/.local/bin/ff"
 alias dust="dust -rn $1"
 alias du="du -ahxD --apparent-size -d 1 "$@" 2>/dev/null | sort -h -r"
+alias fc="fc-list | cut -d ":" -f 2 | fzf"
 export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 
 spac() {
@@ -66,7 +67,7 @@ mcd() {
 
 o()
 {
-  xdg-open "$(find -L $HOME /media/Vault -maxdepth 4 -type f | fzf --height 100% --preview 'preview {}')"
+  xdg-open "$(find -L $HOME /media/Vault -maxdepth 4 -type f | fzf --height 100% --preview 'pv {}')"
 }
 
 t()
