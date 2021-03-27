@@ -83,15 +83,10 @@ static const Layout layouts[] = {
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
-static const char *termcmd[]  = { "alacritty", NULL };
-static const char *browsercmd[]  = { "brave", NULL };
-static const char *shutcmd[]  = { "clpoweroff", NULL };
-static const char *rebcmd[]  = { "clreboot", NULL };
 
 static Key keys[] = {
 	/* modifier               key              function        argument */
 	{ MODKEY|ShiftMask,   	  XK_Return,      spawn,          {.v = dmenucmd } },
-	{ MODKEY,                 XK_Return,      spawn,          {.v = termcmd } },
 	{ MODKEY,                 XK_b,           togglebar,      {0} },
 	{ MODKEY|ShiftMask,       XK_Right,       rotatestack,    {.i = +1 } },
 	{ MODKEY|ShiftMask,       XK_Left,        rotatestack,    {.i = -1 } },
@@ -125,27 +120,6 @@ static Key keys[] = {
 	{ MODKEY, 		  XK_a,      	   defaultgaps,    {0} },
 
     /* Apps Launched with SUPER + ALT + KEY  */
-	{ MODKEY,        	  XK_w,      	  spawn,          CMD ("xdo activate -N qutebrowser || qutebrowser") },
-	{ MODKEY,        	  XK_t,      	  spawn,          CMD ("telegram-desktop") },
-  { MODKEY|ShiftMask, XK_space,     spawn,          CMD ("passmenu --type") },
-	{ MODKEY|ShiftMask, XK_t,      	  spawn,          CMD ("tnoty") },
-	{ MODKEY,        	  XK_p,      	  spawn,          CMD ("pcmanfm") },
-	{ MODKEY,        	  XK_j,      	  spawn,          CMD ("alacritty -e journalctl --follow") },
-	{ MODKEY,        	  XK_s,      	  spawn,          CMD ("signal-desktop") },
-	{ MODKEY,        	  XK_e,      	  spawn,          CMD ("element-desktop") },
-	{ MODKEY,        	  XK_r,      	  spawn,          CMD ("rstudio-bin") },
-	{ MODKEY,        	  XK_v,      	  spawn,          SHCMD ("~/.local/bin/playvideo") },
-	{ MODKEY,        	  XK_Delete,    spawn,          SHCMD ("xset dpms force off") },
-	{ MODKEY|ShiftMask, XK_Delete, 	  spawn,          {.v = shutcmd } },
-	{ MODKEY|ShiftMask, XK_BackSpace, spawn,          {.v = rebcmd } },
-	{ MODKEY,       	  XK_BackSpace, spawn,          CMD ("physlock") },
-	{ 0,                XK_Print,  	  spawn,          SHCMD ("scrot ~/Imagens/Screenshots/$(date '+%Y%m%d').png") },
-	{ MODKEY|ShiftMask, XK_plus,   	  spawn,          SHCMD ("~/.config/suckless/brightness.sh Up") },
-  { MODKEY|ShiftMask, XK_minus,  	  spawn,          SHCMD ("~/.config/suckless/brightness.sh Down") },
-  { MODKEY,           XK_plus,   	  spawn,          SHCMD ("pactl set-sink-volume alsa_output.pci-0000_00_1f.3.analog-stereo +10%") },
-  { MODKEY,           XK_minus,  	  spawn,          SHCMD ("pactl set-sink-volume alsa_output.pci-0000_00_1f.3.analog-stereo -10%") },
-  { MODKEY,           XK_m, 	   		spawn,          SHCMD ("pamixer -t ") },
-  { MODKEY,           XK_c, 	   		spawn,          SHCMD ("xdotool search --class $(wmctrl -lx | awk  '{ print $3 }' | cut -d'.' -f1 | dmenu $@) windowkill") },
 	{ MODKEY,        	 	XK_1,      	  spawn,          CMD("xdotool search --class Chromium windowactivate || chromium") },
 	{ MODKEY,        	  XK_2,      	  spawn,          CMD("xdotool search --class Alacritty windowactivate || alacritty") },
 	TAGKEYS(            XK_1,            0)
@@ -161,7 +135,6 @@ static Button buttons[] = {
 	{ ClkLtSymbol,          0,              Button1,        setlayout,      {0} },
 	{ ClkLtSymbol,          0,              Button3,        setlayout,      {.v = &layouts[2]} },
 	{ ClkWinTitle,          0,              Button2,        zoom,           {0} },
-	{ ClkStatusText,        0,              Button2,        spawn,          {.v = termcmd } },
 	{ ClkClientWin,         MODKEY,         Button1,        setlayout,       {0} },
 	{ ClkClientWin,         MODKEY,         Button2,        togglefloating, {0} },
 	{ ClkClientWin,         MODKEY,         Button3,        resizemouse,    {0} },

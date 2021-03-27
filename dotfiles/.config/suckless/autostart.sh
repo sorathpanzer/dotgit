@@ -1,5 +1,6 @@
 #!/bin/sh
 
+sxhkd &
 slstatus &
 udiskie &
 numlockx &

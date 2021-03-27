@@ -1,0 +1,110 @@
+# bspwm-specific Hotkeys
+
+# Terminal
+super + Return
+    alacritty
+
+super + t
+  telegram-desktop
+
+super + shift + space
+  passmenu --type
+
+super + shift + t
+  tnoty
+
+super + x
+  12ft
+
+super + s
+  signal-desktop
+
+super + e
+  element-desktop
+
+super + v
+  playvideo
+
+super + Delete
+  xset dpms force off
+
+super + w
+    xdo activate -N qutebrowser || qutebrowser
+
+super + BackSpace
+  physlock
+
+super + Print
+  scrot ~/Imagens/Screenshots/$(date '+%Y%m%d').png
+
+super + shift + plus
+  ~/.config/suckless/brightness.sh Up
+
+super + shift + minus
+  ~/.config/suckless/brightness.sh Down
+
+super + plus
+  pactl set-sink-volume alsa_output.pci-0000_00_1f.3.analog-stereo +10%
+
+super + minus
+  pactl set-sink-volume alsa_output.pci-0000_00_1f.3.analog-stereo -10%
+
+super + m
+  pamixer -t
+
+super + c
+  xdotool search --class $(wmctrl -lx | awk  '{ print $3 }' | cut -d'.' -f1 | dmenu $@) windowkill
+
+super + shift + BackSpace
+  clreboot
+
+super + shift + Delete
+  clpoweroff
+
+# Change focus
+super + {j,k}
+    bspc node --focus {next.local,prev.local}
+
+# Move window
+super + shift + {j,k}
+    bspc node -s {next.local,prev.local}
+
+# Close window
+super + q
+    bspc node -c
+
+# Focus master
+super + space
+    bspc node --focus biggest.local
+
+# Promote to master
+super + shift + space
+    bspc node -s biggest.local
+
+# Change desktop
+super + {1-9,0}
+    bspc desktop --focus ^{1-9,10}
+
+# Move to desktop
+super + shift + {1-9,0}
+    bspc node --to-desktop ^{1-9,10}
+
+# Change monitor
+super + {comma,period}
+    bspc monitor -f {next,prev}
+
+# Move to monitor
+super + shift + {comma,period}
+    bspc node -m {next,prev}
+
+# Fullscreen toggle
+super + f
+    bspc desktop --layout next
+
+# Resize
+super + {h,l}
+    bspwm_node_resize {west,east}
+
+# Reload config
+super + F2
+     ~/.config/bspwm/bspwmrc
