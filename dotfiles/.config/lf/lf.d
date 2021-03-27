@@ -1,1 +1,1 @@
-/home/sorath/.config
+/home/sorath/.config/dotgit/dotfiles/.config/qtile
