@@ -5,4 +5,4 @@
 
 ping -q -c 1 1.1.1.1 > /dev/null || exit
 pgrep -f newsboat$ && /usr/bin/xdotool key --window "$(/usr/bin/xdotool search --name newsboat)" R && exit
-/usr/bin/newsboat -x reload
+newsboat -x reload
