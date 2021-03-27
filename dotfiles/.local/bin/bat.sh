@@ -1,16 +1,13 @@
-#!/bin/sh
+#!/bin/bash
 
-# Loop through all attached batteries.
-for battery in /sys/class/power_supply/BAT?
-do
-	# Get its remaining capacity and charge status.
-	capacity=$(cat "$battery"/capacity) || break
-	status=$(sed "s/[Dd]ischarging/🔋/;s/[Nn]otcharging/🛑/;s/[Cc]harging/🔌/;s/[Uu]nknown/♻️/;s/[Ff]ull/⚡/" "$battery"/status)
+bat=`cat /sys/class/power_supply/BAT?/capacity`
 
-	# If it is discharging and 25% or less, we will add a ❗ as a warning.
-	 [ "$capacity" -le 25 ] && [ "$status" = "🔋" ] && warn="❗"
+state=`cat /sys/class/power_supply/BAT?/status`
 
-	printf "%s%s%s%% " "$status" "$warn" "$capacity"
-	unset warn
-done | sed 's/ *$//'
+if [ $state == "charging" -o $state == "fully-charged" ]; then
+    echo -n " "
+else
+    echo -n "$(percentage $bat            )  "
+fi
 
+echo -n "$bat "
