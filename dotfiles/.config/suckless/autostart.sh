@@ -1,7 +1,6 @@
 #!/bin/sh
 
 slstatus &
-sxhkd &
 udiskie &
 numlockx &
 xrdb -load $HOME/.Xresources &
