@@ -38,6 +38,7 @@ alias lf="$HOME/.local/bin/ff"
 alias dust="dust -rn $1"
 alias du="du -ahxD --apparent-size -d 1 "$@" 2>/dev/null | sort -h -r"
 alias fc="fc-list | cut -d ":" -f 2 | fzf"
+alias tux="tux -r"
 export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 
 spac() {
