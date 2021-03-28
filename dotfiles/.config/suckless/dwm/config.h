@@ -62,9 +62,9 @@ static const int resizehints = 0;    /* 1 means respect size hints in tiled resi
 
 static const Layout layouts[] = {
 	/* symbol     arrange function */
-	{ "[]=",      tile },    /* first entry is default */
-	{ "|M|",      monocle },
-	{ "|U|",      centeredmaster },
+	{ "[T]=",      tile },    /* first entry is default */
+	{ "|F|",      monocle },
+	{ "|M|",      centeredmaster },
 	{ NULL,       NULL },
 };
 
@@ -83,13 +83,16 @@ static const Layout layouts[] = {
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
+static const char *termcmd[]  = { "alacritty", NULL };
 
 static Key keys[] = {
 	/* modifier               key              function        argument */
 	{ MODKEY|ShiftMask,   	  XK_Return,      spawn,          {.v = dmenucmd } },
+	{ MODKEY,                 XK_Return,      spawn,          {.v = termcmd } },
+	{ MODKEY|ShiftMask,       XK_t,           setlayout,      {.v = &layouts[0]} },
+	{ MODKEY|ShiftMask,       XK_f,           setlayout,      {.v = &layouts[1]} },
+	{ MODKEY|ShiftMask,      XK_m,      			setlayout,      {.v = &layouts[2]} },
 	{ MODKEY,                 XK_b,           togglebar,      {0} },
-	{ MODKEY|ShiftMask,       XK_Right,       rotatestack,    {.i = +1 } },
-	{ MODKEY|ShiftMask,       XK_Left,        rotatestack,    {.i = -1 } },
 	{ MODKEY,                 XK_Right,       focusstack,     {.i = +1 } },
 	{ MODKEY,                 XK_Left,        focusstack,     {.i = -1 } },
 	{ MODKEY,                 XK_Down,        focusstack,     {.i = +1 } },
@@ -100,24 +103,18 @@ static Key keys[] = {
 	{ MODKEY,                 XK_backslash,   view,           {0} },
 	{ MODKEY,	          			XK_q,           killclient,     {0} },
 	{ MODKEY,	  	  					XK_Escape,  	  cyclelayout,    {.i = -1 } },
-	{ MODKEY|ShiftMask,       XK_t,           setlayout,      {.v = &layouts[0]} },
-	{ MODKEY|ShiftMask,       XK_m,           setlayout,      {.v = &layouts[1]} },
-	{ MODKEY|ShiftMask,       XK_space,       togglefloating, {0} },
 	{ MODKEY,                 XK_0,           view,           {.ui = ~0 } },
-	{ MODKEY|ShiftMask,       XK_0,           tag,            {.ui = ~0 } },
 	{ MODKEY,                 XK_comma,       focusmon,       {.i = -1 } },
 	{ MODKEY,                 XK_period,      focusmon,       {.i = +1 } },
 	{ MODKEY|ShiftMask,       XK_comma,       tagmon,         {.i = -1 } },
 	{ MODKEY|ShiftMask,       XK_period,      tagmon,         {.i = +1 } },
 	{ MODKEY|ShiftMask, 	  	XK_r,      	   	quit,           {1} },
-	{ MODKEY,                 XK_i,      	   	incnmaster,     {.i = +1 } },
-  { MODKEY,           			XK_d,      	   	incnmaster,     {.i = -1 } },
 	{ MODKEY,                 XK_z, 	   			zoom,           {0} },
-	{ MODKEY,                 XK_u,      			setlayout,      {.v = &layouts[2]} },
+	{ MODKEY|ShiftMask,       XK_z,       		rotatestack,    {.i = +1 } },
 
     /* Gaps keybinds control */
-	{ MODKEY|ControlMask,     XK_g,      	   togglegaps,     {0} },
-	{ MODKEY, 		  XK_a,      	   defaultgaps,    {0} },
+	{ MODKEY,     						XK_g,      	   togglegaps,     {0} },
+	{ MODKEY|ShiftMask, 		  XK_g,      	   defaultgaps,    {0} },
 
     /* Apps Launched with SUPER + ALT + KEY  */
 	{ MODKEY,        	 	XK_1,      	  spawn,          CMD("xdotool search --class Chromium windowactivate || chromium") },
@@ -135,6 +132,7 @@ static Button buttons[] = {
 	{ ClkLtSymbol,          0,              Button1,        setlayout,      {0} },
 	{ ClkLtSymbol,          0,              Button3,        setlayout,      {.v = &layouts[2]} },
 	{ ClkWinTitle,          0,              Button2,        zoom,           {0} },
+	{ ClkStatusText,        0,              Button2,        spawn,          {.v = termcmd } },
 	{ ClkClientWin,         MODKEY,         Button1,        setlayout,       {0} },
 	{ ClkClientWin,         MODKEY,         Button2,        togglefloating, {0} },
 	{ ClkClientWin,         MODKEY,         Button3,        resizemouse,    {0} },
@@ -142,5 +140,76 @@ static Button buttons[] = {
 	{ ClkTagBar,            0,              Button3,        toggleview,     {0} },
 	{ ClkTagBar,            MODKEY,         Button1,        tag,            {0} },
 	{ ClkTagBar,            MODKEY,         Button3,        toggletag,      {0} },
+};
+
+void
+setlayoutex(const Arg *arg)
+{
+	setlayout(&((Arg) { .v = &layouts[arg->i] }));
+}
+
+void
+viewex(const Arg *arg)
+{
+	view(&((Arg) { .ui = 1 << arg->ui }));
+}
+
+void
+viewall(const Arg *arg)
+{
+	view(&((Arg){.ui = ~0}));
+}
+
+void
+toggleviewex(const Arg *arg)
+{
+	toggleview(&((Arg) { .ui = 1 << arg->ui }));
+}
+
+void
+tagex(const Arg *arg)
+{
+	tag(&((Arg) { .ui = 1 << arg->ui }));
+}
+
+void
+toggletagex(const Arg *arg)
+{
+	toggletag(&((Arg) { .ui = 1 << arg->ui }));
+}
+
+void
+tagall(const Arg *arg)
+{
+	tag(&((Arg){.ui = ~0}));
+}
+
+/* signal definitions */
+/* signum must be greater than 0 */
+/* trigger signals using `xsetroot -name "fsignal:<signame> [<type> <value>]"` */
+static Signal signals[] = {
+	/* signum           function */
+	{ "focusstack",     focusstack },
+	{ "setmfact",       setmfact },
+	{ "togglebar",      togglebar },
+	{ "incnmaster",     incnmaster },
+	{ "togglefloating", togglefloating },
+	{ "focusmon",       focusmon },
+	{ "tagmon",         tagmon },
+	{ "zoom",           zoom },
+	{ "view",           view },
+	{ "viewall",        viewall },
+	{ "viewex",         viewex },
+	{ "toggleview",     view },
+	{ "toggleviewex",   toggleviewex },
+	{ "tag",            tag },
+	{ "tagall",         tagall },
+	{ "tagex",          tagex },
+	{ "toggletag",      tag },
+	{ "toggletagex",    toggletagex },
+	{ "killclient",     killclient },
+	{ "quit",           quit },
+	{ "setlayout",      setlayout },
+	{ "setlayoutex",    setlayoutex },
 };
 
