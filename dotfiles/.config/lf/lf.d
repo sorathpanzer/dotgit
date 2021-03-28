@@ -1,1 +1,1 @@
-/home/sorath/.config/dotgit/dotfiles/.config
+/home/sorath/.config/dotgit/dotfiles
