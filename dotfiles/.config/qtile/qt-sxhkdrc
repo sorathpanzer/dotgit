@@ -1,0 +1,143 @@
+#--- APPLICATIONS & SERVICES ---#
+
+super + Return
+    st
+
+super + {_,shift +} t
+    {telegram-desktop,tnoty}
+
+super + s
+    signal-desktop
+
+super + e
+    element-desktop
+
+super + v
+    playvideo
+
+super + shift + space
+    passmenu --type
+
+super + x
+    12ft
+
+Print
+    scrot ~/Imagens/Screenshots/$(date '+%Y%m%d').png && notify-send -i "$HOME/.fonts/svg/image.svg" -a Screenshot "Full screenshot completed"
+
+super + shift + {plus,minus}
+    brightness {Up,Down}
+
+super + {plus,minus}
+    pactl set-sink-volume alsa_output.pci-0000_00_1f.3.analog-stereo {+10%,-10%}
+
+super + m
+    pamixer -t
+
+super + shift + q
+    winclosemenu
+
+super + {_,shift +} BackSpace
+    {physlock,clreboot}
+
+super + {_,shift +} Delete
+    {xset dpms force off,clpoweroff}
+
+super + w
+    xdo activate -N qutebrowser; qutebrowser
+
+## Toggle Compositor
+super + shift + p
+		pkill picom; picom
+
+## Toggle sxhkd
+super + shift + s
+		pkill sxhkd; sxhkd
+
+
+
+#Toggle fullscreen of window
+super + f
+    qtile-cmd -o window -f toggle_fullscreen
+
+# normalize layout (undo size changes)
+super + n
+    qtile-cmd -o layout -f normalize
+
+#kill
+super + q
+    qtile-cmd -o window -f kill
+
+# Foucs WINDOW (Navigate)
+super + {Left,Down,Up,Right}
+    qtile-cmd -o layout -f {left,down,up,right}
+
+# Foucs WINDOW (Navigate)
+super + {h,j,k,l}
+    qtile-cmd -o layout -f {left,down,up,right}
+
+#################################################################
+# SUPER KEYS
+#################################################################
+
+#Focus selected desktop
+#super + Tab
+#    qtile-cmd -o screen -f next_group
+
+# set the window state
+super + space
+    qtile-cmd -o cmd -f next_layout
+
+# Move focus to other monitor
+super + BackSpace
+    qtile -o cmd -f next_screen
+
+#################################################################
+# SUPER + SHIFT KEYS
+#################################################################
+
+#kill
+super + shift + q
+    qtile-cmd -o window -f kill
+
+#Quit Qtile
+super + shift + x
+    qtile-cmd -o cmd -f shutdown
+
+# FLIP LAYOUT FOR MONADTALL/MONADWIDE
+super + shift + f
+    qtile-cmd -o layout -f flip
+
+# MOVE WINDOWS UP OR DOWN BSP LAYOUT
+
+super + shift + {h,j,k,l}
+    qtile-cmd -o layout -f {shuffle_left,shuffle_down,shuffle_up,shuffle_right}
+
+# MOVE WINDOWS UP OR DOWN MONADTALL/MONADWIDE LAYOUT
+
+super + shift + {Up,Down,Left,Right}
+    qtile-cmd -o layout -f {shuffle_up,shuffle_down,swap_left,swap_right}
+
+# TOGGLE FLOATING LAYOUT
+super + shift + space
+    qtile-cmd -o window -f toggle_floating
+
+#Reload Qtile
+super + shift + r
+    qtile-cmd -o cmd -f restart
+
+#################################################################
+# SUPER + CONTROL KEYS
+#################################################################
+
+#Reload Qtile
+super +  control + r
+    qtile-cmd -o cmd -f restart
+
+#################################################################
+# SUPER + ALT KEYS
+#################################################################
+
+# FLIP LAYOUT FOR BSP
+
+super + alt + {h,j,k,l}
+    qtile-cmd -o layout -f {flip_left,flip_down,flip_up,flip_right}

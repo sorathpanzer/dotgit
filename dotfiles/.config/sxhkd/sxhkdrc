@@ -21,14 +21,11 @@ super + shift + space
 super + x
     12ft
 
-super + w
-    xdo activate -N qutebrowser; qutebrowser
-
-super + Print
-    scrot ~/Imagens/Screenshots/$(date '+%Y%m%d').png
+Print
+    scrot ~/Imagens/Screenshots/$(date '+%Y%m%d').png && notify-send -i "$HOME/.fonts/svg/image.svg" -a Screenshot "Full screenshot completed"
 
 super + shift + {plus,minus}
-    brightness {Up,Down}
+    brightnessctl -d intel_backlight set {+10%,10%-}
 
 super + {plus,minus}
     pactl set-sink-volume alsa_output.pci-0000_00_1f.3.analog-stereo {+10%,-10%}
@@ -44,3 +41,103 @@ super + {_,shift +} BackSpace
 
 super + {_,shift +} Delete
     {xset dpms force off,clpoweroff}
+
+super + w
+    xdo activate -N qutebrowser; qutebrowser
+
+## Toggle Compositor
+super + shift + p
+		pkill picom; picom
+
+## Toggle sxhkd
+super + shift + s
+		pkill sxhkd; sxhkd
+
+#--- WINDOW MANAGER ---#
+
+## Toggle the dwm bar
+super + b
+	  dwmc togglebar
+
+## Change layout to {tiling, monocle}
+{F10,F11,F12}
+	  dwmc setlayoutex {0,1,2}
+
+## Cycle up and down the window stack (change focus)
+super + {Down,Up,Left,Right}
+    dwmc focusstack {+,-,-,+}1
+
+## Resize Window
+super + shift + {Right,Left}
+    dwmc setmfact {+0.02,-0.02}
+
+## Change focus to/swap the master window
+super + z
+    dwmc zoom
+
+## Rotate clockwise/counterclockwise the window stack
+super + Tab
+	dwmc rotatestack +1
+
+## View all tags
+super + 0
+    dwmc viewall
+
+## Open Chromium & Tag1
+super + 1
+    dwmc viewex 0; \
+    xdotool search --class Chromium windowactivate || chromium
+
+## Open Alacritty & Tag2
+super + 2
+    dwmc viewex 1; \
+    xdotool search --class Alacritty windowactivate || alacritty
+    #xdotool search --class st-256color windowactivate || st
+
+## Only view the tag {1-9}
+super + 3
+    dwmc viewex 2
+
+super + {3-4}
+    dwmc viewex {2-3}
+
+## Send client to tag
+super + shift + {1,2,3,4}
+    dwmc tag {0,1,2,3}
+
+## Toggle the visibility tag {1-9}
+alt + {1-4}
+    dwmc toggleviewex {0-3}
+
+## Toggle Gaps
+super + g
+    dwmc togglegaps
+
+## Close Applications
+super + q
+    dwmc killclient
+
+## Restart Dwm
+super + shift + r
+    dwmc quit 1
+
+## Cycle forward/backward through monitor focus
+super + {comma,period}
+    dwmc focusmon {-,+}1
+
+## Move current window to previous/next monitor
+super + shift + {comma,period}
+    dwmc tagmon {-,+}1
+
+## Toggle Scratchpad
+#super + less
+#    dwmc togglescratch
+
+## Example of Mode command, with semicolon execute once
+#super + a : {plus,minus}
+#    brightness {Up,Down}
+
+## Toggle view next tag
+#super + backslash
+#    dwmc view
+
