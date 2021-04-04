@@ -1,4 +1,4 @@
-#!/usr/bin/env sh
+#!/bin/bash
 #while read file
 #do
 # put files in an array

@@ -1,5 +1,5 @@
 #!/bin/sh
 
 NEWS=$(newsboat -x print-unread | awk '{ print $1}')
-echo -e "📰 $NEWS"
+echo "📰 $NEWS"
 

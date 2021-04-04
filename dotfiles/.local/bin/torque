@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 #
 # Torque - minimal tui for transmission-daemon.
 
