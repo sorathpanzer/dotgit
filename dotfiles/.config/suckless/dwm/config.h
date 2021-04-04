@@ -65,7 +65,6 @@ static const Layout layouts[] = {
 	{ "[T]=",      tile },    /* first entry is default */
 	{ "|F|",      monocle },
 	{ "|M|",      centeredmaster },
-	{ NULL,       NULL },
 };
 
 /* key definitions */
@@ -83,46 +82,14 @@ static const Layout layouts[] = {
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
-static const char *termcmd[]  = { "alacritty", NULL };
+static const char scratchpadname[] = "scratchpad";
+static const char *scratchpadcmd[] = { "st", "-t", scratchpadname, "-g", "120x34", NULL };
 
 static Key keys[] = {
 	/* modifier               key              function        argument */
 	{ MODKEY|ShiftMask,   	  XK_Return,      spawn,          {.v = dmenucmd } },
-	{ MODKEY,                 XK_Return,      spawn,          {.v = termcmd } },
-	{ MODKEY|ShiftMask,       XK_t,           setlayout,      {.v = &layouts[0]} },
-	{ MODKEY|ShiftMask,       XK_f,           setlayout,      {.v = &layouts[1]} },
-	{ MODKEY|ShiftMask,      XK_m,      			setlayout,      {.v = &layouts[2]} },
-	{ MODKEY,                 XK_b,           togglebar,      {0} },
-	{ MODKEY,                 XK_Right,       focusstack,     {.i = +1 } },
-	{ MODKEY,                 XK_Left,        focusstack,     {.i = -1 } },
-	{ MODKEY,                 XK_Down,        focusstack,     {.i = +1 } },
-	{ MODKEY,                 XK_Up,          focusstack,     {.i = -1 } },
-	{ MODKEY|ControlMask,  	  XK_minus,       setmfact,       {.f = -0.02} },
-	{ MODKEY|ControlMask,     XK_plus,        setmfact,       {.f = +0.02} },
-	{ MODKEY,       	  			XK_Tab,         focusstack,     {.i = +1 } },
 	{ MODKEY,                 XK_backslash,   view,           {0} },
-	{ MODKEY,	          			XK_q,           killclient,     {0} },
-	{ MODKEY,	  	  					XK_Escape,  	  cyclelayout,    {.i = -1 } },
-	{ MODKEY,                 XK_0,           view,           {.ui = ~0 } },
-	{ MODKEY,                 XK_comma,       focusmon,       {.i = -1 } },
-	{ MODKEY,                 XK_period,      focusmon,       {.i = +1 } },
-	{ MODKEY|ShiftMask,       XK_comma,       tagmon,         {.i = -1 } },
-	{ MODKEY|ShiftMask,       XK_period,      tagmon,         {.i = +1 } },
-	{ MODKEY|ShiftMask, 	  	XK_r,      	   	quit,           {1} },
-	{ MODKEY,                 XK_z, 	   			zoom,           {0} },
-	{ MODKEY|ShiftMask,       XK_z,       		rotatestack,    {.i = +1 } },
-
-    /* Gaps keybinds control */
-	{ MODKEY,     						XK_g,      	   togglegaps,     {0} },
-	{ MODKEY|ShiftMask, 		  XK_g,      	   defaultgaps,    {0} },
-
-    /* Apps Launched with SUPER + ALT + KEY  */
-	{ MODKEY,        	 	XK_1,      	  spawn,          CMD("xdotool search --class Chromium windowactivate || chromium") },
-	{ MODKEY,        	  XK_2,      	  spawn,          CMD("xdotool search --class Alacritty windowactivate || alacritty") },
-	TAGKEYS(            XK_1,            0)
-	TAGKEYS(            XK_2,            1)
-	TAGKEYS(            XK_3,            2)
-	TAGKEYS(            XK_4,            3)
+	{ MODKEY,   	  					XK_less,      	togglescratch,  {.v = scratchpadcmd } },
 };
 
 /* button definitions */
@@ -131,9 +98,8 @@ static Button buttons[] = {
 	/* click                event mask      button          function        argument */
 	{ ClkLtSymbol,          0,              Button1,        setlayout,      {0} },
 	{ ClkLtSymbol,          0,              Button3,        setlayout,      {.v = &layouts[2]} },
-	{ ClkWinTitle,          0,              Button2,        zoom,           {0} },
-	{ ClkStatusText,        0,              Button2,        spawn,          {.v = termcmd } },
-	{ ClkClientWin,         MODKEY,         Button1,        setlayout,       {0} },
+	{ ClkWinTitle,          0,              Button2,        zoom,  					{0} },
+	{ ClkClientWin,         MODKEY,         Button1,        setlayout,      {0} },
 	{ ClkClientWin,         MODKEY,         Button2,        togglefloating, {0} },
 	{ ClkClientWin,         MODKEY,         Button3,        resizemouse,    {0} },
 	{ ClkTagBar,            0,              Button1,        view,           {0} },
@@ -190,8 +156,12 @@ tagall(const Arg *arg)
 static Signal signals[] = {
 	/* signum           function */
 	{ "focusstack",     focusstack },
+	{ "rotatestack",    rotatestack },
 	{ "setmfact",       setmfact },
 	{ "togglebar",      togglebar },
+	{ "togglescratch",  togglescratch },
+	{ "togglegaps",     togglegaps },
+	{ "defaultgaps",    defaultgaps },
 	{ "incnmaster",     incnmaster },
 	{ "togglefloating", togglefloating },
 	{ "focusmon",       focusmon },
