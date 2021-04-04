@@ -33,12 +33,14 @@ alias emacs="emacsclient -t"
 alias orgy="emacsclient -t $HOME/Documentos/orgwiki/index.org"
 alias off="xset -display :0.0 dpms force off"
 alias ytplay="ytplay -t"
+alias yt="ytplay -t -S --fancy-subs=0 --subs=1"
 alias y2mp3="youtube-dl -x --audio-format mp3 "$1""
 alias lf="$HOME/.local/bin/ff"
 alias dust="dust -rn $1"
 alias du="du -ahxD --apparent-size -d 1 "$@" 2>/dev/null | sort -h -r"
 alias fc="fc-list | cut -d ":" -f 2 | fzf"
 alias tux="tux -r"
+alias market='w3m "http://68k.news/index.php?section=business&loc=PT"'
 export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 
 spac() {
@@ -68,12 +70,20 @@ mcd() {
 
 o()
 {
-  xdg-open "$(find -L $HOME /media/Vault -maxdepth 4 -type f | fzf --height 100% --preview 'pv {}')"
+  if [ -d "/media/Vault" ]; then
+    xdg-open "$(find -L $HOME /media/Vault -maxdepth 4 -type f | fzf --height 100% --preview 'pv {}')"
+  else
+    xdg-open "$(find -L $HOME -maxdepth 4 -type f | fzf --height 100% --preview 'pv {}')"
+  fi
 }
 
 t()
 {
-  cd $(find -L $HOME /media/Vault -maxdepth 4 -type d | fzf)
+  if [ -d "/media/Vault" ]; then
+    cd $(find -L $HOME /media/Vault -maxdepth 4 -type d | fzf)
+  else
+    cd $(find -L $HOME -maxdepth 4 -type d | fzf)
+  fi
 }
 
 msd() {
