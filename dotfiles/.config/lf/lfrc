@@ -207,7 +207,7 @@ cmd stow ${{
     stow -nvt ~ dotfiles
     printf "Link all files to the Stow [y/n]: "
     read ans
-    if [[ $ans == "y" ]]; then
+    if [ $ans = "y" ]; then
       stow -vt ~ dotfiles
       echo "OK!"
       read exit
@@ -219,7 +219,7 @@ cmd stow ${{
 
 cmd stowfile ${{
     clear
-    if [[ ! -L "$f" ]]; then
+    if [ ! -L "$f" ]; then
         backit=$(dirname "$f")
         link=$(dirname "$f" | sd "/home/sorath" "")
         file=$(basename "$f")
@@ -228,7 +228,7 @@ cmd stowfile ${{
         stow -nvt ~ dotfiles
         printf "Link all files to the Stow [y/n]: "
         read ans
-            if [[ $ans == "y" ]]; then
+            if [ $ans = "y" ]; then
                 stow -vt ~ dotfiles
                 echo "OK!"
                 read exit
@@ -263,14 +263,23 @@ cmd logout ${{
   printf '%s\n' "$PWD" > "$HOME/.config/lf/lf.d"
   pkill ueberzug
   lf -remote "send quit"
+  pkill lf
 }}
 
 cmd gf ${{
-    xdg-open "$(find -L $HOME /media/Vault -maxdepth 4 -type f | fzf --height 100% --preview 'pv {}')"
+    if [ -d "/media/Vault" ]; then
+        xdg-open "$(find -L $HOME /media/Vault -maxdepth 4 -type f | fzf --height 100% --preview 'pv {}')"
+    else
+        xdg-open "$(find -L $HOME -maxdepth 4 -type f | fzf --height 100% --preview 'pv {}')"
+    fi
 }}
 
 cmd gd ${{
-    lf -remote "send $id cd '$(find -L $HOME /media/Vault -maxdepth 4 -type d | fzf)'"
+    if [ -d "/media/Vault" ]; then
+        lf -remote "send $id cd '$(find -L $HOME /media/Vault -maxdepth 4 -type d | fzf)'"
+    else
+        lf -remote "send $id cd '$(find -L $HOME -maxdepth 4 -type d | fzf)'"
+    fi
 }}
 
 # Bindings
