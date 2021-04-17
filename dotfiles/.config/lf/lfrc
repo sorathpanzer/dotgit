@@ -9,6 +9,16 @@ set ignorecase true
 set shellopts '-eu'
 set sortby ext
 set cleaner preview-image
+set shell zsh
+set shellopts '-euy'
+set ifs "\n"
+set filesep "\n"  # default already
+set incsearch
+set filesep "\n"  # default already
+set scrolloff 11
+set period 1
+set findlen 2
+set hiddenfiles ".*:*.aux:*.log:*.bbl:*.bcf:*.blg:*.run.xml:lost+found"
 
 # Custom Functions
 
@@ -34,8 +44,8 @@ cmd bulkrename ${{
 cmd open ${{
     case $(file --mime-type "$f" -bL) in
         text/*|application/json) $EDITOR "$f";;
-        video/*|image/*/application/pdf) xdg-open "$f" & disown;;
-        *) xdg-open "$f" & disown;;
+        *)
+        xdg-open "$f" & #> /dev/null 2> /dev/null &
     esac
 }}
 
@@ -58,13 +68,6 @@ cmd chmod ${{
   do
     chmod +x $file
   done
-}}
-
-cmd doasmkfile ${{
-  clear
-  printf "File Name: "
-  read ans
-  doas $EDITOR $ans
 }}
 
 cmd setwallpaper %cp "$f" ~/.config/wall.png && nitrogen --set-scaled "$f"
@@ -156,6 +159,21 @@ cmd trash ${{
   done
 }}
 
+cmd moveto ${{
+	clear; tput cup $(($(tput lines)/3)); tput bold
+	set -f
+	clear; echo "Move to where?"
+	dest="$(find -L $HOME -maxdepth 4 -type d | fzf | sed 's|~|$HOME|' )" &&
+	if [ -n "$dest" ]; then
+		for x in $fx; do
+			eval mv -iv \"$x\" \"$dest\"
+		done &&
+		notify-send "🚚 File(s) moved." "File(s) moved to $dest."
+	fi
+}}
+
+cmd unbash %cat "$f" | checkbashisms
+
 cmd clear_trash %trash-empty
 
 cmd restore_trash ${{
@@ -168,15 +186,6 @@ cmd viewtrash ${{
   ls -Slh ~/.local/share/Trash/files
   printf "\n          Hit enter to exit!"
   read exit
-}}
-
-cmd cptofold ${{
-    clear
-    set -f
-    printf "Directory Name: "
-    read newd
-    mkdir $newd
-    cp $fx $newd
 }}
 
 cmd mvtofold ${{
@@ -255,15 +264,20 @@ cmd size ${{
   read exit
 }}
 
-cmd vview ${{
-  mpv *
-}}
+#cmd vview ${{
+#  mpv *
+#}}
+
 
 cmd logout ${{
-  printf '%s\n' "$PWD" > "$HOME/.config/lf/lf.d"
-  pkill ueberzug
   lf -remote "send quit"
-  pkill lf
+  killall -q --signal 9 lf
+  clear
+}}
+
+cmd logat ${{
+  printf '%s\n' "$PWD" > "$HOME/.config/lf/lf.d"
+  lf -remote "send quit"
 }}
 
 cmd gf ${{
@@ -280,6 +294,11 @@ cmd gd ${{
     else
         lf -remote "send $id cd '$(find -L $HOME -maxdepth 4 -type d | fzf)'"
     fi
+}}
+
+# Share files up to 256 Mib
+cmd share ${{
+	curl -F"file=@$fx" https://0x0.st | xclip -sel c -r
 }}
 
 # Bindings
@@ -299,6 +318,7 @@ map i rpac
 map t gd
 map o gf
 map usb usb
+map ub unbash
 
 # Archive Mappings
 map - extract
@@ -321,9 +341,8 @@ map y copy
 map Yf yank-basename
 map Yp yank-path
 map <enter> open
-map mf mkfile
-map mr doasmkfile
-map md mkdir
+map cf mkfile
+map cd mkdir
 map * chmod
 map bg setwallpaper
 map br bulkrename
@@ -334,21 +353,23 @@ map R reload
 map C clear
 map <esc> unselect
 map bi burniso
-map ctf cptofold
-map mtf mvtofold
+map mf mvtofold
+map mt moveto
 map msd mtsda
-map V vview
-map q logout
-#cmd q quit
+#map q logout
+cmd q quit
+map w logat
 map <c-space> :glob-select *
 map <c-u> :glob-unselect *
 map <c-s> push :glob-select<space>*.
 map cv cutvideo
+map sh share
 
 # Movement
-map gm cd /media/Vault
+map gV cd /media/Vault
 map gh cd ~/
 map gv cd ~/Vídeos
+map gm cd ~/Música
 map gi cd ~/Imagens
 map gw cd ~/Documentos/wiki
 map gd cd ~/Documentos
@@ -356,4 +377,6 @@ map gt cd ~/Transferências
 map gs cd ~/.config/dotgit
 map g.c cd ~/.config
 map g.l cd ~/.local
-
+map g/ cd /
+map º mark-load
+map a mark-save
