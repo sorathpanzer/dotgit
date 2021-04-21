@@ -54,6 +54,6 @@ autocmd BufReadPost *
      \ endif
 
   " You can't stop me
-  cmap w!! w !sudo tee %
+  cmap w!! w !doas tee %
 endif
 

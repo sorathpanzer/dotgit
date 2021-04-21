@@ -39,7 +39,7 @@ static const Rule rules[] = {
 	{ "Brave",    		NULL,       NULL,       1,            1,             0,           -1 },
 	{ "qutebrowser",  NULL,       NULL,       1 << 3,       1,             0,           -1 },
 	{ "st-256color",  NULL,       NULL,       2,            1,             0,           -1 },
-	{ "Alacritty",    NULL,       NULL,       2,            1,             0,           -1 },
+	{ "Alacritty",    NULL,       NULL,       2,            1,             1,           -1 },
 	{ "mpv",     			NULL,       NULL,       1 << 2,       1,             0,           -1 },
 	{ "Lxappearance", NULL,       NULL,       1 << 2,       0,             1,           -1 },
 	{ "Pcmanfm",     	NULL,       NULL,       1 << 2,       1,             0,           -1 },
