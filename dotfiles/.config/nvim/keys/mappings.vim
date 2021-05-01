@@ -95,3 +95,9 @@ inoremap <F9> <C-O>za
 nnoremap <F9> za
 onoremap <F9> <C-C>za
 vnoremap <F9> zf
+
+" Testing Kakoune aproach
+"map w <ESC>lviw
+"map m <ESC>hbbvw
+"map <C-Right> <ESC>lviW
+"map <C-Left> <ESC>hBBviW
