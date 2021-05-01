@@ -1,13 +1,13 @@
 #--- APPLICATIONS & SERVICES ---#
 
 super + Return
-    alacritty
+    st
 
 super + {_,shift +} t
     {telegram-desktop,tnoty}
 
 super + s
-    signal-desktop
+    dmsearch
 
 super + e
     element-desktop
@@ -25,7 +25,7 @@ Print
     scrot ~/Imagens/Screenshots/$(date '+%Y%m%d').png && notify-send -i "$HOME/.fonts/svg/image.svg" -a Screenshot "Full screenshot completed"
 
 super + shift + {plus,minus}
-    brightnessctl -d intel_backlight set {+10%,10%-}
+    light {-A,-U} 15
 
 super + {plus,minus}
     pactl set-sink-volume alsa_output.pci-0000_00_1f.3.analog-stereo {+10%,-10%}
@@ -51,7 +51,7 @@ super + shift + p
 
 ## Toggle sxhkd
 super + shift + s
-		pkill sxhkd; sxhkd
+		pkill sxhkd; sxhkd; notify-send "Restarted sxhkd"
 
 #--- WINDOW MANAGER ---#
 
@@ -60,7 +60,7 @@ super + b
 	  dwmc togglebar
 
 ## Change layout to {tiling, monocle}
-{F10,F11,F12}
+{F9,F10,F12}
 	  dwmc setlayoutex {0,1,2}
 
 ## Cycle up and down the window stack (change focus)
@@ -76,7 +76,7 @@ super + z
     dwmc zoom
 
 ## Rotate clockwise/counterclockwise the window stack
-super + Tab
+super + shift + z
 	dwmc rotatestack +1
 
 ## View all tags
@@ -86,13 +86,13 @@ super + 0
 ## Open Chromium & Tag1
 super + 1
     dwmc viewex 0; \
-    xdotool search --class Chromium windowactivate || chromium
+    xdotool search --class chromium windowactivate || chromium
 
 ## Open Alacritty & Tag2
 super + 2
     dwmc viewex 1; \
-    xdotool search --class Alacritty windowactivate || alacritty
-    #xdotool search --class st-256color windowactivate || st
+    xdotool search --class st-256color windowactivate || st
+    #xdotool search --class Alacritty windowactivate || alacritty
 
 ## Only view the tag {1-9}
 super + 3

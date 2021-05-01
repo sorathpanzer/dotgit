@@ -3,6 +3,8 @@
 # Uncomment this to still load settings configured via autoconfig.yml
 config.load_autoconfig(True)
 
+c.auto_save.session = True
+
 # Try to pre-fetch DNS entries to speed up browsing.
 c.content.dns_prefetch = True
 
@@ -53,8 +55,8 @@ config.set('content.javascript.enabled', True, 'www.youtube.com')
 #   - true
 #   - false
 #   - ask
-config.set('content.notifications', True, 'https://www.etoro.com')
-config.set('content.notifications', True, 'https://www.tradingview.com')
+config.set('content.notifications.enabled', True, 'https://www.etoro.com')
+config.set('content.notifications.enabled', True, 'https://www.tradingview.com')
 
 # Directory to save downloads to.
 c.downloads.location.directory = '/home/sorath/Transferências'
@@ -113,7 +115,7 @@ c.fonts.statusbar = '9pt "SauceCodePro Nerd Font"'
 
 c.tabs.show = "never"
 c.statusbar.show = "never"
-c.url.start_pages = ["https://startpage.com"]
+#c.url.start_pages = ["https://startpage.com"]
 
 # Bindings for normal mode
 config.bind('M', 'hint links spawn mpv {hint-url}')
@@ -123,6 +125,8 @@ config.bind('xb', 'config-cycle statusbar.show always never')
 config.bind('xt', 'config-cycle tabs.show always never')
 config.bind('xx', 'config-cycle statusbar.show always never;; config-cycle tabs.show always never')
 config.bind('xs', 'set-cmd-text :session-load trader')
+config.bind('<Right>', 'tab-next', mode='normal')
+config.bind('<Left>', 'tab-prev', mode='normal')
 
 # Whether host blocking is enabled.
 c.content.blocking.enabled = True

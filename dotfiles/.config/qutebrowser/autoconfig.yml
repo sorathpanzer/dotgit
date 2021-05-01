@@ -7,9 +7,15 @@
 config_version: 2
 settings:
   content.javascript.enabled:
+    '*://*.pop.system76.com/*': true
     '*://*.www.etoro.com/*': true
+    '*://*.www.pornhub.com/*': true
+    '*://*.www.reddit.com/*': true
+    '*://*.www.shortcutfoo.com/*': true
     '*://*.www.tradingview.com/*': true
     global: true
+  content.notifications.enabled:
+    https://www.reddit.com: false
   statusbar.show:
     global: never
   tabs.show:

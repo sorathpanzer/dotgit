@@ -35,13 +35,51 @@ alias off="xset -display :0.0 dpms force off"
 alias ytplay="ytplay -t"
 alias yt="ytplay -t -S --fancy-subs=0 --subs=1"
 alias y2mp3="youtube-dl -x --audio-format mp3 "$1""
-alias lf="$HOME/.local/bin/ff"
-alias dust="dust -rn $1"
-alias du="du -ahxD --apparent-size -d 1 "$@" 2>/dev/null | sort -h -r"
+alias du="du -h -d 1 "$@" 2>/dev/null | sort -h -r"
 alias fc="fc-list | cut -d ":" -f 2 | fzf"
 alias tux="tux -r"
 alias market='w3m "http://68k.news/index.php?section=business&loc=PT"'
 export MANPAGER="sh -c 'col -bx | bat -l man -p'"
+
+fl() {
+    FILE="$HOME/.config/lf/lf.d"
+    ff "$@"
+    if test -f "$FILE"; then
+      cd "$(cat "$FILE")"
+      rm ~/.config/lf/lf.d
+    fi
+      killall -q --signal 9 lf
+      clear
+
+}
+alias lf="fl"
+
+fkill() {
+  process=$(ps -ef | fzf | awk '{print $8}')
+  pkill --signal 9 $process
+}
+
+is_in_git_repo() {
+  git rev-parse HEAD > /dev/null 2>&1
+}
+
+fzf-down() {
+  fzf --height 50% --min-height 20 --border --bind ctrl-/:toggle-preview "$@"
+}
+
+_gf() {
+  is_in_git_repo || return
+  git -c color.status=always status --short |
+  fzf-down -m --ansi --nth 2..,.. \
+    --preview '(git diff --color=always -- {-1} | sed 1,4d; cat {-1})' |
+    cut -c4- | sed 's/.* -> //'
+  #git add $selectum
+  #echo "Commit Message:"
+  #read MESSAGE
+  #git commit -m "$MESSAGE"
+	#git push -u origin master
+
+}
 
 spac() {
   pacmenu=$(paru -Ss $1 | awk "1" RS="\n[ \t]* " ORS=" >> " | fzf | awk '{print $1}')
@@ -81,8 +119,10 @@ t()
 {
   if [ -d "/media/Vault" ]; then
     cd $(find -L $HOME /media/Vault -maxdepth 4 -type d | fzf)
+    lf
   else
     cd $(find -L $HOME -maxdepth 4 -type d | fzf)
+    lf
   fi
 }
 
@@ -144,10 +184,11 @@ bindkey '^v' edit-command-line
 bindkey -s '<<' 't\n'
 bindkey -s '<z' 'o\n'
 bindkey -s "^t" 'msd\n'
+bindkey -s '^z' 'zsh\n'
 
 # Load zsh-syntax-highlighting; should be last.
 export FZF_DEFAULT_OPTS='-e -i --height 40% --layout=reverse --border'
-source ~/.config/zsh/fzf.zsh
+#source ~/.config/zsh/fzf.zsh
 source ~/.config/zsh/unicode.zsh
 source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh 2>/dev/null
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh 2>/dev/null
