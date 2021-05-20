@@ -299,6 +299,8 @@ cmd gd ${{
 # Share files up to 256 Mib
 cmd share ${{
 	curl -F"file=@$fx" https://0x0.st | xclip -sel c -r
+  xclip -o
+  read exit
 }}
 
 # Bindings
