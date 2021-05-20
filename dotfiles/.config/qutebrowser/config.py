@@ -3,7 +3,7 @@
 # Uncomment this to still load settings configured via autoconfig.yml
 config.load_autoconfig(True)
 
-c.auto_save.session = True
+#c.auto_save.session = True
 
 # Try to pre-fetch DNS entries to speed up browsing.
 c.content.dns_prefetch = True
@@ -115,7 +115,8 @@ c.fonts.statusbar = '9pt "SauceCodePro Nerd Font"'
 
 c.tabs.show = "never"
 c.statusbar.show = "never"
-#c.url.start_pages = ["https://startpage.com"]
+c.url.start_pages = ['https://www.etoro.com/portfolio/manual-trades']
+c.url.start_pages.append("https://www.tradingview.com/chart/riV0phPu/#")
 
 # Bindings for normal mode
 config.bind('M', 'hint links spawn mpv {hint-url}')
@@ -131,5 +132,5 @@ config.bind('<Left>', 'tab-prev', mode='normal')
 # Whether host blocking is enabled.
 c.content.blocking.enabled = True
 c.content.blocking.method = "both"
-c.content.blocking.hosts.lists = ['https://www.malwaredomainlist.com/hostslist/hosts.txt', 'http://someonewhocares.org/hosts/hosts', 'http://winhelp2002.mvps.org/hosts.zip', 'http://malwaredomains.lehigh.edu/files/justdomains.zip', 'https://pgl.yoyo.org/adservers/serverlist.php?hostformat=hosts&mimetype=plaintext']
+c.content.blocking.hosts.lists = ['http://someonewhocares.org/hosts/hosts', 'http://winhelp2002.mvps.org/hosts.zip', 'http://malwaredomains.lehigh.edu/files/justdomains.zip', 'https://pgl.yoyo.org/adservers/serverlist.php?hostformat=hosts&mimetype=plaintext', 'https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts']
 
