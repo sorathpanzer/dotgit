@@ -7,6 +7,7 @@ export VISUAL="nvim"
 setopt hist_ignore_dups
 setopt hist_ignore_space
 setopt auto_menu
+unsetopt prompt_cr prompt_sp
 
 # History in cache directory:
 HISTSIZE=10000
@@ -188,7 +189,7 @@ bindkey -s '^z' 'zsh\n'
 
 # Load zsh-syntax-highlighting; should be last.
 export FZF_DEFAULT_OPTS='-e -i --height 40% --layout=reverse --border'
-#source ~/.config/zsh/fzf.zsh
+source ~/.config/zsh/fzf.zsh
 source ~/.config/zsh/unicode.zsh
 source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh 2>/dev/null
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh 2>/dev/null
