@@ -3,6 +3,7 @@
 export EDITOR="nvim"
 export TERMINAL="st"
 export VISUAL="nvim"
+export ANDROID_HOME=/opt/android-sdk
 
 setopt hist_ignore_dups
 setopt hist_ignore_space
@@ -21,6 +22,7 @@ PS1="%{$fg[blue]%}%~$reset_color ⚡"
 
 alias ls="exa --icons -a --group-directories-first"
 alias fzf="fzf -m"
+alias ifz="ifzf --no-height --no-reverse"
 alias mpv="mpv --loop"
 alias nb="newsboat"
 alias lg="cd $HOME/.config/dotgit; lazygit; cd -"
@@ -41,6 +43,14 @@ alias fc="fc-list | cut -d ":" -f 2 | fzf"
 alias tux="tux -r"
 alias market='w3m "http://68k.news/index.php?section=business&loc=PT"'
 export MANPAGER="sh -c 'col -bx | bat -l man -p'"
+alias sudo="doas"
+
+gpull() {
+  git stash --include-untracked
+  git reset --hard
+  git clean -fd
+  git pull
+}
 
 fl() {
     FILE="$HOME/.config/lf/lf.d"
@@ -49,6 +59,7 @@ fl() {
       cd "$(cat "$FILE")"
       rm ~/.config/lf/lf.d
     fi
+      killall -q --signal 9 ueberzug
       killall -q --signal 9 lf
       clear
 
@@ -190,6 +201,7 @@ bindkey -s '^z' 'zsh\n'
 # Load zsh-syntax-highlighting; should be last.
 export FZF_DEFAULT_OPTS='-e -i --height 40% --layout=reverse --border'
 source ~/.config/zsh/fzf.zsh
+source ~/.config/zsh/forgit.zsh
 source ~/.config/zsh/unicode.zsh
 source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh 2>/dev/null
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh 2>/dev/null
