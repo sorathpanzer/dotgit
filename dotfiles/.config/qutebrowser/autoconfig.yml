@@ -17,6 +17,6 @@ settings:
   content.notifications.enabled:
     https://www.reddit.com: false
   statusbar.show:
-    global: never
+    global: always
   tabs.show:
     global: always
