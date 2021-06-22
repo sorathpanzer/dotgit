@@ -1,6 +1,6 @@
 #!/bin/bash
 
 doas adb reboot bootloader
-#doas fastboot flash recovery $HOME/Transferências/twrp-3.5.2_9-0-lavender.img
-doas fastboot flash recovery $HOME/Transferências/twrp-3.5.2_9-0-tf700t.img
+doas fastboot flash recovery $HOME/Transferências/twrp-3.5.2_9-0-lavender.img
+#doas fastboot flash recovery $HOME/Transferências/twrp-3.5.2_9-0-tf700t.img
 doas fastboot reboot
