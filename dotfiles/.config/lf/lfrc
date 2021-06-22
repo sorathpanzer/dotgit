@@ -303,6 +303,10 @@ cmd share ${{
   read exit
 }}
 
+cmd format ${{
+    doas mkfs.vfat -F32 /dev/sdb1
+}}
+
 # Bindings
 # Remove some defaults
 map m
@@ -321,6 +325,7 @@ map t gd
 map o gf
 map usb usb
 map ub unbash
+map fu format
 
 # Archive Mappings
 map - extract

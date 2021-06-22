@@ -1,6 +1,7 @@
 "query:Unread Articles:unread = \"yes\""
 
 Linux
-https://www.archlinux.org/feeds/news/ "Linux" "~ARCH: News"
 https://git.suckless.org/dwm/atom.xml "Linux" "~DWM: Gitsource"
+https://github.com/pystardust/ytfzf/commits/master.atom "Linux" "~YFZF: Git Source"
+https://github.com/tanujnotes/Olauncher/commits/master.atom "Linux" "~Olauncher: Git Source"
 
