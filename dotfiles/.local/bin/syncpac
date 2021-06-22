@@ -14,3 +14,9 @@ rm kore.files.tar.gz.old
 
 repo-add kore.db.tar.gz ./*.xz
 repo-add kore.db.tar.gz ./*.zst
+
+rsync -avr --delete $HOME/Documentos /media/Vault/BackHome
+rsync -avr --delete $HOME/Imagens /media/Vault/BackHome
+rsync -avr --delete $HOME/Música /media/Vault/BackHome
+rsync -avr --delete $HOME/Vídeos /media/Vault/BackHome
+rsync -avr --delete $HOME/Transferências /media/Vault/BackHome
