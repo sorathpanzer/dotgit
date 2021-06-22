@@ -106,8 +106,8 @@ super + shift + {1,2,3,4}
     dwmc tag {0,1,2,3}
 
 ## Toggle the visibility tag {1-9}
-alt + {1-4}
-    dwmc toggleviewex {0-3}
+#alt + {1-4}
+ #   dwmc toggleviewex {0-3}
 
 ## Toggle Gaps
 super + g
