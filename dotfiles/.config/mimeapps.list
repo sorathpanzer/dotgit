@@ -17,6 +17,8 @@ application/x-xls=libreoffice-calc.desktop;
 application/xls=libreoffice-calc.desktop;
 text/csv=libreoffice-calc.desktop;
 text/csv=libreoffice-calc.desktop;
+x-scheme-handler/http=chromium.desktop
+x-scheme-handler/https=chromium.desktop
 
 [Default Applications]
 image/jpeg=sxiv.desktop
@@ -30,3 +32,4 @@ x-scheme-handler/geo=chromium.desktop
 application/pdf=org.pwmt.zathura-pdf-mupdf.desktop
 x-scheme-handler/tg=userapp-Telegram Desktop-VO7GZ0.desktop
 text/plain=nvim.desktop;
+text/html=chromium.desktop
