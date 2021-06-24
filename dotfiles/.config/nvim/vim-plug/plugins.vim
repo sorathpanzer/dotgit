@@ -89,8 +89,6 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     " Plug 'jbgutierrez/vim-better-comments'
     " Echo doc
     " Plug 'Shougo/echodoc.vim'
-    " Interactive code
-    Plug 'ChristianChiarulli/codi.vim'
     " Vim Wiki
     Plug 'vimwiki/vimwiki'
     Plug 'axvr/org.vim'
