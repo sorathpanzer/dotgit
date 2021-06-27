@@ -44,6 +44,14 @@ alias tux="tux -r"
 alias market='w3m "http://68k.news/index.php?section=business&loc=PT"'
 export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 alias sudo="doas"
+alias xpg="gpg -c --no-symkey-cache --cipher-algo AES256"
+
+iwf() {
+  #doas ip link set wlan0 up
+  iwctl station wlan0 scan
+  SSID="$(iwctl station wlan0 get-networks | awk '{print $1}' | head -n -1 | tail -n +6 | fzf)"
+  iwctl station wlan0 connect $SSID
+}
 
 gpull() {
   git stash --include-untracked
