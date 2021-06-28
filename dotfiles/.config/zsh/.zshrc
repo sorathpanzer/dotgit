@@ -47,9 +47,8 @@ alias sudo="doas"
 alias xpg="gpg -c --no-symkey-cache --cipher-algo AES256"
 
 iwf() {
-  #doas ip link set wlan0 up
   iwctl station wlan0 scan
-  SSID="$(iwctl station wlan0 get-networks | awk '{print $1}' | head -n -1 | tail -n +6 | fzf)"
+  SSID="$(iwctl station wlan0 get-networks | awk '{print $1}' | head -n -1 | tail -n +5 | fzf)"
   iwctl station wlan0 connect $SSID
 }
 
