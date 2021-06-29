@@ -14,12 +14,11 @@ static const int horizpadbar        = 6;        /* horizontal padding for status
 static const int vertpadbar         = 7;        /* vertical padding for statusbar */
 static const char *fonts[]          = { "UbuntuMono Nerd Font:size=10" };
 static const char dmenufont[]       = "UbuntuMono Nerd Font:size=10";
-static const char col_gray1[]       = "#292d3e"; /* #292d3e */
+static const char col_gray1[]       = "#292d3e";
 static const char col_gray2[]       = "#000000"; /* border color unfocused windows */
-static const char col_gray3[]       = "#cccccc"; /* #96b5b4 */
+static const char col_gray3[]       = "#96b5b4";
 static const char col_gray4[]       = "#c0c5ce";
-static const char col_cyan[]        = "#74438e"; /* border color focused windows and tags DT=#645377 */
-static const char col_cyan2[]       = "#a5bdf7";
+static const char col_cyan[]        = "#645377"; /* border color focused windows and tags DT= #84598D */
 static const char *colors[][3]      = {
 	/*               fg         bg         border   */
 	[SchemeNorm] = { col_gray4, col_gray1, col_gray2 },
@@ -37,12 +36,20 @@ static const Rule rules[] = {
 	 */
 	/* class      instance    title       tags mask     switchtotag    isfloating   monitor */
 	{ "Chromium",    	NULL,       NULL,       1,            1,             0,           -1 },
-	{ "qutebrowser",  NULL,       NULL,       1 << 3,       1,             0,           -1 },
+	{ "Firefox",    		NULL,       NULL,       1,            1,             0,           -1 },
+	{ "qutebrowser",  NULL,       NULL,       1,       			1,             0,           -1 },
 	{ "st-256color",  NULL,       NULL,       2,            1,             0,           -1 },
-	{ "Alacritty",    NULL,       NULL,       2,            1,             0,           -1 },
+	{ "Alacritty",    NULL,       NULL,       2,            1,             1,           -1 },
 	{ "mpv",     			NULL,       NULL,       1 << 2,       1,             0,           -1 },
+	{ "Lxappearance", NULL,       NULL,       1 << 2,       0,             1,           -1 },
+	{ "Pcmanfm",     	NULL,       NULL,       1 << 2,       1,             0,           -1 },
+	{ "Telegram",    	NULL,       NULL,       1 << 2,       1,             0,           -1 },
 	{ "Signal",    		NULL,       NULL,       1 << 2,       1,             0,           -1 },
+	{ "Element",    	NULL,       NULL,       1 << 2,       1,             0,           -1 },
 	{ "Sxiv",     	 	NULL,       NULL,       1 << 2,       1,             0,           -1 },
+	{ "imv",         	NULL,       NULL,       1 << 2,       1,             0,           -1 },
+	{ "Steam",     	 	NULL,       NULL,       1 << 3,       1,             0,           -1 },
+	{ "RStudio",     	NULL,       NULL,       1 << 3,       1,             0,           -1 },
 	{ "libreoffice",  NULL,       NULL,       1 << 3,       1,             0,           -1 },
 	{ "libreoffice-calc",  NULL,       NULL,       1 << 3,       1,             0,           -1 },
 	{ "VirtualBox Manager", NULL,       NULL,       1 << 3,       1,             0,           -1 },
@@ -57,8 +64,7 @@ static const Layout layouts[] = {
 	/* symbol     arrange function */
 	{ "[T]=",      tile },    /* first entry is default */
 	{ "|F|",      monocle },
-	{ "|C|",      centeredmaster },
-	{ NULL,       NULL },
+	{ "|M|",      centeredmaster },
 };
 
 /* key definitions */
@@ -75,73 +81,15 @@ static const Layout layouts[] = {
 
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
-static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_cyan2, NULL };
-static const char *termcmd[]  = { "alacritty", NULL };
-static const char *shutcmd[]  = { "clpoweroff", NULL };
-static const char *rebcmd[]  = { "clreboot", NULL };
+static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
 static const char scratchpadname[] = "scratchpad";
 static const char *scratchpadcmd[] = { "st", "-t", scratchpadname, "-g", "120x34", NULL };
 
 static Key keys[] = {
 	/* modifier               key              function        argument */
 	{ MODKEY|ShiftMask,   	  XK_Return,      spawn,          {.v = dmenucmd } },
-	{ MODKEY,                 XK_Return,      spawn,          {.v = termcmd } },
-	{ MODKEY,                 XK_b,           togglebar,      {0} },
-	{ MODKEY|ShiftMask,       XK_Right,       rotatestack,    {.i = +1 } },
-	{ MODKEY|ShiftMask,       XK_Left,        rotatestack,    {.i = -1 } },
-	{ MODKEY,                 XK_Right,       focusstack,     {.i = +1 } },
-	{ MODKEY,                 XK_Left,        focusstack,     {.i = -1 } },
-	{ MODKEY,                 XK_Down,        focusstack,     {.i = +1 } },
-	{ MODKEY,                 XK_Up,          focusstack,     {.i = -1 } },
-	{ MODKEY|ControlMask,  	  XK_minus,       setmfact,       {.f = -0.02} },
-	{ MODKEY|ControlMask,     XK_plus,        setmfact,       {.f = +0.02} },
-	{ MODKEY,       	  			XK_Tab,         focusstack,     {.i = +1 } },
 	{ MODKEY,                 XK_backslash,   view,           {0} },
-	{ MODKEY,	          			XK_q,           killclient,     {0} },
-	{ MODKEY,       					XK_F9,          setlayout,      {.v = &layouts[0]} },
-	{ MODKEY,       					XK_F10,         setlayout,      {.v = &layouts[1]} },
-	{ MODKEY,       					XK_F11,         setlayout,      {.v = &layouts[2]} },
-	{ MODKEY|ShiftMask,       XK_space,       togglefloating, {0} },
-	{ MODKEY,                 XK_0,           view,           {.ui = ~0 } },
-	{ MODKEY|ShiftMask,       XK_0,           tag,            {.ui = ~0 } },
-	{ MODKEY,                 XK_comma,       focusmon,       {.i = -1 } },
-	{ MODKEY,                 XK_period,      focusmon,       {.i = +1 } },
-	{ MODKEY|ShiftMask,       XK_comma,       tagmon,         {.i = -1 } },
-	{ MODKEY|ShiftMask,       XK_period,      tagmon,         {.i = +1 } },
-	{ MODKEY|ShiftMask, 	  	XK_r,      	   	quit,           {1} },
-	{ MODKEY,                 XK_i,      	   	incnmaster,     {.i = +1 } },
-  { MODKEY,           			XK_d,      	   	incnmaster,     {.i = -1 } },
-	{ MODKEY,                 XK_z, 	   			zoom,           {0} },
 	{ MODKEY,   	  					XK_less,      	togglescratch,  {.v = scratchpadcmd } },
-
-    /* Gaps keybinds control */
-	{ MODKEY|ControlMask,     XK_g,      	   togglegaps,     {0} },
-	{ MODKEY, 		  XK_a,      	   defaultgaps,    {0} },
-
-    /* Apps Launched with SUPER + ALT + KEY  */
-	{ MODKEY,        	  XK_w,      	  spawn,          CMD ("xdo activate -N qutebrowser || qutebrowser") },
-  { MODKEY|ShiftMask, XK_space,     spawn,          CMD ("passmenu --type") },
-	{ MODKEY|ShiftMask, XK_t,      	  spawn,          CMD ("tnoty") },
-	{ MODKEY,        	  XK_j,      	  spawn,          CMD ("alacritty -e journalctl --follow") },
-	{ MODKEY,        	  XK_s,      	  spawn,          CMD ("dmsearch") },
-	{ MODKEY,        	  XK_x,      	  spawn,          CMD ("12ft") },
-	{ MODKEY,        	  XK_v,      	  spawn,          CMD ("playvideo") },
-	{ MODKEY,        	  XK_Delete,    spawn,          SHCMD ("xset dpms force off") },
-	{ MODKEY|ShiftMask, XK_Delete, 	  spawn,          {.v = shutcmd } },
-	{ MODKEY|ShiftMask, XK_BackSpace, spawn,          {.v = rebcmd } },
-	{ MODKEY,       	  XK_BackSpace, spawn,          CMD ("physlock") },
-	{ 0,                XK_Print,  	  spawn,          CMD ("screenshot") },
-	{ MODKEY|ShiftMask, XK_plus,   	  spawn,          SHCMD ("light -A 15") },
-  { MODKEY|ShiftMask, XK_minus,  	  spawn,          SHCMD ("light -U 15") },
-  { MODKEY,           XK_plus,   	  spawn,          SHCMD ("pactl set-sink-volume alsa_output.pci-0000_00_1f.3.analog-stereo +10%") },
-  { MODKEY,           XK_minus,  	  spawn,          SHCMD ("pactl set-sink-volume alsa_output.pci-0000_00_1f.3.analog-stereo -10%") },
-  { MODKEY,           XK_m, 	   		spawn,          SHCMD ("pamixer -t ") },
-	{ MODKEY,        	 	XK_1,      	  spawn,          CMD("xdotool search --class Chromium windowactivate || chromium") },
-	{ MODKEY,        	  XK_2,      	  spawn,          CMD("xdotool search --class st-256color windowactivate || st") },
-	TAGKEYS(            XK_1,            0)
-	TAGKEYS(            XK_2,            1)
-	TAGKEYS(            XK_3,            2)
-	TAGKEYS(            XK_4,            3)
 };
 
 /* button definitions */
@@ -150,14 +98,88 @@ static Button buttons[] = {
 	/* click                event mask      button          function        argument */
 	{ ClkLtSymbol,          0,              Button1,        setlayout,      {0} },
 	{ ClkLtSymbol,          0,              Button3,        setlayout,      {.v = &layouts[2]} },
-	{ ClkWinTitle,          0,              Button2,        zoom,           {0} },
-	{ ClkStatusText,        0,              Button2,        spawn,          {.v = termcmd } },
-	{ ClkClientWin,         MODKEY,         Button1,        setlayout,       {0} },
+	{ ClkWinTitle,          0,              Button2,        zoom,  					{0} },
+	{ ClkClientWin,         MODKEY,         Button1,        setlayout,      {0} },
 	{ ClkClientWin,         MODKEY,         Button2,        togglefloating, {0} },
 	{ ClkClientWin,         MODKEY,         Button3,        resizemouse,    {0} },
 	{ ClkTagBar,            0,              Button1,        view,           {0} },
 	{ ClkTagBar,            0,              Button3,        toggleview,     {0} },
 	{ ClkTagBar,            MODKEY,         Button1,        tag,            {0} },
 	{ ClkTagBar,            MODKEY,         Button3,        toggletag,      {0} },
+};
+
+void
+setlayoutex(const Arg *arg)
+{
+	setlayout(&((Arg) { .v = &layouts[arg->i] }));
+}
+
+void
+viewex(const Arg *arg)
+{
+	view(&((Arg) { .ui = 1 << arg->ui }));
+}
+
+void
+viewall(const Arg *arg)
+{
+	view(&((Arg){.ui = ~0}));
+}
+
+void
+toggleviewex(const Arg *arg)
+{
+	toggleview(&((Arg) { .ui = 1 << arg->ui }));
+}
+
+void
+tagex(const Arg *arg)
+{
+	tag(&((Arg) { .ui = 1 << arg->ui }));
+}
+
+void
+toggletagex(const Arg *arg)
+{
+	toggletag(&((Arg) { .ui = 1 << arg->ui }));
+}
+
+void
+tagall(const Arg *arg)
+{
+	tag(&((Arg){.ui = ~0}));
+}
+
+/* signal definitions */
+/* signum must be greater than 0 */
+/* trigger signals using `xsetroot -name "fsignal:<signame> [<type> <value>]"` */
+static Signal signals[] = {
+	/* signum           function */
+	{ "focusstack",     focusstack },
+	{ "rotatestack",    rotatestack },
+	{ "setmfact",       setmfact },
+	{ "togglebar",      togglebar },
+	{ "togglescratch",  togglescratch },
+	{ "togglegaps",     togglegaps },
+	{ "defaultgaps",    defaultgaps },
+	{ "incnmaster",     incnmaster },
+	{ "togglefloating", togglefloating },
+	{ "focusmon",       focusmon },
+	{ "tagmon",         tagmon },
+	{ "zoom",           zoom },
+	{ "view",           view },
+	{ "viewall",        viewall },
+	{ "viewex",         viewex },
+	{ "toggleview",     view },
+	{ "toggleviewex",   toggleviewex },
+	{ "tag",            tag },
+	{ "tagall",         tagall },
+	{ "tagex",          tagex },
+	{ "toggletag",      tag },
+	{ "toggletagex",    toggletagex },
+	{ "killclient",     killclient },
+	{ "quit",           quit },
+	{ "setlayout",      setlayout },
+	{ "setlayoutex",    setlayoutex },
 };
 
