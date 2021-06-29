@@ -3,14 +3,8 @@
 super + Return
     st
 
-super + {_,shift +} t
-    {telegram-desktop,tnoty}
-
 super + s
     dmsearch
-
-super + e
-    element-desktop
 
 super + v
     playvideo
@@ -24,6 +18,14 @@ super + x
 Print
     scrot ~/Imagens/Screenshots/$(date '+%Y%m%d').png && notify-send -i "$HOME/.fonts/svg/image.svg" -a Screenshot "Full screenshot completed"
 
+super + w
+    xdo activate -N qutebrowser; qutebrowser
+
+## Toggle sxhkd
+super + shift + s
+		pkill sxhkd; sxhkd; notify-send "Restarted sxhkd"
+
+                           #--- WINDOW MANAGER ---#
 super + shift + {plus,minus}
     light {-A,-U} 15
 
@@ -33,27 +35,12 @@ super + {plus,minus}
 super + m
     pamixer -t
 
-super + shift + q
-    winclosemenu
-
 super + {_,shift +} BackSpace
     {physlock,clreboot}
 
 super + {_,shift +} Delete
     {xset dpms force off,clpoweroff}
 
-super + w
-    xdo activate -N qutebrowser; qutebrowser
-
-## Toggle Compositor
-super + shift + p
-		pkill picom; picom
-
-## Toggle sxhkd
-super + shift + s
-		pkill sxhkd; sxhkd; notify-send "Restarted sxhkd"
-
-#--- WINDOW MANAGER ---#
 
 ## Toggle the dwm bar
 super + b
