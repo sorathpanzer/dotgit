@@ -67,7 +67,7 @@ fi
 # Picking a search engine.
 # shellcheck disable=SC2154
 while [ -z "$engine" ]; do
-    engine=$(printf '%s\n' "${!options[@]}" | sort | dmenu -l 20 -p 'Choose search engine:') "$@" || exit
+    engine=$(printf '%s\n' "${!options[@]}" | sort | dmenu -m dmenumon -fn dmenufont -nf "#cccccc" -nb "#292d3e" -sb "#74438e" -sf "#a5bdf7" -l 20 -p 'Choose search engine:') "$@" || exit
     url="${options["${engine}"]}" || exit
 done
 
