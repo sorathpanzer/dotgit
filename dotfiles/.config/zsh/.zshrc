@@ -67,9 +67,8 @@ fl() {
       rm ~/.config/lf/lf.d
     fi
       killall -q --signal 9 ueberzug
-      killall -q --signal 9 lf
+      #killall -q --signal 9 lf
       clear
-
 }
 alias lf="fl"
 

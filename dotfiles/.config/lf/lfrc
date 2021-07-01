@@ -264,20 +264,9 @@ cmd size ${{
   read exit
 }}
 
-#cmd vview ${{
-#  mpv *
-#}}
-
-
-cmd logout ${{
-  lf -remote "send quit"
-  killall -q --signal 9 lf
-  clear
-}}
-
 cmd logat ${{
   printf '%s\n' "$PWD" > "$HOME/.config/lf/lf.d"
-  lf -remote "send quit"
+  lf -remote "send $id quit"
 }}
 
 cmd gf ${{
@@ -363,7 +352,6 @@ map bi burniso
 map mf mvtofold
 map mt moveto
 map msd mtsda
-#map q logout
 cmd q quit
 map w logat
 map <c-space> :glob-select *
