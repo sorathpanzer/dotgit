@@ -56,8 +56,8 @@ static const int resizehints = 0;    /* 1 means respect size hints in tiled resi
 static const Layout layouts[] = {
 	/* symbol     arrange function */
 	{ "[T]=",      tile },    /* first entry is default */
-	{ "|F|",      monocle },
 	{ "|C|",      centeredmaster },
+	{ "|F|",      monocle },
 	{ NULL,       NULL },
 };
 
@@ -76,7 +76,7 @@ static const Layout layouts[] = {
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_cyan2, NULL };
-static const char *termcmd[]  = { "alacritty", NULL };
+static const char *termcmd[]  = { "st", NULL };
 static const char *shutcmd[]  = { "clpoweroff", NULL };
 static const char *rebcmd[]  = { "clreboot", NULL };
 static const char scratchpadname[] = "scratchpad";
@@ -115,8 +115,7 @@ static Key keys[] = {
 	{ MODKEY,   	  					XK_less,      	togglescratch,  {.v = scratchpadcmd } },
 
     /* Gaps keybinds control */
-	{ MODKEY|ControlMask,     XK_g,      	   togglegaps,     {0} },
-	{ MODKEY, 		  XK_a,      	   defaultgaps,    {0} },
+	{ MODKEY,     						XK_g,      	   togglegaps,     {0} },
 
     /* Apps Launched with SUPER + ALT + KEY  */
 	{ MODKEY,        	  XK_w,      	  spawn,          CMD ("xdo activate -N qutebrowser || qutebrowser") },

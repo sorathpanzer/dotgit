@@ -23,7 +23,7 @@ if !exists('g:vscode')
   set smartindent                         " Makes indenting smart
   set autoindent                          " Good auto indent
   set laststatus=2                        " Always display the status line
-  set number relativenumber                             " Line numbers
+  set number relativenumber               " Line numbers
   set cursorline                          " Enable highlighting of the current line
   set background=dark                     " tell vim what the background color looks like
   set showtabline=1                       " Always show tabs
