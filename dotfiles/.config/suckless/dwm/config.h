@@ -116,6 +116,7 @@ static Key keys[] = {
 
     /* Gaps keybinds control */
 	{ MODKEY,     						XK_g,      	   togglegaps,     {0} },
+	{ MODKEY|ShiftMask,     				XK_g,      	   defaultgaps,     {0} },
 
     /* Apps Launched with SUPER + ALT + KEY  */
 	{ MODKEY,        	  XK_w,      	  spawn,          CMD ("xdo activate -N qutebrowser || qutebrowser") },
