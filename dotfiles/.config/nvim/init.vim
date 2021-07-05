@@ -5,51 +5,55 @@
 "/___/_/ /_/_/\__(_)___/_/_/ /_/ /_/
 
 " Always source these
-source $HOME/.config/nvim/vim-plug/plugins.vim
-source $HOME/.config/nvim/general/settings.vim
-source $HOME/.config/nvim/general/functions.vim
-source $HOME/.config/nvim/keys/mappings.vim
-source $HOME/.config/nvim/keys/which-key.vim
+source $HOME/.config/nvim/plugins.vim
+source $HOME/.config/nvim/mappings.vim
+source $HOME/.config/nvim/plug-config/easyescape.vim
+source $HOME/.config/nvim/plug-config/fzf.vim
+source $HOME/.config/nvim/plug-config/rainbow.vim
+source $HOME/.config/nvim/plug-config/start-screen.vim
+source $HOME/.config/nvim/plug-config/floaterm.vim
 
-" Source depending on if VSCode is our client
-if exists('g:vscode')
-    " VSCode extension
-  source $HOME/.config/nvim/vscode/windows.vim
-  source $HOME/.config/nvim/plug-config/easymotion.vim
-else
-  " ordinary neovim
-  source $HOME/.config/nvim/themes/syntax.vim
-  source $HOME/.config/nvim/themes/onedark.vim
-  source $HOME/.config/nvim/themes/airline.vim
-  source $HOME/.config/nvim/plug-config/rnvimr.vim
-  source $HOME/.config/nvim/plug-config/easyescape.vim
-  source $HOME/.config/nvim/plug-config/fzf.vim
-  source $HOME/.config/nvim/plug-config/nerd-commenter.vim
-  source $HOME/.config/nvim/plug-config/rainbow.vim
-  source $HOME/.config/nvim/plug-config/quickscope.vim
-  source $HOME/.config/nvim/plug-config/vim-wiki.vim
-  source $HOME/.config/nvim/plug-config/sneak.vim
-  source $HOME/.config/nvim/plug-config/goyo.vim
-  source $HOME/.config/nvim/plug-config/vim-rooter.vim
-  source $HOME/.config/nvim/plug-config/start-screen.vim
-  source $HOME/.config/nvim/plug-config/gitgutter.vim
-  source $HOME/.config/nvim/plug-config/closetags.vim
-  source $HOME/.config/nvim/plug-config/floaterm.vim
-  luafile $HOME/.config/nvim/lua/plug-colorizer.lua
-endif
+syntax enable                           " Enables syntax highlighing
+colorscheme onedark
+set iskeyword+=-                      	" treat dash separated words as a word text object"
+set formatoptions-=cro                  " Stop newline continution of comments
+set hidden                              " Required to keep multiple buffers open multiple buffers
+set nowrap                              " Display long lines as just one line
+set encoding=utf-8                      " The encoding displayed
+set pumheight=10                        " Makes popup menu smaller
+set fileencoding=utf-8                  " The encoding written to file
+set ruler              			            " Show the cursor position all the time
+set cmdheight=2                         " More space for displaying messages
+set mouse=a                             " Enable your mouse
+set splitbelow                          " Horizontal splits will automatically be below
+set splitright                          " Vertical splits will automatically be to the right
+set t_Co=256                            " Support 256 colors
+set tabstop=2                           " Insert 2 spaces for a tab
+set shiftwidth=2                        " Change the number of space characters inserted for indentation
+set smarttab                            " Makes tabbing smarter will realize you have 2 vs 4
+set expandtab                           " Converts tabs to spaces
+set smartindent                         " Makes indenting smart
+set autoindent                          " Good auto indent
+set laststatus=2                        " Always display the status line
+set number relativenumber               " Line numbers
+set cursorline                          " Enable highlighting of the current line
+set background=dark                     " tell vim what the background color looks like
+set showtabline=1                       " Always show tabs
+set noshowmode                          " We don't need to see things like -- INSERT -- anymore
+set nobackup                            " This is recommended by coc
+set nowritebackup                       " This is recommended by coc
+set shortmess+=c                        " Don't pass messages to |ins-completion-menu|.
+set signcolumn=yes                      " Always show the signcolumn, otherwise it would shift the text each time
+set clipboard=unnamedplus               " Copy paste between vim and everything else
+set so=999                              " Open with the cursor on the middle of the screen
+set incsearch
+set termguicolors
 
-"open auto VimwikiSearch
-augroup quickfix
-    autocmd!
-    autocmd QuickFixCmdPost [^l]* nested cwindow
-    autocmd QuickFixCmdPost    l* nested lwindow
-augroup END
-
-"copy content of a url into vim
-function Webshare()
-  execute ':read !echo "Source: $(xclip -selection c -o)\n" & readable -l force -p text-content $(xclip -selection c -o)'
-  call feedkeys("ggdd2j2dd")
-endfunction
+" Return to last edit position when opening files (You want this!)
+autocmd BufReadPost *
+     \ if line("'\"") > 0 && line("'\"") <= line("$") |
+     \   exe "normal! g`\"" |
+     \ endif
 
 "Hide tabline toggle
 let s:hidden_all = 0
@@ -69,9 +73,5 @@ function! ToggleHiddenAll()
     endif
 endfunction
 
-nnoremap <silent> <S-h> :call ToggleHiddenAll()<CR>
-nnoremap <silent> <C-h> :set showtabline=2<CR>
-
-"Disable spell check in markdown
-autocmd BufRead,BufNewFile {*.markdown,*.mdown,*.mkdn,*.md,*.mkd,*.mdwn,*.mdtxt,*.mdtext,*.text} set filetype=markdown
-autocmd FileType markdown setlocal nospell
+" Automatically deletes all trailing whitespace on save.
+autocmd BufWritePre * %s/\s\+$//e
