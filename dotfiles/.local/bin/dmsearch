@@ -74,7 +74,7 @@ done
 # Searching the chosen engine.
 # shellcheck disable=SC2154
 while [ -z "$query" ]; do
-    query=$(echo "$engine" | dmenu -p 'Enter search query:') "$@" || exit
+    query=$(echo "$engine" | dmenu -fn "UbuntuMono Nerd Font:size=10" -nf "#cccccc" -nb "#292d3e" -sb "#74438e" -sf "#a5bdf7" -p 'Enter search query:') "$@" || exit
 done
 
 # Display search results in web browser
