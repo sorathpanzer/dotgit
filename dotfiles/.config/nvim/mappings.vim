@@ -28,7 +28,8 @@ nnoremap <silent> <M-h>    :vertical resize -2<CR>
 nnoremap <silent> <M-l>    :vertical resize +2<CR>
 
 " Find & Replace Globally
- nnoremap <C-S-s> :%s/\<<C-r><C-w>\>//g<Left><Left>
+ nnoremap <C-s> :%s/\<<C-r><C-w>\>//g<Left><Left>
+
  nmap <C-n> :lnext<CR>
  nmap <C-p> :lprevious<CR>
  nmap <C-o> :lopen<CR>
@@ -59,3 +60,5 @@ nnoremap <silent> <F3>  0w<Left><c-x><S-$>
 " execute selected lines
 xnoremap <leader>x :w !zsh<cr>
 
+" Open Float Lazygit
+nnoremap  <silent>  <F2>  :FloatermNew lazygit<CR>
