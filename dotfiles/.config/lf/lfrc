@@ -8,6 +8,7 @@ set icons true
 set ignorecase true
 set shellopts '-eu'
 set sortby ext
+set info time
 set cleaner preview-image
 set shell zsh
 set shellopts '-euy'
@@ -100,7 +101,7 @@ cmd autoratios &{{
                         lf -remote "send $id set ratios 1:2"
                         lf -remote "send $id set preview"
                     else
-                        lf -remote "send $id set ratios 1:5:6"
+                        lf -remote "send $id set ratios 1:1"
                         lf -remote "send $id set preview"
                     fi
                     lf -remote "send reload"
@@ -259,11 +260,6 @@ cmd cutvideo ${{
     ffmpeg -i "$f" -ss $start -to $end -c copy $name.mp4
 }}
 
-cmd size ${{
-  du -h "$f"
-  read exit
-}}
-
 cmd logat ${{
   printf '%s\n' "$PWD" > "$HOME/.config/lf/lf.d"
   lf -remote "send $id quit"
@@ -325,7 +321,6 @@ map dd trash
 map dc clear_trash
 map dr restore_trash
 map dv viewtrash
-map sv size
 
 # Awesome Search
 map S stow
