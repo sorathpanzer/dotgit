@@ -1,82 +1,33 @@
-#!/usr/bin/env bash
-#
-# Script name: dmsearch
-# Description: Search various search engines (inspired by surfraw).
-# Dependencies: dmenu and brave
-# GitLab: https://www.gitlab.com/dwt1/dmscripts
-# License: https://www.gitlab.com/dwt1/dmscripts/LICENSE
-# Contributors: Derek Taylor
-#               Ali Furkan Yıldız
-#               HostGrady
+#!/usr/bin/dash
 
-# Defining our config location
-# The configuration file must be a bash script and it is formatted the same as below
-DMCONFIG="$HOME/.config/dmscripts/dmsearch"
+duck_search="https://duckduckgo.com/?q="
+google_search="https://www.google.com/search?q="
+youtube_search="https://www.youtube.com/results?search_query="
+wiki_search="https://en.wikipedia.org/w/index.php?search="
+archpkg="https://archlinux.org/packages/?sort=&q="
+archwiki="https://wiki.archlinux.org/index.php?search="
+github="https://github.com/search?q="
+odysee="https://odysee.com/$/search?q="
+stackoverflow="https://stackoverflow.com/search?q="
+translate="https://translate.google.com/?sl=auto&tl=en&text="
 
-# If our config location exists, it will execute the dmsearch config script
-# If not, the script has sample urls and a sample browser
-if [ -f "$DMCONFIG" ]; then
-# SC1090 says there is a problem with this way dealing with the config, I have experienced no issues personally
-	source "$DMCONFIG"
-else
-# Defining our web browser, by default we are using brave.
-	DMBROWSER="${BROWSER:-chromium}"
-# An array of search engines.  You can edit this list to add/remove
-# search engines. The format must be: "engine_name]="url".
-# The url format must allow for the search keywords at the end of the url.
-# For example: https://www.amazon.com/s?k=XXXX searches Amazon for 'XXXX'.
-	declare -A options
-	options[archaur]="https://aur.archlinux.org/packages/?O=0&K="
-	options[archpkg]="https://archlinux.org/packages/?sort=&q="
-	options[archwiki]="https://wiki.archlinux.org/index.php?search="
-	options[arxiv]="https://arxiv.org/search/?searchtype=all&source=header&query="
-	options[coinbase]="https://www.coinbase.com/price?query="
-	options[duckduckgo]="https://duckduckgo.com/?q="
-	options[github]="https://github.com/search?q="
-	options[gitlab]="https://gitlab.com/search?search="
-	options[odysee]="https://odysee.com/$/search?q="
-	options[reddit]="https://www.reddit.com/search/?q="
-	options[slashdot]="https://slashdot.org/index2.pl?fhfilter="
-	options[socialblade]="https://socialblade.com/youtube/user/"
-	options[stackoverflow]="https://stackoverflow.com/search?q="
-	options[startpage]="https://www.startpage.com/do/dsearch?query="
-	options[stockquote]="https://finance.yahoo.com/quote/"
-	options[thesaurus]="https://www.thesaurus.com/misspelling?term="
-	options[translate]="https://translate.google.com/?sl=auto&tl=en&text="
-	options[urban]="https://www.urbandictionary.com/define.php?term="
-	options[wayback]="https://web.archive.org/web/*/"
-	options[webster]="https://www.merriam-webster.com/dictionary/"
-	options[wikipedia]="https://en.wikipedia.org/wiki/"
-	options[wiktionary]="https://en.wiktionary.org/wiki/"
-	options[wolfram]="https://www.wolframalpha.com/input/?i="
-	options[youtube]="https://www.youtube.com/results?search_query="
-	options[google]="https://www.google.com/search?q="
-	options[googleimages]="https://www.google.com/search?hl=en&tbm=isch&q="
-	options[googlenews]="https://news.google.com/search?q="
-	options[googleSupport]="https://support.google.com/search?q="
-	options[googleSupportAdmin]="https://support.google.com/a/search?q="
-	options[googleStructuredData]="https://search.google.com/structured-data/testing-tool#url="
-	options[googleRichResults]="https://search.google.com/test/rich-results??url="
-	options[googlePagespeed]="https://developers.google.com/speed/pagespeed/insights/?url="
-	options[googleDevelopers]="https://developers.google.com/s/results?q="
-	options[googleOpenSource]="https://opensource.google/projects/search?q="
-	options[googleExperimentswithGoogle]="https://experiments.withgoogle.com/search?q="
-	options[googleDataset]="https://datasetsearch.research.google.com/search?query="
-fi
+options=$(echo "duckduckgo google youtube github translate archpkg archwiki wikipedia odysee" | tr ' ' '\n')
+search_engine=$(printf '%s\n' "$options" | dmenu -fn "UbuntuMono Nerd Font:size=10" -nf "#cccccc" -nb "#292d3e" -sb "#74438e" -sf "#a5bdf7" -l 20 -p 'Choose search engine:') "$@" || exit
+keyword=$(tac ~/.cache/search_history | dmenu -fn "UbuntuMono Nerd Font:size=10" -nf "#cccccc" -nb "#292d3e" -sb "#74438e" -sf "#a5bdf7" -l 1 -p "Search")
 
-# Picking a search engine.
-# shellcheck disable=SC2154
-while [ -z "$engine" ]; do
-    engine=$(printf '%s\n' "${!options[@]}" | sort | dmenu -fn "UbuntuMono Nerd Font:size=10" -nf "#cccccc" -nb "#292d3e" -sb "#74438e" -sf "#a5bdf7" -l 20 -p 'Choose search engine:') "$@" || exit
-    url="${options["${engine}"]}" || exit
-done
+[ "$keyword" = "" ] || echo $keyword >> ~/.cache/search_history
 
-# Searching the chosen engine.
-# shellcheck disable=SC2154
-while [ -z "$query" ]; do
-    query=$(echo "$engine" | dmenu -fn "UbuntuMono Nerd Font:size=10" -nf "#cccccc" -nb "#292d3e" -sb "#74438e" -sf "#a5bdf7" -p 'Enter search query:') "$@" || exit
-done
+search_word=${keyword#$search_engine}
 
-# Display search results in web browser
-$DMBROWSER "$url""$query"
-
+case $search_engine in
+	"duckduckgo") $BROWSER "$duck_search$search_word" ;;
+	"google") $BROWSER "$google_search$search_word" ;;
+	"youtube") $BROWSER "$youtube_search$search_word" ;;
+	"wikipedia") $BROWSER "$wiki_search$search_word" ;;
+	"archpkg") $BROWSER "$archpkg$search_word" ;;
+	"archwiki") $BROWSER "$archpkg$search_word" ;;
+	"github") $BROWSER "$github$search_word" ;;
+	"odysee") $BROWSER "$odysee$search_word" ;;
+	"stackoverflow") $BROWSER "$stackoverflow$search_word" ;;
+	"translate") $BROWSER "$translate$search_word" ;;
+esac

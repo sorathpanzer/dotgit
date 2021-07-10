@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 if [ $# -lt 5 ]; then
     echo "Missing args, usage: percentage current icon1 icon2 icon3 icon4"
