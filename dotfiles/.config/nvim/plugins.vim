@@ -26,7 +26,11 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'voldikss/vim-floaterm'
   " Start Screen
     Plug 'mhinz/vim-startify'
-call plug#end()
+  " Nerd Commenter
+    Plug 'scrooloose/nerdcommenter'
+  " Interaction with git
+  Plug 'airblade/vim-gitgutter'
+  call plug#end()
 
 " Automatically install missing plugins on startup
 autocmd VimEnter *
