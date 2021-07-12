@@ -37,7 +37,7 @@ static const Rule rules[] = {
 	 */
 	/* class      instance    title       tags mask     switchtotag    isfloating   monitor */
 	{ "Chromium",    	NULL,       NULL,       1,            1,             0,           -1 },
-	{ "qutebrowser",  NULL,       NULL,       1 << 3,       1,             0,           -1 },
+/*	{ "qutebrowser",  NULL,       NULL,       1,            1,             0,           -1 },*/
 	{ "st-256color",  NULL,       NULL,       2,            1,             0,           -1 },
 	{ "Alacritty",    NULL,       NULL,       2,            1,             0,           -1 },
 	{ "mpv",     			NULL,       NULL,       1 << 2,       1,             0,           -1 },
@@ -119,7 +119,7 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,     				XK_g,      	   defaultgaps,     {0} },
 
     /* Apps Launched with SUPER + ALT + KEY  */
-	{ MODKEY,        	  XK_w,      	  spawn,          CMD ("xdo activate -N qutebrowser || qutebrowser") },
+	{ MODKEY,        	  XK_w,      	  spawn,          CMD ("xdotool search --class qutebrowser windowactivate || qutebrowser") },
   { MODKEY|ShiftMask, XK_space,     spawn,          CMD ("passmenu --type") },
 	{ MODKEY|ShiftMask, XK_t,      	  spawn,          CMD ("tnoty") },
 	{ MODKEY,        	  XK_j,      	  spawn,          CMD ("alacritty -e journalctl --follow") },

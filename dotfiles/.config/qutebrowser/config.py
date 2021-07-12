@@ -46,6 +46,7 @@ config.set('content.javascript.enabled', True, 'devtools://*')
 config.set('content.javascript.enabled', True, 'chrome://*/*')
 config.set('content.javascript.enabled', True, 'qute://*/*')
 
+config.set('content.javascript.enabled', True, 'file:///home/sorath/.config/qutebrowser/startpage/index.html')
 config.set('content.javascript.enabled', True, 'www.etoro.com')
 config.set('content.javascript.enabled', True, 'www.tradingview.com')
 config.set('content.javascript.enabled', True, 'www.youtube.com')
@@ -115,17 +116,19 @@ c.fonts.statusbar = '9pt "SauceCodePro Nerd Font"'
 
 c.tabs.show = "never"
 c.statusbar.show = "never"
-c.url.start_pages = ['https://www.etoro.com/portfolio/manual-trades']
-c.url.start_pages.append("https://www.tradingview.com/chart/riV0phPu/#")
+c.url.start_pages = ['file:///home/sorath/.config/qutebrowser/startpage/index.html']
+#c.url.start_pages = ['https://www.etoro.com/portfolio/manual-trades']
+#c.url.start_pages.append("https://www.tradingview.com/chart/riV0phPu/#")
 
 # Bindings for normal mode
-config.bind('M', 'hint links spawn mpv {hint-url}')
-config.bind('Z', 'hint links spawn st -e youtube-dl {hint-url}')
+config.bind('V', 'hint links spawn mpv {hint-url}')
+config.bind('D', 'hint links spawn st -e youtube-dl {hint-url}')
 #config.bind('t', 'set-cmd-text -s :open -t')
-config.bind('xb', 'config-cycle statusbar.show always never')
-config.bind('xt', 'config-cycle tabs.show always never')
-config.bind('xx', 'config-cycle statusbar.show always never;; config-cycle tabs.show always never')
-config.bind('xs', 'set-cmd-text :session-load trader')
+config.bind('<Alt-b>', 'config-cycle tabs.show always never')
+config.bind('st', 'session-load trader')
+config.bind('sl', 'set-cmd-text :session-load')
+config.bind('ss', 'set-cmd-text :session-save')
+config.bind('sd', 'set-cmd-text :session-delete  ')
 config.bind('<Right>', 'tab-next', mode='normal')
 config.bind('<Left>', 'tab-prev', mode='normal')
 

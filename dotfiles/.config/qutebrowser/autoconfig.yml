@@ -13,10 +13,13 @@ settings:
     '*://*.www.reddit.com/*': true
     '*://*.www.shortcutfoo.com/*': true
     '*://*.www.tradingview.com/*': true
+    '*://mail.google.com/*': true
     global: true
   content.notifications.enabled:
     https://www.reddit.com: false
+  content.register_protocol_handler:
+    https://mail.google.com?extsrc=mailto&url=%25s: true
   statusbar.show:
     global: always
   tabs.show:
-    global: always
+    global: never
