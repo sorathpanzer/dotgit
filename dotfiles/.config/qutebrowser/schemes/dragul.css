@@ -1,0 +1,77 @@
+/* Sticky header. */
+[data-qb-domain="distrowatch.com"] #header,
+	position: sticky !important;
+	top: 0 !important;
+	z-index: 1000 !important;
+}
+
+[data-qb-domain="distrowatch.com"] #sr-header-area,
+	position: relative !important;
+	z-index: 1000 !important;
+}
+
+div, table {
+  color: #efefef !important;
+  background-color: #161616 !important;
+}
+
+* {
+  border-color: #252525 !important
+}
+
+html, body, body>div {
+  background-color: #000 !important
+}
+
+div[style*="transparent"] *:not(img) {
+  opacity: 0 !important
+}
+
+@-moz-document url(about:blank) {
+  html {
+    background-color: #000
+  }
+}
+
+browser[type="content-primary"] {
+  background-color: #000 !important
+}
+
+body *:not([background]):not(input) {
+  background-color: #000 !important
+}
+
+body * {
+  text-shadow: none !important;
+  color: none !important;
+}
+
+body a, body a:link, body a *:not(img), body a:link *:not(img) {
+  color: #30C5FF !important;
+  background-color: rgba(60, 60, 60, 0) !important;
+}
+
+body a:hover, body a:active, body a:hover *:not(img), body a:active *:not(img) {
+  color: #40e0ff !important;
+  background-image: none !important;
+  background-color: rgba(60, 60, 60, 0) !important;
+}
+
+body a:visited, body a:visited *:not(img) {
+  color: #9182ff !important;
+  background-image: none !important;
+  background-color: rgba(60, 60, 60, 0) !important;
+}
+
+body input, body textarea {
+  color: #f0f0f0 !important;
+  border-color: #333 !important;
+  background-image: none !important;
+  background-color: #222 !important;
+}
+
+h1, h2, h3, h4, h5, h6, h1 *, h2 *, h3 *, strong, a.active, .selected, [href="#"], a.active *,
+.selected *, a.highlight, a.highlight *, [id*="header"], [id*="headline"], [class*="header"], [class*="headline"], [class*="header"] td {
+  color: #DDD !important;
+}
+
