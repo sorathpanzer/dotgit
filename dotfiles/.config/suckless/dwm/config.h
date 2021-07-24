@@ -80,7 +80,7 @@ static const char *termcmd[]  = { "st", NULL };
 static const char *shutcmd[]  = { "clpoweroff", NULL };
 static const char *rebcmd[]  = { "clreboot", NULL };
 static const char scratchpadname[] = "scratchpad";
-static const char *scratchpadcmd[] = { "st", "-t", scratchpadname, "-g", "120x34", NULL };
+static const char *scratchpadcmd[] = { "alacritty", "-t", scratchpadname, "-g", "120x34", NULL };
 
 static Key keys[] = {
 	/* modifier               key              function        argument */
@@ -124,7 +124,6 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask, XK_t,      	  spawn,          CMD ("tnoty") },
 	{ MODKEY,        	  XK_j,      	  spawn,          CMD ("st -e journalctl --follow") },
 	{ MODKEY,        	  XK_s,      	  spawn,          CMD ("dmsearch") },
-	{ MODKEY,        	  XK_o,      	  spawn,          CMD ("fmenu") },
 	{ MODKEY,        	  XK_x,      	  spawn,          CMD ("12ft") },
 	{ MODKEY,        	  XK_v,      	  spawn,          CMD ("playvideo") },
 	{ MODKEY,        	  XK_Delete,    spawn,          SHCMD ("xset dpms force off") },
