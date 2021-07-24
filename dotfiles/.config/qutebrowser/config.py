@@ -392,17 +392,6 @@ config.bind('ab', 'spawn --userscript addbookmark')
 #config.bind('O', 'spawn --userscript dmenu-open -t')
 #config.bind('o', 'spawn --userscript fopen')
 
-# block youtube ads from playing. still have to skip them however.
-def filter_yt(info: interceptor.Request):
-	url = info.request_url
-	if (url.host() == "www.youtube.com"
-		and url.path() == "/get_video_info"
-		and "&adformat=" in url.query()
-	):
-		info.block()
-
-interceptor.register(filter_yt)
-
 # Whether host blocking is enabled.
 c.content.blocking.enabled = True
 c.content.blocking.method = "both"
