@@ -1,0 +1,11 @@
+#!/bin/bash
+
+url=$({
+    echo "qr translate readability openfeeds" | tr " " "\n"
+} | dmenu -fn "UbuntuMono Nerd Font:size=10" -nf "#cccccc" -nb "#292d3e" -sb "#74438e" -sf "#a5bdf7" -l 7 -p "set-cmd-text :spawn --userscript qr ")
+
+if [ $? = 0 ] && [ -n "$url" ]; then
+    printf 'open %s %s\n' "$*" "$url" >>"$QUTE_FIFO"
+fi
+
+xdotool key Super_L+Down

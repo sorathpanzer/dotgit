@@ -1,0 +1,13 @@
+#!/bin/bash
+
+url=$({
+    awk '{ tmp = $1; $1 = $2; $2 = tmp; print $1 }' $HOME/.config/qutebrowser/quickmarks
+    sqlite3 -separator ' ' $HOME/.local/share/qutebrowser/history.sqlite 'SELECT url, title FROM CompletionHistory' | sort | awk '{print $1}'
+    cat $HOME/.config/qutebrowser/bookmarks/urls
+} | fzf --reverse)
+
+
+if [ $? = 0 ] && [ -n "$url" ]; then
+    printf 'open %s %s\n' "$*" "$url" >>"$QUTE_FIFO"
+fi
+st

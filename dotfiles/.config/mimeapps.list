@@ -17,8 +17,8 @@ application/x-xls=libreoffice-calc.desktop;
 application/xls=libreoffice-calc.desktop;
 text/csv=libreoffice-calc.desktop;
 text/csv=libreoffice-calc.desktop;
-x-scheme-handler/http=chromium.desktop
-x-scheme-handler/https=chromium.desktop
+x-scheme-handler/http=qutebrowser.desktop
+x-scheme-handler/https=qutebrowser.desktop
 
 [Default Applications]
 image/jpeg=sxiv.desktop
@@ -28,8 +28,8 @@ image/gif=sxiv.desktop
 application/x-shellscript=nvim.desktop
 x-scheme-handler/magnet=torrent.desktop;
 application/x-bittorrent=torrent.desktop;
-x-scheme-handler/geo=chromium.desktop
+x-scheme-handler/geo=qutebrowser.desktop
 application/pdf=org.pwmt.zathura-pdf-mupdf.desktop
 x-scheme-handler/tg=userapp-Telegram Desktop-VO7GZ0.desktop
 text/plain=nvim.desktop;
-text/html=chromium.desktop
+text/html=qutebrowser.desktop

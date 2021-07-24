@@ -1,0 +1,8 @@
+#!/bin/sh
+
+TITLE=$(:| dmenu -fn "UbuntuMono Nerd Font:size=10" -nf "#cccccc" -nb "#292d3e" -sb "#74438e" -sf "#a5bdf7" -p "Title:")
+BOOKMARK=$(:| dmenu -fn "UbuntuMono Nerd Font:size=10" -nf "#cccccc" -nb "#292d3e" -sb "#74438e" -sf "#a5bdf7" -p "Bookmark:")
+TAGS=$(:| dmenu -fn "UbuntuMono Nerd Font:size=10" -nf "#cccccc" -nb "#292d3e" -sb "#74438e" -sf "#a5bdf7" -p "Tags:")
+FOLDER=$(echo $TAGS | awk '{print $1}' | sed 's/#//')
+
+echo "$TITLE $BOOKMARK $TAGS" >> /home/sorath/.config/qutebrowser/bookmarks/$FOLDER/urls

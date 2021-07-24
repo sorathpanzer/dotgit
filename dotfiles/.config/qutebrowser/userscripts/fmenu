@@ -1,0 +1,4 @@
+#!/bin/bash
+
+alacritty --option "window.dimensions.columns=80" --option "window.dimensions.lines=20" --option "window.position.x=630"  --option "window.position.y=340" -e $HOME/.config/qutebrowser/userscripts/fopen
+
