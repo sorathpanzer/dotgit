@@ -36,10 +36,10 @@ static const Rule rules[] = {
 	 *	WM_NAME(STRING) = title
 	 */
 	/* class      instance    title       tags mask     switchtotag    isfloating   monitor */
-	{ "Chromium",    	NULL,       NULL,       1,            1,             0,           -1 },
-/*	{ "qutebrowser",  NULL,       NULL,       1,            1,             0,           -1 },*/
+	{ "qutebrowser",    	NULL,       NULL,       1,            1,             0,           -1 },
+/*	{ "Chromium",  NULL,       NULL,       1,            1,             0,           -1 },*/
 	{ "st-256color",  NULL,       NULL,       2,            1,             0,           -1 },
-	{ "Alacritty",    NULL,       NULL,       2,            1,             0,           -1 },
+	{ "Alacritty",    NULL,       NULL,       0,            0,             1,           -1 },
 	{ "mpv",     			NULL,       NULL,       1 << 2,       1,             0,           -1 },
 	{ "Signal",    		NULL,       NULL,       1 << 2,       1,             0,           -1 },
 	{ "Sxiv",     	 	NULL,       NULL,       1 << 2,       1,             0,           -1 },
@@ -119,11 +119,12 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,     				XK_g,      	   defaultgaps,     {0} },
 
     /* Apps Launched with SUPER + ALT + KEY  */
-	{ MODKEY,        	  XK_w,      	  spawn,          CMD ("xdotool search --class qutebrowser windowactivate || qutebrowser") },
-  { MODKEY|ShiftMask, XK_space,     spawn,          CMD ("passmenu --type") },
+	{ MODKEY,        	  XK_w,      	  spawn,          CMD ("xdotool search --class Chromium windowactivate || chromium") },
+/*  { MODKEY|ShiftMask, XK_space,     spawn,          CMD ("passmenu --type") },*/
 	{ MODKEY|ShiftMask, XK_t,      	  spawn,          CMD ("tnoty") },
-	{ MODKEY,        	  XK_j,      	  spawn,          CMD ("alacritty -e journalctl --follow") },
+	{ MODKEY,        	  XK_j,      	  spawn,          CMD ("st -e journalctl --follow") },
 	{ MODKEY,        	  XK_s,      	  spawn,          CMD ("dmsearch") },
+	{ MODKEY,        	  XK_o,      	  spawn,          CMD ("fmenu") },
 	{ MODKEY,        	  XK_x,      	  spawn,          CMD ("12ft") },
 	{ MODKEY,        	  XK_v,      	  spawn,          CMD ("playvideo") },
 	{ MODKEY,        	  XK_Delete,    spawn,          SHCMD ("xset dpms force off") },
@@ -135,8 +136,8 @@ static Key keys[] = {
   { MODKEY|ShiftMask, XK_minus,  	  spawn,          SHCMD ("light -U 15") },
   { MODKEY,           XK_plus,   	  spawn,          SHCMD ("pactl set-sink-volume alsa_output.pci-0000_00_1f.3.analog-stereo +10%") },
   { MODKEY,           XK_minus,  	  spawn,          SHCMD ("pactl set-sink-volume alsa_output.pci-0000_00_1f.3.analog-stereo -10%") },
-  { MODKEY,           XK_m, 	   		spawn,          SHCMD ("pamixer -t ") },
-	{ MODKEY,        	 	XK_1,      	  spawn,          CMD("xdotool search --class Chromium windowactivate || chromium") },
+  { MODKEY,           XK_m, 	   		spawn,          SHCMD ("amixer -q sset Master toggle ") },
+	{ MODKEY,        	 	XK_1,      	  spawn,          CMD("xdotool search --class qutebrowser windowactivate || qutebrowser") },
 	{ MODKEY,        	  XK_2,      	  spawn,          CMD("xdotool search --class st-256color windowactivate || st") },
 	TAGKEYS(            XK_1,            0)
 	TAGKEYS(            XK_2,            1)
