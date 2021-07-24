@@ -21,7 +21,7 @@
 
 /* macros */
 #define INTERSECT(x,y,w,h,r)  (MAX(0, MIN((x)+(w),(r).x_org+(r).width)  - MAX((x),(r).x_org)) \
-                              && MAX(0, MIN((y)+(h),(r).y_org+(r).height) - MAX((y),(r).y_org)))
+                             * MAX(0, MIN((y)+(h),(r).y_org+(r).height) - MAX((y),(r).y_org)))
 #define LENGTH(X)             (sizeof X / sizeof X[0])
 #define TEXTW(X)              (drw_fontset_getwidth(drw, (X)) + lrpad)
 
@@ -37,7 +37,7 @@ struct item {
 static char text[BUFSIZ] = "";
 static char *embed;
 static int bh, mw, mh;
-static int inputw = 0, promptw;
+static int inputw = 0, promptw, passwd = 0;
 static int lrpad; /* sum of left and right padding */
 static size_t cursor;
 static struct item *items = NULL;
@@ -55,9 +55,8 @@ static Clr *scheme[SchemeLast];
 
 #include "config.h"
 
-static char * cistrstr(const char *s, const char *sub);
-static int (*fstrncmp)(const char *, const char *, size_t) = strncasecmp;
-static char *(*fstrstr)(const char *, const char *) = cistrstr;
+static int (*fstrncmp)(const char *, const char *, size_t) = strncmp;
+static char *(*fstrstr)(const char *, const char *) = strstr;
 
 static void
 appenditem(struct item *item, struct item **list, struct item **last)
@@ -142,6 +141,7 @@ drawmenu(void)
 	unsigned int curpos;
 	struct item *item;
 	int x = 0, y = 0, w;
+	char *censort;
 
 	drw_setscheme(drw, scheme[SchemeNorm]);
 	drw_rect(drw, 0, 0, mw, mh, 1, 1);
@@ -153,7 +153,12 @@ drawmenu(void)
 	/* draw input field */
 	w = (lines > 0 || !matches) ? mw - x : inputw;
 	drw_setscheme(drw, scheme[SchemeNorm]);
-	drw_text(drw, x, 0, w, bh, lrpad / 2, text, 0);
+	if (passwd) {
+	        censort = ecalloc(1, sizeof(text));
+		memset(censort, '.', strlen(text));
+		drw_text(drw, x, 0, w, bh, lrpad / 2, censort, 0);
+		free(censort);
+	} else drw_text(drw, x, 0, w, bh, lrpad / 2, text, 0);
 
 	curpos = TEXTW(text) - TEXTW(&text[cursor]);
 	if ((curpos += lrpad / 2 - 1) < w) {
@@ -534,6 +539,11 @@ readstdin(void)
 	char buf[sizeof text], *p;
 	size_t i, imax = 0, size = 0;
 	unsigned int tmpmax = 0;
+	if(passwd){
+    	inputw = lines = 0;
+    	return;
+  	}
+
 
 	/* read each line from stdin and add it to the item list */
 	for (i = 0; fgets(buf, sizeof buf, stdin); i++) {
@@ -563,9 +573,14 @@ run(void)
 	XEvent ev;
 
 	while (!XNextEvent(dpy, &ev)) {
-		if (XFilterEvent(&ev, None))
+		if (XFilterEvent(&ev, win))
 			continue;
 		switch(ev.type) {
+		case DestroyNotify:
+			if (ev.xdestroywindow.window != win)
+				break;
+			cleanup();
+			exit(1);
 		case Expose:
 			if (ev.xexpose.count == 0)
 				drw_map(drw, win, 0, 0, mw, mh);
@@ -678,21 +693,24 @@ setup(void)
 	swa.override_redirect = True;
 	swa.background_pixel = scheme[SchemeNorm][ColBg].pixel;
 	swa.event_mask = ExposureMask | KeyPressMask | VisibilityChangeMask;
-	win = XCreateWindow(dpy, parentwin, x, y, mw, mh, border_width,
+	win = XCreateWindow(dpy, parentwin, x, y - (topbar ? 0 : border_width * 2), mw - border_width * 2, mh, border_width,
 	                    CopyFromParent, CopyFromParent, CopyFromParent,
 	                    CWOverrideRedirect | CWBackPixel | CWEventMask, &swa);
-	XSetWindowBorder(dpy, win, scheme[SchemeSel][ColBg].pixel);
+	if (border_width)
+		XSetWindowBorder(dpy, win, scheme[SchemeSel][ColBg].pixel);
 	XSetClassHint(dpy, win, &ch);
 
-	/* open input methods */
-	xim = XOpenIM(dpy, NULL, NULL, NULL);
+
+	/* input methods */
+	if ((xim = XOpenIM(dpy, NULL, NULL, NULL)) == NULL)
+		die("XOpenIM failed: could not open input device");
+
 	xic = XCreateIC(xim, XNInputStyle, XIMPreeditNothing | XIMStatusNothing,
 	                XNClientWindow, win, XNFocusWindow, win, NULL);
 
 	XMapRaised(dpy, win);
-	XSetInputFocus(dpy, win, RevertToParent, CurrentTime);
 	if (embed) {
-		XSelectInput(dpy, parentwin, FocusChangeMask);
+		XSelectInput(dpy, parentwin, FocusChangeMask | SubstructureNotifyMask);
 		if (XQueryTree(dpy, parentwin, &dw, &w, &dws, &du) && dws) {
 			for (i = 0; i < du && dws[i] != win; ++i)
 				XSelectInput(dpy, dws[i], FocusChangeMask);
@@ -707,7 +725,7 @@ setup(void)
 static void
 usage(void)
 {
-	fputs("usage: dmenu [-bfiv] [-l lines] [-p prompt] [-fn font] [-m monitor]\n"
+	fputs("usage: dmenu [-bfivP] [-l lines] [-p prompt] [-fn font] [-m monitor]\n"
 	      "             [-nb color] [-nf color] [-sb color] [-sf color] [-w windowid]\n", stderr);
 	exit(1);
 }
@@ -729,10 +747,12 @@ main(int argc, char *argv[])
 			fast = 1;
 		else if (!strcmp(argv[i], "-c"))   /* centers dmenu on screen */
 			centered = 1;
-		else if (!strcmp(argv[i], "-s")) { /* case-sensitive item matching */
-			fstrncmp = strncmp;
-			fstrstr = strstr;
-		} else if (i + 1 == argc)
+		else if (!strcmp(argv[i], "-i")) { /* case-insensitive item matching */
+			fstrncmp = strncasecmp;
+			fstrstr = cistrstr;
+		} else if (!strcmp(argv[i], "-P"))   /* is the input a password */
+			passwd = 1;
+		else if (i + 1 == argc)
 			usage();
 		/* these options take one argument */
 		else if (!strcmp(argv[i], "-l"))   /* number of lines in vertical list */
@@ -753,13 +773,13 @@ main(int argc, char *argv[])
 			colors[SchemeSel][ColFg] = argv[++i];
 		else if (!strcmp(argv[i], "-w"))   /* embedding window id */
 			embed = argv[++i];
+		else if (!strcmp(argv[i], "-bw"))
+			border_width = atoi(argv[++i]); /* border width */
 		else
 			usage();
 
 	if (!setlocale(LC_CTYPE, "") || !XSupportsLocale())
 		fputs("warning: no locale support\n", stderr);
-	if (!XSetLocaleModifiers(""))
-		fputs("warning: no locale modifiers support\n", stderr);
 	if (!(dpy = XOpenDisplay(NULL)))
 		die("cannot open display");
 	screen = DefaultScreen(dpy);
