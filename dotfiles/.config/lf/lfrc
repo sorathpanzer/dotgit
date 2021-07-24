@@ -3,7 +3,7 @@
 set preview true
 set previewer preview
 set hidden true
-set drawbox true
+#set drawbox false
 set icons true
 set ignorecase true
 set shellopts '-eu'
@@ -164,7 +164,7 @@ cmd moveto ${{
 	clear; tput cup $(($(tput lines)/3)); tput bold
 	set -f
 	clear; echo "Move to where?"
-	dest="$(find -L $HOME -maxdepth 4 -type d | fzf | sed 's|~|$HOME|' )" &&
+	dest="$(find -L . $HOME -maxdepth 4 -type d | fzf | sed 's|~|$HOME|' )" &&
 	if [ -n "$dest" ]; then
 		for x in $fx; do
 			eval mv -iv \"$x\" \"$dest\"
@@ -175,7 +175,10 @@ cmd moveto ${{
 
 cmd unbash %cat "$f" | checkbashisms
 
-cmd clear_trash %trash-empty
+cmd clear_trash ${{
+    trash-empty
+    paplay /usr/share/sounds/freedesktop/stereo/trash-empty.oga
+}}
 
 cmd restore_trash ${{
   trash-restore
@@ -266,19 +269,11 @@ cmd logat ${{
 }}
 
 cmd gf ${{
-    if [ -d "/media/Vault" ]; then
-        xdg-open "$(find -L $HOME /media/Vault -maxdepth 4 -type f | fzf --height 100% --preview 'pv {}')"
-    else
-        xdg-open "$(find -L $HOME -maxdepth 4 -type f | fzf --height 100% --preview 'pv {}')"
-    fi
+        xdg-open "$(find -L . $HOME -maxdepth 4 -type f | fzf --height 100% --preview 'pv {}')"
 }}
 
 cmd gd ${{
-    if [ -d "/media/Vault" ]; then
-        lf -remote "send $id cd '$(find -L $HOME /media/Vault -maxdepth 4 -type d | fzf)'"
-    else
-        lf -remote "send $id cd '$(find -L $HOME -maxdepth 4 -type d | fzf)'"
-    fi
+        lf -remote "send $id cd '$(find -L . $HOME -maxdepth 4 -type d | fzf)'"
 }}
 
 # Share files up to 256 Mib
@@ -306,8 +301,8 @@ map f
 map u
 
 map i rpac
-map t gd
-map o gf
+map <lt><lt> gd
+map <lt>z gf
 map usb usb
 map ub unbash
 map fu format
