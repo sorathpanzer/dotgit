@@ -74,26 +74,8 @@ fkill() {
   pkill --signal 9 $process
 }
 
-is_in_git_repo() {
-  git rev-parse HEAD > /dev/null 2>&1
-}
-
 fzf-down() {
   fzf --height 50% --min-height 20 --border --bind ctrl-/:toggle-preview "$@"
-}
-
-_gf() {
-  is_in_git_repo || return
-  git -c color.status=always status --short |
-  fzf-down -m --ansi --nth 2..,.. \
-    --preview '(git diff --color=always -- {-1} | sed 1,4d; cat {-1})' |
-    cut -c4- | sed 's/.* -> //'
-  #git add $selectum
-  #echo "Commit Message:"
-  #read MESSAGE
-  #git commit -m "$MESSAGE"
-	#git push -u origin master
-
 }
 
 spac() {
@@ -123,22 +105,13 @@ mcd() {
 
 o()
 {
-  if [ -d "/media/Vault" ]; then
-    xdg-open "$(find -L $HOME /media/Vault -maxdepth 4 -type f | fzf --height 100% --preview 'pv {}')"
-  else
-    xdg-open "$(find -L $HOME -maxdepth 4 -type f | fzf --height 100% --preview 'pv {}')"
-  fi
+    xdg-open "$(find -L . $HOME -maxdepth 4 -type f | fzf --height 100% --preview 'pv {}')"
 }
 
 t()
 {
-  if [ -d "/media/Vault" ]; then
-    cd $(find -L $HOME /media/Vault -maxdepth 4 -type d | fzf)
+    cd $(find -L . $HOME -maxdepth 4 -type d | fzf)
     lf
-  else
-    cd $(find -L $HOME -maxdepth 4 -type d | fzf)
-    lf
-  fi
 }
 
 msd() {
