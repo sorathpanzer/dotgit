@@ -26,6 +26,18 @@ static const char *colors[][3]      = {
 	[SchemeSel]  = { col_gray4, col_cyan,  col_cyan  },
 };
 
+typedef struct {
+	const char *name;
+	const void *cmd;
+} Sp;
+const char *spcmd1[] = {"alacritty", NULL };
+const char *spcmd2[] = {"keepassxc", NULL };
+static Sp scratchpads[] = {
+	/* name          cmd  */
+	{"Alacritty",      spcmd1},
+	{"keepassxc",   spcmd2},
+};
+
 /* tagging */
 static const char *tags[] = { "", "", "", "" };
 static const char *alttags[] = { "|}|", "| |", "| |", "| |" };
@@ -37,15 +49,16 @@ static const Rule rules[] = {
 	 */
 	/* class      instance    title       tags mask     switchtotag    isfloating   monitor */
 	{ "qutebrowser",    	NULL,       NULL,       1,            1,             0,           -1 },
-/*	{ "Chromium",  NULL,       NULL,       1,            1,             0,           -1 },*/
-	{ "st-256color",  NULL,       NULL,       2,            1,             0,           -1 },
-	{ "Alacritty",    NULL,       NULL,       0,            0,             1,           -1 },
-	{ "mpv",     			NULL,       NULL,       1 << 2,       1,             0,           -1 },
-	{ "Signal",    		NULL,       NULL,       1 << 2,       1,             0,           -1 },
-	{ "Sxiv",     	 	NULL,       NULL,       1 << 2,       1,             0,           -1 },
-	{ "libreoffice",  NULL,       NULL,       1 << 3,       1,             0,           -1 },
-	{ "libreoffice-calc",  NULL,       NULL,       1 << 3,       1,             0,           -1 },
-	{ "VirtualBox Manager", NULL,       NULL,       1 << 3,       1,             0,           -1 },
+/*{ "Chromium",         NULL,       NULL,       1,            1,             0,           -1 },*/
+	{ "st-256color",      NULL,       NULL,       2,            1,             0,           -1 },
+/*	{ "Alacritty",        NULL,       NULL,       0,            0,             1,           -1 },*/
+	{ "mpv",     			    NULL,       NULL,       1 << 2,       1,             0,           -1 },
+	{ "Signal",    		    NULL,       NULL,       1 << 2,       1,             0,           -1 },
+	{ "Sxiv",     	 	    NULL,       NULL,       1 << 2,       1,             0,           -1 },
+	{ "libreoffice",      NULL,       NULL,       1 << 3,       1,             0,           -1 },
+	{ "libreoffice-calc", NULL,       NULL,       1 << 3,       1,             0,           -1 },
+	{ NULL,		            "Alacritty",NULL,		    SPTAG(0),		  0,             1,			      -1 },
+	{ NULL,		            "keepassxc",NULL,		    SPTAG(1),		  0,             1,			      -1 },
 };
 
 /* layout(s) */
@@ -79,8 +92,6 @@ static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont,
 static const char *termcmd[]  = { "st", NULL };
 static const char *shutcmd[]  = { "clpoweroff", NULL };
 static const char *rebcmd[]  = { "clreboot", NULL };
-static const char scratchpadname[] = "scratchpad";
-static const char *scratchpadcmd[] = { "alacritty", "-t", scratchpadname, "-g", "120x34", NULL };
 
 static Key keys[] = {
 	/* modifier               key              function        argument */
@@ -112,7 +123,8 @@ static Key keys[] = {
 	{ MODKEY,                 XK_i,      	   	incnmaster,     {.i = +1 } },
   { MODKEY,           			XK_d,      	   	incnmaster,     {.i = -1 } },
 	{ MODKEY,                 XK_z, 	   			zoom,           {0} },
-	{ MODKEY,   	  					XK_less,      	togglescratch,  {.v = scratchpadcmd } },
+	{ MODKEY,            			XK_less,  	    togglescratch,  {.ui = 0 } },
+	{ MODKEY,            			XK_a,	          togglescratch,  {.ui = 1 } },
 
     /* Gaps keybinds control */
 	{ MODKEY,     						XK_g,      	   togglegaps,     {0} },
