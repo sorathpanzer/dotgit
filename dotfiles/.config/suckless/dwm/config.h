@@ -147,7 +147,7 @@ static Key keys[] = {
   { MODKEY|ShiftMask, XK_minus,  	  spawn,          SHCMD ("light -U 15") },
   { MODKEY,           XK_plus,   	  spawn,          SHCMD ("pactl set-sink-volume alsa_output.pci-0000_00_1f.3.analog-stereo +10%") },
   { MODKEY,           XK_minus,  	  spawn,          SHCMD ("pactl set-sink-volume alsa_output.pci-0000_00_1f.3.analog-stereo -10%") },
-  { MODKEY,           XK_m, 	   		spawn,          SHCMD ("amixer -q sset Master toggle ") },
+  { MODKEY,           XK_m, 	   		spawn,          SHCMD ("pamixer --toggle-mute") },
 	{ MODKEY,        	 	XK_1,      	  spawn,          CMD("xdotool search --class qutebrowser windowactivate || qutebrowser") },
 	{ MODKEY,        	  XK_2,      	  spawn,          CMD("xdotool search --class st-256color windowactivate || st") },
 	TAGKEYS(            XK_1,            0)

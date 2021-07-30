@@ -1,0 +1,21 @@
+#!/bin/sh
+
+RED='\033[0;31m'
+NC='\033[0m' # No Color
+
+#url=$({
+#    column -t -s " " "$QUTE_CONFIG_DIR"/bookmarks/*/urls | awk '{sub(" ","                                                             &");print}' | \
+#      awk '{sub("#","               &");print}'
+#} | dmenu -fn "UbuntuMono Nerd Font:size=10" -nf "#cccccc" -nb "#292d3e" -sb "#74438e" -sf "#a5bdf7" -l 7 -p "open $* " | awk {'print $2'})
+
+url=$({
+column -t -s  "(" "$QUTE_CONFIG_DIR"/bookmarks/*/urls | column -t -s ")" | awk '{sub("#","          &");print}'
+} | dmenu -i -fn "UbuntuMono Nerd Font:size=10" -nf "#cccccc" -nb "#292d3e" -sb "#74438e" -sf "#a5bdf7" -l 7 -p "open $* " | cut -f2 -d "]" | awk '{print $1}')
+
+if [ $? = 0 ] && [ -n "$url" ]; then
+    printf 'open %s %s\n' "$*" "$url" >>"$QUTE_FIFO"
+fi
+
+xdotool key Super_L+Down
+
+

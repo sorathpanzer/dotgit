@@ -22,16 +22,14 @@ PS1="%{$fg[blue]%}%~$reset_color ⚡"
 
 alias ls="exa --icons -a --group-directories-first"
 alias fzf="fzf -m"
-alias ifz="ifzf --no-height --no-reverse"
 alias mpv="mpv --loop"
 alias nb="newsboat"
 alias lg="cd $HOME/.config/dotgit; lazygit; cd -"
+alias lgit="lazigit"
 alias vim="nvim -c ':set showtabline=0'"
 alias diff="diff --color"
 alias paclog='pacman -Qiie | grep -iE "nome[ ]+:|Data da Instalação" | sed "s/.*: //" | tac | paste -d " " - - | sort -n --k 2'
 alias trl="transmission-remote -l | sed '/Sum/d'"
-alias emacs="emacsclient -t"
-alias orgy="emacsclient -t $HOME/Documentos/orgwiki/index.org"
 alias off="xset -display :0.0 dpms force off"
 alias ytsub="yt -S --sort"
 alias y2mp3="youtube-dl -x --audio-format mp3 "$1""
@@ -42,6 +40,10 @@ alias market='w3m "http://68k.news/index.php?section=business&loc=PT"'
 export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 alias sudo="doas"
 alias xpg="gpg -c --no-symkey-cache --cipher-algo AES256"
+
+ww() {
+  lynx --dump "$1" | tr -c '[:alnum:]' '[\n*]' | tr "[A-Z]" "[a-z]" | sort | uniq -c | sort -nr | awk '{print $2}' | grep -wvf $HOME/wfilter | head -n 20 | sed '1d'
+}
 
 iwf() {
   iwctl station wlan0 scan

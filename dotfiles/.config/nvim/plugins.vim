@@ -29,7 +29,9 @@ call plug#begin('~/.config/nvim/autoload/plugged')
   " Nerd Commenter
     Plug 'scrooloose/nerdcommenter'
   " Interaction with git
-  Plug 'airblade/vim-gitgutter'
+    Plug 'airblade/vim-gitgutter'
+  " Org Mode
+    Plug 'kristijanhusak/orgmode.nvim'
   call plug#end()
 
 " Automatically install missing plugins on startup

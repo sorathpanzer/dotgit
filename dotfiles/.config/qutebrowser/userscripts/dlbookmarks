@@ -1,0 +1,10 @@
+#!/bin/sh
+
+BOOKMARK=$({
+column -t -s  "(" "$QUTE_CONFIG_DIR"/bookmarks/*/urls | column -t -s ")" | awk '{sub("#","          &");print}'
+} | dmenu -i -fn "UbuntuMono Nerd Font:size=10" -nf "#cccccc" -nb "#292d3e" -sb "#74438e" -sf "#a5bdf7" -l 7 -p "Delete: "| cut -d "]" -f2 | awk '{print $1}')
+
+FILE=$(grep -n $BOOKMARK $HOME/.config/qutebrowser/bookmarks/*/urls | cut -f1 -d ":")
+LINE=$(grep -n $BOOKMARK $HOME/.config/qutebrowser/bookmarks/*/urls | cut -f2 -d ":")
+
+sed -i "${LINE}d" $FILE

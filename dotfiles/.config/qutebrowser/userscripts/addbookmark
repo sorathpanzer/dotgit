@@ -1,8 +1,13 @@
 #!/bin/sh
 
-TITLE=$(:| dmenu -fn "UbuntuMono Nerd Font:size=10" -nf "#cccccc" -nb "#292d3e" -sb "#74438e" -sf "#a5bdf7" -p "Title:")
-BOOKMARK=$(:| dmenu -fn "UbuntuMono Nerd Font:size=10" -nf "#cccccc" -nb "#292d3e" -sb "#74438e" -sf "#a5bdf7" -p "Bookmark:")
+echo "yank inline [{title}]({url})" >> "$QUTE_FIFO"
+BOOKMARK=$(xclip -o -sel clip)
 TAGS=$(:| dmenu -fn "UbuntuMono Nerd Font:size=10" -nf "#cccccc" -nb "#292d3e" -sb "#74438e" -sf "#a5bdf7" -p "Tags:")
 FOLDER=$(echo $TAGS | awk '{print $1}' | sed 's/#//')
 
-echo "$TITLE $BOOKMARK $TAGS" >> /home/sorath/.config/qutebrowser/bookmarks/$FOLDER/urls
+if [ ! -d $HOME/.config/qutebrowser/bookmarks/$FOLDER ]; then
+  mkdir $HOME/.config/qutebrowser/bookmarks/$FOLDER
+  touch $HOME/.config/qutebrowser/bookmarks/$FOLDER/urls
+fi
+
+echo "$BOOKMARK $TAGS" >> /home/sorath/.config/qutebrowser/bookmarks/$FOLDER/urls

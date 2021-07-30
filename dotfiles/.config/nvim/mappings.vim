@@ -66,4 +66,3 @@ nnoremap  <silent>  <F2>  :FloatermNew lazygit<CR>
 " Comment lines
 nmap ++ <plug>NERDCommenterToggle
 vmap ++ <plug>NERDCommenterToggle
-

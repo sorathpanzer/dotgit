@@ -12,4 +12,3 @@ picom --config ~/.config/picom/picom.conf -b &
 hsetroot -solid "#000000" &
 syncthing -no-browser &
 #hsetroot -cover $HOME/Imagens/Waterfall.jpg &
-#emacs --daemon &
