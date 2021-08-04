@@ -9,6 +9,6 @@ xinput --set-prop "SYNA2B46:00 06CB:CD5F Touchpad" "libinput Natural Scrolling E
 pactl set-sink-volume alsa_output.pci-0000_00_1f.3.analog-stereo 100% &
 /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
 picom --config ~/.config/picom/picom.conf -b &
-hsetroot -solid "#000000" &
 syncthing -no-browser &
-#hsetroot -cover $HOME/Imagens/Waterfall.jpg &
+hsetroot -cover $HOME/Imagens/Wallpapers/clouds.png
+#hsetroot -solid "#000000"
