@@ -6,4 +6,4 @@ for i in $windows; do
   xdotool search --class $i windowkill
 done
 
-systemctl reboot
+doas reboot
