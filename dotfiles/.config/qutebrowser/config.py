@@ -9,7 +9,7 @@ config.source('/home/sorath/.config/qutebrowser/themes/onedark.py')
 # Aliases for commands.
 c.aliases = {'q': 'quit', 'w': 'session-save', 'wq': 'quit --save'}
 c.auto_save.session = True
-c.auto_save.interval = 15000
+c.auto_save.interval = 3750
 c.statusbar.position = 'top'
 c.content.autoplay = False
 # Setting dark mode
@@ -370,6 +370,12 @@ config.bind('<tab>', 'nop', mode='normal')
 #########################################################################################
 
 # Bindings for normal mode
+config.bind('st', 'session-load trader')
+config.bind('sx', 'session-load xxx')
+config.bind('sh', 'session-load startpage')
+config.bind('sl', 'set-cmd-text :session-load')
+config.bind('ss', 'set-cmd-text :session-save')
+config.bind('sd', 'set-cmd-text :session-delete  ')
 config.bind('q', 'tab-close')
 config.bind('<Alt-z>', 'back')
 config.bind('<Alt-x>', 'forward')
@@ -380,12 +386,6 @@ config.bind('gf', 'view-source')
 config.bind('wi', 'inspector')
 config.bind('wp', 'open -w -- {clipboard}')
 #config.bind('<Alt-b>', 'config-cycle tabs.show always never')
-config.bind('st', 'session-load trader')
-config.bind('sx', 'session-load xxx')
-config.bind('sh', 'session-load startpage')
-config.bind('sl', 'set-cmd-text :session-load')
-config.bind('ss', 'set-cmd-text :session-save')
-config.bind('sd', 'set-cmd-text :session-delete  ')
 config.bind('<Alt-p>', 'spawn --userscript qute-keepass -p ~/Syncthing/Backup/Database_keepass_14721.kdbx')
 config.bind('<Alt-r>', 'spawn --userscript readability')
 #config.bind('<Alt-f>', 'spawn --userscript openfeeds')
@@ -405,4 +405,4 @@ config.bind('aa', 'set-cmd-text -s :quickmark-add {title} {url} ')
 # Whether host blocking is enabled.
 c.content.blocking.enabled = True
 c.content.blocking.method = "both"
-c.content.blocking.hosts.lists = ['http://someonewhocares.org/hosts/hosts', 'http://winhelp2002.mvps.org/hosts.zip', 'http://malwaredomains.lehigh.edu/files/justdomains.zip', 'https://pgl.yoyo.org/adservers/serverlist.php?hostformat=hosts&mimetype=plaintext', 'https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts']
+c.content.blocking.hosts.lists = ['https://raw.githubusercontent.com/mmotti/pihole-regex/master/regex.list', 'https://dbl.oisd.nl/', 'https://raw.githubusercontent.com/jerryn70/GoodbyeAds/master/Extension/GoodbyeAds-YouTube-AdBlock.txt', 'http://someonewhocares.org/hosts/hosts', 'http://winhelp2002.mvps.org/hosts.zip', 'http://malwaredomains.lehigh.edu/files/justdomains.zip', 'https://pgl.yoyo.org/adservers/serverlist.php?hostformat=hosts&mimetype=plaintext', 'https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts']
