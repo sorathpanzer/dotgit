@@ -91,6 +91,10 @@ char *termname = "st-256color";
  *
  *	stty tabs
  */
+
+/* bg opacity */
+float alpha = 0.8;
+
 unsigned int tabspaces = 8;
 
 static const char *colorname[] = {
