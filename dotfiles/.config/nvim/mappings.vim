@@ -66,3 +66,9 @@ nnoremap  <silent>  <F2>  :FloatermNew lazygit<CR>
 " Comment lines
 nmap ++ <plug>NERDCommenterToggle
 vmap ++ <plug>NERDCommenterToggle
+
+" keymap for custom function for toggling Transparency
+nnoremap <leader>t :call BGToggleTransparency()<CR>
+
+" Toggle tabline
+nnoremap <silent> <leader>b :execute 'set showtabline=' . (&showtabline ==# 0 ? 2 : 0)<CR>

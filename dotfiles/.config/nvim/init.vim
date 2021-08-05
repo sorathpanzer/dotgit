@@ -24,7 +24,7 @@ set encoding=utf-8                      " The encoding displayed
 set pumheight=10                        " Makes popup menu smaller
 set fileencoding=utf-8                  " The encoding written to file
 set ruler              			            " Show the cursor position all the time
-set cmdheight=2                         " More space for displaying messages
+set cmdheight=1                         " More space for displaying messages
 set mouse=a                             " Enable your mouse
 set splitbelow                          " Horizontal splits will automatically be below
 set splitright                          " Vertical splits will automatically be to the right
@@ -35,12 +35,12 @@ set smarttab                            " Makes tabbing smarter will realize you
 set expandtab                           " Converts tabs to spaces
 set smartindent                         " Makes indenting smart
 set autoindent                          " Good auto indent
-set laststatus=2                        " Always display the status line
+set laststatus=0                        " Always display the status line
 set number relativenumber               " Line numbers
 set cursorline                          " Enable highlighting of the current line
 set background=dark                     " tell vim what the background color looks like
-set showtabline=1                       " Always show tabs
-set noshowmode                          " We don't need to see things like -- INSERT -- anymore
+set showtabline=0                       " Always show tabs
+"set noshowmode                          " We don't need to see things like -- INSERT -- anymore
 set nobackup                            " This is recommended by coc
 set nowritebackup                       " This is recommended by coc
 set shortmess+=c                        " Don't pass messages to |ins-completion-menu|.
@@ -49,6 +49,7 @@ set clipboard=unnamedplus               " Copy paste between vim and everything 
 set so=999                              " Open with the cursor on the middle of the screen
 set incsearch
 set termguicolors
+hi Normal guibg=NONE ctermbg=NONE
 
 " Return to last edit position when opening files (You want this!)
 autocmd BufReadPost *
@@ -76,3 +77,16 @@ endfunction
 
 " Automatically deletes all trailing whitespace on save.
 autocmd BufWritePre * %s/\s\+$//e
+
+" Toggle background transparency
+let t:isTransparent = 0
+function! BGToggleTransparency()
+  if t:isTransparent == 0
+    hi Normal guibg=#111111 ctermbg=black
+    set background=dark
+    let t:isTransparent = 1
+  else
+    hi Normal guibg=NONE ctermbg=NONE
+    let t:isTransparent = 0
+  endif
+endfunction

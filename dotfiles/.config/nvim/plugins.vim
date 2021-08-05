@@ -18,7 +18,7 @@ call plug#begin('~/.config/nvim/autoload/plugged')
   " Auto pairs for '(' '[' '{'
     Plug 'jiangmiao/auto-pairs'
   " Status Line
-    Plug 'vim-airline/vim-airline'
+"    Plug 'vim-airline/vim-airline'
   " FZF
     Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
     Plug 'junegunn/fzf.vim'
