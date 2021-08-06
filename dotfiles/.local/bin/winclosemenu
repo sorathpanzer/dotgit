@@ -1,3 +1,0 @@
-#!/bin/sh
-
-xdotool search --class $(wmctrl -lx | awk  '{ print $3 }' | cut -d'.' -f1 | dmenu $@) windowkill
