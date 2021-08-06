@@ -1,9 +1,9 @@
 #!/bin/sh
 
-windows=$(wmctrl -lx | awk  '{ print $3 }' | cut -d'.' -f1)
+windows=$(xdotool search --onlyvisible --name .)
 
 for i in $windows; do
-  xdotool search --class $i windowkill
+  xdotool windowclose $i
 done
 
 doas poweroff
