@@ -41,6 +41,7 @@ set cursorline                          " Enable highlighting of the current lin
 set background=dark                     " tell vim what the background color looks like
 set showtabline=0                       " Always show tabs
 "set noshowmode                          " We don't need to see things like -- INSERT -- anymore
+set foldmethod=manual                   " Fold method
 set nobackup                            " This is recommended by coc
 set nowritebackup                       " This is recommended by coc
 set shortmess+=c                        " Don't pass messages to |ins-completion-menu|.
@@ -90,3 +91,9 @@ function! BGToggleTransparency()
     let t:isTransparent = 0
   endif
 endfunction
+
+augroup remember_folds
+  autocmd!
+  autocmd BufWinLeave * mkview
+  autocmd BufWinEnter * silent! loadview
+augroup END
