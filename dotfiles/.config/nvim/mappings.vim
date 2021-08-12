@@ -72,3 +72,7 @@ nnoremap <leader>t :call BGToggleTransparency()<CR>
 
 " Toggle tabline
 nnoremap <silent> <leader>b :execute 'set showtabline=' . (&showtabline ==# 0 ? 2 : 0)<CR>
+
+nnoremap <C-Up> zk
+nnoremap <C-Down> zj
+
