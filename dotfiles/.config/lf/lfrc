@@ -71,7 +71,7 @@ cmd chmod ${{
   done
 }}
 
-cmd setwallpaper %cp "$f" ~/.config/wall.png && nitrogen --set-scaled "$f"
+cmd setwallpaper %hsetroot -cover "$f"
 
 cmd mtsda ${{
   clear
@@ -133,6 +133,11 @@ cmd extract ${{
       *.7z) 7z x $f ;;
       *) echo "Unsupported format" ;;
   esac
+}}
+
+cmd size ${{
+  du -h "$f"
+  read exit
 }}
 
 cmd burniso ${{
@@ -349,6 +354,7 @@ map <c-u> :glob-unselect *
 map <c-s> push :glob-select<space>*.
 map cv cutvideo
 map sh share
+map sv size
 
 # Movement
 map gV cd /media/Vault
