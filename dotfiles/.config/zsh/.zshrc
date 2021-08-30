@@ -8,6 +8,8 @@ export ANDROID_HOME=/opt/android-sdk
 setopt hist_ignore_dups
 setopt hist_ignore_space
 setopt auto_menu
+setopt auto_cd
+setopt menucomplete
 unsetopt prompt_cr prompt_sp
 
 # History in cache directory:
@@ -149,9 +151,6 @@ cx () {
     tar cfJv "$1.tar.xz" "$1"
     ls -la
 }
-
-setopt auto_cd
-setopt menucomplete
 
 # Basic auto/tab complete:
 autoload -U compinit

@@ -11,7 +11,8 @@ pactl set-sink-volume alsa_output.pci-0000_00_1f.3.analog-stereo 100% &
 #/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
 picom --config ~/.config/picom/picom.conf -b &
 syncthing -no-browser &
-hsetroot -cover $HOME/Imagens/Wallpapers/clouds.png &
+hsetroot -cover $HOME/Imagens/Wallpapers/$(ls $HOME/Imagens/Wallpapers | shuf -n 1) &
+sudo wg-quick up wg0 &
 #hsetroot -solid "#000000" &
 
 if uname -n | grep -q 'void-live'; then
