@@ -5,7 +5,8 @@ from qutebrowser.api import interceptor
 
 # Uncomment this to still load settings configured via autoconfig.yml
 config.load_autoconfig(True)
-config.source('/home/sorath/.config/qutebrowser/themes/onedark.py')
+#config.source('/home/sorath/.config/qutebrowser/themes/onedark.py')
+config.source('/home/sorath/.config/qutebrowser/themes/distrotube.py')
 # Aliases for commands.
 c.aliases = {'q': 'quit', 'w': 'session-save', 'wq': 'quit --save'}
 c.auto_save.session = True
@@ -19,10 +20,12 @@ c.colors.webpage.darkmode.grayscale.all = True
 c.colors.webpage.darkmode.grayscale.images = 0.5
 c.colors.webpage.darkmode.policy.images = 'never'
 c.colors.webpage.darkmode.policy.page = 'smart'
+c.colors.webpage.preferred_color_scheme= 'dark'
 # c.colors.webpage.darkmode.contrast = 1
-#c.colors.webpage.darkmode.threshold.text = 20
+# c.colors.webpage.darkmode.threshold.text = 20
 
 c.content.user_stylesheets = ['~/.config/qutebrowser/schemes/minimal.css']
+c.colors.webpage.bg = '#222222'
 
 c.completion.cmd_history_max_items = 100
 #c.completion.timestamp_format = '%Y-%m-%d'
