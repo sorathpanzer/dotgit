@@ -21,11 +21,11 @@ c.colors.webpage.darkmode.grayscale.images = 0.5
 c.colors.webpage.darkmode.policy.images = 'never'
 c.colors.webpage.darkmode.policy.page = 'smart'
 c.colors.webpage.preferred_color_scheme= 'dark'
-# c.colors.webpage.darkmode.contrast = 1
-# c.colors.webpage.darkmode.threshold.text = 20
+c.colors.webpage.darkmode.contrast = 1
+#c.colors.webpage.darkmode.threshold.text = 200
 
 c.content.user_stylesheets = ['~/.config/qutebrowser/schemes/minimal.css']
-c.colors.webpage.bg = '#222222'
+c.colors.webpage.bg = '#111111'
 
 c.completion.cmd_history_max_items = 100
 #c.completion.timestamp_format = '%Y-%m-%d'
