@@ -7,18 +7,12 @@
 "endif
 
 call plug#begin('~/.config/nvim/autoload/plugged')
-  " Better escape
-    Plug 'zhou13/vim-easyescape'
-  "Change dates fast
-    Plug 'tpope/vim-speeddating'
   "Highlighted Parentesis
     Plug 'junegunn/rainbow_parentheses.vim'
   " Cool Icons
     Plug 'ryanoasis/vim-devicons'
   " Auto pairs for '(' '[' '{'
     Plug 'jiangmiao/auto-pairs'
-  " Status Line
-"    Plug 'vim-airline/vim-airline'
   " FZF
     Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
     Plug 'junegunn/fzf.vim'
@@ -32,6 +26,8 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'airblade/vim-gitgutter'
   " Org Mode
     Plug 'kristijanhusak/orgmode.nvim'
+  " If you are using Vim-Plug
+    Plug 'shaunsingh/nord.nvim'
   call plug#end()
 
 " Automatically install missing plugins on startup

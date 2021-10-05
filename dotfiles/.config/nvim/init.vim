@@ -14,8 +14,8 @@ source $HOME/.config/nvim/plug-config/start-screen.vim
 source $HOME/.config/nvim/plug-config/floaterm.vim
 source $HOME/.config/nvim/plug-config/gitgutter.vim
 
-syntax enable                           " Enables syntax highlighing
-colorscheme onedark
+syntax on                           " Enables syntax highlighing
+colorscheme nord
 set iskeyword+=-                      	" treat dash separated words as a word text object"
 set formatoptions-=cro                  " Stop newline continution of comments
 set hidden                              " Required to keep multiple buffers open multiple buffers
@@ -36,7 +36,7 @@ set expandtab                           " Converts tabs to spaces
 set smartindent                         " Makes indenting smart
 set autoindent                          " Good auto indent
 set laststatus=0                        " Always display the status line
-set number relativenumber               " Line numbers
+"set number relativenumber               " Line numbers
 set cursorline                          " Enable highlighting of the current line
 set background=dark                     " tell vim what the background color looks like
 set showtabline=0                       " Always show tabs
@@ -79,10 +79,10 @@ endfunction
 " Automatically deletes all trailing whitespace on save.
 autocmd BufWritePre * %s/\s\+$//e
 
-" Toggle background transparency
+""" Toggle background transparency
 let t:isTransparent = 0
 function! BGToggleTransparency()
-  if t:isTransparent == 0
+ "if t:isTransparent == 0
     hi Normal guibg=#111111 ctermbg=black
     set background=dark
     let t:isTransparent = 1
@@ -97,3 +97,5 @@ augroup remember_folds
   autocmd BufWinLeave * silent! mkview
   autocmd BufWinEnter * silent! loadview
 augroup END
+
+let g:nord_disable_background = v:true
