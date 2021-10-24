@@ -1,4 +1,5 @@
 #!/bin/sh
 
 dunst &
-dwm
+#exec dwm
+exec bspwm

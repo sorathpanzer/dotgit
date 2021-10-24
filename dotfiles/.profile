@@ -20,4 +20,5 @@ PATH="$PATH:/var/lib/snapd/snap/bin"
 
 if [ "$(tty)" = "/dev/tty1" ]; then
   sx $HOME/.xinitrc
+  #sx $(echo "dwm\nbspwm" | fzf)
 fi
