@@ -10,7 +10,7 @@ config.source('/home/sorath/.config/qutebrowser/themes/distrotube.py')
 # Aliases for commands.
 c.aliases = {'q': 'quit', 'w': 'session-save', 'wq': 'quit --save'}
 c.auto_save.session = True
-c.auto_save.interval = 3750
+c.auto_save.interval = 4000
 c.statusbar.position = 'top'
 c.content.autoplay = False
 # Setting dark mode
@@ -133,7 +133,7 @@ c.qt.args = ['disable-logging', 'disable-reading-from-canvas']
 
 c.tabs.show = "multiple"
 c.statusbar.show = "never"
-c.url.start_pages = ['file:///home/sorath/.config/qutebrowser/startpage/index.html']
+#c.url.start_pages = ['file:///home/sorath/.config/qutebrowser/startpage/index.html']
 
 ## Bindings for normal mode
 config.bind('<F2>', 'scroll-page 0 0.9')
@@ -409,3 +409,6 @@ config.bind('aa', 'set-cmd-text -s :quickmark-add {title} {url} ')
 c.content.blocking.enabled = True
 c.content.blocking.method = "both"
 c.content.blocking.hosts.lists = ['https://raw.githubusercontent.com/mmotti/pihole-regex/master/regex.list', 'https://dbl.oisd.nl/', 'https://raw.githubusercontent.com/jerryn70/GoodbyeAds/master/Extension/GoodbyeAds-YouTube-AdBlock.txt', 'http://someonewhocares.org/hosts/hosts', 'http://winhelp2002.mvps.org/hosts.zip', 'http://malwaredomains.lehigh.edu/files/justdomains.zip', 'https://pgl.yoyo.org/adservers/serverlist.php?hostformat=hosts&mimetype=plaintext', 'https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts']
+c.content.blocking.adblock.lists = [
+    "https://raw.githubusercontent.com/uBlockOrigin/uAssets/master/filters/annoyances.txt", "https://raw.githubusercontent.com/uBlockOrigin/uAssets/master/filters/badlists.txt", "https://raw.githubusercontent.com/uBlockOrigin/uAssets/master/filters/badware.txt", "https://raw.githubusercontent.com/uBlockOrigin/uAssets/master/filters/filters-2020.txt", "https://raw.githubusercontent.com/uBlockOrigin/uAssets/master/filters/filters-2021.txt", "https://raw.githubusercontent.com/uBlockOrigin/uAssets/master/filters/filters.txt", "https://raw.githubusercontent.com/uBlockOrigin/uAssets/master/filters/privacy.txt", "https://raw.githubusercontent.com/uBlockOrigin/uAssets/master/filters/resource-abuse.txt", "https://raw.githubusercontent.com/uBlockOrigin/uAssets/master/thirdparties/easylist-downloads.adblockplus.org/easyprivacy.txt", "https://raw.githubusercontent.com/uBlockOrigin/uAssets/master/thirdparties/pgl.yoyo.org/as/serverlist", "https://raw.githubusercontent.com/StevenBlack/hosts/master/alternates/fakenews-gambling/hosts", "https://raw.githubusercontent.com/AdAway/adaway.github.io/master/hosts.txt", "https://fanboy.co.nz/fanboy-problematic-sites.txt", "https://easylist.to/easylist/easylist.txt", "https://raw.githubusercontent.com/bogachenko/fuckfuckadblock/master/fuckfuckadblock.txt"
+    ]
