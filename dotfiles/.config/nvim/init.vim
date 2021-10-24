@@ -7,7 +7,6 @@
 " Always source these
 source $HOME/.config/nvim/plugins.vim
 source $HOME/.config/nvim/mappings.vim
-source $HOME/.config/nvim/plug-config/easyescape.vim
 source $HOME/.config/nvim/plug-config/fzf.vim
 source $HOME/.config/nvim/plug-config/rainbow.vim
 source $HOME/.config/nvim/plug-config/start-screen.vim
