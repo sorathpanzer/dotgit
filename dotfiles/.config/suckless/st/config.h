@@ -93,7 +93,7 @@ char *termname = "st-256color";
  */
 
 /* bg opacity */
-float alpha = 1.0;
+float alpha = 0.7;
 
 unsigned int tabspaces = 8;
 
@@ -121,7 +121,7 @@ static const char *colorname[] = {
 	[255] = 0,
 
 	/* more colors can be added after 255 to use with DefaultXX */
-	"#111111", /*"#292d3e",*/
+	"#000000", /*"#292d3e",*/
 	"#bbc5ff",
 	"#d7d7d7",
 };
