@@ -140,9 +140,14 @@ cmd size ${{
   read exit
 }}
 
+#cmd burniso ${{
+#  clear
+#  doas dd if="$f" of=/dev/sdb
+#}}
+
 cmd burniso ${{
   clear
-  doas dd if="$f" of=/dev/sdb
+  doas cat "$f" > of=/dev/sdb
 }}
 
 # Trash cli bindings
@@ -278,7 +283,7 @@ cmd gf ${{
 }}
 
 cmd gd ${{
-        lf -remote "send $id cd '$(find -L . $HOME -maxdepth 4 -type d | fzf)'"
+        lf -remote "send $id cd '$(find -L $HOME /media/Vault/Imagens/x -maxdepth 4 -type d | fzf)'"
 }}
 
 # Share files up to 256 Mib
