@@ -3,7 +3,7 @@
 PMUPDATES=$(pacman -Qu | grep -Fcv '[ignored]')
 
 if [ $PMUPDATES = 0 ]; then
-  echo "^c#00ff00^📦$PMUPDATES"
+  echo "^c#00ff00^📦$PMUPDATES^c#ffffff^"
 else
   echo "📦$PMUPDATES"
 fi
