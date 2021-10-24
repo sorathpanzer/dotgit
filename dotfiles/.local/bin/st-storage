@@ -1,0 +1,4 @@
+#!/bin/bash
+
+STORAGE=$(df -h /dev/mapper/cryptroot | grep cryptroot | awk '{print $5}')
+echo -n "  $STORAGE"

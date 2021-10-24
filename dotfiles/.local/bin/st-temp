@@ -1,0 +1,20 @@
+#!/bin/sh
+
+if [ "$(uname)" = "FreeBSD" ]; then
+	TEMPERATURE=$(sysctl -a | grep temperature | head -n 1 | awk '{print $2}' | cut -b 2,3)
+	else
+	TEMPERATURE=$(sensors | awk '/Core 0/ {print $3}' | cut -b 2,3)
+fi
+
+if [ $TEMPERATURE -ge 80 ] && [ $TEMPERATURE -le 89 ]; then
+  echo "^c#ffd700^🔥+$TEMPERATUREºC^c#ffffff^"
+fi
+
+if [ $TEMPERATURE -ge 90 ]; then
+  echo "^c#ff4500^🔥+$TEMPERATUREºC^c#ffffff^"
+fi
+
+if [ $TEMPERATURE -lt 80 ]; then
+  echo "🔥$TEMPERATURE"
+fi
+

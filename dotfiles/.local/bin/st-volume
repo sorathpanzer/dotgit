@@ -1,0 +1,10 @@
+#!/bin/bash
+
+vol=`pamixer --get-volume`
+
+if [[ `pamixer --get-mute` == "true" ]]; then
+    echo -n "^c#ff4500^🔇^c#ffffff^"
+else
+    echo -n "$(percentage $vol   奔 墳  ) $vol%"
+fi
+
