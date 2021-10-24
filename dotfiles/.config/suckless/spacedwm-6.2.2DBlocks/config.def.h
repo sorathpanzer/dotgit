@@ -21,17 +21,11 @@ static const int horizpadbar        = 2;        /* horizontal padding for status
 static const int vertpadbar         = 8;        /* vertical padding for statusbar */
 
 /* ------------- colorscheme ------------- */
-static const char col_black[]       = "#000000"; /* border color unfocused windows */
-static const char col_white[]       = "#FFFFFF";
-static const char col_gray1[]       = "#292d3e"; /* #292d3e */
-static const char col_gray3[]       = "#cccccc"; /* #96b5b4 */
-static const char col_velvet[]      = "#df73ff"; /* border color focused windows and tags DT=#74438e */
-static const char col_purple[]      = "#74438e"; /* border color focused windows and tags DT=#74438e */
-static const char *colors[][3]      = {
-	/*               fg         bg         border   */
-	[SchemeNorm] = { col_white, col_black, col_black },
-	[SchemeSel]  = { col_velvet, col_black,  col_purple  },
-};
+
+//#include "themes/purple.c"
+#include "themes/dark.c"
+
+/* ------------- scratchs ------------- */
 
 typedef struct {
 	const char *name;
@@ -46,7 +40,7 @@ static Sp scratchpads[] = {
 };
 
 /* ----------------- tags ---------------- */
-static const char *tags[]       = { " ", " ", " ", " ", " ", " ", " " };
+static const char *tags[]       = { " ", " "," ", " ", " ", " " };
 
 /* ------------ occ indicator ------------ */
 static const unsigned int ulinepad      = 8;     /* horizontal padding between the underline and tag */
@@ -70,11 +64,12 @@ static const Rule rules[] = {
 	{ "qutebrowser",    	NULL,       NULL,       1,            1,             0,           -1 },
 /*{ "Chromium",         NULL,       NULL,       1,            1,             0,           -1 },*/
 	{ "st-256color",      NULL,       NULL,       2,            1,             0,           -1 },
-	{ "mpv",     			    NULL,       NULL,       1 << 2,       1,             0,           -1 },
-	{ "Signal",    		    NULL,       NULL,       1 << 2,       1,             0,           -1 },
+	{ "mpv",     			    NULL,       NULL,       1 << 3,       1,             0,           -1 },
+	{ "Signal",    		    NULL,       NULL,       1 << 5,       1,             0,           -1 },
+	{ "Telegram",    		    NULL,       NULL,       1 << 5,       1,             0,           -1 },
 	{ "Sxiv",     	 	    NULL,       NULL,       1 << 2,       1,             0,           -1 },
-	{ "libreoffice",      NULL,       NULL,       1 << 3,       1,             0,           -1 },
-	{ "libreoffice-calc", NULL,       NULL,       1 << 3,       1,             0,           -1 },
+	{ "libreoffice",      NULL,       NULL,       1 << 4,       1,             0,           -1 },
+	{ "libreoffice-calc", NULL,       NULL,       1 << 4,       1,             0,           -1 },
 	{ NULL,		            "Alacritty",NULL,		    SPTAG(0),		  0,             1,			      -1 },
 	{ NULL,		            "keepassxc",NULL,		    SPTAG(1),		  0,             1,			      -1 },
 };
@@ -213,7 +208,6 @@ static Key keys[] = {
 	TAGKEYS(            XK_4,            3)
 	TAGKEYS(            XK_5,            4)
 	TAGKEYS(            XK_6,            5)
-	TAGKEYS(            XK_7,            6)
 };
 
 /* ---------- button definitions --------- */
