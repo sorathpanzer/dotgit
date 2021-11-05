@@ -1,4 +1,4 @@
-PREFIX ?= /usr/local
+PREFIX ?= /home/sorath/.local
 CC ?= cc
 LDFLAGS = -lX11
 

@@ -15,22 +15,17 @@ static const int smartgaps          = 1;        /* 1 means no outer gap when the
 /* ----------------- bar ----------------- */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
+static const char statussep         = ';';      /* separator between status bars */
 static const Bool viewontag         = True;     /* Switch view on tag switch */
 static const int horizpadbar        = 2;        /* horizontal padding for statusbar */
 static const int vertpadbar         = 8;        /* vertical padding for statusbar */
 
 /* ------------- colorscheme ------------- */
-static const char col_black[]       = "#000000"; /* border color unfocused windows */
-static const char col_white[]       = "#FFFFFF";
-static const char col_gray1[]       = "#292d3e"; /* #292d3e */
-static const char col_gray3[]       = "#cccccc"; /* #96b5b4 */
-static const char col_velvet[]      = "#df73ff"; /* border color focused windows and tags DT=#74438e */
-static const char col_purple[]      = "#74438e"; /* border color focused windows and tags DT=#74438e */
-static const char *colors[][3]      = {
-	/*               fg         bg         border   */
-	[SchemeNorm] = { col_white, col_black, col_black },
-	[SchemeSel]  = { col_velvet, col_black,  col_purple  },
-};
+
+//#include "themes/purple.c"
+#include "themes/dark.c"
+
+/* ------------- scratchs ------------- */
 
 typedef struct {
 	const char *name;
@@ -45,7 +40,7 @@ static Sp scratchpads[] = {
 };
 
 /* ----------------- tags ---------------- */
-static const char *tags[]       = { " ", " ", " ", " ", " ", " ", " " };
+static const char *tags[]       = { " ", " "," ", " ", " ", " " };
 
 /* ------------ occ indicator ------------ */
 static const unsigned int ulinepad      = 8;     /* horizontal padding between the underline and tag */
@@ -69,11 +64,13 @@ static const Rule rules[] = {
 	{ "qutebrowser",    	NULL,       NULL,       1,            1,             0,           -1 },
 /*{ "Chromium",         NULL,       NULL,       1,            1,             0,           -1 },*/
 	{ "st-256color",      NULL,       NULL,       2,            1,             0,           -1 },
-	{ "mpv",     			    NULL,       NULL,       1 << 2,       1,             0,           -1 },
-	{ "Signal",    		    NULL,       NULL,       1 << 2,       1,             0,           -1 },
+	{ "mpv",     			    NULL,       NULL,       1 << 3,       1,             0,           -1 },
+	{ "Signal",    		    NULL,       NULL,       1 << 5,       1,             0,           -1 },
+	{ "Telegram",    		    NULL,       NULL,       1 << 5,       1,             0,           -1 },
 	{ "Sxiv",     	 	    NULL,       NULL,       1 << 2,       1,             0,           -1 },
-	{ "libreoffice",      NULL,       NULL,       1 << 3,       1,             0,           -1 },
-	{ "libreoffice-calc", NULL,       NULL,       1 << 3,       1,             0,           -1 },
+	{ "libreoffice",      NULL,       NULL,       1 << 4,       1,             0,           -1 },
+  { "localc",           NULL,       NULL,       1 << 4,       1,             0,           -1 },
+	{ "libreoffice-calc", NULL,       NULL,       1 << 4,       1,             0,           -1 },
 	{ NULL,		            "Alacritty",NULL,		    SPTAG(0),		  0,             1,			      -1 },
 	{ NULL,		            "keepassxc",NULL,		    SPTAG(1),		  0,             1,			      -1 },
 };
@@ -95,7 +92,9 @@ static const BarRule barrules[] = {
 	{ -1,       0,     BAR_ALIGN_CENTER,   width_tags,            draw_tags,            click_tags,         "tags" },
 	{ -1,       0,     BAR_ALIGN_LEFT,   width_wintitle,        draw_wintitle,        click_wintitle,     "wintitle" },
 	{ -1,       0,     BAR_ALIGN_RIGHT,   width_ltsymbol,        draw_ltsymbol,        click_ltsymbol,     "layout" },
-	{ 'A',      0,     BAR_ALIGN_RIGHT,  width_status,          draw_status,          click_status,       "status" },
+	{ 'A',      0,     BAR_ALIGN_RIGHT,  width_status2d,        draw_status2d,        click_statuscmd,    "status2d" },
+	{  0,       1,     BAR_ALIGN_CENTER, width_status2d_es,     draw_status2d_es,     click_statuscmd_es, "status2d_es" },
+
 };
 
 /* --------------- layouts --------------- */
@@ -210,7 +209,6 @@ static Key keys[] = {
 	TAGKEYS(            XK_4,            3)
 	TAGKEYS(            XK_5,            4)
 	TAGKEYS(            XK_6,            5)
-	TAGKEYS(            XK_7,            6)
 };
 
 /* ---------- button definitions --------- */
@@ -220,7 +218,11 @@ static Button buttons[] = {
 	{ ClkLtSymbol,          0,                Button1,        setlayout,      {0} },
 	{ ClkLtSymbol,          0,                Button3,        setlayout,      {.v = &layouts[2]} },
 	{ ClkWinTitle,          0,                Button2,        zoom,           {0} },
-	{ ClkStatusText,        0,                Button2,        spawn,          {.v = termcmd } },
+	{ ClkStatusText,        0,                Button1,        sigdwmblocks,   {.i = 1 } },
+	{ ClkStatusText,        0,                Button2,        sigdwmblocks,   {.i = 2 } },
+	{ ClkStatusText,        0,                Button3,        sigdwmblocks,   {.i = 3 } },
+	{ ClkStatusText,        0,                Button4,        sigdwmblocks,   {.i = 4 } },
+	{ ClkStatusText,        0,                Button5,        sigdwmblocks,   {.i = 5 } },
 	{ ClkClientWin,         MODKEY|ShiftMask, Button1,        movemouse,      {0} },
 	{ ClkClientWin,         MODKEY,           Button1,        setlayout,      {0} },
 	{ ClkClientWin,         MODKEY,           Button2,        togglefloating, {0} },
