@@ -5,6 +5,8 @@ export TERMINAL="st"
 export VISUAL="nvim"
 export ANDROID_HOME=/opt/android-sdk
 
+export LS_COLORS=$LS_COLORS:"*.mp4=01;31"
+
 setopt hist_ignore_dups
 setopt hist_ignore_space
 setopt auto_menu
@@ -22,7 +24,8 @@ autoload -U colors && colors
 setopt PROMPT_SUBST
 PS1="%{$fg[blue]%}%~$reset_color ⚡"
 
-alias ls="exa --icons -a --group-directories-first"
+#alias ls="exa --icons --group-directories-first"
+alias ls="ls --color=auto --group-directories-first -l"
 alias fzf="fzf -m"
 alias mpv="mpv --loop"
 alias nb="newsboat"
@@ -32,17 +35,12 @@ alias v="nvim -c ':set showtabline=0'"
 alias diff="diff --color"
 alias paclog='pacman -Qiie | grep -iE "nome[ ]+:|Data da Instalação" | sed "s/.*: //" | tac | paste -d " " - - | sort -n --k 2'
 alias trl="transmission-remote -l | sed '/Sum/d'"
-alias off="xset -display :0.0 dpms force off"
 alias ytsub="yt -S --sort"
 alias y2mp3="youtube-dl -x --audio-format mp3 "$1""
 alias du="du -h -d 1 "$@" 2>/dev/null | sort -h -r"
 export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 alias sudo="doas"
 alias xpg="gpg -c --no-symkey-cache --cipher-algo AES256"
-
-ww() {
-  lynx --dump "$1" | tr -c '[:alnum:]' '[\n*]' | tr "[A-Z]" "[a-z]" | sort | uniq -c | sort -nr | awk '{print $2}' | grep -wvf $HOME/wfilter | head -n 20 | sed '1d'
-}
 
 iwf() {
   iwctl station wlan0 scan
@@ -65,8 +63,7 @@ fl() {
       rm ~/.config/lf/lf.d
     fi
       killall -q --signal 9 ueberzug
-      #killall -q --signal 9 lf
-      clear
+#      clear
 }
 alias lf="fl"
 
@@ -98,12 +95,6 @@ myip() {
 # Calculator
 calc() { echo "scale=5;$*" | bc -l; }
 
-# mkdir and cd in one command
-mcd() {
-	mkdir -p -- "$1" &&
-		cd -P -- "$1" || return
-	}
-
 o()
 {
     xdg-open "$(find -L . $HOME -maxdepth 4 -type f | fzf --height 100% --preview 'pv {}')"
@@ -120,33 +111,6 @@ msd() {
   doas udisksctl mount -b /dev/dm-1
   cd /media/Vault
   ls -alF
-}
-
-xt () {
-	if [ -f $1 ] ; then
-		case $1 in
-			*.tar.xz)    tar xvf $1     ;;
-			*.tar.bz2)   tar xvjf $1    ;;
-			*.tar.gz)    tar xvzf $1    ;;
-			*.bz2)       bunzip2 $1     ;;
-			*.rar)       unrar e $1     ;;
-			*.gz)        gunzip $1      ;;
-			*.tar)       tar xvf $1     ;;
-			*.tbz2)      tar xvjf $1    ;;
-			*.tgz)       tar xvzf $1    ;;
-			*.zip)       unzip $1       ;;
-			*.Z)         uncompress $1  ;;
-			*.7z)        7z x $1        ;;
-			*)           echo "don't know how to extract "$1"..." ;;
-		esac
-	else
-		echo "'$1' is not a valid file!"
-	fi
-}
-
-cx () {
-    tar cfJv "$1.tar.xz" "$1"
-    ls -la
 }
 
 # Basic auto/tab complete:
@@ -175,7 +139,6 @@ bindkey -s '^z' 'zsh\n'
 # Load zsh-syntax-highlighting; should be last.
 export FZF_DEFAULT_OPTS='-e -i --height 40% --layout=reverse --border'
 source ~/.config/zsh/fzf.zsh
-source ~/.config/zsh/forgit.zsh
 source ~/.config/zsh/unicode.zsh
 source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh 2>/dev/null
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh 2>/dev/null
