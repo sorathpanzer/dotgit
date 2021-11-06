@@ -203,6 +203,7 @@ Usage: ytfzf [OPTIONS...] <search-query>;
      --thumbnail-quality=<0,1>              0: low quality (faster), 1: default
      --thumb-disp-method=<method>           the program to use for displaying images,
                                             see --help-thumb-disp for a list of choices
+
      -N, --notification                     Send notification when playing video
      -D, --ext-menu                         Use external menu(default dmenu) instead of fzf
      -H, --choose-from-history              Choose from history
@@ -228,11 +229,14 @@ Usage: ytfzf [OPTIONS...] <search-query>;
      --sort-name=         <function>        The function must contain the values of
                                             data_sort_key, data_sort_fn,
 					    see the example sort-name in the example config
+
   Use - instead of <search-query> for stdin
+
   Option usage:
      ytfzf -fDH                             to show history using external
                                             menu and show formats
      ytfzf -fD --choose-from-history        same as above
+
 EOF
 }
 
@@ -260,12 +264,16 @@ all_help_info () {
          In addition this overrides any filter provided through options
          Example: ytfzf --filter-id=EgJAAQ minecraft
          This will filter by livestream
+
   Update:
      --update                             clones the latest stable commit and installs it
                                           on Arch ytfzf is available in the AUR
      --update-unstable                    gets the latest commit and installs it (--update is safer)
+
+
   Defaults can be modified through ENV variables or the config file
   the default config file can be found at https://github.com/pystardust/ytfzf/blob/master/docs/conf.sh
+
   Environment Variables:
      YTFZF_HIST=1                                       0 : off history
      YTFZF_NOTI=1                                       0 : turn off notification
@@ -286,16 +294,21 @@ thumbnail_display_help_info () {
     printf "%s" "
   There are a few different ways thumbnails can be displayed, most of which use ascii text to display images,
   options:
+
   ueberzug (default) only works with Xorg,
+
   catimg,
+
   jp2a (24 bit color),
   jp2a-8 (256 color palette),
   jp2a-4 (ansi colors),
   jp2a-grey/gray (greyscale),
+
   chafa (24 bit color)
   chafa-4 (ansi colors)
   chafa-8 (256 color palette)
   chafa-grey/gray (greyscale)
+
   custom use a custom way to show images
   handle_display_img must be defined in config for this to work
   handle_display_img will run the command you want to run for displaying images
@@ -762,7 +775,7 @@ scrape_pt () {
 	    {
 		title: .name,
 		channel: .channel.displayName,
-		duration: .duration,
+		duration: "\(.duration / 60 | floor):\(.duration % 60)",
 		views: .views,
 		date: .publishedAt,
 		videoID: .uuid,
@@ -1031,10 +1044,10 @@ open_player () {
 
 	if [ $detach_player -eq 1 ]; then
 		if [ -z "$video_pref" ] || [ $is_audio_only -eq 1 ]; then
-			printf "Opening Player: %s\n" "$video_player $*"
+			printf "Opening Player: %s\n" "$video_player \"$*\""
 			setsid -f $video_player "$@"  $YTFZF_SUBT_NAME >/dev/null 2>&1
 		else
-			printf "Opening Player: %s\n" "$video_player_format$video_pref $*"
+			printf "Opening Player: %s\n" "$video_player_format$video_pref \"$*\""
 			setsid -f $video_player_format"$video_pref"  "$@"  $YTFZF_SUBT_NAME >/dev/null 2>&1
 		fi
 		return
@@ -1042,18 +1055,22 @@ open_player () {
 
 	if [ $is_download -eq 0 ]; then
 		if [ -z "$video_pref" ] || [ $is_audio_only -eq 1 ]; then
-			printf "Opening Player: %s\n" "$video_player $*"
+			printf "Opening Player: %s\n" "$video_player \"$*\""
 			$video_player "$@"  $YTFZF_SUBT_NAME
 		else
-			printf "Opening Player: %s\n" "$video_player_format$video_pref $*"
+			printf "Opening Player: %s\n" "$video_player_format$video_pref \"$*\""
 			$video_player_format"$video_pref"  "$@"  $YTFZF_SUBT_NAME || [ $? -eq 4 ] || video_pref= open_player "$@"
 		fi
 	elif [ $is_download -eq 1 ]; then
 		if [ -z "$video_pref" ]; then
 			youtube-dl "$@"  "$YTFZF_SUBT_NAME"
+      dl_status=`[ $? -eq 0 ] && echo Successful || echo Failed`
 		else
 			youtube-dl -f "$video_pref"  "$@"  $YTFZF_SUBT_NAME || video_pref= open_player "$@"
+      dl_status=`[ $? -eq 0 ] && echo Successful || echo Failed`
 		fi
+
+    notify-send "[ytfzf] Download $dl_status!" "$*"
 	fi
 }
 
@@ -1247,21 +1264,28 @@ EOF
 
 update_ytfzf () {
 	branch="$1"
-	updatefile="/tmp/ytfzf-update"
+	updatefile="$(mktemp)"
 	curl -L "https://raw.githubusercontent.com/pystardust/ytfzf/$branch/ytfzf" -o "$updatefile"
 
 	if sed -n '1p' < "$updatefile" | grep -q '#!/bin/sh'; then
 		chmod 755 "$updatefile"
-		[ "$(uname)" = "Darwin" ] && prefix="/usr/local/bin" || prefix="/usr/bin"
 		function_exists "sudo" && doasroot="sudo" || doasroot="doas"
-		$doasroot cp "$updatefile" "$prefix/ytfzf"
-		unset prefix doasroot
+		mv -f "$updatefile" "$0" 2>/dev/null || $doasroot mv -f "$updatefile" "$0"
+		if [ $? -eq 0 ] ; then
+			unset doasroot
+			printf "%bytfzf successfully updated.%b\n" "$c_green" "$c_reset"
+			exit 0
+		else
+			unset doasroot
+			printf "%bFailed to update ytfzf.%b\n" "$c_red" "$c_reset"
+			rm "$updatefile"
+			exit 1
+		fi
 	else
-		printf "%bFailed to update ytfzf. Try again later.%b" "$c_red" "$c_reset"
+		printf "%bFailed to update ytfzf. Try again later.%b\n" "$c_red" "$c_reset"
+		rm "$updatefile"
+		exit 1
 	fi
-
-	rm "$updatefile"
-	exit 0
 }
 
 #gives a value to sort by (this will give the unix time the video was uploaded)
