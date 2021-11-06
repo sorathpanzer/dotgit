@@ -5,7 +5,7 @@ export TERMINAL="st"
 export VISUAL="nvim"
 export ANDROID_HOME=/opt/android-sdk
 
-export LS_COLORS=$LS_COLORS:"*.mp4=01;31"
+#export LS_COLORS=$LS_COLORS:"*.mp4=01;31":"*.mp3=00;38;5;109"
 
 setopt hist_ignore_dups
 setopt hist_ignore_space
@@ -41,6 +41,7 @@ alias du="du -h -d 1 "$@" 2>/dev/null | sort -h -r"
 export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 alias sudo="doas"
 alias xpg="gpg -c --no-symkey-cache --cipher-algo AES256"
+emacs="emacsclient -c -a 'emacs'"
 
 iwf() {
   iwctl station wlan0 scan

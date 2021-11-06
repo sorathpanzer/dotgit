@@ -18,9 +18,12 @@ PATH="$PATH:$HOME/.local/bin/transmission"
 PATH="$PATH:/opt/android-sdk/tools/bin"
 PATH="$PATH:/var/lib/snapd/snap/bin"
 
+eval $( dircolors -b $HOME/.config/dir_colors )
+
 if [ "$(tty)" = "/dev/tty1" ]; then
   #QT_QPA_PLATFORM=wayland SDL_VIDEODRIVER=wayland
   #exec dwl
   sx $HOME/.xinitrc
   #sx $(echo "dwm\nbspwm" | fzf)
 fi
+
