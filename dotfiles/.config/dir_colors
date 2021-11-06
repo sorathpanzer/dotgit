@@ -1,0 +1,43 @@
+# Audio formats (orange)
+.aac    38;5;141
+.au     38;5;141
+.flac   38;5;141
+.mid    38;5;141
+.midi   38;5;141
+.mka    38;5;141
+.mp3    38;5;141
+.mpc    38;5;141
+.ogg    38;5;141
+.opus   38;5;141
+.ra     38;5;141
+.wav    38;5;141
+.m4a    38;5;141
+
+# Video formats (as audio + bold)
+.mov    01;31
+.MOV    01;31
+.mpg    01;31
+.mpeg   01;31
+.m2v    01;31
+.mkv    01;31
+.ogm    01;31
+.mp4    01;31
+.m4v    01;31
+.mp4v   01;31
+.vob    01;31
+.qt     01;31
+.nuv    01;31
+.wmv    01;31
+.asf    01;31
+.rm     01;31
+.rmvb   01;31
+.flc    01;31
+.avi    01;31
+.fli    01;31
+.flv    01;31
+.gl     01;31
+.m2ts   01;31
+.divx   01;31
+.webm   01;31
+
+
