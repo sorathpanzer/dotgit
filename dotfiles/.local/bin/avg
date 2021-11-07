@@ -1,0 +1,105 @@
+#!/bin/bash
+
+RED="\e[91m"
+GREEN="\e[92m"
+CYAN="\e[94m"
+YELLOW="\e[0;33m"
+RESET="\e[0m"
+
+if [ -f ".viruslog" ]; then
+  rm .viruslog
+fi
+
+if [ -f ".normlog" ]; then
+  rm .normlog
+fi
+
+search_virus() {
+  echo " "
+  echo "Procurar malwares..."
+  clamscan -r --max-filesize=4000M --max-scansize=4000M --bell -i -o $@ > .avg.log
+}
+
+print_summary() {
+  echo " "
+  colorize .avg.log | sed '/SCAN/,$!d' | sed '/Date\|Data\|Time\|Engine/d' | cat | head -n 6
+}
+
+colorize() {
+
+Infected=$(cat .avg.log | grep Infected | awk '{print $3}')
+
+  if [ "$Infected" -gt 0 ]; then
+      awk '
+function color(c,s) {
+        printf("\033[%dm%s\033[0m\n",30+c,s)
+}
+/Infected/ {color(1,$0);next}
+{print}
+' $1
+
+  else
+      awk '
+function color(c,s) {
+        printf("\033[%dm%s\033[0m\n",30+c,s)
+}
+/Infected/ {color(2,$0);next}
+{print}
+' $1
+  fi
+}
+
+remove_virus() {
+  badfiles=$(cat .avg.log | grep FOUND |  cut -f1 -d":")
+  badnum=$(cat .avg.log | grep FOUND |  cut -f1 -d":" | wc -l)
+
+if [[ $badnum -gt 0 ]]; then
+  while read -r LINE; do
+    echo "Remover ficheiro? [Y/n]"
+    echo -e "${RED} $LINE ${RESET}"
+    printf "> "
+    read answer < /dev/tty
+
+    if [ "$answer" == "" ] || [ "$answer" == "y" ] || [ "$answer" == "Y" ]; then
+      mv $LINE $HOME/.local/share/Trash/files
+      echo "$LINE" >> .viruslog
+      echo -e "${GREEN}$LINE removido${RESET}"
+      sleep 1
+    else
+      echo "$LINE" >> .normlog
+    fi
+  done <<< $badfiles
+
+  if [ -f ".viruslog" ]; then
+    viruslog=$(cat .viruslog)
+
+    echo " "
+    echo "Foram removidos os seguintes ficheiros:"
+
+    while read -r LINE; do
+      echo -e "${CYAN} $LINE ${RESET}"
+    done <<< $viruslog
+
+    rm .viruslog
+  fi
+fi
+}
+
+
+search_virus
+remove_virus
+print_summary
+
+  echo "------------------------------------"
+  echo " "
+
+    if [ -f ".normlog" ]; then
+    normlog=$(cat .normlog)
+    echo -e "${YELLOW}ATENÇÂO: Os seguintes ficheiros não foram removidos:${RESET}"
+
+    while read -r LINE; do
+      echo -e "${CYAN} $LINE ${RESET}"
+    done <<< $normlog
+
+    rm .normlog
+  fi

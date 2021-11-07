@@ -140,14 +140,9 @@ cmd size ${{
   read exit
 }}
 
-#cmd burniso ${{
-#  clear
-#  doas dd if="$f" of=/dev/sdb
-#}}
-
 cmd burniso ${{
   clear
-  doas cat "$f" > of=/dev/sdb
+  doas dd if="$f" of=/dev/sdb
 }}
 
 # Trash cli bindings
