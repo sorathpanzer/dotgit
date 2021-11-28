@@ -35,13 +35,20 @@ alias v="nvim -c ':set showtabline=0'"
 alias diff="diff --color"
 alias paclog='pacman -Qiie | grep -iE "nome[ ]+:|Data da Instalação" | sed "s/.*: //" | tac | paste -d " " - - | sort -n --k 2'
 alias trl="transmission-remote -l | sed '/Sum/d'"
+alias trs='pidof transmission-daemon >/dev/null || (transmission-daemon && notify-send "Starting transmission daemon...")'
 alias ytsub="yt -S --sort"
 alias y2mp3="youtube-dl -x --audio-format mp3 "$1""
 alias du="du -h -d 1 "$@" 2>/dev/null | sort -h -r"
 export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 alias sudo="doas"
 alias xpg="gpg -c --no-symkey-cache --cipher-algo AES256"
-emacs="emacsclient -c -a 'emacs'"
+alias emacs="emacsclient -c -a 'emacs'"
+
+trd()
+{
+  list=$(trl | tail -n +2 | fzf | awk '{print $1}')
+  transmission-remote -t $list --remove
+}
 
 iwf() {
   iwctl station wlan0 scan
