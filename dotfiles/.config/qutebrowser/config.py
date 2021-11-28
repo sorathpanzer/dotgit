@@ -22,7 +22,6 @@ c.colors.webpage.darkmode.policy.images = 'never'
 c.colors.webpage.darkmode.policy.page = 'smart'
 c.colors.webpage.preferred_color_scheme= 'dark'
 c.colors.webpage.darkmode.contrast = 1
-#c.colors.webpage.darkmode.threshold.text = 200
 
 c.content.user_stylesheets = ['~/.config/qutebrowser/schemes/minimal.css']
 c.colors.webpage.bg = '#111111'
