@@ -1,0 +1,9 @@
+#!/bin/sh
+
+echo "Open vault password:"
+sudo cryptsetup open --type luks /dev/sda2 cryptroot
+sudo mount /dev/mapper/cryptroot /mnt
+sudo mv /mnt/@ /mnt/@$(date "+%Y%m%d-%H%M")
+echo "Choose Snapshot ID"
+SNAP=$(sudo snapper list | tail -n +4 | fzf | awk '{print $1}' | tr -dc '[:alnum:]\n\r')
+sudo btrfs subvol snapshot /mnt/snapshots/$SNAP/snapshot /mnt/@
