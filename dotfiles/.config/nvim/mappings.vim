@@ -75,4 +75,7 @@ nnoremap <silent> <leader>b :execute 'set showtabline=' . (&showtabline ==# 0 ? 
 
 nnoremap <C-Up> zk
 nnoremap <C-Down> zj
-
+nnoremap <2-LeftMouse> za
+" Toggle folds
+nnoremap <silent> <return> @=(foldlevel('.')?'za':"\<Space>")<CR>
+vnoremap <return> zf
