@@ -79,3 +79,14 @@ nnoremap <2-LeftMouse> za
 " Toggle folds
 nnoremap <silent> <return> @=(foldlevel('.')?'za':"\<Space>")<CR>
 vnoremap <return> zf
+
+" Goyo
+nnoremap <leader>g :Goyo<CR>
+
+" Spellchecking
+
+map <leader>s :setlocal spell! spelllang=pt_pt<CR>
+map <leader><S-s> :setlocal spell! spelllang=en_us<CR>
+"nnoremap <leader>s :set spell spelllang=pt_pt<CR>
+"nnoremap <leader><S-s> :set spell spelllang=en_us<CR>
+

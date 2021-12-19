@@ -28,6 +28,8 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'kristijanhusak/orgmode.nvim'
   " If you are using Vim-Plug
     Plug 'shaunsingh/nord.nvim'
+  " Goyo Plugin
+    Plug 'junegunn/goyo.vim'
   call plug#end()
 
 " Automatically install missing plugins on startup
