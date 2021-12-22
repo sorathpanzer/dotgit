@@ -52,7 +52,7 @@ trd()
 
 iwf() {
   iwctl station wlan0 scan
-  sleep 1
+  sleep 2
   SSID="$(iwctl station wlan0 get-networks | awk '{print $1}' | head -n -1 | tail -n +5 | fzf)"
   iwctl station wlan0 connect $SSID
 }
