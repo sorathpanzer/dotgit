@@ -292,6 +292,38 @@ cmd format ${{
     doas mkfs.vfat -F32 /dev/sdb1
 }}
 
+cmd gif ${{
+    clear
+    echo "Set the scale for the gif!"
+    read sc
+    ffmpeg -i $fx -vf "scale=iw/$sc:ih/$sc" -pix_fmt yuv420p $(echo "$f" | cut -f1 -d ".").gif
+}}
+
+cmd vrotate ${{
+    clear
+    echo "Set the rotation for the video file!"
+    read rt
+    ffmpeg -i $fx -vf "rotate=$rt" $(echo "$f" | cut -f1 -d ".")-rotate.$(echo "$f" | cut -f2 -d ".")
+}}
+
+cmd vcut ${{
+    clear
+    echo "Set the start point!"
+    read start
+    echo "Set the end point!"
+    read end
+
+    if [ "$start" -eq "" ]; then
+        start=00:00:00
+    fi
+
+    if [ "$end" = "" ]; then
+        ffmpeg -ss $start -i raw.webm -c copy $(echo "$f" | cut -f1 -d ".")-cut.$(echo "$f" | cut -f2 -d ".")
+    else
+        ffmpeg -ss $start -i raw.webm -to $end -c copy $(echo "$f" | cut -f1 -d ".")-cut.$(echo "$f" | cut -f2 -d ".")
+    fi
+}}
+
 # Bindings
 # Remove some defaults
 map m
@@ -305,6 +337,9 @@ map e
 map f
 map u
 
+map ffg gif
+map ffr vrotate
+map ffc vcut
 map i rpac
 map <lt><lt> gd
 map <lt>z gf
