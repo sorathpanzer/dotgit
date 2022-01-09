@@ -1,5 +1,6 @@
 #!/bin/sh
 
+iwctl station wlan0 scan &
 dunst &
 dwmblocks &
 #$HOME/.config/polybar/launch.sh &
