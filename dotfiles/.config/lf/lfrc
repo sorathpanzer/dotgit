@@ -239,7 +239,8 @@ cmd stowfile ${{
     clear
     if [ ! -L "$f" ]; then
         backit=$(dirname "$f")
-        link=$(dirname "$f" | sd "/home/sorath" "")
+        #link=$(dirname "$f" | sd "/home/sorath" "")
+        link=$(dirname "$f" | sed 's/\/home\/sorath//')
         file=$(basename "$f")
         mv "$f" ~/.config/dotgit/dotfiles/$link
         cd ~/.config/dotgit
