@@ -21,6 +21,6 @@ rsync -avr --delete $HOME/Vídeos /media/Vault/BackHome
 rsync -avr --delete $HOME/Transferências /media/Vault/BackHome
 rsync -avr --delete $HOME/Syncthing /media/Vault/BackHome
 rsync -avr --delete $HOME/Projectos /media/Vault/BackHome
-rsync -avr --delete $HOME/.config/chromium /media/Vault/BackHome/
-rsync -avr --delete $HOME/.config/qutebrowser/bookmarks /media/Vault/BackHome/
-rsync -avr --delete $HOME/.local/chromium /media/Vault/BackHome/
+rsync -avr --delete $HOME/.config/chromium /media/Vault/BackHome/.config
+rsync -avr --delete $HOME/.config/qutebrowser/bookmarks /media/Vault/BackHome/.config/qutebrowser
+rsync -avr --delete $HOME/.local/share/qutebrowser /media/Vault/BackHome/.local/share
