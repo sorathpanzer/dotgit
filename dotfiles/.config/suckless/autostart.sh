@@ -3,7 +3,6 @@
 iwctl station wlan0 scan &
 dunst &
 dwmblocks &
-#$HOME/.config/polybar/launch.sh &
 udiskie &
 numlockx &
 xrdb -load $HOME/.Xresources &
