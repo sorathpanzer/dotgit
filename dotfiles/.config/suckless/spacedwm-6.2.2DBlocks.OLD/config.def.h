@@ -61,18 +61,20 @@ static const Rule rules[] = {
 	 *	WM_NAME(STRING) = title
 	 */
 	/* class      instance    title       tags mask     switchtotag    isfloating   monitor */
-	{ "qutebrowser",    	NULL,       NULL,       1,            1,             0,           -1 },
-/*{ "Chromium",         NULL,       NULL,       1,            1,             0,           -1 },*/
+	{ "qutebrowser",      NULL,       NULL,       1,            1,             0,           -1 },
+    { "Chromium",         NULL,       NULL,       1 << 2,       1,             0,           -1 },
 	{ "st-256color",      NULL,       NULL,       2,            1,             0,           -1 },
-	{ "mpv",     			    NULL,       NULL,       1 << 3,       1,             0,           -1 },
-	{ "Signal",    		    NULL,       NULL,       1 << 5,       1,             0,           -1 },
-	{ "Telegram",    		    NULL,       NULL,       1 << 5,       1,             0,           -1 },
-	{ "Sxiv",     	 	    NULL,       NULL,       1 << 2,       1,             0,           -1 },
+	{ "mpv",     		  NULL,       NULL,       1 << 3,       1,             0,           -1 },
+	{ "Audacity",     	  NULL,       NULL,       1 << 3,       1,             0,           -1 },
+	{ "Virt-manager",     NULL,       NULL,       1 << 4,       1,             0,           -1 },
+	{ "Signal",    		  NULL,       NULL,       1 << 5,       1,             0,           -1 },
+	{ "Telegram",    	  NULL,       NULL,       1 << 5,       1,             0,           -1 },
+	{ "Sxiv",     	 	  NULL,       NULL,       1 << 2,       1,             0,           -1 },
 	{ "libreoffice",      NULL,       NULL,       1 << 4,       1,             0,           -1 },
     { "localc",           NULL,       NULL,       1 << 4,       1,             0,           -1 },
 	{ "libreoffice-calc", NULL,       NULL,       1 << 4,       1,             0,           -1 },
-	{ NULL,		            "Alacritty",NULL,		    SPTAG(0),		  0,             1,			      -1 },
-	{ NULL,		            "keepassxc",NULL,		    SPTAG(1),		  0,             1,			      -1 },
+	{ NULL,		          "Alacritty",NULL,		  SPTAG(0),		0,             1,			-1 },
+	{ NULL,		          "keepassxc",NULL,		  SPTAG(1),		0,             1,			-1 },
 };
 
 /* Bar rules allow you to configure what is shown where on the bar, as well as
