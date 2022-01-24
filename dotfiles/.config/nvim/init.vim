@@ -22,7 +22,7 @@ set nowrap                              " Display long lines as just one line
 set encoding=utf-8                      " The encoding displayed
 set pumheight=10                        " Makes popup menu smaller
 set fileencoding=utf-8                  " The encoding written to file
-set ruler              			            " Show the cursor position all the time
+set ruler              			        " Show the cursor position all the time
 set cmdheight=1                         " More space for displaying messages
 set mouse=a                             " Enable your mouse
 set splitbelow                          " Horizontal splits will automatically be below
@@ -44,10 +44,10 @@ set foldmethod=manual                   " Fold method
 set nobackup                            " This is recommended by coc
 set nowritebackup                       " This is recommended by coc
 set shortmess+=c                        " Don't pass messages to |ins-completion-menu|.
-set signcolumn=yes:2                      " Always show the signcolumn, otherwise it would shift the text each time
+"set signcolumn=no                      " Always show the signcolumn, otherwise it would shift the text each time
 set wildmode=longest:full,full
-set list
-set listchars=tab:➤\ ,trail:.
+"set list
+"set listchars=tab:➤\ ,trail:.
 set clipboard=unnamedplus               " Copy paste between vim and everything else
 set so=999                              " Open with the cursor on the middle of the screen
 set incsearch
