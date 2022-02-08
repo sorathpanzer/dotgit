@@ -87,6 +87,6 @@ nnoremap <leader>g :Goyo<CR>
 
 map <leader>s :setlocal spell! spelllang=pt_pt<CR>
 map <leader><S-s> :setlocal spell! spelllang=en_us<CR>
-"nnoremap <leader>s :set spell spelllang=pt_pt<CR>
-"nnoremap <leader><S-s> :set spell spelllang=en_us<CR>
-
+nmap <leader><leader> z=
+nnoremap <leader>z [s
+nnoremap <leader>x ]s

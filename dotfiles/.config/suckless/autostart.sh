@@ -1,6 +1,8 @@
 #!/bin/sh
 
 iwctl station wlan0 scan &
+synclient VertScrollDelta=-20 &
+synclient TapButton2=2 &
 dunst &
 dwmblocks &
 udiskie &

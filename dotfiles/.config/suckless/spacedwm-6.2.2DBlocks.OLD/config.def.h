@@ -62,7 +62,8 @@ static const Rule rules[] = {
 	 */
 	/* class      instance    title       tags mask     switchtotag    isfloating   monitor */
 	{ "qutebrowser",      NULL,       NULL,       1,            1,             0,           -1 },
-    { "Chromium",         NULL,       NULL,       1 << 2,       1,             0,           -1 },
+    { "Chromium",         NULL,       NULL,       1 << 3,       1,             0,           -1 },
+    { "Falkon",           NULL,       NULL,       1 << 3,       1,             0,           -1 },
 	{ "st-256color",      NULL,       NULL,       2,            1,             0,           -1 },
 	{ "mpv",     		  NULL,       NULL,       1 << 3,       1,             0,           -1 },
 	{ "Audacity",     	  NULL,       NULL,       1 << 3,       1,             0,           -1 },
@@ -186,7 +187,7 @@ static Key keys[] = {
 
     /* Apps Launched with SUPER + ALT + KEY  */
 	/* ----------- apps ----------- */
-	{ MODKEY,        	  XK_w,      	  spawn,          CMD ("xdotool search --class Chromium windowactivate || chromium") },
+	{ MODKEY,        	  XK_w,      	  spawn,          CMD ("xdotool search --class Falkon windowactivate || falkon") },
 	{ MODKEY|ShiftMask, XK_t,      	  spawn,          CMD ("tnoty") },
 	{ MODKEY,        	  XK_j,      	  spawn,          CMD ("st -e journalctl --follow") },
 	{ MODKEY,        	  XK_x,      	  spawn,          CMD ("12ft") },
