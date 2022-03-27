@@ -29,7 +29,7 @@ alias ls="ls --color=auto --group-directories-first -l"
 alias fzf="fzf -m"
 alias mpv="mpv --loop"
 alias nb="newsboat"
-alias lg="cd $HOME/.config/dotgit; lazygit; cd -"
+alias tg="cd $HOME/.config/dotgit; tig; cd -"
 alias lgit="lazygit"
 alias v="nvim -c ':set showtabline=0'"
 alias diff="diff --color"
@@ -43,6 +43,7 @@ export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 alias sudo="doas"
 alias xpg="gpg -c --no-symkey-cache --cipher-algo AES256"
 alias emacs="emacsclient -c -a 'emacs'"
+alias apt="nala"
 
 trd()
 {
@@ -149,5 +150,7 @@ bindkey -s '^z' 'zsh\n'
 export FZF_DEFAULT_OPTS='-e -i --height 40% --layout=reverse --border'
 source ~/.config/zsh/fzf.zsh
 source ~/.config/zsh/unicode.zsh
-source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh 2>/dev/null
-source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh 2>/dev/null
+#source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh 2>/dev/null
+#source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh 2>/dev/null
+source /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh 2>/dev/null
+source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh 2>/dev/null

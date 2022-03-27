@@ -1,10 +1,11 @@
 #!/bin/bash
 
-vol=`pamixer --get-volume`
+#vol=`pamixer --get-volume`
+vol=`pulsemixer --get-volume`
 
-if [[ `pamixer --get-mute` == "true" ]]; then
+if [[ `pulsemixer --get-mute` == "true" ]]; then
     echo -n "^c#ff4500^🔇^c#ffffff^"
 else
-    echo -n "$(percentage $vol   奔 墳  ) $vol%"
+    echo -n "$(percentage $vol   奔 墳  ) $vol%" | awk '{print $1" "$2}'
 fi
 
