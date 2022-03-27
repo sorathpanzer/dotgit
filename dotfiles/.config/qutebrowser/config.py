@@ -20,7 +20,7 @@ c.colors.webpage.darkmode.grayscale.all = True
 c.colors.webpage.darkmode.grayscale.images = 0.5
 c.colors.webpage.darkmode.policy.images = 'never'
 c.colors.webpage.darkmode.policy.page = 'smart'
-c.colors.webpage.preferred_color_scheme= 'dark'
+#c.colors.webpage.preferred_color_scheme= 'dark'
 c.colors.webpage.darkmode.contrast = 1
 
 c.content.user_stylesheets = ['~/.config/qutebrowser/schemes/minimal.css']
@@ -66,8 +66,8 @@ config.set('content.javascript.enabled', True, 'qute://*/*')
 #   - true
 #   - false
 #   - ask
-config.set('content.notifications.enabled', True, 'https://www.etoro.com')
-config.set('content.notifications.enabled', True, 'https://www.tradingview.com')
+#config.set('content.notifications.enabled', True, 'https://www.etoro.com')
+#config.set('content.notifications.enabled', True, 'https://www.tradingview.com')
 
 # Directory to save downloads to.
 c.downloads.location.directory = '/home/sorath/Transferências'

@@ -21,6 +21,7 @@ PATH="$PATH:/var/lib/snapd/snap/bin"
 eval $( dircolors -b $HOME/.config/dir_colors )
 
 if [ "$(tty)" = "/dev/tty1" ]; then
-  sx $HOME/.xinitrc
+  #sx $HOME/.xinitrc
+  startx
 fi
 

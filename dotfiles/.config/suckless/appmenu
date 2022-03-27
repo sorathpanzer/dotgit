@@ -1,7 +1,8 @@
 audacity
-chromium
+firefox
 libreoffice
-pitivi
-signal-desktop
-telegram-desktop
-virt-manager
+lxappearance
+flatpak run org.signal.Signal
+qutebrowser
+flatpak run org.telegram.desktop
+

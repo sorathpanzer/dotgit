@@ -187,7 +187,7 @@ static Key keys[] = {
 
     /* Apps Launched with SUPER + ALT + KEY  */
 	/* ----------- apps ----------- */
-	{ MODKEY,        	  XK_w,      	  spawn,          CMD ("xdotool search --class Falkon windowactivate || falkon") },
+	{ MODKEY,        	  XK_w,      	  spawn,          CMD ("xdotool search --class quetebrowser windowactivate || qutebrowser") },
 	{ MODKEY|ShiftMask, XK_t,      	  spawn,          CMD ("tnoty") },
 	{ MODKEY,        	  XK_j,      	  spawn,          CMD ("st -e journalctl --follow") },
 	{ MODKEY,        	  XK_x,      	  spawn,          CMD ("12ft") },
