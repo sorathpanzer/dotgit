@@ -31,11 +31,11 @@ typedef struct {
 	const char *name;
 	const void *cmd;
 } Sp;
-const char *spcmd1[] = {"alacritty", NULL };
+const char *spcmd1[] = {"kitty", NULL };
 const char *spcmd2[] = {"keepassxc", NULL };
 static Sp scratchpads[] = {
 	/* name          cmd  */
-	{"Alacritty",      spcmd1},
+	{"kitty",      spcmd1},
 	{"keepassxc",   spcmd2},
 };
 
@@ -61,9 +61,9 @@ static const Rule rules[] = {
 	 *	WM_NAME(STRING) = title
 	 */
 	/* class      instance    title       tags mask     switchtotag    isfloating   monitor */
-	{ "qutebrowser",      NULL,       NULL,       1,            1,             0,           -1 },
+	{ "firefox",      NULL,       NULL,       1,            1,             0,           -1 },
     { "Chromium",         NULL,       NULL,       1 << 3,       1,             0,           -1 },
-    { "Falkon",           NULL,       NULL,       1 << 3,       1,             0,           -1 },
+    { "qutebrowser",           NULL,       NULL,       1 << 3,       1,             0,           -1 },
 	{ "st-256color",      NULL,       NULL,       2,            1,             0,           -1 },
 	{ "mpv",     		  NULL,       NULL,       1 << 3,       1,             0,           -1 },
 	{ "Audacity",     	  NULL,       NULL,       1 << 3,       1,             0,           -1 },
@@ -74,7 +74,7 @@ static const Rule rules[] = {
 	{ "libreoffice",      NULL,       NULL,       1 << 4,       1,             0,           -1 },
     { "localc",           NULL,       NULL,       1 << 4,       1,             0,           -1 },
 	{ "libreoffice-calc", NULL,       NULL,       1 << 4,       1,             0,           -1 },
-	{ NULL,		          "Alacritty",NULL,		  SPTAG(0),		0,             1,			-1 },
+	{ NULL,		          "kitty",NULL,		  SPTAG(0),		0,             1,			-1 },
 	{ NULL,		          "keepassxc",NULL,		  SPTAG(1),		0,             1,			-1 },
 };
 
@@ -187,7 +187,7 @@ static Key keys[] = {
 
     /* Apps Launched with SUPER + ALT + KEY  */
 	/* ----------- apps ----------- */
-	{ MODKEY,        	  XK_w,      	  spawn,          CMD ("xdotool search --class quetebrowser windowactivate || qutebrowser") },
+	{ MODKEY,        	  XK_w,      	  spawn,          CMD ("xdotool search --class qutebrowser windowactivate || qutebrowser") },
 	{ MODKEY|ShiftMask, XK_t,      	  spawn,          CMD ("tnoty") },
 	{ MODKEY,        	  XK_j,      	  spawn,          CMD ("st -e journalctl --follow") },
 	{ MODKEY,        	  XK_x,      	  spawn,          CMD ("12ft") },
@@ -199,10 +199,10 @@ static Key keys[] = {
 	{ 0,                XK_Print,  	  spawn,          CMD ("screenshot") },
 	{ MODKEY|ShiftMask, XK_plus,   	  spawn,          SHCMD ("light -A 15") },
   { MODKEY|ShiftMask, XK_minus,  	  spawn,          SHCMD ("light -U 15") },
-  { MODKEY,           XK_plus,   	  spawn,          SHCMD ("pactl set-sink-volume $(pactl list sources | grep Sink | head -n 1 | awk '{print $4}') +10%") },
-  { MODKEY,           XK_minus,  	  spawn,          SHCMD ("pactl set-sink-volume $(pactl list sources | grep Sink | head -n 1 | awk '{print $4}') -10%") },
-  { MODKEY,           XK_m, 	   		spawn,          SHCMD ("pamixer --toggle-mute") },
-	{ MODKEY,        	 	XK_1,      	  spawn,          CMD("xdotool search --class qutebrowser windowactivate || qutebrowser") },
+  { MODKEY,           XK_plus,   	  spawn,          SHCMD ("pactl set-sink-volume 0 +10%") },
+  { MODKEY,           XK_minus,  	  spawn,          SHCMD ("pactl set-sink-volume 0 -10%") },
+  { MODKEY,           XK_m, 	   		spawn,          SHCMD ("pactl set-sink-mute 0 toggle") },
+	{ MODKEY,        	 	XK_1,      	  spawn,          CMD("xdotool search --class firefox windowactivate || firefox") },
 	{ MODKEY,        	  XK_2,      	  spawn,          CMD("xdotool search --class st-256color windowactivate || st") },
 
 	/* ------------ tag ------------ */

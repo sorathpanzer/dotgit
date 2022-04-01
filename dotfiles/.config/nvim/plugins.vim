@@ -27,7 +27,7 @@ call plug#begin('~/.config/nvim/autoload/plugged')
   " Org Mode
     Plug 'kristijanhusak/orgmode.nvim'
   " If you are using Vim-Plug
-    Plug 'shaunsingh/nord.nvim'
+    Plug 'arcticicestudio/nord-vim'
   " Goyo Plugin
     Plug 'junegunn/goyo.vim'
   call plug#end()

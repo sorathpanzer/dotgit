@@ -1,8 +1,12 @@
 audacity
+emacs
 firefox
+kitty
 libreoffice
 lxappearance
 flatpak run org.signal.Signal
 qutebrowser
+timeshift-gui
+flatpak run io.freetubeapp.FreeTube
 flatpak run org.telegram.desktop
 

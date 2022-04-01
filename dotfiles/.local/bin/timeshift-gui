@@ -1,0 +1,3 @@
+#!/bin/sh
+
+doas pkexec env DISPLAY=$DISPLAY XAUTHORITY=$XAUTHORITY timeshift-gtk

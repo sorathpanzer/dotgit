@@ -2,8 +2,6 @@
 
 set preview true
 set previewer preview
-#set hidden false
-#set drawbox false
 set icons true
 set ignorecase true
 set shellopts '-eu'
@@ -13,7 +11,6 @@ set cleaner preview-image
 set shell zsh
 set shellopts '-euy'
 set ifs "\n"
-set filesep "\n"  # default already
 set incsearch
 set filesep "\n"  # default already
 set scrolloff 11
@@ -263,8 +260,11 @@ cmd stowfile ${{
 }}
 
 cmd cutvideo ${{
+    echo "Start position:"
     read start
+    echo "End position:"
     read end
+    echo "Rename to:"
     read name
     ffmpeg -i "$f" -ss $start -to $end -c copy $name.mp4
 }}

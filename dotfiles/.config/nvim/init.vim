@@ -15,6 +15,8 @@ source $HOME/.config/nvim/plug-config/gitgutter.vim
 
 syntax on                           " Enables syntax highlighing
 colorscheme nord
+let g:sonokai_style = 'default'
+let ayucolor="dark"                     " for dark version of theme
 set iskeyword+=-                      	" treat dash separated words as a word text object"
 set formatoptions-=cro                  " Stop newline continution of comments
 set hidden                              " Required to keep multiple buffers open multiple buffers

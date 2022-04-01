@@ -1,6 +1,6 @@
 #!/bin/sh
 
-[ $(cat /sys/class/net/w*/operstate 2>/dev/null) = up ] && wifiIcon="📶"
+[ $(cat /sys/class/net/wl*/operstate 2>/dev/null) = up ] && wifiIcon="📶"
 
 if [ $(cat /sys/class/net/e*/operstate 2>/dev/null) = up ]; then
 	ethIcon="🌐"

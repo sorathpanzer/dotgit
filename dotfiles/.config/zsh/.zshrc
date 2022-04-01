@@ -5,8 +5,6 @@ export TERMINAL="st"
 export VISUAL="nvim"
 export ANDROID_HOME=/opt/android-sdk
 
-#export LS_COLORS=$LS_COLORS:"*.mp4=01;31":"*.mp3=00;38;5;109"
-
 setopt hist_ignore_dups
 setopt hist_ignore_space
 setopt auto_menu
@@ -28,10 +26,8 @@ PS1="%{$fg[blue]%}%~$reset_color ⚡"
 alias ls="ls --color=auto --group-directories-first -l"
 alias fzf="fzf -m"
 alias mpv="mpv --loop"
-alias nb="newsboat"
 alias tg="cd $HOME/.config/dotgit; tig; cd -"
 alias lgit="lazygit"
-alias v="nvim -c ':set showtabline=0'"
 alias diff="diff --color"
 alias paclog='pacman -Qiie | grep -iE "nome[ ]+:|Data da Instalação" | sed "s/.*: //" | tac | paste -d " " - - | sort -n --k 2'
 alias trl="transmission-remote -l | sed '/Sum/d'"
@@ -39,11 +35,10 @@ alias trs='pidof transmission-daemon >/dev/null || (transmission-daemon && notif
 alias ytsub="yt -S --sort"
 alias y2mp3="youtube-dl -x --audio-format mp3 "$1""
 alias du="du -h -d 1 "$@" 2>/dev/null | sort -h -r"
-export MANPAGER="sh -c 'col -bx | bat -l man -p'"
+export MANPAGER="sh -c 'col -bx | batcat -l man -p'"
 alias sudo="doas"
 alias xpg="gpg -c --no-symkey-cache --cipher-algo AES256"
 alias emacs="emacsclient -c -a 'emacs'"
-alias apt="nala"
 
 trd()
 {
@@ -56,13 +51,6 @@ iwf() {
   sleep 2
   SSID="$(iwctl station wlan0 get-networks | awk '{print $1}' | head -n -1 | tail -n +5 | fzf)"
   iwctl station wlan0 connect $SSID
-}
-
-gpull() {
-  git stash --include-untracked
-  git reset --hard
-  git clean -fd
-  git pull
 }
 
 fl() {

@@ -1,12 +1,13 @@
 #!/bin/sh
 
 iwctl station wlan0 scan &
-synclient VertScrollDelta=-20 &
-synclient TapButton2=2 &
+#synclient VertScrollDelta=-20 &
+#synclient TapButton2=2 &
 dunst &
 dwmblocks &
 udiskie &
 numlockx &
+doas wg-quick up wg0 &
 xrdb -load $HOME/.Xresources &
 xrandr --output "eDP-1" --brightness 0.60 &
 xinput --set-prop "SYNA2B46:00 06CB:CD5F Touchpad" "libinput Natural Scrolling Enabled" 1 &
@@ -14,7 +15,7 @@ pactl set-sink-volume alsa_output.pci-0000_00_1f.3.analog-stereo 100% &
 picom --config ~/.config/picom/picom.conf -b &
 syncthing -no-browser &
 xset dpms 0 0 0 && xset -dpms  && xset s off && xset s noblank &
-hsetroot -cover $HOME/Imagens/Wallpapers/blackplanet.jpg &
+hsetroot -cover $HOME/Imagens/Wallpapers/minimal_squares.png &
 #sudo wg-quick up wg0 &
 #hsetroot -cover $HOME/Imagens/Wallpapers/$(ls $HOME/Imagens/Wallpapers | shuf -n 1) &
 
