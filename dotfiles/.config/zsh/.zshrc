@@ -30,6 +30,7 @@ alias tg="cd $HOME/.config/dotgit; tig; cd -"
 alias lgit="lazygit"
 alias diff="diff --color"
 alias paclog='pacman -Qiie | grep -iE "nome[ ]+:|Data da Instalação" | sed "s/.*: //" | tac | paste -d " " - - | sort -n --k 2'
+alias aptlog='zcat /var/log/apt/history.log.*.gz | cat - /var/log/apt/history.log'
 alias trl="transmission-remote -l | sed '/Sum/d'"
 alias trs='pidof transmission-daemon >/dev/null || (transmission-daemon && notify-send "Starting transmission daemon...")'
 alias ytsub="yt -S --sort"
