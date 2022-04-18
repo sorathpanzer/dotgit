@@ -88,6 +88,10 @@ cmd rpac ${{
     doas pacman -U $(ls -p | grep -v / | fzf)
 }}
 
+cmd encrypt ${{
+    tar czf data.tar.gz "$f"
+}}
+
 # dynamically set number of columns
 cmd autoratios &{{
                     w=$(tput cols)

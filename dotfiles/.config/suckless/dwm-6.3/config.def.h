@@ -60,22 +60,23 @@
 		 *	WM_CLASS(STRING) = instance, class
 		 *	WM_NAME(STRING) = title
 		 */
-		/* class      instance    title       tags mask     switchtotag    isfloating   monitor */
-		{ "firefox",      NULL,       NULL,       1,            1,             0,           -1 },
-	    { "Chromium",         NULL,       NULL,       1 << 3,       1,             0,           -1 },
-	    { "qutebrowser",           NULL,       NULL,       1 << 3,       1,             0,           -1 },
-		{ "st-256color",      NULL,       NULL,       2,            1,             0,           -1 },
-		{ "mpv",     		  NULL,       NULL,       1 << 3,       1,             0,           -1 },
-		{ "Audacity",     	  NULL,       NULL,       1 << 3,       1,             0,           -1 },
-		{ "Virt-manager",     NULL,       NULL,       1 << 4,       1,             0,           -1 },
-		{ "Signal",    		  NULL,       NULL,       1 << 5,       1,             0,           -1 },
-		{ "Telegram",    	  NULL,       NULL,       1 << 5,       1,             0,           -1 },
-		{ "Sxiv",     	 	  NULL,       NULL,       1 << 2,       1,             0,           -1 },
-		{ "libreoffice",      NULL,       NULL,       1 << 4,       1,             0,           -1 },
-	    { "localc",           NULL,       NULL,       1 << 4,       1,             0,           -1 },
-		{ "libreoffice-calc", NULL,       NULL,       1 << 4,       1,             0,           -1 },
-		{ NULL,		          "kitty",NULL,		  SPTAG(0),		0,             1,			-1 },
-		{ NULL,		          "keepassxc",NULL,		  SPTAG(1),		0,             1,			-1 },
+		/* class                instance    title       tags mask       switchtotag    isfloating   monitor */
+		{ "firefox",            NULL,       NULL,       1,              1,             0,           -1 },
+		{ "librewolf",          NULL,       NULL,       1,              1,             0,           -1 },
+	    { "Chromium",           NULL,       NULL,       1 << 3,         1,             0,           -1 },
+	    { "qutebrowser",        NULL,       NULL,       1 << 3,         1,             0,           -1 },
+		{ "st-256color",        NULL,       NULL,       2,              1,             0,           -1 },
+		{ "mpv",     		    NULL,       NULL,       1 << 3,         1,             0,           -1 },
+		{ "Audacity",     	    NULL,       NULL,       1 << 3,         1,             0,           -1 },
+		{ "Virt-manager",       NULL,       NULL,       1 << 4,         1,             0,           -1 },
+		{ "Signal",    		    NULL,       NULL,       1 << 5,         1,             0,           -1 },
+		{ "Telegram",    	    NULL,       NULL,       1 << 5,         1,             0,           -1 },
+		{ "Sxiv",     	 	    NULL,       NULL,       1 << 2,         1,             0,           -1 },
+		{ "libreoffice",        NULL,       NULL,       1 << 4,         1,             0,           -1 },
+	    { "localc",             NULL,       NULL,       1 << 4,         1,             0,           -1 },
+		{ "libreoffice-calc",   NULL,       NULL,       1 << 4,         1,             0,           -1 },
+		{ NULL,		            "kitty",NULL,		    SPTAG(0),	    0,             1,			-1 },
+		{ NULL,		            "keepassxc",NULL,		SPTAG(1),	    0,             1,			-1 },
 	};
 
 	/* Bar rules allow you to configure what is shown where on the bar, as well as
@@ -104,6 +105,7 @@
 	static const float mfact     = 0.55; /* factor of master area size [0.05..0.95] */
 	static const int nmaster     = 1;    /* number of clients in master area */
 	static const int resizehints = 0;    /* 1 means respect size hints in tiled resizals */
+    static const int lockfullscreen = 1; /* 1 will force focus on the fullscreen window */
 
 	static const Layout layouts[] = {
 		/* symbol     arrange function */
@@ -154,13 +156,27 @@
 		{ MODKEY|ShiftMask,       XK_Right,       rotatestack,    {.i = +1 } },
 		{ MODKEY|ShiftMask,       XK_Left,        rotatestack,    {.i = -1 } },
 		{ MODKEY,                 XK_i,      	   	incnmaster,     {.i = +1 } },
-	  { MODKEY,           			XK_d,      	   	incnmaster,     {.i = -1 } },
-		{ MODKEY,       	  			XK_Tab,         focusstack,     {.i = +1 } },
+	    { MODKEY,           	  XK_d,      	   	incnmaster,     {.i = -1 } },
+		{ MODKEY,       	  	  XK_Tab,         focusstack,     {.i = +1 } },
 		{ MODKEY,                 XK_z, 	   			zoom,           {0} },
 
 		/* ------------ gaps ----------- */
-		{ MODKEY,     						XK_g,      	   togglegaps,      {0} },
-		{ MODKEY|ShiftMask,     	XK_g,      	   defaultgaps,     {0} },
+	    { MODKEY|Mod4Mask,              XK_h,      incrgaps,       {.i = +1 } },
+	    { MODKEY|Mod4Mask,              XK_l,      incrgaps,       {.i = -1 } },
+	    { MODKEY|Mod4Mask|ShiftMask,    XK_h,      incrogaps,      {.i = +1 } },
+	    { MODKEY|Mod4Mask|ShiftMask,    XK_l,      incrogaps,      {.i = -1 } },
+	    { MODKEY|Mod4Mask|ControlMask,  XK_h,      incrigaps,      {.i = +1 } },
+	    { MODKEY|Mod4Mask|ControlMask,  XK_l,      incrigaps,      {.i = -1 } },
+		{ MODKEY,     				    XK_g,      	   togglegaps,      {0} },
+		{ MODKEY|ShiftMask,     	    XK_g,      	   defaultgaps,     {0} },
+	    { MODKEY,                       XK_y,      incrihgaps,     {.i = +1 } },
+	    { MODKEY,                       XK_o,      incrihgaps,     {.i = -1 } },
+	    { MODKEY|ControlMask,           XK_y,      incrivgaps,     {.i = +1 } },
+	    { MODKEY|ControlMask,           XK_o,      incrivgaps,     {.i = -1 } },
+	    { MODKEY|Mod4Mask,              XK_y,      incrohgaps,     {.i = +1 } },
+	    { MODKEY|Mod4Mask,              XK_o,      incrohgaps,     {.i = -1 } },
+	    { MODKEY|ShiftMask,             XK_y,      incrovgaps,     {.i = +1 } },
+	    { MODKEY|ShiftMask,             XK_o,      incrovgaps,     {.i = -1 } },
 
 		/* ---------- monitor ---------- */
 		{ MODKEY,                 XK_comma,      focusmon,        {.i = -1 } },
@@ -203,7 +219,7 @@
 	    { MODKEY,               XK_plus,   	  spawn,          SHCMD ("pactl set-sink-volume 0 +10%") },
 	    { MODKEY,               XK_minus,  	  spawn,          SHCMD ("pactl set-sink-volume 0 -10%") },
 	    { MODKEY,               XK_m, 	   		spawn,          SHCMD ("pactl set-sink-mute 0 toggle") },
-		{ MODKEY,        	 	XK_1,      	  spawn,          CMD("xdotool search --class firefox windowactivate || firefox") },
+		{ MODKEY,        	 	XK_1,      	  spawn,          CMD("xdotool search --class librewolf windowactivate || flatpak run io.gitlab.librewolf-community") },
 		{ MODKEY,        	    XK_2,      	  spawn,          CMD("xdotool search --class st-256color windowactivate || st") },
 
 		/* ------------ tag ------------ */
