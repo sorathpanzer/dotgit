@@ -2,7 +2,6 @@ audacity
 firefox
 libreoffice
 flatpak run org.signal.Signal
-qutebrowser
 timeshift-gui
 transmission-gtk
 flatpak run org.telegram.desktop
