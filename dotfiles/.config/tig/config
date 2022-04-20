@@ -1,0 +1,1 @@
+bind generic x !git push origin master
