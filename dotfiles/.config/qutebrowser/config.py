@@ -49,6 +49,8 @@ config.set('content.headers.user_agent', 'Mozilla/5.0 ({os_info}; rv:71.0) Gecko
 config.set('content.headers.user_agent', 'Mozilla/5.0 ({os_info}) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/99 Safari/537.36', 'https://*.slack.com/*')
 config.set('content.headers.user_agent', 'Mozilla/5.0 ({os_info}; rv:71.0) Gecko/20100101 Firefox/71.0', 'https://docs.google.com/*')
 config.set('content.headers.user_agent', 'Mozilla/5.0 ({os_info}; rv:71.0) Gecko/20100101 Firefox/71.0', 'https://drive.google.com/*')
+config.set('content.headers.user_agent', 'Chrome/100.0.4896.127-1', 'https://accounts.google.com/*')
+config.set('content.headers.user_agent', 'Chrome/100.0.4896.127-1', 'https://google.com/maps/*')
 
 # Load images automatically in web pages.
 config.set('content.images', True, 'chrome-devtools://*')
