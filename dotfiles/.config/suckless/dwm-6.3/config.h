@@ -65,6 +65,7 @@
 		/* class                instance    title       tags mask       switchtotag    isfloating   monitor */
 		{ "firefox",            NULL,       NULL,       1,              1,             0,           -1 },
 		{ "librewolf",          NULL,       NULL,       1,              1,             0,           -1 },
+		{ "brave",              NULL,       NULL,       1,              1,             0,           -1 },
 	    { "Chromium",           NULL,       NULL,       1 << 3,         1,             0,           -1 },
 		{ "st-256color",        NULL,       NULL,       2,              1,             0,           -1 },
 		{ "mpv",     		    NULL,       NULL,       1 << 3,         1,             0,           -1 },
@@ -212,17 +213,17 @@
 		{ MODKEY,        	            XK_j,      	    spawn,          CMD ("st -e journalctl --follow") },
 		{ MODKEY,        	            XK_x,      	    spawn,          CMD ("12ft") },
 		{ MODKEY,        	            XK_v,      	    spawn,          CMD ("playvideo") },
-		{ MODKEY,        	            XK_Delete,      spawn,          SHCMD ("xset dpms force off") },
+		{ MODKEY,        	            XK_Delete,      spawn,          SHCMD ("systemctl suspend | i3lock -c 000000") },
 		{ MODKEY|ShiftMask,             XK_Delete, 	    spawn,          {.v = shutcmd } },
 		{ MODKEY|ShiftMask,             XK_BackSpace,   spawn,          {.v = rebcmd } },
-		{ MODKEY,       	            XK_BackSpace,   spawn,          CMD ("physlock") },
+		{ MODKEY,       	            XK_BackSpace,   spawn,          CMD ("i3lock -c 000000") },
 		{ 0,                            XK_Print,  	    spawn,          CMD ("screenshot") },
 		{ MODKEY|ShiftMask,             XK_plus,   	    spawn,          SHCMD ("light -A 15") },
 	    { MODKEY|ShiftMask,             XK_minus,  	    spawn,          SHCMD ("light -U 15") },
 	    { MODKEY,                       XK_plus,   	    spawn,          SHCMD ("pactl set-sink-volume 0 +10%") },
 	    { MODKEY,                       XK_minus,  	    spawn,          SHCMD ("pactl set-sink-volume 0 -10%") },
 	    { MODKEY,                       XK_m, 	   	    spawn,          SHCMD ("pactl set-sink-mute 0 toggle") },
-		{ MODKEY,        	 	        XK_1,      	    spawn,          CMD("xdotool search --class librewolf windowactivate || flatpak run io.gitlab.librewolf-community") },
+		{ MODKEY,        	 	        XK_1,      	    spawn,          CMD("xdotool search --class firefox windowactivate || firefox") },
 		{ MODKEY,        	            XK_2,      	    spawn,          CMD("xdotool search --class st-256color windowactivate || st") },
 
 		/* ------------ tag ------------ */

@@ -1,8 +1,5 @@
-audacity
-firefox
-libreoffice
+flatpak run org.libreoffice.LibreOffice
+flatpak run net.agalwood.Motrix
 flatpak run org.signal.Signal
-timeshift-gui
-transmission-gtk
+syncthing
 flatpak run org.telegram.desktop
-virt-manager

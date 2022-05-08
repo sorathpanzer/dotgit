@@ -23,7 +23,7 @@ setopt PROMPT_SUBST
 PS1="%{$fg[blue]%}%~$reset_color ⚡"
 
 #alias ls="exa --icons --group-directories-first"
-alias ls="ls --color=auto --group-directories-first -l"
+alias ls="ls --color=auto --group-directories-first"
 alias fzf="fzf -m"
 alias mpv="mpv --loop"
 alias tg="cd $HOME/.config/dotgit; tig; cd -"
@@ -36,10 +36,11 @@ alias trs='pidof transmission-daemon >/dev/null || (transmission-daemon && notif
 alias ytsub="yt -S --sort"
 alias y2mp3="youtube-dl -x --audio-format mp3 "$1""
 alias du="du -h -d 1 "$@" 2>/dev/null | sort -h -r"
-export MANPAGER="sh -c 'col -bx | batcat -l man -p'"
-alias sudo="doas"
+#export MANPAGER="sh -c 'col -bx | batcat -l man -p'"
 alias xpg="gpg -c --no-symkey-cache --cipher-algo AES256"
 alias emacs="emacsclient -c -a 'emacs'"
+alias vim="nvim"
+alias dx="distrobox enter alma --"
 
 trd()
 {

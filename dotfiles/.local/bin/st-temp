@@ -14,7 +14,7 @@ if [ $TEMPERATURE -ge 90 ]; then
   echo "^c#ff4500^🔥+$TEMPERATUREºC^c#ffffff^"
 fi
 
-if [ $TEMPERATURE -lt 80 ]; then
+if [ $TEMPERATURE -lt 79 ]; then
   echo "🔥$TEMPERATURE"
 fi
 

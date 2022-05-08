@@ -18,5 +18,5 @@ case "$clock" in
 	"12") icon="🕛" ;;
 esac
 
-date +"$icon%H:%M%p" | sed 's/  / /g'
+date +"$icon%H:%M" | sed 's/  / /g'
 

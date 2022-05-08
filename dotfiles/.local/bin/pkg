@@ -1,0 +1,82 @@
+#!/bin/bash
+
+get_status()
+{
+    rpm-ostree status
+}
+
+get_install()
+{
+    rpm-ostree install $2
+}
+
+remove_install()
+{
+    rpm-ostree remove $2
+}
+
+override_install()
+{
+    rpm-ostree override remove $2
+}
+
+get_updates()
+{
+    rpm-ostree update
+    #flatpak update -y
+    #toolbox run sudo dnf update -y
+    echo "No updates available." | tee $HOME/.cache/pkg.log
+}
+
+check_updates()
+{
+    rpm-ostree update --check 2>&1 | tee $HOME/.cache/pkg.log
+}
+
+preview_updates()
+{
+    rpm-ostree update --preview 2>&1 | tee $HOME/.cache/pkg.log
+}
+
+pin_deployment()
+{
+    sudo ostree admin pin 0
+}
+
+unpin_deployment()
+{
+    sudo ostree admin pin --unpin
+}
+
+help_pkg()
+{
+    echo "
+    pkg [OPTIONS] [PACKAGE]
+
+    status
+    install
+    remove
+    override
+    update/upgrade
+    check
+    preview
+    pin
+    unpin
+    "
+}
+
+case "${1}" in
+	"")         echo "No option was specified."; exit 1 ;;
+    status)         get_status ;;
+    install)        get_install ;;
+    remove)         remove_install ;;
+    override)       override_install ;;
+    update) get_updates ;;
+    upgrade) get_updates ;;
+    check)          check_updates ;;
+    preview)        preview_updates ;;
+    pin)            pin_deployment ;;
+    unpin)          unpin_deployment ;;
+    help)           help_pkg ;;
+    *)              echo "Unknown argument '${1}'."; exit 1 ;;
+esac
