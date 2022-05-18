@@ -10,3 +10,4 @@ dotfiles/.config/qutebrowser/autoconfig.yml
 dotfiles/.config/qutebrowser/quickmarks
 dotfiles/.config/qutebrowser/bookmarks
 dotfiles/.config/qutebrowser/qsettings
+dotfiles/.config/zsh/.zcompdump

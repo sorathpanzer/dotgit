@@ -1,5 +1,4 @@
-flatpak run org.libreoffice.LibreOffice
-flatpak run net.agalwood.Motrix
-flatpak run org.signal.Signal
-syncthing
-flatpak run org.telegram.desktop
+org.libreoffice.LibreOffice
+net.agalwood.Motrix
+org.signal.Signal
+org.telegram.desktop

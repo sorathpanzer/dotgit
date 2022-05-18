@@ -31,12 +31,12 @@
 		const char *name;
 		const void *cmd;
 	} Sp;
-	const char *spcmd1[] = {"kitty", NULL };
+	const char *spcmd1[] = {"alacritty", NULL };
 	const char *spcmd2[] = {"keepassxc", NULL };
 	const char *spcmd3[] = {"qutebrowser", NULL };
 	static Sp scratchpads[] = {
 		/* name          cmd  */
-		{"kitty",      spcmd1},
+		{"alacritty",      spcmd1},
 		{"keepassxc",   spcmd2},
 		{"qutebrowser",   spcmd3},
 	};
@@ -70,14 +70,14 @@
 		{ "st-256color",        NULL,       NULL,       2,              1,             0,           -1 },
 		{ "mpv",     		    NULL,       NULL,       1 << 3,         1,             0,           -1 },
 		{ "Audacity",     	    NULL,       NULL,       1 << 3,         1,             0,           -1 },
-		{ "Virt-manager",       NULL,       NULL,       1 << 4,         1,             0,           -1 },
+		{ "qemu",               NULL,       NULL,       1 << 4,         1,             0,           -1 },
 		{ "Signal",    		    NULL,       NULL,       1 << 5,         1,             0,           -1 },
 		{ "Telegram",    	    NULL,       NULL,       1 << 5,         1,             0,           -1 },
 		{ "Sxiv",     	 	    NULL,       NULL,       1 << 2,         1,             0,           -1 },
 		{ "libreoffice",        NULL,       NULL,       1 << 4,         1,             0,           -1 },
 	    { "localc",             NULL,       NULL,       1 << 4,         1,             0,           -1 },
 		{ "libreoffice-calc",   NULL,       NULL,       1 << 4,         1,             0,           -1 },
-		{ NULL,		            "kitty",NULL,		    SPTAG(0),	    0,             1,			-1 },
+		{ NULL,		            "Alacritty",NULL,		SPTAG(0),	    0,             1,			-1 },
 		{ NULL,		            "keepassxc",NULL,		SPTAG(1),	    0,             1,			-1 },
 		{ NULL,		            "qutebrowser",NULL,		SPTAG(2),	    0,             1,			-1 },
 	};
@@ -223,6 +223,7 @@
 	    { MODKEY,                       XK_plus,   	    spawn,          SHCMD ("pactl set-sink-volume 0 +10%") },
 	    { MODKEY,                       XK_minus,  	    spawn,          SHCMD ("pactl set-sink-volume 0 -10%") },
 	    { MODKEY,                       XK_m, 	   	    spawn,          SHCMD ("pactl set-sink-mute 0 toggle") },
+	    { MODKEY,                       XK_n, 	   	    spawn,          SHCMD ("wg-toggle") },
 		{ MODKEY,        	 	        XK_1,      	    spawn,          CMD("xdotool search --class firefox windowactivate || firefox") },
 		{ MODKEY,        	            XK_2,      	    spawn,          CMD("xdotool search --class st-256color windowactivate || st") },
 

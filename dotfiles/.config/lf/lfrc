@@ -73,7 +73,7 @@ cmd setwallpaper %hsetroot -cover "$f"
 cmd mtsda ${{
   clear
   udisksctl unlock -b /dev/sda1
-  udisksctl mount -b /dev/dm-1
+  udisksctl mount -b /dev/dm-3
   lf -remote "send $id cd /media/Vault"
 }}
 
@@ -85,7 +85,7 @@ cmd usb ${{
 
 cmd rpac ${{
     cd /var/cache/pacman/pkg
-    doas pacman -U $(ls -p | grep -v / | fzf)
+    sudo pacman -U $(ls -p | grep -v / | fzf)
 }}
 
 cmd encrypt ${{
@@ -143,7 +143,7 @@ cmd size ${{
 
 cmd burniso ${{
   clear
-  doas dd if="$f" of=/dev/sdb
+  sudo dd if="$f" of=/dev/sdb
 }}
 
 # Trash cli bindings
@@ -182,7 +182,7 @@ cmd moveto ${{
 cmd unbash %cat "$f" | checkbashisms
 
 cmd clear_trash ${{
-    trash-empty
+    echo "y" | trash-empty
     paplay /usr/share/sounds/freedesktop/stereo/trash-empty.oga
 }}
 
@@ -294,7 +294,7 @@ cmd share ${{
 }}
 
 cmd format ${{
-    doas mkfs.vfat -F32 /dev/sdb1
+    sudo mkfs.vfat -F32 /dev/sdb1
 }}
 
 cmd gif ${{

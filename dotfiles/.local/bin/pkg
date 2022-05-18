@@ -10,22 +10,23 @@ get_install()
     rpm-ostree install $2
 }
 
-remove_install()
-{
-    rpm-ostree remove $2
-}
+if [ $1 == "install" ]; then
+    rpm-ostree install $2
+fi
 
-override_install()
-{
+if [ $1 == "remove" ]; then
+    rpm-ostree remove $2
+fi
+
+if [ $1 == "override" ]; then
     rpm-ostree override remove $2
-}
+fi
 
 get_updates()
 {
-    rpm-ostree update
-    #flatpak update -y
+    rpm-ostree update 2>&1 | tee $HOME/.cache/pkg.log
+    flatpak update -y
     #toolbox run sudo dnf update -y
-    echo "No updates available." | tee $HOME/.cache/pkg.log
 }
 
 check_updates()
@@ -33,20 +34,36 @@ check_updates()
     rpm-ostree update --check 2>&1 | tee $HOME/.cache/pkg.log
 }
 
+get_rollback()
+{
+    rpm-ostree rollback -r
+}
+
 preview_updates()
 {
     rpm-ostree update --preview 2>&1 | tee $HOME/.cache/pkg.log
 }
 
-pin_deployment()
-{
-    sudo ostree admin pin 0
-}
+if [ $1 == "pin" ]; then
+    sudo ostree admin pin $2
+fi
 
-unpin_deployment()
-{
-    sudo ostree admin pin --unpin
-}
+if [ $1 == "unpin" ]; then
+    sudo ostree admin pin --unpin $2
+fi
+
+
+if [ $1 == "diff" ]; then
+    DIFF=$(diff --suppress-common-lines -y <(rpm-ostree status | awk "/LayeredPackages:/{++n} n==$2; /LocalPackages/ && n==$2{exit}" | xargs -n1) \
+        <(rpm-ostree status | awk "/LayeredPackages:/{++n} n==$3; /LocalPackages/ && n==$3{exit}" | xargs -n1))
+
+    if [[ $DIFF == *"<"* ]]; then
+        echo "$(tput setaf 2)$DIFF$(tput setaf 7)"
+    else
+        echo "$(tput setaf 1)$DIFF$(tput setaf 7)"
+    fi
+fi
+
 
 help_pkg()
 {
@@ -54,29 +71,26 @@ help_pkg()
     pkg [OPTIONS] [PACKAGE]
 
     status
-    install
-    remove
-    override
+    install PKG
+    remove PKG
+    override PKG
     update/upgrade
+    rollback
     check
     preview
-    pin
-    unpin
+    pin DEPLOY
+    unpin DEPLOY
+    diff DEPLOY1 DEPLOY2
     "
 }
 
 case "${1}" in
 	"")         echo "No option was specified."; exit 1 ;;
     status)         get_status ;;
-    install)        get_install ;;
-    remove)         remove_install ;;
-    override)       override_install ;;
-    update) get_updates ;;
-    upgrade) get_updates ;;
+    update)         get_updates ;;
+    upgrade)        get_updates ;;
+    rollback)       get_rollback ;;
     check)          check_updates ;;
     preview)        preview_updates ;;
-    pin)            pin_deployment ;;
-    unpin)          unpin_deployment ;;
     help)           help_pkg ;;
-    *)              echo "Unknown argument '${1}'."; exit 1 ;;
 esac

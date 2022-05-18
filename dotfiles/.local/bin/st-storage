@@ -1,5 +1,6 @@
 #!/bin/bash
 
 #STORAGE=$(df -h /dev/mapper/cryptroot | grep cryptroot | awk '{print $5}')
-STORAGE=$(df -h /dev/mapper/nvme0n1p3_crypt | grep nvme0n1p3_crypt | awk '{print $5}')
+#STORAGE=$(df -h /dev/mapper/nvme0n1p3_crypt | grep nvme0n1p3_crypt | awk '{print $5}')
+STORAGE=$(df -h /dev/mapper/fedora--iot_fedora-home | grep fedora--iot_fedora-home | awk '{print $5}')
 echo -n "  $STORAGE"
