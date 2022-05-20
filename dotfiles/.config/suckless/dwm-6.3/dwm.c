@@ -2409,6 +2409,7 @@ togglebar(const Arg *arg)
 	updatebarpos(selmon);
 	for (bar = selmon->bar; bar; bar = bar->next)
 		XMoveResizeWindow(dpy, bar->win, bar->bx, bar->by, bar->bw, bar->bh);
+    enablegaps = !enablegaps;
 	arrange(selmon);
 }
 
@@ -2590,7 +2591,7 @@ updatebarpos(Monitor *m)
 	for (bar = m->bar; bar; bar = bar->next) {
 		bar->bx = m->mx + x_pad;
 		bar->bw = m->ww - 2 * x_pad;
-		bar->bh = bh;
+        bar->bh = bh;
 	}
 
 	if (!m->showbar) {
@@ -2602,10 +2603,10 @@ updatebarpos(Monitor *m)
 	for (num_bars = 0, bar = m->bar; bar; bar = bar->next, num_bars++)
 		if (bar->topbar)
 			m->wy = m->my + bh + y_pad;
-	m->wh = m->wh - y_pad * num_bars - bh * num_bars;
+	m->wh = m->wh - y_pad * num_bars - bh;
 
 	for (bar = m->bar; bar; bar = bar->next)
-		bar->by = (bar->topbar ? m->wy - bh : m->wy + m->wh);
+		bar->by = (bar->topbar ? m->wy - bh : m->wh + m->wh);
 }
 
 void
