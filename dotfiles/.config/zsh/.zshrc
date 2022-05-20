@@ -40,7 +40,7 @@ alias du="du -h -d 1 "$@" 2>/dev/null | sort -h -r"
 alias xpg="gpg -c --no-symkey-cache --cipher-algo AES256"
 alias emacs="emacsclient -c -a 'emacs'"
 alias vim="nvim"
-alias dx="distrobox enter alma --"
+alias box="toolbox run"
 
 trd()
 {

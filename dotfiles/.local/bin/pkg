@@ -5,28 +5,23 @@ get_status()
     rpm-ostree status
 }
 
-get_install()
-{
-    rpm-ostree install $2
-}
-
 if [ $1 == "install" ]; then
-    rpm-ostree install $2
+    rpm-ostree install ${@:2}
 fi
 
 if [ $1 == "remove" ]; then
-    rpm-ostree remove $2
+    rpm-ostree remove ${@:2}
 fi
 
 if [ $1 == "override" ]; then
-    rpm-ostree override remove $2
+    rpm-ostree override remove ${@:2}
 fi
 
 get_updates()
 {
     rpm-ostree update 2>&1 | tee $HOME/.cache/pkg.log
     flatpak update -y
-    #toolbox run sudo dnf update -y
+    toolbox run sudo dnf update -y
 }
 
 check_updates()
@@ -64,6 +59,10 @@ if [ $1 == "diff" ]; then
     fi
 fi
 
+if [ $1 == "history" ]; then
+    rpm-ostree ex history | egrep CreateCommand | sed 's/CreateCommand:/->/'
+fi
+
 
 help_pkg()
 {
@@ -81,6 +80,7 @@ help_pkg()
     pin DEPLOY
     unpin DEPLOY
     diff DEPLOY1 DEPLOY2
+    history
     "
 }
 

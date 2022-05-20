@@ -1,8 +1,6 @@
 #!/bin/sh
 
-iwctl station wlan0 scan &
-#synclient VertScrollDelta=-20 &
-#synclient TapButton2=2 &
+#iwctl station wlan0 scan &
 dunst &
 udiskie &
 numlockx &
@@ -16,8 +14,3 @@ syncthing -no-browser &
 xset dpms 0 0 0 && xset -dpms  && xset s off && xset s noblank &
 feh --bg-fill $HOME/Imagens/Wallpapers/minimal_squares.png &
 dwmblocks &
-#hsetroot -cover $HOME/Imagens/Wallpapers/$(ls $HOME/Imagens/Wallpapers | shuf -n 1) &
-
-#if uname -n | grep -q 'void-live'; then
-  #pulseaudio --daemonize=no --exit-idle-time=-1
-#fi
