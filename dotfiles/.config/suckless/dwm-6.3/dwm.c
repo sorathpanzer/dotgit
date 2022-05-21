@@ -2606,7 +2606,7 @@ updatebarpos(Monitor *m)
 	m->wh = m->wh - y_pad * num_bars - bh;
 
 	for (bar = m->bar; bar; bar = bar->next)
-		bar->by = (bar->topbar ? m->wy - bh : m->wh + m->wh);
+		bar->by = (bar->topbar);
 }
 
 void
