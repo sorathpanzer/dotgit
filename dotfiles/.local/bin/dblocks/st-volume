@@ -1,0 +1,10 @@
+#!/bin/bash
+
+VOL=$(pactl get-sink-volume 0 | awk '{print $5}' | head -n 1)
+MUTE=$(pactl get-sink-mute 0 | awk '{print $2}')
+
+if [[ $MUTE == "yes" ]]; then
+    echo -n "^c#ff4500^🔇^c#ffffff^"
+else
+    echo -n "$(percentage $VOL   奔 墳  ) $VOL" | awk '{print $1" "$2}'
+fi

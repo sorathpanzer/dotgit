@@ -12,6 +12,8 @@ setopt auto_cd
 setopt menucomplete
 unsetopt prompt_cr prompt_sp
 
+unset zle_bracketed_paste
+
 # History in cache directory:
 HISTSIZE=10000
 SAVEHIST=10000
@@ -20,7 +22,12 @@ setopt SHARE_HISTORY
 
 autoload -U colors && colors
 setopt PROMPT_SUBST
-PS1="%{$fg[blue]%}%~$reset_color ⚡"
+
+if [[ -f /run/.containerenv && -f /run/.toolboxenv ]]; then
+    PS1="%{$fg[blue]%B%}%~$fg[red] ⚫$reset_color"
+else
+    PS1="%{$fg[blue]%}%~$reset_color ⚡"
+fi
 
 #alias ls="exa --icons --group-directories-first"
 alias ls="ls --color=auto --group-directories-first"
@@ -97,7 +104,7 @@ calc() { echo "scale=5;$*" | bc -l; }
 
 o()
 {
-    xdg-open "$(find -L . $HOME -maxdepth 4 -type f | fzf --height 100% --preview 'pv {}')"
+    nvim "$(find -L . $HOME -maxdepth 4 -type f | fzf --height 100% --preview 'pv {}')"
 }
 
 t()
@@ -107,8 +114,8 @@ t()
 }
 
 msd() {
-  doas udisksctl unlock -b /dev/sda1
-  doas udisksctl mount -b /dev/dm-1
+  sudo udisksctl unlock -b /dev/sda1
+  sudo udisksctl mount -b /dev/dm-3
   cd /media/Vault
   ls -alF
 }
@@ -135,12 +142,15 @@ bindkey -s '<<' 't\n'
 bindkey -s '<z' 'o\n'
 bindkey -s "^t" 'msd\n'
 bindkey -s '^z' 'zsh\n'
+bindkey -s '^x' 'fg\n'
+bindkey '^[x' autosuggest-execute
+bindkey '^[z' autosuggest-toggle
 
 # Load zsh-syntax-highlighting; should be last.
 export FZF_DEFAULT_OPTS='-e -i --height 40% --layout=reverse --border'
-source ~/.config/zsh/fzf.zsh
-source ~/.config/zsh/unicode.zsh
-#source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh 2>/dev/null
-#source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh 2>/dev/null
-source /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh 2>/dev/null
-source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh 2>/dev/null
+source ~/.config/zsh/plugins/fzf.zsh
+source ~/.config/zsh/plugins/unicode.zsh
+source ~/.config/zsh/plugins/zsh-autosuggestions.zsh 2>/dev/null
+source ~/.config/zsh/plugins/zsh-syntax-highlighting.zsh 2>/dev/null
+source ~/.config/zsh/plugins/sudo.plugin.zsh
+source ~/.config/zsh/plugins/fancy-ctrl-z.plugin.zsh

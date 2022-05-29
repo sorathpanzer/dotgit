@@ -1,0 +1,4 @@
+#!/bin/sh
+
+url=$(xclip -o)
+xdg-open https://12ft.io/$url

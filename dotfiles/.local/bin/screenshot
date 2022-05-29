@@ -1,4 +1,0 @@
-#!/bin/sh
-
-scrot -z ~/Imagens/Screenshots/$(date '+%Y%m%d').png && notify-send -i "$HOME/.fonts/svg/image.svg" -a Screenshot "Full screenshot completed"
-paplay /usr/share/sounds/freedesktop/stereo/screen-capture.oga

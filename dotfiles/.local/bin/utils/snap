@@ -1,0 +1,14 @@
+#!/bin/bash
+
+if [ $1 == "shot" ]; then
+    btrfs subvolume snapshot -r /media/Vault/Documentos /media/Vault/.snapshots/@$(date "+%Y-%m-%d")
+fi
+
+if [ $1 == "send" ]; then
+    sudo btrfs send -p /media/Vault/Documentos/.snapshots/$(ls /media/Vault/.snapshots/ | fzf) .snapshots/@$(date "+%Y-%m-%d") | sudo btrfs receive /media/Andromeda/
+fi
+
+if [ $1 == "now" ]; then
+    btrfs subvolume snapshot -r /media/Vault/Documentos /media/Vault/.snapshots/@$(date "+%Y-%m-%d")
+    sudo btrfs send -p /media/Vault/Documentos/.snapshots/$(ls /media/Vault/.snapshots/ | fzf) .snapshots/@$(date "+%Y-%m-%d") | sudo btrfs receive /media/Andromeda/
+fi

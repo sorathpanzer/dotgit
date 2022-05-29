@@ -1,3 +1,0 @@
-#!/bin/sh
-
-export $(dbus-launch) && exec flatpak run $(flatpak list --columns=application | grep --ignore-case $(cat $HOME/.config/suckless/appmenu | dmenu -i -fn "UbuntuMono Nerd Font:size=10" -nf "#cccccc" -nb "#111111" -sb "#74438e" -sf "#a5bdf7") | head -n 1)

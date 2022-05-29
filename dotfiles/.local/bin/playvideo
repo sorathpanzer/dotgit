@@ -1,5 +1,0 @@
-#!/bin/sh
-
-#xdotool search --name chromium windowactivate %1 && sleep 0.4s && xdotool key Tab F6 ctrl+c
-echo "mpv --loop $(xclip -o)" >> $HOME/.cache/zsh/history
-mpv --loop "$(xclip -o)"

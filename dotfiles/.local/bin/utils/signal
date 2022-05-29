@@ -1,0 +1,7 @@
+#!/bin/sh
+
+mkdir .signal/export
+signalbackup-tools --overwrite --output .signal/export/ $HOME/.signal/signal-*.backup 890114332212414261872161623126
+signal2html -i .signal/export/ -o .signal/
+rm -r .signal/export
+

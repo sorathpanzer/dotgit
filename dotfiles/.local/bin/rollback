@@ -1,7 +1,0 @@
-#!/bin/sh
-
-doas mount /dev/mapper/cryptroot /mnt
-doas mv /mnt/@ /mnt/@$(date "+%Y%m%d-%H%M")
-#"Choose Snapshot ID"
-doas read SNAP
-doas btrfs subvol snapshot /mnt/@snapshots/$SNAP/snapshot /mnt/@

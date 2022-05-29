@@ -27,16 +27,18 @@
 
 	/* ------------- scratchs ------------- */
 
+    #define KEEPASSXC   "export $(dbus-launch) && flatpak run org.keepassxc.KeePassXC"
+
 	typedef struct {
 		const char *name;
 		const void *cmd;
 	} Sp;
-	const char *spcmd1[] = {"alacritty", NULL };
-	const char *spcmd2[] = {"keepassxc", NULL };
+	const char *spcmd1[] = {"st", "-t", "stv", "-c", "stv", "-n", "stv", NULL };
+	const char *spcmd2[] = {"keepass", NULL };
 	const char *spcmd3[] = {"qutebrowser", NULL };
 	static Sp scratchpads[] = {
 		/* name          cmd  */
-		{"alacritty",      spcmd1},
+		{"stv",      spcmd1},
 		{"keepassxc",   spcmd2},
 		{"qutebrowser",   spcmd3},
 	};
@@ -63,10 +65,10 @@
 		 *	WM_NAME(STRING) = title
 		 */
 		/* class                instance    title       tags mask       switchtotag    isfloating   monitor */
+	    { "Chromium",           NULL,       NULL,       1,              1,             0,           -1 },
 		{ "firefox",            NULL,       NULL,       1,              1,             0,           -1 },
-		{ "librewolf",          NULL,       NULL,       1,              1,             0,           -1 },
 		{ "brave",              NULL,       NULL,       1,              1,             0,           -1 },
-	    { "Chromium",           NULL,       NULL,       1 << 3,         1,             0,           -1 },
+		{ "librewolf",          NULL,       NULL,       1 << 3,         1,             0,           -1 },
 		{ "st-256color",        NULL,       NULL,       2,              1,             0,           -1 },
 		{ "mpv",     		    NULL,       NULL,       1 << 3,         1,             0,           -1 },
 		{ "Audacity",     	    NULL,       NULL,       1 << 3,         1,             0,           -1 },
@@ -77,7 +79,7 @@
 		{ "libreoffice",        NULL,       NULL,       1 << 4,         1,             0,           -1 },
 	    { "localc",             NULL,       NULL,       1 << 4,         1,             0,           -1 },
 		{ "libreoffice-calc",   NULL,       NULL,       1 << 4,         1,             0,           -1 },
-		{ NULL,		            "Alacritty",NULL,		SPTAG(0),	    0,             1,			-1 },
+		{ NULL,		            "stv",      "stv",		SPTAG(0),	    0,             1,			-1 },
 		{ NULL,		            "keepassxc",NULL,		SPTAG(1),	    0,             1,			-1 },
 		{ NULL,		            "qutebrowser",NULL,		SPTAG(2),	    0,             1,			-1 },
 	};
@@ -141,7 +143,7 @@
 	static Key keys[] = {
 		/* modifier               key              function        argument */
 		{ MODKEY|ShiftMask,   	        XK_Return,      spawn,          {.v = dmenucmd } },
-		{ MODKEY,                       XK_Return,      spawn,          {.v = termcmd } },
+        { MODKEY,                       XK_Return,      spawn,          {.v = termcmd } },
 		{ MODKEY|ShiftMask, 	  	    XK_r,      	    quit,           {1} },
 
 		/* ---------- layouts ---------- */
@@ -208,7 +210,7 @@
 	    /* Apps Launched with SUPER + ALT + KEY  */
 		/* ----------- apps ----------- */
 		{ MODKEY,        	            XK_w,      	    spawn,          CMD ("xdotool search --class qutebrowser windowactivate || flatpak run org.qutebrowser.qutebrowser") },
-		{ MODKEY,                       XK_t,      	    spawn,          CMD ("xdotool search --class Telegram windowactivate || flatpak run org.telegram.desktop") },
+		{ MODKEY,                       XK_t,      	    spawn,          CMD ("xdotool key Super_L+6 | xdotool search --class Telegram windowactivate || flatpak run org.telegram.desktop") },
 		{ MODKEY|ShiftMask,             XK_t,      	    spawn,          CMD ("tnoty") },
 		{ MODKEY,        	            XK_j,      	    spawn,          CMD ("st -e journalctl --follow") },
 		{ MODKEY,        	            XK_x,      	    spawn,          CMD ("12ft") },
@@ -224,7 +226,7 @@
 	    { MODKEY,                       XK_minus,  	    spawn,          SHCMD ("pactl set-sink-volume 0 -10%") },
 	    { MODKEY,                       XK_m, 	   	    spawn,          SHCMD ("pactl set-sink-mute 0 toggle") },
 	    { MODKEY,                       XK_n, 	   	    spawn,          SHCMD ("wg-toggle") },
-		{ MODKEY,        	 	        XK_1,      	    spawn,          CMD("xdotool search --class librewolf windowactivate || flatpak run io.gitlab.librewolf-community") },
+		{ MODKEY,        	 	        XK_1,      	    spawn,          CMD("xdotool search --class Chromium windowactivate || export $(dbus-launch) && flatpak run org.chromium.Chromium") },
 		{ MODKEY,        	            XK_2,      	    spawn,          CMD("xdotool search --class st-256color windowactivate || st") },
 
 		/* ------------ tag ------------ */

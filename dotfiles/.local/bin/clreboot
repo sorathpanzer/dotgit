@@ -1,9 +1,0 @@
-#!/bin/sh
-
-windows=$(xdotool search --onlyvisible --name .)
-
-for i in $windows; do
-  xdotool windowclose $i
-done
-
-reboot

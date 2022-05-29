@@ -1940,7 +1940,7 @@ run(void)
 void
 runAutostart(void) {
 	system("cd ~/.config/suckless; ./autostart_blocking.sh");
-	system("cd ~/.config/suckless; ./autostart.sh &");
+	system("cd ~/.local/bin; ./autostart &");
 }
 
 void

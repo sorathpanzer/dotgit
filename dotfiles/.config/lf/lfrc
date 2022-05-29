@@ -65,10 +65,11 @@ cmd chmod ${{
   for file in "$fx"
   do
     chmod +x $file
+    lf -remote "send $id reload"
   done
 }}
 
-cmd setwallpaper %hsetroot -cover "$f"
+cmd setwallpaper %feh --bg-fill "$f"
 
 cmd mtsda ${{
   clear
@@ -179,8 +180,6 @@ cmd moveto ${{
 	fi
 }}
 
-cmd unbash %cat "$f" | checkbashisms
-
 cmd clear_trash ${{
     echo "y" | trash-empty
     paplay /usr/share/sounds/freedesktop/stereo/trash-empty.oga
@@ -279,7 +278,7 @@ cmd logat ${{
 }}
 
 cmd gf ${{
-        xdg-open "$(find -L . $HOME -maxdepth 4 -type f | fzf --height 100% --preview 'pv {}')"
+        nvim "$(find -L . $HOME -maxdepth 4 -type f | fzf --height 100% --preview 'pv {}')"
 }}
 
 cmd gd ${{

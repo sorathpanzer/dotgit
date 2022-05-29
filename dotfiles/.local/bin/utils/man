@@ -1,0 +1,233 @@
+#!/usr/bin/env bash
+# date : 		25.04.2022
+# version : 		1.03
+#
+#
+#For people, would like to have manpages inside termial with PUPPY LINUX.
+#
+#
+#This script go check on Ubuntu site focal manpages first and if not found go check in /usr/share/man/man1 for locally installed man pages.
+#
+#Installation :
+#1. Put this script in /oot/my-applications/bin
+#2. Go to folder "cd /root/my-applications/bin"
+#3. Set mansh executable "chmod 755 mansh"
+#4. Relaunch terminal
+#5. Type the command with argument to get Ubuntu focal link index "mansh --get"
+#6. mansh ls (for the manpage of ls command)
+#
+#
+#This script isn't perfect for search and sometimes you need to type the full name without the dot gzip at end  ".gz"
+#"--see" argument after mansh, can help you to show manpage of ubuntu site "link".
+#You can also go see /usr/share/man/man1 files you have, for seeing full name, in my case rofi go on wrong on, and I need to type rofi.1
+#
+#In any cases, mansh without argument, show you help with all arguments (just three).
+#
+#
+#
+#If you want to replace the man command from Puppy with mansh, inside your bashrc or zshrc, or any rc of your favorite terminal.
+#You can just put inside this alias :
+#alias man="mansh"
+#
+#
+#If you would like back to original man command from Puppy Linux, after set this alias, you can just type \ "back slash" before.
+#Exemple with ls  :    "\mansh ls".
+#
+#
+#Sorry for my English grammar and also the fault, English is not my mother tongue.
+
+
+# make temporary files for store data and catch $1 argument for man search.
+output=$(mktemp)
+output1=$(mktemp)
+export search_term=$1
+
+
+# Ubuntu 20.04 = FossaPup64 9.5
+get_ubuntu_focal_manpages()
+{
+curl https://manpages.ubuntu.com/manpages/focal/en/man1/ | fmt | sed "/^href/!d;s/^href\=\"//;s/.html\"..*//;/^%/d;/^_/d;s/^/https:\/\/manpages.ubuntu.com\/manpages\/focal\/en\/man1\//" >$output
+curl https://manpages.ubuntu.com/manpages/focal/en/man2/ | fmt | sed "/^href/!d;s/^href\=\"//;s/.html\"..*//;/^%/d;/^_/d;s/^/https:\/\/manpages.ubuntu.com\/manpages\/focal\/en\/man2\//" >>$output
+curl https://manpages.ubuntu.com/manpages/focal/en/man3/ | fmt | sed "/^href/!d;s/^href\=\"//;s/.html\"..*//;/^%/d;/^_/d;s/^/https:\/\/manpages.ubuntu.com\/manpages\/focal\/en\/man3\//" >>$output
+curl https://manpages.ubuntu.com/manpages/focal/en/man4/ | fmt | sed "/^href/!d;s/^href\=\"//;s/.html\"..*//;/^%/d;/^_/d;s/^/https:\/\/manpages.ubuntu.com\/manpages\/focal\/en\/man4\//" >>$output
+curl https://manpages.ubuntu.com/manpages/focal/en/man5/ | fmt | sed "/^href/!d;s/^href\=\"//;s/.html\"..*//;/^%/d;/^_/d;s/^/https:\/\/manpages.ubuntu.com\/manpages\/focal\/en\/man5\//" >>$output
+curl https://manpages.ubuntu.com/manpages/focal/en/man6/ | fmt | sed "/^href/!d;s/^href\=\"//;s/.html\"..*//;/^%/d;/^_/d;s/^/https:\/\/manpages.ubuntu.com\/manpages\/focal\/en\/man6\//" >>$output
+curl https://manpages.ubuntu.com/manpages/focal/en/man7/ | fmt | sed "/^href/!d;s/^href\=\"//;s/.html\"..*//;/^%/d;/^_/d;s/^/https:\/\/manpages.ubuntu.com\/manpages\/focal\/en\/man7\//" >>$output
+curl https://manpages.ubuntu.com/manpages/focal/en/man8/ | fmt | sed "/^href/!d;s/^href\=\"//;s/.html\"..*//;/^%/d;/^_/d;s/^/https:\/\/manpages.ubuntu.com\/manpages\/focal\/en\/man8\//" >>$output
+curl https://manpages.ubuntu.com/manpages/focal/en/man9/ | fmt | sed "/^href/!d;s/^href\=\"//;s/.html\"..*//;/^%/d;/^_/d;s/^/https:\/\/manpages.ubuntu.com\/manpages\/focal\/en\/man9\//" >>$output
+cat $output >/home/sorath/.manpage.index
+}
+
+# Ubuntu 18.04 = BionicPup32 8.0 or BionicPup64 8.0
+get_ubuntu_bionic_manpages()
+{
+curl https://manpages.ubuntu.com/manpages/bionic/en/man1/ | fmt | sed "/^href/!d;s/^href\=\"//;s/.html\"..*//;/^%/d;/^_/d;s/^/https:\/\/manpages.ubuntu.com\/manpages\/bionic\/en\/man1\//" >$output
+curl https://manpages.ubuntu.com/manpages/bionic/en/man2/ | fmt | sed "/^href/!d;s/^href\=\"//;s/.html\"..*//;/^%/d;/^_/d;s/^/https:\/\/manpages.ubuntu.com\/manpages\/bionic\/en\/man2\//" >>$output
+curl https://manpages.ubuntu.com/manpages/bionic/en/man3/ | fmt | sed "/^href/!d;s/^href\=\"//;s/.html\"..*//;/^%/d;/^_/d;s/^/https:\/\/manpages.ubuntu.com\/manpages\/bionic\/en\/man3\//" >>$output
+curl https://manpages.ubuntu.com/manpages/bionic/en/man4/ | fmt | sed "/^href/!d;s/^href\=\"//;s/.html\"..*//;/^%/d;/^_/d;s/^/https:\/\/manpages.ubuntu.com\/manpages\/bionic\/en\/man4\//" >>$output
+curl https://manpages.ubuntu.com/manpages/bionic/en/man5/ | fmt | sed "/^href/!d;s/^href\=\"//;s/.html\"..*//;/^%/d;/^_/d;s/^/https:\/\/manpages.ubuntu.com\/manpages\/bionic\/en\/man5\//" >>$output
+curl https://manpages.ubuntu.com/manpages/bionic/en/man6/ | fmt | sed "/^href/!d;s/^href\=\"//;s/.html\"..*//;/^%/d;/^_/d;s/^/https:\/\/manpages.ubuntu.com\/manpages\/bionic\/en\/man6\//" >>$output
+curl https://manpages.ubuntu.com/manpages/bionic/en/man7/ | fmt | sed "/^href/!d;s/^href\=\"//;s/.html\"..*//;/^%/d;/^_/d;s/^/https:\/\/manpages.ubuntu.com\/manpages\/bionic\/en\/man7\//" >>$output
+curl https://manpages.ubuntu.com/manpages/bionic/en/man8/ | fmt | sed "/^href/!d;s/^href\=\"//;s/.html\"..*//;/^%/d;/^_/d;s/^/https:\/\/manpages.ubuntu.com\/manpages\/bionic\/en\/man8\//" >>$output
+curl https://manpages.ubuntu.com/manpages/bionic/en/man9/ | fmt | sed "/^href/!d;s/^href\=\"//;s/.html\"..*//;/^%/d;/^_/d;s/^/https:\/\/manpages.ubuntu.com\/manpages\/bionic\/en\/man9\//" >>$output
+cat $output >/home/sorath/.manpage.index
+}
+
+# Ubuntu 18.04 = XenialPup 7.5 or XenialPup64 7.5
+get_ubuntu_xenial_manpages()
+{
+curl https://manpages.ubuntu.com/manpages/xenial/en/man1/ | fmt | sed "/^href/!d;s/^href\=\"//;s/.html\"..*//;/^%/d;/^_/d;s/^/https:\/\/manpages.ubuntu.com\/manpages\/xenial\/en\/man1\//" >$output
+curl https://manpages.ubuntu.com/manpages/xenial/en/man2/ | fmt | sed "/^href/!d;s/^href\=\"//;s/.html\"..*//;/^%/d;/^_/d;s/^/https:\/\/manpages.ubuntu.com\/manpages\/xenial\/en\/man2\//" >>$output
+curl https://manpages.ubuntu.com/manpages/xenial/en/man3/ | fmt | sed "/^href/!d;s/^href\=\"//;s/.html\"..*//;/^%/d;/^_/d;s/^/https:\/\/manpages.ubuntu.com\/manpages\/xenial\/en\/man3\//" >>$output
+curl https://manpages.ubuntu.com/manpages/xenial/en/man4/ | fmt | sed "/^href/!d;s/^href\=\"//;s/.html\"..*//;/^%/d;/^_/d;s/^/https:\/\/manpages.ubuntu.com\/manpages\/xenial\/en\/man4\//" >>$output
+curl https://manpages.ubuntu.com/manpages/xenial/en/man5/ | fmt | sed "/^href/!d;s/^href\=\"//;s/.html\"..*//;/^%/d;/^_/d;s/^/https:\/\/manpages.ubuntu.com\/manpages\/xenial\/en\/man5\//" >>$output
+curl https://manpages.ubuntu.com/manpages/xenial/en/man6/ | fmt | sed "/^href/!d;s/^href\=\"//;s/.html\"..*//;/^%/d;/^_/d;s/^/https:\/\/manpages.ubuntu.com\/manpages\/xenial\/en\/man6\//" >>$output
+curl https://manpages.ubuntu.com/manpages/xenial/en/man7/ | fmt | sed "/^href/!d;s/^href\=\"//;s/.html\"..*//;/^%/d;/^_/d;s/^/https:\/\/manpages.ubuntu.com\/manpages\/xenial\/en\/man7\//" >>$output
+curl https://manpages.ubuntu.com/manpages/xenial/en/man8/ | fmt | sed "/^href/!d;s/^href\=\"//;s/.html\"..*//;/^%/d;/^_/d;s/^/https:\/\/manpages.ubuntu.com\/manpages\/xenial\/en\/man8\//" >>$output
+curl https://manpages.ubuntu.com/manpages/xenial/en/man9/ | fmt | sed "/^href/!d;s/^href\=\"//;s/.html\"..*//;/^%/d;/^_/d;s/^/https:\/\/manpages.ubuntu.com\/manpages\/xenial\/en\/man9\//" >>$output
+cat $output >/home/sorath/.manpage.index
+}
+
+# function for make an index of all link to ubuntu focal manpages stored inside /root/.manpage.index
+make_index()
+{
+
+echo
+echo "Type number of version of manpages you want and type return : "
+echo
+echo "1. \"Puppy Linux FossaPup64 9.5 = Ubuntu 20.04 (manpages)\""
+echo "2. \"Puppy Linux BionicPup32 8.0 or BionicPup64 8.0 = Ubuntu 18.04 (manpages)\""
+echo "3. \"Puppy Linux XenialPup 7.5 or XenialPup64 7.5 = Ubuntu 16.04 (manpages)\""
+echo
+read -p "Which number : " answer
+[[ $answer = "1" ]] && get_ubuntu_focal_manpages && exit
+[[ $answer = "2" ]] && get_ubuntu_bionic_manpages && exit
+[[ $answer = "3" ]] && get_ubuntu_xenial_manpages && exit
+}
+
+
+# function for show help, if argument ($1) is empty.
+help_me()
+{
+echo "******************************"
+echo "mansh \"manpage for shell\""
+echo "******************************"
+echo
+tput setaf 1;echo "IMPORTANT : w3m is needed to be installed \(use ppm Puppy Packages Manager\).";
+tput sgr 0 0;echo
+echo "----------------------------------------------------------------------------"
+echo "OPTIONS : "
+echo "----------------------------------------------------------------------------"
+
+echo "--help (see this help, mansh command without any name and argument do the same)"
+echo
+echo "--install (this option launch mansh  installation and get manpages index)"
+echo
+echo "--get (get manpages index,  if you remove them or manually install mansh, this is necessary to mansh to work)"
+echo
+echo "--update (update this script serach where is mansh from \$PATH, or tell you how to do)"
+echo
+echo "--see (see index saved in /home/sorath/.manpage.index, helps you find which manpages are online)"
+echo
+echo "--local (see local manpages on /usr/shar/man/man1, help you find manpages installed on your machine)"
+echo
+echo "--clean (remove /home/sorath/. manpage. index, you need to get a new one after or mansh is broken)"
+echo
+echo "If ubuntu http man page is not found, mansh go to /usr/share/man/man1 to search file."
+echo
+echo "This script doesn't work perfectly, sometimes you need to search and type the name  of manpage without the dot gzip"
+echo "Using --see and --local, help you found the right name."
+echo
+}
+
+# search for manpage and show them if isn't found on index, this go search inside /usr/share/man/man1, if nothing fount the script exit.
+manpage()
+{
+page=$(mktemp)
+grep "man.\/$search_term" /home/sorath/.manpage.index | head -n1 >$output1 #search manpage
+
+[[ $(cat $output1 | wc -l) = "0" ]] && ls /usr/share/man/man1* | grep "^$search_term\." >$output1
+[[ $(cat $output1 | wc -l) = "0" ]] && exit # do the same with gz for locally man page until w3m
+
+[[ $(grep -o "gz" $output1) = "gz" ]] && gzip -dkc /usr/share/man/man1/$(cat $output1) | man2html >.delete.html && w3m .delete.html | less -X -m && rm .delete.html && exit
+
+w3m -m -v -no-cookie $(cat $output1) -dump >$page
+[[ -z $page ]] && exit
+[[ -n $page ]] && less -X -m $page
+}
+
+
+# fuction for update script / use $PATH where mansh is, if not $PATH set just tell you how do uptade with curl.
+update_script()
+{
+	mansh_found()
+	{
+		path=$(whereis mansh | sed "s/mansh: //")
+		grep "version\ :" $path | grep -o "..\..." | tr -d "[:blank:]" >$output
+
+		curl https://framagit.org/noje77/terminal_manpages_for_puppy_linux/-/raw/main/mansh.sh >$path
+		chmod 755 $path
+		echo
+		echo "old version :" $(cat $output)
+		grep "version\ :" $path | grep -o "..\..." | tr -d "[:blank:]" >$output
+		echo "new version :" $(cat $output)
+		echo
+	}
+
+	mansh_notfound()
+	{
+		tput setaf 1
+		echo
+		echo "Unfortunatelly you didn't set "mansh" properly on \$PATH or /var/home/sorath/.config/dotgit/dotfiles/.local/bin/"
+		echo
+		echo "You can update this way :"
+		echo
+		echo "Be sure you are inside the folder where mansh are put, then type the curl command below and validate"
+		echo
+		echo "curl https://framagit.org/noje77/terminal_manpages_for_puppy_linux/-/raw/main/mansh.sh >mansh"
+		echo
+
+
+	}
+
+# check if mansh is on path with coreutils whereis, acting if on or not.
+
+[[ $(whereis mansh | sed "s/^mansh://" | grep -o "mansh") = "mansh" ]] && mansh_found || mansh_notfound
+
+}
+
+# function for install script
+
+install_me()
+{
+clear
+echo
+echo "Where do you want install mansh ?"
+echo
+echo "1. /var/home/sorath/.config/dotgit/dotfiles/.local/bin/ (default Puppy Linux additional executables path)"
+echo
+echo "2. Personnal path, need be set on environnement variable \$PATH"
+echo
+read -p "Which number : " answer
+[[ $answer = "1" ]] && chmod 755 mansh && cp mansh /var/home/sorath/.config/dotgit/dotfiles/.local/bin/ && rm mansh && echo  && tput setaf 1 && echo "!! mansh file is deleted from the current folder !!" && tput sgr 0 0 && echo && make_index
+[[ $answer = "2" ]] && chmod 755 mansh && echo && read -p "enter your path and validate example \"/var/home/sorath/.config/dotgit/dotfiles/.local/bin\" : " path && cp mansh $path && rm mansh && echo && tput setaf 1 && echo "!! mansh file is deleted from the current folder !!" && tput sgr 0 0 && echo && make_index
+}
+
+
+
+# ↓↓↓ Script really start here ↓↓↓
+
+[[ $1 = "--help" ]] && help_me && exit
+[[ $1 = "--get" ]] && make_index && exit
+[[ $1 = "--see" ]] && less -X -m /home/sorath/.manpage.index && exit
+[[ $1 = "--clean" ]] && rm /home/sorath/.manpage.index && exit
+[[ $1 = "--local" ]] && ls /usr/share/man/man1/* | less -X -m && exit
+[[ $1 = "--update" ]] && update_script && exit
+[[ $1 = "--install" ]] && install_me && exit
+[[ -z $1 ]] && help_me
+[[ -n $1 ]] && manpage
+
+
+# this remove commands clean the temporary files made at start
+rm $output
+rm $output1

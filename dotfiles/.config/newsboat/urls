@@ -1,8 +1,0 @@
-"query:Unread Articles:unread = \"yes\""
-
-Linux
-https://git.suckless.org/dwm/atom.xml "Linux" "~DWM: Gitsource"
-https://github.com/pystardust/ytfzf/commits/master.atom "Linux" "~YFZF: Git Source"
-https://github.com/tanujnotes/Olauncher/commits/master.atom "Linux" "~Olauncher: Git Source"
-https://forum.manjaro.org/c/announcements/stable-updates/12 "Linux" "~Manjaro: Stable"
-

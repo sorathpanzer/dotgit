@@ -1,0 +1,22 @@
+#!/bin/bash
+
+if [[ $(cat /sys/class/net/wl*/operstate 2>/dev/null) = up ]] && [[ "$(sudo wg)" != "" ]]; then
+    wifiIcon="^c#64dd17^📶^c#ffffff^"
+fi
+
+if [[ $(cat /sys/class/net/wl*/operstate 2>/dev/null) = up ]] && [[ "$(sudo wg)" = "" ]]; then
+     wifiIcon="^c#ff4500^📶^c#ffffff^"
+fi
+
+if [ $(cat /sys/class/net/e*/operstate 2>/dev/null) = up ]; then
+	ethIcon="🌐"
+else
+	if [ ! $wifiIcon ]; then
+		echo "^c#ff4500^❎^c#ffffff^";
+		exit 0;
+	fi
+fi
+
+echo "$wifiIcon$ethIcon"
+
+

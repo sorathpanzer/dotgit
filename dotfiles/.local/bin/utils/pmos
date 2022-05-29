@@ -1,0 +1,7 @@
+#!/bin/sh
+
+pmbootstrap shutdown
+pmbootstrap zap -p
+pmbootstrap init
+pmbootstrap install --android-recovery-zip
+pmbootstrap flasher --method=adb sideload
