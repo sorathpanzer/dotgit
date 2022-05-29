@@ -1,1 +1,2 @@
 bind generic x !git push origin master
+bind status	c	!git commit
