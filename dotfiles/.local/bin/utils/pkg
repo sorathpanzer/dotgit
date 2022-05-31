@@ -40,7 +40,7 @@ get_rollback()
 
 preview_updates()
 {
-    rpm-ostree update --preview 2>&1 | tee $HOME/.cache/pkg.log
+    rpm-ostree update --preview 2>&1 #| tee $HOME/.cache/pkg.log
 }
 
 if [ $1 == "pin" ]; then

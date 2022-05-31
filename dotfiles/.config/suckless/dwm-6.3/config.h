@@ -212,6 +212,7 @@
 		{ MODKEY,        	            XK_w,      	    spawn,          CMD ("xdotool search --class qutebrowser windowactivate || flatpak run org.qutebrowser.qutebrowser") },
 		{ MODKEY,                       XK_t,      	    spawn,          CMD ("xdotool key Super_L+6 | xdotool search --class Telegram windowactivate || flatpak run org.telegram.desktop") },
 		{ MODKEY|ShiftMask,             XK_t,      	    spawn,          CMD ("tnoty") },
+		{ MODKEY,                       XK_p,      	    spawn,          CMD ("keepmenu") },
 		{ MODKEY,        	            XK_j,      	    spawn,          CMD ("st -e journalctl --follow") },
 		{ MODKEY,        	            XK_x,      	    spawn,          CMD ("12ft") },
 		{ MODKEY,        	            XK_v,      	    spawn,          CMD ("playvideo") },

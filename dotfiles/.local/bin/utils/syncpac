@@ -7,6 +7,8 @@ rsync -avr --delete $HOME/Vídeos /media/Vault/Documentos/BackHome
 rsync -avr --delete $HOME/Transferências /media/Vault/Documentos/BackHome
 rsync -avr --delete $HOME/Syncthing /media/Vault/Documentos/BackHome
 rsync -avr --delete $HOME/.ssh /media/Vault/Documentos/BackHome
+rsync -avr --delete $HOME/.themes /media/Vault/Documentos/BackHome
+rsync -avr --delete $HOME/.icons /media/Vault/Documentos/BackHome
 rsync -avr --delete $HOME/.var /media/Vault/Documentos/BackHome
 rsync -avr --delete $HOME/.config/qutebrowser/bookmarks /media/Vault/Documentos/BackHome/.config/qutebrowser
 rsync -avr --delete $HOME/.local/share/qutebrowser /media/Vault/Documentos/BackHome/.local/share
