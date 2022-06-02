@@ -12,5 +12,4 @@ rsync -avr --delete $HOME/.icons /media/Vault/Documentos/BackHome
 rsync -avr --delete $HOME/.var /media/Vault/Documentos/BackHome
 rsync -avr --delete $HOME/.config/qutebrowser/bookmarks /media/Vault/Documentos/BackHome/.config/qutebrowser
 rsync -avr --delete $HOME/.local/share/qutebrowser /media/Vault/Documentos/BackHome/.local/share
-rsync -avr --delete $HOME/.config/Signal /media/Vault/Documentos/BackHome/.config
 rsync -avr --delete $HOME/.cache/zsh/history /media/Vault/Documentos/BackHome/.cache/zsh
