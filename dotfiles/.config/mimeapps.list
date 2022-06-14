@@ -1,40 +1,10 @@
 [Added Associations]
-x-scheme-handler/magnet=torrent.desktop;
-application/x-bittorrent=torrent.desktop;
-x-scheme-handler/sms=org.gnome.Shell.Extensions.GSConnect.desktop;
-x-scheme-handler/tel=org.gnome.Shell.Extensions.GSConnect.desktop;
-image/jpeg=gimp.desktop;org.gnome.eog.desktop;
-application/x-shellscript=nvim.desktop;
-text/plain=nvim.desktop;
-x-scheme-handler/tg=userapp-Telegram Desktop-VO7GZ0.desktop;
-application/excel=libreoffice-calc.desktop;
-application/vnd.ms-excel=libreoffice-calc.desktop;
-application/vnd.ms-excel.sheet.macroenabled.12=libreoffice-calc.desktop;
-application/vnd.ms-excel.template.macroenabled.12=libreoffice-calc.desktop;
-application/vnd.openxmlformats-officedocument.spreadsheetml.sheet=libreoffice-calc.desktop;
-application/vnd.openxmlformats-officedocument.spreadsheetml.template=libreoffice-calc.desktop;
-application/x-xls=libreoffice-calc.desktop;
-application/xls=libreoffice-calc.desktop;
-text/csv=libreoffice-calc.desktop;
-text/csv=libreoffice-calc.desktop;
-text/html=org.chromium.Chromium.desktop
-x-scheme-handler/http=org.chromium.Chromium.desktop
-x-scheme-handler/https=org.chromium.Chromium.desktop
-application/xhtml+xml=org.chromium.Chromium.desktop
-application/http=org.chromium.Chromium.desktop
-application/https=org.chromium.Chromium.desktop
+video/mp4=io.mpv.Mpv.desktop;
 
 [Default Applications]
-image/jpeg=sxiv.desktop
-image/png=sxiv.desktop
-image/bmp=sxiv.desktop
-image/gif=sxiv.desktop
-video/mp4=mpv.desktop
-application/x-shellscript=nvim.desktop
-x-scheme-handler/magnet=torrent.desktop;
-application/x-bittorrent=torrent.desktop;
-x-scheme-handler/geo=org.chromium.Chromium.desktop
-application/pdf=org.pwmt.zathura-pdf-mupdf.desktop
-x-scheme-handler/tg=userapp-Telegram Desktop-VO7GZ0.desktop
-text/plain=nvim.desktop;
-text/html=org.chromium.Chromium.desktop
+image/jpeg=feh.desktop
+image/png=feh.desktop
+image/bmp=feh.desktop
+image/gif=feh.desktop
+application/pdf=org.pwmt.zathura-pdf-poppler.desktop
+

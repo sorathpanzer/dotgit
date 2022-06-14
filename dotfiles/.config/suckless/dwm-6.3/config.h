@@ -76,6 +76,7 @@
 		{ "Signal",    		    NULL,       NULL,       1 << 5,         1,             0,           -1 },
 		{ "Telegram",    	    NULL,       NULL,       1 << 5,         1,             0,           -1 },
 		{ "Sxiv",     	 	    NULL,       NULL,       1 << 2,         1,             0,           -1 },
+		{ "feh",     	 	    NULL,       NULL,       1 << 2,         1,             0,           -1 },
 		{ "libreoffice",        NULL,       NULL,       1 << 4,         1,             0,           -1 },
 	    { "localc",             NULL,       NULL,       1 << 4,         1,             0,           -1 },
 		{ "libreoffice-calc",   NULL,       NULL,       1 << 4,         1,             0,           -1 },
@@ -227,7 +228,8 @@
 	    { MODKEY,                       XK_minus,  	    spawn,          SHCMD ("pactl set-sink-volume 0 -10%") },
 	    { MODKEY,                       XK_m, 	   	    spawn,          SHCMD ("pactl set-sink-mute 0 toggle") },
 	    { MODKEY,                       XK_n, 	   	    spawn,          SHCMD ("wg-toggle") },
-		{ MODKEY,        	 	        XK_1,      	    spawn,          CMD("xdotool search --class Chromium windowactivate || export $(dbus-launch) && flatpak run org.chromium.Chromium") },
+		//{ MODKEY,        	 	        XK_1,      	    spawn,          CMD("xdotool search --class Chromium windowactivate || export $(dbus-launch) && flatpak run org.chromium.Chromium") },
+		{ MODKEY,        	 	        XK_1,      	    spawn,          CMD("xdotool search --class firefox windowactivate || flatpak run org.mozilla.firefox") },
 		{ MODKEY,        	            XK_2,      	    spawn,          CMD("xdotool search --class st-256color windowactivate || st") },
 
 		/* ------------ tag ------------ */
