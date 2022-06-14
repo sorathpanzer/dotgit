@@ -1,0 +1,19 @@
+jump_first g
+jump_last G
+zoom_in  KP_Add Up
+zoom_out KP_Subtract Down
+
+# image movement
+scroll_up    C-Up
+scroll_down  C-Down
+scroll_left  C-Left
+scroll_right C-Right
+
+# File deletion
+remove     d   Delete
+delete   C-d C-Delete
+
+# remove now conflicts with toggle_filenames, so change that
+toggle_filenames b
+save_image s
+toggle_fixed_geometry w
