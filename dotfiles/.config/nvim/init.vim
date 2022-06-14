@@ -104,3 +104,10 @@ augroup remember_folds
 augroup END
 
 let g:nord_disable_background = v:true
+
+function! AutoCompile()
+        execute "!pandoc % -t ms -o %:r.pdf; zathura -e %:r.pdf &" | redraw!
+    endif
+endfunction
+
+autocmd BufWritePost *md silent! :call AutoCompile()

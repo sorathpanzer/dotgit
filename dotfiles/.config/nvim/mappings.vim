@@ -90,3 +90,5 @@ map <leader><S-s> :setlocal spell! spelllang=en_us<CR>
 nmap <leader><leader> z=
 nnoremap <leader>z [s
 nnoremap <leader>x ]s
+
+nnoremap <leader>p :!pandoc % -t ms -o %:r.pdf; zathura %:r.pdf &<CR>
