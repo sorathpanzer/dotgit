@@ -34,7 +34,6 @@ alias ls="ls --color=auto --group-directories-first"
 alias fzf="fzf -m"
 alias mpv="mpv --loop"
 alias tg="cd $HOME/.config/dotgit; tig; cd -"
-alias lgit="lazygit"
 alias diff="diff --color"
 alias paclog='pacman -Qiie | grep -iE "nome[ ]+:|Data da Instalação" | sed "s/.*: //" | tac | paste -d " " - - | sort -n --k 2'
 alias aptlog='zcat /var/log/apt/history.log.*.gz | cat - /var/log/apt/history.log'
@@ -48,6 +47,7 @@ alias xpg="gpg -c --no-symkey-cache --cipher-algo AES256"
 alias emacs="emacsclient -c -a 'emacs'"
 alias vim="nvim"
 alias box="toolbox run"
+alias tig="tig status"
 
 trd()
 {

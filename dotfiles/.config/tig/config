@@ -1,3 +1,3 @@
-bind generic x !git push origin master
+bind generic x !git push origin main
 bind status	c !git commit
 bind generic q quit
