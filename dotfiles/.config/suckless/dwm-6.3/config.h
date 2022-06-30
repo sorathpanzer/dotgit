@@ -211,7 +211,7 @@
 	    /* Apps Launched with SUPER + ALT + KEY  */
 		/* ----------- apps ----------- */
 		{ MODKEY,        	            XK_w,      	    spawn,          CMD ("xdotool search --class qutebrowser windowactivate || flatpak run org.qutebrowser.qutebrowser") },
-		{ MODKEY,                       XK_t,      	    spawn,          CMD ("xdotool key Super_L+6 | xdotool search --class Telegram windowactivate || flatpak run org.telegram.desktop") },
+		{ MODKEY,                       XK_t,      	    spawn,          CMD ("xdotool key Super_L+6 | xdotool search --class Telegram windowactivate || export $(dbus-launch) && flatpak run org.telegram.desktop") },
 		{ MODKEY|ShiftMask,             XK_t,      	    spawn,          CMD ("tnoty") },
 		{ MODKEY,                       XK_p,      	    spawn,          CMD ("keepmenu") },
 		{ MODKEY,        	            XK_j,      	    spawn,          CMD ("st -e journalctl --follow") },
@@ -228,8 +228,8 @@
 	    { MODKEY,                       XK_minus,  	    spawn,          SHCMD ("pactl set-sink-volume 0 -10%") },
 	    { MODKEY,                       XK_m, 	   	    spawn,          SHCMD ("pactl set-sink-mute 0 toggle") },
 	    { MODKEY,                       XK_n, 	   	    spawn,          SHCMD ("wg-toggle") },
-		//{ MODKEY,        	 	        XK_1,      	    spawn,          CMD("xdotool search --class Chromium windowactivate || export $(dbus-launch) && flatpak run org.chromium.Chromium") },
-		{ MODKEY,        	 	        XK_1,      	    spawn,          CMD("xdotool search --class firefox windowactivate || flatpak run org.mozilla.firefox") },
+        //{ MODKEY,        	 	        XK_1,      	    spawn,          CMD("xdotool search --class Chromium windowactivate || export $(dbus-launch) && flatpak run org.chromium.Chromium") },
+        { MODKEY,        	 	        XK_1,      	    spawn,          CMD("xdotool search --class firefox windowactivate || flatpak run org.mozilla.firefox") },
 		{ MODKEY,        	            XK_2,      	    spawn,          CMD("xdotool search --class st-256color windowactivate || st") },
 
 		/* ------------ tag ------------ */

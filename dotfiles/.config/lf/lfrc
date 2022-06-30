@@ -118,7 +118,7 @@ cmd compress ${{
     read name
     mkdir $name
     cp -r $fx $name
-    tar -I zstd -cvf "$name.tar.zst" $name
+    tar -czvf "$name.tar.gz" $name
     rm -r $name
 }}
 
@@ -396,6 +396,7 @@ map sv size
 
 # Movement
 map gV cd /media/Vault
+map gM cd /media
 map gh cd ~/
 map gv cd ~/Vídeos
 map gm cd ~/Música

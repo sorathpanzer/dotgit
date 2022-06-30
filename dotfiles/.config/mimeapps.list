@@ -2,9 +2,9 @@
 video/mp4=io.mpv.Mpv.desktop;
 
 [Default Applications]
-image/jpeg=feh.desktop
-image/png=feh.desktop
-image/bmp=feh.desktop
-image/gif=feh.desktop
+image/jpeg=sxiv.desktop
+image/png=sxiv.desktop
+image/bmp=sxiv.desktop
+image/gif=sxiv.desktop
 application/pdf=org.pwmt.zathura-pdf-poppler.desktop
 
