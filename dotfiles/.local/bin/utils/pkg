@@ -55,8 +55,8 @@ fi
 
 if [ $1 == "diff" ]; then
 
-    DIFF=$(diff --suppress-common-lines -y <(rpm-ostree status | awk "/LayeredPackages:/{++n} n==$2; /Pinned:/ && n==$2{exit}" | xargs -n1) \
-        <(rpm-ostree status | awk "/LayeredPackages:/{++n} n==$3; /Pinned:/ && n==$3{exit}" | xargs -n1))
+    DIFF=$(diff --suppress-common-lines -y <(rpm-ostree status | awk "/LayeredPackages:/{++n} n==$2; /LocalPackages:/ && n==$2{exit}" | xargs -n1) \
+        <(rpm-ostree status | awk "/LayeredPackages:/{++n} n==$3; /LocalPackages:/ && n==$3{exit}" | xargs -n1))
 
     if [[ $DIFF == *"<"* ]]; then
         echo "$(tput setaf 2)$DIFF$(tput setaf 7)"

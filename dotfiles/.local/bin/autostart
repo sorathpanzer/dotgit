@@ -6,6 +6,7 @@ dwmblocks &
 sudo wg-quick up wg0 &
 xrdb -load $HOME/.Xresources &
 xrandr --output "eDP-1" --brightness 0.80 &
+xmodmap -e "keycode  12 = 4 EuroSign 4 EuroSign" &
 sudo setleds -D +num < /dev/tty1 &
 xinput --set-prop "SYNA2B46:00 06CB:CD5F Touchpad" "libinput Natural Scrolling Enabled" 1 &
 pactl set-sink-volume alsa_output.pci-0000_00_1f.3.analog-stereo 100% &
