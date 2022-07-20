@@ -20,7 +20,7 @@ if [ $1 == "boot" ]; then
     qemu-system-x86_64 -enable-kvm -boot order=d -drive file=$HOME/.local/share/vmu/$(ls $HOME/.local/share/vmu | cut -f1 -d'.' | fzf).img -m 4G -cpu host -vga virtio -display sdl,gl=on
 fi
 
-if [ $1 == "snapshot" ]; then
+if [ $1 == "snap" ]; then
     DISK="$HOME/.local/share/vmu/$(ls $HOME/.local/share/vmu | cut -f1 -d'.' | fzf)"
     echo "Give a name for the snapshot:"
     read SNAPNAME
@@ -32,7 +32,7 @@ if [ $1 == "remove" ]; then
     rm $HOME/.local/share/vmu/$(ls $HOME/.local/share/vmu | cut -f1 -d'.' | fzf).img
 fi
 
-if ! [[ $1 =~ ^(create|install|boot|help|snapshot|remove|list)$ ]]; then
+if ! [[ $1 =~ ^(create|install|boot|help|snap|remove|list)$ ]]; then
     qemu-system-x86_64 -enable-kvm -boot order=d -drive file=$HOME/.local/share/vmu/$1.img -m 4G -cpu host -vga virtio -display sdl,gl=on &
 fi
 
@@ -46,7 +46,7 @@ if [ $1 == "help" ]; then
 vmu install...................... Boot install iso in specific disk
 vmu <NAMEDISK>................... Boot disk
 vmu boot......................... Boot disk
-vmu snapshot..................... Snapshot of a specific disk
+vmu snap......................... Snapshot of a specific disk
 vmu remove....................... Remove disk
 vmu list......................... List disks"
 fi

@@ -107,6 +107,7 @@ let g:nord_disable_background = v:true
 
 function! AutoCompile()
         execute "!pandoc % -t ms -o %:r.pdf; zathura -e %:r.pdf &" | redraw!
+        "execute "!pandoc -f markdown-implicit_figures -t pdf % -o %:r.pdf; zathura -e %:r.pdf &" | redraw!
     endif
 endfunction
 

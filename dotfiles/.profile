@@ -21,7 +21,7 @@ PATH="$PATH:$HOME/.local/bin/dmenuX"
 PATH="$PATH:$HOME/.local/bin/lfx"
 PATH="$PATH:$HOME/.local/bin/utils"
 PATH="$PATH:$HOME/.local/bin/transmission"
-
+PATH="$PATH:$HOME/.emacs.d/bin"
 eval $( dircolors -b $HOME/.config/dir_colors )
 
   startx

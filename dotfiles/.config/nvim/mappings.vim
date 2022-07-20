@@ -91,4 +91,8 @@ nmap <leader><leader> z=
 nnoremap <leader>z [s
 nnoremap <leader>x ]s
 
+" Compile from ms
 nnoremap <leader>p :!pandoc % -t ms -o %:r.pdf; zathura %:r.pdf &<CR>
+
+"Compile from latex
+"nnoremap <leader>p :!pandoc -f markdown-implicit_figures -t pdf % -o %:r.pdf; zathura %:r.pdf &<CR>

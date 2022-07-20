@@ -1,6 +1,5 @@
-Chromium
-Gimp
-LibreOffice
-Motrix
-Signal
-Telegram
+libreoffice
+firefox
+transmission-gtk
+flatpak run org.signal.Signal
+telegram-desktop

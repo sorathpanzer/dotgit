@@ -1,3 +1,0 @@
-#!/bin/bash
-
-export $(dbus-launch) && flatpak run io.mpv.Mpv --loop $2 &> /dev/null
