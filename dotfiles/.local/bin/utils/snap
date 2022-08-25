@@ -5,10 +5,12 @@ if [ $1 == "shot" ]; then
 fi
 
 if [ $1 == "send" ]; then
-    sudo btrfs send -p /media/Vault/Documentos/.snapshots/$(ls /media/Vault/.snapshots/ | fzf) .snapshots/@$(date "+%Y-%m-%d") | sudo btrfs receive /media/Andromeda/
+    echo "Choose old snapshot for incrementation against recent snapshot:"
+    OLDSNAPSHOT=$(ls /media/Vault/.snapshots | fzf)
+    sudo btrfs send -p $OLDSNAPSHOT /media/Vault/.snapshots/@$(date "+%Y-%m-%d") | sudo btrfs receive /media/Andromeda/
 fi
 
 if [ $1 == "now" ]; then
     btrfs subvolume snapshot -r /media/Vault/Documentos /media/Vault/.snapshots/@$(date "+%Y-%m-%d")
-    sudo btrfs send -p /media/Vault/Documentos/.snapshots/$(ls /media/Vault/.snapshots/ | fzf) .snapshots/@$(date "+%Y-%m-%d") | sudo btrfs receive /media/Andromeda/
+    sudo btrfs send -p /media/Vault/.snapshots/$2 .snapshots/@$(date "+%Y-%m-%d") | sudo btrfs receive /media/Andromeda/
 fi

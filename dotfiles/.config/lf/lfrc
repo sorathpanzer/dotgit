@@ -304,9 +304,18 @@ cmd gif ${{
 }}
 
 cmd vrotate ${{
-    clear
-    mv $fx $(echo "$f" | cut -f1 -d ".")-OLD.$(echo "$f" | cut -f2 -d ".")
-    ffmpeg -i $(echo "$f" | cut -f1 -d ".")-OLD.$(echo "$f" | cut -f2 -d ".") -c copy -metadata:s:v:0 rotate=0 $(echo "$f" | cut -f1 -d ".").$(echo "$f" | cut -f2 -d ".")
+    EXT=$(file $fx | cut -d " " -f 2)
+    if [[ $EXT != "JPEG" ]]; then
+        clear
+        mv $fx $(echo "$f" | cut -f1 -d ".")-OLD.$(echo "$f" | cut -f2 -d ".")
+        ffmpeg -i $(echo "$f" | cut -f1 -d ".")-OLD.$(echo "$f" | cut -f2 -d ".") -c copy -metadata:s:v:0 rotate=90 $(echo "$f" | cut -f1 -d ".").$(echo "$f" | cut -f2 -d ".")
+    fi
+
+    if [[ $EXT == "JPEG" ]]; then
+        clear
+        #mv $fx $(echo "$f" | cut -f1 -d ".")-OLD.$(echo "$f" | cut -f2 -d ".")
+        convert $fx -rotate -90 $fx
+    fi
 }}
 
 cmd vcut ${{
