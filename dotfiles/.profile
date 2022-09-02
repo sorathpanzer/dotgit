@@ -1,5 +1,7 @@
 #!/bin/bash
 
+[ -x "$(command ! -v rpm-ostree)" ] && . /home/$USER_NAME/.nix-profile/etc/profile.d/nix.sh
+
 if [ "$(tty)" = "/dev/tty1" ]; then
 
 export EDITOR="nvim"

@@ -2,5 +2,14 @@
 
 #STORAGE=$(df -h /dev/mapper/cryptroot | grep cryptroot | awk '{print $5}')
 #STORAGE=$(df -h /dev/mapper/nvme0n1p3_crypt | grep nvme0n1p3_crypt | awk '{print $5}')
-STORAGE=$(df -h /dev/mapper/fedora--iot_legionx-root | grep fedora--iot_legionx-root | awk '{print $5}')
-echo -n "  $STORAGE"
+
+if [[ $RELEASE = fedora && -f /usr/bin/ostree ]]; then
+    STORAGEROOT=$(df -h /dev/mapper/fedora--iot_legionx-root | grep fedora--iot_legionx-root | awk '{print $5}')
+    STORAGEHOME=$(df -h /dev/mapper/fedora--iot_legionx-home | grep fedora--iot_legionx-home | awk '{print $5}')
+fi
+
+if [[ $RELEASE = almalinux ]]; then
+    STORAGEROOT=$(df -h | grep mapper | awk '{print $5}')
+fi
+
+echo -n "  $STORAGEROOT|$STORAGEHOME"
