@@ -61,7 +61,7 @@ nnoremap <silent> <F3>  0w<Left><c-x><S-$>
 xnoremap <leader>x :w !zsh<cr>
 
 " Open Float Lazygit
-nnoremap  <silent>  <F2>  :FloatermNew lazygit<CR>
+nnoremap  <silent>  <F2>  :FloatermNew tig status<CR>
 
 " Comment lines
 nmap ++ <plug>NERDCommenterToggle
