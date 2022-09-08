@@ -5,6 +5,7 @@ VERSION = 6.3
 
 # paths
 PREFIX = /home/sorath/.local
+#PREFIX = /usr/local
 MANPREFIX = ${PREFIX}/share/man
 
 # FreeBSD
