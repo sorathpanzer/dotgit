@@ -2,8 +2,6 @@
 
 [ ! -x "$(command -v rpm-ostree)" ] && . $HOME/.nix-profile/etc/profile.d/nix.sh
 
-if [ "$(tty)" = "/dev/tty1" ]; then
-
 export EDITOR="nvim"
 export TERMINAL="st"
 export READER="zathura"
@@ -26,6 +24,7 @@ PATH="$PATH:$HOME/.local/bin/transmission"
 PATH="$PATH:$HOME/.emacs.d/bin"
 eval $( dircolors -b $HOME/.config/dir_colors )
 
+if [ "$(tty)" = "/dev/tty1" ]; then
   startx
 fi
 
