@@ -1,8 +1,7 @@
 # dwm - dynamic window manager
 # See LICENSE file for copyright and license details.
 
-CONFIGMK = config.mk
-include ${CONFIGMK}
+include config.mk
 
 SRC = drw.c dwm.c util.c
 OBJ = ${SRC:.c=.o}
@@ -18,7 +17,7 @@ options:
 .c.o:
 	${CC} -c ${CFLAGS} $<
 
-${OBJ}: config.h ${CONFIGMK}
+${OBJ}: config.h config.mk
 
 config.h:
 	cp config.def.h $@
@@ -31,7 +30,7 @@ clean:
 
 dist: clean
 	mkdir -p dwm-${VERSION}
-	cp -R LICENSE Makefile README config.def.h ${CONFIGMK}\
+	cp -R LICENSE Makefile README config.def.h config.mk\
 		dwm.1 drw.h util.h ${SRC} dwm.png transient.c dwm-${VERSION}
 	tar -cf dwm-${VERSION}.tar dwm-${VERSION}
 	gzip dwm-${VERSION}.tar
