@@ -1,7 +1,8 @@
 # dmenu - dynamic menu
 # See LICENSE file for copyright and license details.
 
-include config.mk
+CONFIGMK = config.mk
+include ${CONFIGMK}
 
 SRC = drw.c dmenu.c stest.c util.c
 OBJ = $(SRC:.c=.o)

@@ -2,7 +2,8 @@
 # See LICENSE file for copyright and license details.
 .POSIX:
 
-include config.mk
+CONFIGMK = config.mk
+include ${CONFIGMK}
 
 SRC = st.c x.c
 OBJ = $(SRC:.c=.o)
