@@ -74,7 +74,7 @@ cmd setwallpaper %feh --bg-fill "$f"
 cmd mtsda ${{
   clear
   udisksctl unlock -b /dev/sda1
-  udisksctl mount -b /dev/dm-3
+  udisksctl mount -b /dev/dm-2
   lf -remote "send $id cd /$HOME/Vault"
 }}
 
