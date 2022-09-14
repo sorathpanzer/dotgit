@@ -75,7 +75,7 @@ cmd mtsda ${{
   clear
   udisksctl unlock -b /dev/sda1
   udisksctl mount -b /dev/dm-3
-  lf -remote "send $id cd /media/Vault"
+  lf -remote "send $id cd /$HOME/Vault"
 }}
 
 cmd usb ${{
