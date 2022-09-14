@@ -4,7 +4,7 @@ VERSION = 6.3
 # Customize below to fit your system
 
 # paths
-PREFIX = /usr/local
+PREFIX = /home/sorath/.local
 MANPREFIX = ${PREFIX}/share/man
 
 # FreeBSD

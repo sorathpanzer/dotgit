@@ -4,7 +4,6 @@ VERSION = 6.3
 # Customize below to fit your system
 
 # paths
-#PREFIX = /home/sorath/.local
 PREFIX = /usr/local
 MANPREFIX = ${PREFIX}/share/man
 
